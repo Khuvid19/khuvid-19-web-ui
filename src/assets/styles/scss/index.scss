@@ -1,1 +1,18 @@
 body {}
+
+// header
+.page-header {
+  color: black;
+  background-color: white;
+  height: 60px;
+}
+
+// footer
+.page-footer {
+  color: black;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background-color: white;
+  height: 60px;
+}
