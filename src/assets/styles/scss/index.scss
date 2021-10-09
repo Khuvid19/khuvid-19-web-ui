@@ -5,6 +5,19 @@ body {}
   color: black;
   background-color: white;
   height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .header-logo {
+    margin-left: 20px;
+  }
+
+  .header-user {
+    font-size: 10px;
+    width: 60px;
+    margin-right: 20px;
+  }
 }
 
 // footer
