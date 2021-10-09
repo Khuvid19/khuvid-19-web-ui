@@ -19,4 +19,18 @@ body {}
   display: flex;
   align-items: center;
   justify-content: space-around;
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+
+
+    div {
+      margin-top: 5px;
+      font-size: 8px;
+    }
+  }
 }
