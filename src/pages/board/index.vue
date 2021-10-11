@@ -1,14 +1,13 @@
 <template>
   <div>
-    <TestComponent />
-    <button class="btn btn-primary">버튼</button>
+    <SearchComponent />
   </div>
 </template>
 
 <script>
-import TestComponent from '@/components/Main/test'
+import SearchComponent from '@/components/Board/search'
 
 export default {
-  components: { TestComponent },
+  components: { SearchComponent },
 }
 </script>

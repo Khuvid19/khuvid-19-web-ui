@@ -1,4 +1,4 @@
-const solid = ['faHome', 'faBandAid', 'faClipboard']
+const solid = ['faHome', 'faBandAid', 'faClipboard', 'faSearch']
 const regular = []
 const brands = []
 
