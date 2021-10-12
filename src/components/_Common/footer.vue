@@ -1,15 +1,27 @@
 <template>
-  <div class="page-footer">
-    <div to="/main" class="footer-col" @click="clickIcon('main')">
-      <font-awesome-icon icon="home" style="font-size: 20px" />
+  <div class="page-footer grid grid-cols-3">
+    <div
+      to="/main"
+      :class="`footer-col ${iconBorder('main')}`"
+      @click="clickIcon('main')"
+    >
+      <font-awesome-icon icon="home" />
       <div>대시보드</div>
     </div>
-    <div to="/review" class="footer-col" @click="clickIcon('review')">
-      <font-awesome-icon icon="band-aid" style="font-size: 20px" />
+    <div
+      to="/review"
+      :class="`footer-col ${iconBorder('review')}`"
+      @click="clickIcon('review')"
+    >
+      <font-awesome-icon icon="band-aid" />
       <div>접종후기</div>
     </div>
-    <div to="board" class="footer-col" @click="clickIcon('board')">
-      <font-awesome-icon icon="clipboard" style="font-size: 20px" />
+    <div
+      to="board"
+      :class="`footer-col ${iconBorder('board')}`"
+      @click="clickIcon('board')"
+    >
+      <font-awesome-icon icon="clipboard" />
       <div>게시판</div>
     </div>
   </div>
@@ -17,10 +29,26 @@
 
 <script>
 export default {
+  data() {
+    return {
+      current: null,
+    }
+  },
+  computed: {},
+  watch: {},
+  created() {
+    this.current = this.$router.history.current.name
+  },
   methods: {
     clickIcon(value) {
-      if (this.$router.history.current.name !== value)
+      if (this.current !== value) {
+        this.current = value
         this.$router.push(`/${value}`)
+      }
+    },
+    iconBorder(value) {
+      if (this.current === value) return 'bg-base-200'
+      return ''
     },
   },
 }
