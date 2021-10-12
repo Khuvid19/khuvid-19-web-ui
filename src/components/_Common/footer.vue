@@ -5,7 +5,7 @@
       :class="`footer-col ${iconBorder('main')}`"
       @click="clickIcon('main')"
     >
-      <font-awesome-icon icon="home" />
+      <fa-icon icon="home" />
       <div>대시보드</div>
     </div>
     <div
@@ -13,7 +13,7 @@
       :class="`footer-col ${iconBorder('review')}`"
       @click="clickIcon('review')"
     >
-      <font-awesome-icon icon="band-aid" />
+      <fa-icon icon="band-aid" />
       <div>접종후기</div>
     </div>
     <div
@@ -21,7 +21,7 @@
       :class="`footer-col ${iconBorder('board')}`"
       @click="clickIcon('board')"
     >
-      <font-awesome-icon icon="clipboard" />
+      <fa-icon icon="clipboard" />
       <div>게시판</div>
     </div>
   </div>
