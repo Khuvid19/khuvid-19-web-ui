@@ -48,6 +48,8 @@ export default {
       regular: FontAwesome.regular,
       brands: FontAwesome.brands,
     },
+    component: 'fa',
+    suffix: true,
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
