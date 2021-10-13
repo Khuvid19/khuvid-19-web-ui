@@ -1,3 +1,5 @@
+$layoutHeight: 60px;
+
 html {
   font-size: 14px;
 }
@@ -10,7 +12,7 @@ html {
   z-index: 5;
   color: black;
   background-color: white;
-  height: 60px;
+  height: $layoutHeight;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -21,15 +23,15 @@ html {
 
   .header-user {
     font-size: 10px;
-    width: 60px;
+    width: $layoutHeight;
     margin-right: 20px;
   }
 }
 
 .page-body {
   position: absolute;
-  top: 60px;
-  max-height: calc(100vh - 120px);
+  top: $layoutHeight;
+  max-height: calc(100vh - 2 * #{$layoutHeight});
 }
 
 // footer
@@ -39,7 +41,7 @@ html {
   width: 100%;
   bottom: 0;
   background-color: white;
-  height: 60px;
+  height: $layoutHeight;
 
   .footer-col {
     display: flex;
@@ -57,4 +59,9 @@ html {
   .icon-border {
     background: gray;
   }
+}
+
+// board
+.board-list {
+  height: calc(100vh - #{$layoutHeight});
 }
