@@ -1,0 +1,5 @@
+.page-body {
+  position: absolute;
+  top: $layoutHeight;
+  max-height: calc(100vh - 2 * #{$layoutHeight});
+}

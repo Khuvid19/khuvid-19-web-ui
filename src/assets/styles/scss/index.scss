@@ -1,67 +1,13 @@
-$layoutHeight: 60px;
+@import "mixins.scss";
+@import "partials/header.scss";
+@import "partials/body.scss";
+@import "partials/footer.scss";
+@import "partials/board.scss";
 
 html {
   font-size: 14px;
 }
 
-// header
-.page-header {
-  top: 0;
-  position: fixed;
-  width: 100%;
-  z-index: 5;
-  color: black;
-  background-color: white;
-  height: $layoutHeight;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .header-logo {
-    margin-left: 20px;
-  }
-
-  .header-user {
-    font-size: 10px;
-    width: $layoutHeight;
-    margin-right: 20px;
-  }
-}
-
-.page-body {
-  position: absolute;
-  top: $layoutHeight;
-  max-height: calc(100vh - 2 * #{$layoutHeight});
-}
-
-// footer
-.page-footer {
-  color: black;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  background-color: white;
-  height: $layoutHeight;
-
-  .footer-col {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-
-    div {
-      margin-top: 5px;
-      font-size: 8px;
-    }
-  }
-
-  .icon-border {
-    background: gray;
-  }
-}
-
-// board
 .board-list {
   height: calc(100vh - #{$layoutHeight});
 }
