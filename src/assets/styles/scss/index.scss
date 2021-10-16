@@ -3,11 +3,8 @@
 @import "partials/body.scss";
 @import "partials/footer.scss";
 @import "partials/board.scss";
+@import "partials/fullScreen.scss";
 
 html {
   font-size: 14px;
-}
-
-.board-list {
-  height: calc(100vh - #{$layoutHeight});
 }
