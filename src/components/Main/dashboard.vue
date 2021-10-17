@@ -31,7 +31,7 @@ export default {
   },
 
   created () {
-    axios.get('https://nip.kdca.go.kr/irgd/cov19stats.do?list=all').then(res => {
+    axios.get('/nip.kdca.go.kr/irgd/cov19stats.do?list=all').then(res => {
       console.log(res);
     })
   },
