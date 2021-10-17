@@ -16,7 +16,24 @@
 </template>
 
 <script>
-export default {
+import axios from 'axios';
 
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+
+
+export default {
+  data() {
+    return {
+      confirmed: '',
+      first: '',
+      second: '',
+    }
+  },
+
+  created () {
+    axios.get('https://nip.kdca.go.kr/irgd/cov19stats.do?list=all').then(res => {
+      console.log(res);
+    })
+  },
 }
 </script>
