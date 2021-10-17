@@ -16,10 +16,8 @@
 </template>
 
 <script>
-import axios from 'axios';
-
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-
+import axios from 'axios'
+const convert = require('xml-js')
 
 export default {
   data() {
@@ -31,8 +29,12 @@ export default {
   },
 
   created () {
-    axios.get('/nip.kdca.go.kr/irgd/cov19stats.do?list=all').then(res => {
-      console.log(res);
+    const PATH_API = '/irgd/cov19stats.do?list=all'
+    axios.get(`/api/v1${PATH_API}`).then(res => {
+      console.log(res)
+      const xml = res.data
+      const json = convert.xml2json(xml, { compact: true })
+      console.log(json)
     })
   },
 }

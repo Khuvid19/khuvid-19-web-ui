@@ -56,6 +56,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
   ],
   alias: {
     '@': resolve(__dirname, './src'),
@@ -63,5 +64,10 @@ export default {
     styles: resolve(__dirname, './src/assets/styles'),
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    proxy: true,
+  },
+  proxy: {
+    '/api/v1': { target: 'https://nip.kdca.go.kr', pathRewrite: { '^/api/v1': '' } },
+  },
 }
