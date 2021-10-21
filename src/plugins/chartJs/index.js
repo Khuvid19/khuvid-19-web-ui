@@ -1,4 +1,3 @@
-/* eslint-disable import/namespace,import/named */
 import Vue from 'vue';
 
 import { Pie, Line, Bar, Doughnut } from './baseChart';

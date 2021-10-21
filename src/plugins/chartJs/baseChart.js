@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle,consistent-return */
 import {Chart, registerables} from 'chart.js';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -10,18 +9,34 @@ Chart.register(ChartDataLabels);
 export function generateChart(chartId, chartType) {
   return {
     render(h) {
-      return (
-        <div
-          style={this.styles}
-        >
-          <canvas
-            id={this.chartId}
-            height={this.height}
-            width={this.width}
-            ref='canvas'
-          />
-        </div>
+      return h(
+        'div',{ style: this.styles }, [
+          h(
+            'canvas', {
+              id: this.chartId,
+              height: this.height,
+              width: this.width,
+              ref: 'canvas',
+            },
+          ),
+        ],
       );
+      /**
+       *  jsx 버전 - eslint 에러 떠서 render function 사용함.
+       *  jsx 사용하고 싶으면 eslint 옵션에서 jsx 에러 뜨는 부분 disable 처리하고 쓰세요~
+       */
+      // return (
+      //   <div
+      //     style={this.styles}
+      //   >
+      //     <canvas
+      //       id={this.chartId}
+      //       height={this.height}
+      //       width={this.width}
+      //       ref='canvas'
+      //     />
+      //   </div>
+      // )
     },
     props: {
       chartId: {
@@ -123,7 +138,7 @@ export function generateChart(chartId, chartType) {
 }
 
 /**
- * 기본 chart.js에서 등록 가능한 모드 차트 generateChart 함수를 통해 등록 가능.
+ * 기본 chart.js에서 등록 가능한 모차트 generateChart 함수를 통해 등록 가능.
  * wordcloud 차트와 같은 user library는 해당 문서 참고하여 추가할 것.
  */
 const Bar = generateChart('bar-chart', 'bar');
