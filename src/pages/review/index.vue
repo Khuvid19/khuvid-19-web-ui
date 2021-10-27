@@ -1,14 +1,13 @@
 <template>
   <div>
-    <TestComponent />
-    <button class="btn btn-primary">버튼</button>
+    <AddCont/>
   </div>
 </template>
 
 <script>
-import TestComponent from '@/components/Main/test'
+import AddCont from '@/components/Review/add'
 
 export default {
-  components: { TestComponent },
+  components: { AddCont },
 }
 </script>
