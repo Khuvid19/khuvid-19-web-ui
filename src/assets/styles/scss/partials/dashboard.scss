@@ -1,6 +1,7 @@
 .page-status {
   position: fixed;
-  width: 100%;
+  width: 90%;
+  left: 5%;
   height: $layoutHeight;
 }
 
@@ -15,11 +16,17 @@
 }
 
 .divline {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+}
+
+.status-border {
+  border: 1px solid black;
+  background-color: white;
 }
 
 .inoculator-area {
+  background-color: white;
   text-align: center;
-  margin-top: -20px;
+  margin-top: -22px;
 }
+

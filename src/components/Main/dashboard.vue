@@ -2,9 +2,9 @@
   <div class="page-status">
     <div class="flex flex-col w-full">
       <div class="dashboard-logo">상황판</div>
-      <div class="grid h-20 card bg-base-300 rounded-box place-items-center">확진자</div> 
+      <div class="status-border grid h-20 card bg-base-300 rounded-box place-items-center">확진자</div> 
       <div class="divline"></div>
-      <div class="grid h-20 card bg-base-300 rounded-box place-items-center">
+      <div class="status-border grid h-20 card bg-base-300 rounded-box place-items-center">
         <div class="flex flex-row w-full">
           <div class="inoculator-area grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
             1차 접종<br>{{ first }}
