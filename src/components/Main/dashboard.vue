@@ -1,7 +1,10 @@
 <template>
   <div class="page-status">
     <div class="flex flex-col w-full">
-      <div class="dashboard-logo">상황판</div>
+      <div class="dashboard-logo">
+        <fa-icon icon="bullhorn" />
+        <span>&nbsp;상황판</span>
+      </div>
       <div class="status-border grid h-20 card bg-base-300 rounded-box place-items-center">확진자</div> 
       <div class="divline"></div>
       <div class="status-border grid h-20 card bg-base-300 rounded-box place-items-center">

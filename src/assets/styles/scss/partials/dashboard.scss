@@ -6,9 +6,14 @@
 }
 
 .dashboard-logo {
-  margin-left: 25px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  font-size: 18px;
+  margin-left: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+  span {
+    font-size: 14px;
+  }
 }
 
 .hidden {
@@ -16,7 +21,7 @@
 }
 
 .divline {
-  margin-top: 1.5rem;
+  margin-top: 15px;
 }
 
 .status-border {
@@ -25,8 +30,8 @@
 }
 
 .inoculator-area {
-  background-color: white;
   text-align: center;
+  background-color: white;
   margin-top: -22px;
 }
 
