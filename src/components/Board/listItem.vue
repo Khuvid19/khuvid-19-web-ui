@@ -1,5 +1,5 @@
 <template>
-  <div class="card shadow m-2 bg-white">
+  <div class="card shadow m-2 bg-white" @click="$emit('click')">
     <div class="card-body p-4">
       <div class="flex justify-between align-middle mb-2">
         <div class="text-sm font-bold">제목입니다</div>
@@ -20,7 +20,9 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {},
+}
 </script>
 
 <style>
