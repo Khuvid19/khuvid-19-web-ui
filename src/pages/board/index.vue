@@ -2,7 +2,7 @@
   <div>
     <SearchComponent />
     <div class="board-list overflow-y-scroll">
-      <ListItem @click="moveToWrite" />
+      <ListItem />
       <ListItem />
       <ListItem />
       <ListItem />
@@ -13,6 +13,12 @@
       <ListItem />
       <ListItem />
     </div>
+    <button
+      class="absolute bottom-5 right-5 bg-primary w-16 h-16 rounded-full"
+      @click="moveToWrite"
+    >
+      <fa-icon class="text-white text-xl" icon="pen" />
+    </button>
     <FullScreen
       v-model="screenFlag"
       :title="screenTitle"
