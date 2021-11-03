@@ -19,7 +19,7 @@
       :ok-text="screenOkText"
       @onClickBack="screenFlag = false"
     >
-      <Write />
+      <WriteScreen />
     </FullScreen>
   </div>
 </template>
@@ -28,10 +28,10 @@
 import SearchComponent from '@/components/Board/search'
 import ListItem from '@/components/Board/listItem'
 import FullScreen from '@/components/_Common/fullScreen'
-import Write from '@/components/Board/Screen/write'
+import WriteScreen from '@/components/Board/Screen/writeScreen'
 
 export default {
-  components: { SearchComponent, ListItem, FullScreen, Write },
+  components: { SearchComponent, ListItem, FullScreen, WriteScreen },
   data() {
     return {
       screenFlag: false,
