@@ -35,8 +35,8 @@
 import SearchComponent from '@/components/Board/search'
 import ListItem from '@/components/Board/listItem'
 import FullScreen from '@/components/_Common/fullScreen'
-import WriteScreen from '@/components/Board/Screen/writeScreen'
-import DetailScreen from '@/components/Board/Screen/detailScreen'
+import WriteScreen from '@/components/Board/Screen/writeScreen/writeScreen'
+import DetailScreen from '@/components/Board/Screen/detailScreen/detailScreen'
 
 export default {
   components: {
