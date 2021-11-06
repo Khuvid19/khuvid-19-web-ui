@@ -42,7 +42,29 @@ export default {
     '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/fontawesome',
+    // '@nuxtjs/auth',
+    'cookie-universal-nuxt',
+    '@nuxtjs/auth-next',
   ],
+  auth: {
+    // router: {
+    //   middleware: ['auth'],
+    // },
+    strategies: {
+      google: {
+        clientId: '442366876413-4a1q3lpghs2rc3pqeeg6fnqfp4cn1frk.apps.googleusercontent.com',
+        codeChallengeMethod: '',
+        responseType: 'token id_token',
+        // scope: ['profile', 'email'],
+      },
+    },
+    redirect: {
+      login: '/main',
+      logout: '/main',
+      callback: '/main',
+      home: '/main',
+    },
+  },
   fontawesome: {
     icons: {
       solid: FontAwesome.solid,
