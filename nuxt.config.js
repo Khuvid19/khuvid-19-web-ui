@@ -53,9 +53,39 @@ export default {
       google: {
         clientId: '442366876413-4a1q3lpghs2rc3pqeeg6fnqfp4cn1frk.apps.googleusercontent.com',
         codeChallengeMethod: '',
-        responseType: 'token id_token',
+        responseType: ['token', 'id_token'],
+        // responseType: 'code',
         // scope: ['profile', 'email'],
       },
+      // social: {
+      //   scheme: 'oauth2',
+      //   endpoints: {
+      //     authorization: 'https://accounts.google.com/o/oauth2/auth',
+      //     token: 'https://oauth2.googleapis.com/token',
+      //     userInfo: 'https://www.googleapis.com/oauth2/v3/userinfo',
+      //     deviceAuthorization: 'https://oauth2.googleapis.com/device/code',
+      //   },
+      //   token: {
+      //     property: 'access_token',
+      //     type: 'Bearer',
+      //     maxAge: 1800,
+      //   },
+      //   refreshToken: {
+      //     property: 'refresh_token',
+      //     maxAge: 60 * 60 * 24 * 30,
+      //   },
+      //   responseType: ['token', 'id_token'],
+      //   grantType: 'authorization_code',
+      //   accessType: undefined,
+      //   redirectUri: 'http://localhost:3000/main',
+      //   // logoutRedirectUri: 'http://localhost:3000/main',
+      //   clientId: '442366876413-4a1q3lpghs2rc3pqeeg6fnqfp4cn1frk.apps.googleusercontent.com',
+      //   scope: ['openid', 'profile', 'email'],
+      //   state: 'UNIQUE_AND_NON_GUESSABLE',
+      //   codeChallengeMethod: '',
+      //   responseMode: '',
+      //   acrValues: '',
+      // },
     },
     redirect: {
       login: '/main',
@@ -80,6 +110,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
     '@nuxtjs/proxy',
+    'nuxt-client-init-module',
   ],
   alias: {
     '@': resolve(__dirname, './src'),

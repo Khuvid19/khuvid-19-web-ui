@@ -26,20 +26,13 @@ export default {
       showLoginScreen: false,
     }
   },
-  created() {
-    console.log(this.$auth)
-  },
   methods: {
     clickLogin() {
       if (this.$auth.loggedIn) {
         this.$auth.logout()
-      } else {
-        this.$auth.loginWith('google')
+        return
       }
-      // this.showLoginScreen = true
-      // console.log('clickLogin')
-      // console.log(this.$auth)
-      // console.log('this.$auth.loginWith', this.$auth.loginWith)
+      this.$auth.loginWith('google', { params: { prompt: "select_account" } })
     },
   },
 }
