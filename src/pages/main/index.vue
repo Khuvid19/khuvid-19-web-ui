@@ -11,5 +11,12 @@ import TestChart from "@/components/Main/dashboardChart";
 
 export default {
   components: { Dashboard, TestChart },
+  created(){
+    console.log(this.$route)
+  },
+  mounted() {
+    if(this.$route.hash !== '') window.location.replace('/main')
+
+  },
 }
 </script>
