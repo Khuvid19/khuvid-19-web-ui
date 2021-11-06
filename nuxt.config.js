@@ -44,7 +44,6 @@ export default {
     '@nuxtjs/fontawesome',
     // '@nuxtjs/auth',
     'cookie-universal-nuxt',
-    '@nuxtjs/auth-next',
   ],
   auth: {
     // router: {
@@ -79,6 +78,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
     '@nuxtjs/proxy',
   ],
   alias: {
@@ -92,5 +92,8 @@ export default {
   },
   proxy: {
     '/api/v1': { target: 'https://nip.kdca.go.kr', pathRewrite: { '^/api/v1': '' } },
+  },
+  router: {
+    middleware: ['auth'],
   },
 }
