@@ -1,10 +1,12 @@
 <template>
   <client-only>
-    <bar-chart
-      class="w-full" style="height: 400px"
-      :data="chartData"
-      :options="chartOptions"
-    />
+    <div class="chart-header">
+      <bar-chart
+        class="w-full chart" style="height: 330px"
+        :data="chartData"
+        :options="chartOptions"
+      />
+    </div>
   </client-only>
 </template>
 
@@ -46,7 +48,7 @@ export default {
           ...defaultPlugins,
           title: {
             display: true,
-            text: '테스트입니다.',
+            text: '',
             font: {
               size: 22,
             },
@@ -57,13 +59,13 @@ export default {
     initData(){
       this.chartData.labels = Array.from( {length: 12}, (_, i) => `${i+1}월`)
       this.chartData.datasets.push({
-        label: '확진자1',
+        label: '증상1',
         borderColor: '#f43f5e',
         backgroundColor: '#f43f5e',
         data:  Array.from( {length: 12}, (_, i) => this.makeRandomNum(100, 300)),
       })
       this.chartData.datasets.push({
-        label: '확진자2',
+        label: '증상2',
         borderColor: '#0ea5e9',
         backgroundColor: '#0ea5e9',
         data:  Array.from( {length: 12}, (_, i) => this.makeRandomNum(200, 400)),
