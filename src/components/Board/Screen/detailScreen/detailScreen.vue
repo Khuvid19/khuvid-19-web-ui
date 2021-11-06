@@ -5,19 +5,21 @@
       class="mt-4 mb-2 w-full bg-gray-300 rounded-full"
       style="height: 1px"
     ></div>
-    <template v-for="(el, idx) in [0, 1, 2, 3, 4, 5, 6, 7]">
-      <CommentItem :key="idx" />
-      <div
-        v-if="idx !== [0, 1, 2, 3, 4, 5, 6, 7].length - 1"
-        :key="`${idx}i`"
-        class="pl-2 pr-2"
-      >
+    <div class="overflow-y-hidden">
+      <template v-for="(el, idx) in [0, 1, 2, 3, 4, 5, 6, 7, 8]">
+        <CommentItem :key="idx" />
         <div
-          class="mt-2 mb-2 w-full bg-gray-200 rounded-full"
-          style="height: 1px"
-        ></div>
-      </div>
-    </template>
+          v-if="idx !== [0, 1, 2, 3, 4, 5, 6, 7, 8].length - 1"
+          :key="`${idx}i`"
+          class="pl-2 pr-2"
+        >
+          <div
+            class="mt-2 mb-2 w-full bg-gray-200 rounded-full"
+            style="height: 1px"
+          ></div>
+        </div>
+      </template>
+    </div>
     <CommentInput />
   </div>
 </template>
