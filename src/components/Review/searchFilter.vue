@@ -9,7 +9,7 @@
       <fa-icon icon="filter" class="bg-white mr-2" style="font-size: 20px"
       @click="clickFilter"/>
       <button v-for="(item,idx) in vaccineList" :key="idx"
-              class="m-1 btn btn-outline btn-primary btn-sm">
+              class="m-1 btn bg-white btn-outline btn-primary btn-sm">
         {{ item }}
       </button>
     </div>
