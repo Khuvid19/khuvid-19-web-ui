@@ -26,6 +26,7 @@
     "nuxt": "^2.15.7",
     "nuxt-client-init-module": "^0.3.0",
     "sass-loader": "10",
+    "v-calendar": "^2.3.4",
     "vue-axios-cors": "^1.0.1",
     "xml-js": "^1.6.11"
   },
