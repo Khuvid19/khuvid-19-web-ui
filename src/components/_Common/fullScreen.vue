@@ -1,7 +1,16 @@
 <template>
   <div
     v-show="value"
-    class="fullScreen transition-all fixed w-screen h-screen z-50 bg-white"
+    class="
+      fullScreen
+      transition-all
+      fixed
+      top-0
+      w-screen
+      h-screen
+      z-50
+      bg-white
+    "
   >
     <header class="grid grid-cols-3 items-center h-16 shadow">
       <fa-icon
@@ -64,7 +73,7 @@ export default {
   },
   methods: {
     onClickBack() {
-      this.$emit('onClickBack', false)
+      this.$emit('onClickBack')
     },
     onClickSideBtn() {
       this.$emit('onClickSideBtn')

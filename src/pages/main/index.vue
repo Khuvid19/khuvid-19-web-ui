@@ -1,16 +1,15 @@
 <template>
   <div>
-    <TestComponent />
-    <button class="btn btn-primary">버튼</button>
-      <test-chart />
+    <Dashboard />
+    <test-chart />
   </div>
 </template>
 
 <script>
-import TestComponent from '@/components/Main/test'
+import Dashboard from '@/components/Main/dashboard'
 import TestChart from "@/components/Main/dashboardChart";
 
 export default {
-  components: {TestChart, TestComponent },
+  components: { Dashboard, TestChart },
 }
 </script>

@@ -31,7 +31,8 @@ module.exports = {
       jsx: 'never',
       vue: 'never',
     }],
-    indent: [2, 2],
+    indent: ["error", 2 , { "SwitchCase": 1}],
+    // indent: [2, 2],
   },
   settings: {
     'import/extensions': ['.js', '.jsx', '.vue'],

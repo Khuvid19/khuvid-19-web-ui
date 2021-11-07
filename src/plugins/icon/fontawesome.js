@@ -1,11 +1,5 @@
-const solid = [
-  'faHome',
-  'faBandAid',
-  'faClipboard',
-  'faSearch',
-  'faArrowLeft',
-]
-const regular = ['faComments']
+const solid = ['faHome', 'faBandAid', 'faClipboard', 'faSearch', 'faArrowLeft', 'faPen', 'faBullhorn' ]
+const regular = ['faComments', 'faUser', 'faPaperPlane']
 const brands = []
 
 export { solid, regular, brands }
