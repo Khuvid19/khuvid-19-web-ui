@@ -1,6 +1,5 @@
 <template>
   <div>
-    <add-simple-cont :check-flag="simpleFlag" @closeModal="closeModal"/>
     <search-filter @clickFilter="moveToScreen('filter')"/>
     <div class="w-full my-2 h-px bg-gray-200"></div>
     <div class="board-list overflow-y-scroll">
@@ -48,6 +47,7 @@
       <add-detail-cont v-if="screenType === 'addDetail'"/>
       <detail-cont v-if="screenType === 'detail'"/>
     </FullScreen>
+    <add-simple-cont :check-flag="simpleFlag" @closeModal="closeModal"/>
   </div>
 </template>
 

@@ -12,13 +12,23 @@
             </button>
           </div>
         </div>
-        <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
+        <div class="border rounded-box px-3 py-4 mx-4 my-2 bg-white">
           <div class="text-lg mb-1 ml-1">접종 날짜</div>
           <div>
-            <button v-for="(item,idx) in vaccineList" :key="idx"
-                    class="m-1 btn btn-outline btn-primary btn-sm">
-              {{ item }}
-            </button>
+            <v-date-picker v-model="date" class="inline-block h-full"
+                           :masks="masks"
+            >
+              <template #default="{ inputValue, togglePopover }">
+                <div class="flex items-center">
+                  <input
+                    :value="inputValue"
+                    class="text-center bg-white text-gray-700 w-full py-1 px-2 appearance-none border rounded-xl focus:outline-none focus:border-blue-500"
+                    readonly
+                    @click="togglePopover()"
+                  />
+                </div>
+              </template>
+            </v-date-picker>
           </div>
         </div>
         <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
@@ -62,6 +72,10 @@ export default {
   },
   data() {
     return {
+      date: new Date(),
+      masks: {
+        input: 'YYYY-MM-DD',
+      },
       vaccineList: ['화이자', '모더나'],
       bb: ['없음', '있음'],
       cc: [
