@@ -1,13 +1,17 @@
 <template>
   <div>
-    <div class="p-4 w-screen flex justify-between items-center">
-      <fa-icon icon="arrow-left" class="bg-white" style="font-size: 20px"/>
-      <div class="text-2xl font-semibold">접종후기</div>
-      <div>완료</div>
-    </div>
     <div>
       <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
         <div class="text-lg mb-1 ml-1">백신 종류</div>
+        <div>
+          <button v-for="(item,idx) in vaccineList" :key="idx"
+                  class="m-1 btn btn-outline btn-primary btn-sm">
+            {{ item }}
+          </button>
+        </div>
+      </div>
+      <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
+        <div class="text-lg mb-1 ml-1">접종 날짜</div>
         <div>
           <button v-for="(item,idx) in vaccineList" :key="idx"
                   class="m-1 btn btn-outline btn-primary btn-sm">
