@@ -57,15 +57,15 @@ export default {
       }
     },
     initData(){
-      this.chartData.labels = Array.from( {length: 12}, (_, i) => `${i+1}월`)
+      this.chartData.labels = Array.from( {length: 12}, (_, i) => `증상${i+1}`)
       this.chartData.datasets.push({
-        label: '증상1',
+        label: '1차',
         borderColor: '#f43f5e',
         backgroundColor: '#f43f5e',
         data:  Array.from( {length: 12}, (_, i) => this.makeRandomNum(100, 300)),
       })
       this.chartData.datasets.push({
-        label: '증상2',
+        label: '2차',
         borderColor: '#0ea5e9',
         backgroundColor: '#0ea5e9',
         data:  Array.from( {length: 12}, (_, i) => this.makeRandomNum(200, 400)),
