@@ -20,7 +20,6 @@
 import FullScreen from './fullScreen'
 export default {
   components: { FullScreen },
-  middleware: ['auth'],
   data() {
     return {
       showLoginScreen: false,
@@ -32,7 +31,7 @@ export default {
         this.$auth.logout()
         return
       }
-      this.$auth.loginWith('google', { params: { prompt: "select_account" } })
+      this.$auth.loginWith('google', { params: { prompt: 'select_account' } })
     },
   },
 }

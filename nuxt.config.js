@@ -46,9 +46,6 @@ export default {
     'cookie-universal-nuxt',
   ],
   auth: {
-    // router: {
-    //   middleware: ['auth'],
-    // },
     strategies: {
       google: {
         clientId: '442366876413-4a1q3lpghs2rc3pqeeg6fnqfp4cn1frk.apps.googleusercontent.com',
@@ -123,8 +120,5 @@ export default {
   },
   proxy: {
     '/api/v1': { target: 'https://nip.kdca.go.kr', pathRewrite: { '^/api/v1': '' } },
-  },
-  router: {
-    middleware: ['auth'],
   },
 }
