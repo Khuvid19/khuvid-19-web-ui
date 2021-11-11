@@ -5,7 +5,17 @@
         <fa-icon icon="bullhorn" />
         <span>&nbsp;상황판</span>
       </div>
-      <div class="status-border grid h-20 card bg-base-300 rounded-box place-items-center">확진자</div> 
+      <div class="status-border grid h-20 card bg-base-300 rounded-box place-items-center">
+        <div class="flex flex-row w-full">
+          <div class="inoculator-area grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
+            전체 확진자<br>{{ all }}
+          </div>
+          <div class="hidden divider divider-vertical"></div> 
+          <div class="inoculator-area grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
+            금일 확진자<br> {{ today }}
+          </div>
+        </div>
+      </div> 
       <div class="divline"></div>
       <div class="status-border grid h-20 card bg-base-300 rounded-box place-items-center">
         <div class="flex flex-row w-full">
@@ -29,7 +39,8 @@ const convert = require('xml-js')
 export default {
   data() {
     return {
-      confirmed: '',
+      all: '388,351',
+      today: '2520',
       first: '',
       second: '',
     }
