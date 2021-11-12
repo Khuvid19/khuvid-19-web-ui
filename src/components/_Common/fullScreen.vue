@@ -28,7 +28,7 @@
         okText !== null ? 'content-area' : 'h-full'
       }`"
     >
-      <slot>1234</slot>
+      <slot></slot>
     </main>
     <footer
       v-if="okText !== null"
