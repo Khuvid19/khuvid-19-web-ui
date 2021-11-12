@@ -1,109 +1,72 @@
 <template>
   <div>
-    <search-filter @clickFilter="moveToScreen('filter')"/>
-    <div class="w-full my-2 h-px bg-gray-200"></div>
-    <div class="board-list overflow-y-scroll">
-      <list-cont @click="moveToScreen('detail')"/>
-      <list-cont @click="moveToScreen('detail')"/>
-      <list-cont @click="moveToScreen('detail')"/>
-      <list-cont @click="moveToScreen('detail')"/>
-      <list-cont @click="moveToScreen('detail')"/>
-      <list-cont @click="moveToScreen('detail')"/>
-      <list-cont @click="moveToScreen('detail')"/>
-    </div>
-    <button
-      v-if="!btnFlag"
-      class="absolute bottom-5 right-5 bg-primary w-16 h-16 rounded-full"
-      @click="btnFlag=true"
-    >
-      <fa-icon class="text-white text-xl" icon="pen"/>
-    </button>
-    <div
-      v-else
-      class="absolute bottom-5 right-5 w-full h-16"
-    >
-      <div class="flex justify-end items-center gap-4">
-        <button class="text-white text-xl bg-primary w-40 h-16 rounded-xl"
-                @click="openSimple">
-          간편후기
-        </button>
-        <button class="text-white text-xl bg-primary w-40 h-16 rounded-xl"
-                @click="moveToScreen('addDetail')">
-          상세후기
-        </button>
-        <button class="bg-primary w-16 h-16 rounded-full"
-                @click="btnFlag=false">
-          <fa-icon class="text-white text-xl" icon="times"/>
-        </button>
-      </div>
-    </div>
-    <FullScreen
+    <search-filter/>
+    <div class="h-px bg-gray-200"></div>
+    <list-item @clickDetail="clickDetail"/>
+
+    <full-screen
       v-model="screenFlag"
       :title="screenTitle"
       :ok-text="screenOkText"
+      :side-btn-text="screenSideBtnText"
       @onClickBack="screenFlag = false"
     >
-      <filter-cont v-if="screenType === 'filter'"/>
-      <add-detail-cont v-if="screenType === 'addDetail'"/>
-      <detail-cont v-if="screenType === 'detail'"/>
-    </FullScreen>
-    <add-simple-cont :check-flag="simpleFlag" @closeModal="closeModal"/>
+      <detail-cont v-if="screenType === 'detail'" :id="id"/>
+      <add-cont v-if="screenType === 'add'" />
+    </full-screen>
+
+    <button
+      class="absolute bottom-5 right-5 bg-primary w-16 h-16 rounded-full"
+      @click="moveToScreen('add')">
+      <fa-icon class="text-white text-xl" icon="pen" />
+    </button>
+
   </div>
 </template>
 
 <script>
-import SearchFilter from '@/components/Review/searchFilter'
-import ListCont from '@/components/Review/listCont'
-import AddDetailCont from '@/components/Review/addDetailCont'
-import AddSimpleCont from '@/components/Review/addSimpleCont'
+import SearchFilter from '@/components/Review/SearchFilter/index';
+import ListItem from '@/components/Review/listItem'
 import DetailCont from '@/components/Review/detailCont'
-import FilterCont from '@/components/Review/filterCont'
+import AddCont from '@/components/Review/addCont'
 import FullScreen from '@/components/_Common/fullScreen'
 
 export default {
-  components: {AddSimpleCont, DetailCont, AddDetailCont, FilterCont, FullScreen, SearchFilter, ListCont},
+  name: 'Review',
+  components: {SearchFilter, ListItem, FullScreen, DetailCont,AddCont},
   data() {
     return {
       screenType: null,
       screenFlag: false,
       screenTitle: '',
       screenOkText: '',
-      btnFlag: false,
-      simpleFlag: false,
+      screenSideBtnText: '',
+      id: null,
     }
   },
-  watch:{
-    screenFlag(v){
-      if(!v){
-        this.btnFlag = false;
-      }
-    },
-  },
   methods: {
-    closeModal(){
-      this.simpleFlag = false;
-      this.btnFlag = false;
-    },
-    openSimple() {
-      this.simpleFlag = true;
+    clickDetail(id){
+      this.id = id;
+      this.moveToScreen('detail');
     },
     moveToScreen(type) {
       this.screenType = type
       switch (type) {
-        case 'addDetail':
+        case 'add':
           this.screenTitle = '접종후기'
           this.screenOkText = '완료'
+          this.screenSideBtnText = ''
           break
         case 'detail':
           this.screenTitle = '접종후기'
           this.screenOkText = null
-          break
-        case 'filter':
-          this.screenTitle = '필터설정'
-          this.screenOkText = '완료'
+          this.screenSideBtnText = ''
           break
       }
       this.screenFlag = true
+    },
+    onClickBack() {
+      console.log('hi')
     },
   },
 }
