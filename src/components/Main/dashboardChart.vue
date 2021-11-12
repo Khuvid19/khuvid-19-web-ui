@@ -1,6 +1,10 @@
 <template>
   <client-only>
     <div class="chart-header">
+      <div class="chart-logo">
+        <fa-icon :icon="['far', 'chart-bar']" />
+        <span>&nbsp;증상</span>
+      </div>
       <bar-chart
         class="w-full chart" style="height: 330px"
         :data="chartData"
