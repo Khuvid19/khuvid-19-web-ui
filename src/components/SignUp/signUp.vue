@@ -40,13 +40,22 @@
       <div class="text-xl flex items-center justify-between mb-10">
         생년월일
         <div class="flex justify-between w-64">
-          <button class="btn text-xl btn-primary">
+          <button
+            class="btn text-xl btn-primary"
+            @click="
+              ageListIdx =
+                ageListIdx === 0 ? ageList.length - 1 : ageListIdx - 1
+            "
+          >
             <fa-icon :icon="['fas', 'caret-left']"></fa-icon>
           </button>
           <button class="btn btn-outline btn-primary w-32 btn-disabled">
-            20대
+            {{ ageValue }}
           </button>
-          <button class="btn text-xl btn-primary">
+          <button
+            class="btn text-xl btn-primary"
+            @click="ageListIdx = (ageListIdx + 1) % ageList.length"
+          >
             <fa-icon :icon="['fas', 'caret-right']"></fa-icon>
           </button>
         </div>
@@ -73,7 +82,22 @@ export default {
   data() {
     return {
       signupScreenFlag: false,
+      ageList: [
+        '10대이하',
+        '20대',
+        '30대',
+        '40대',
+        '50대',
+        '60대',
+        '70대 이상',
+      ],
+      ageListIdx: 0,
     }
+  },
+  computed: {
+    ageValue() {
+      return this.ageList[this.ageListIdx]
+    },
   },
   created() {
     if (this.$auth.$state.loggedIn) {
