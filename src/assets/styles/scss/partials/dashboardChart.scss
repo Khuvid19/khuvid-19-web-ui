@@ -1,9 +1,15 @@
 .chart-header {
-    text-align: center;
-    margin-top: 185px;
-    margin-left: 8vw;
+  position: fixed;
+  width: 90%;
+  left: 5%;
 }
 
-.chart {
-    margin: 0 auto;
+.chart-logo {
+  font-size: 20px;
+  margin-left: 15px;
+
+  span {
+    font-size: 14px;
+    margin-left: 10px;
+  }
 }
