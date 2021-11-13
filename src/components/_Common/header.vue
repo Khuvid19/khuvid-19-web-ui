@@ -10,6 +10,10 @@
         pr-6
         h-16
         shadow-sm
+        fixed
+        top-0
+        left-0
+        w-full
       "
     >
       <div class="self-center">KHUVID(로고)</div>
@@ -20,15 +24,14 @@
       >
         LogIn
       </div>
-      <div v-else class="avatar self-center">
+      <label v-else for="my-drawer-4" class="avatar self-center">
         <div class="rounded-full w-10 h-10 self-center">
           <img
             class="self-center"
             :src="$auth.$state.user ? $auth.$state.user.picture : ''"
-            @click="$auth.logout()"
           />
         </div>
-      </div>
+      </label>
     </div>
     <FullScreen
       v-model="showLoginScreen"
