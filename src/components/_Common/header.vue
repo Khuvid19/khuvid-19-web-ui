@@ -1,9 +1,33 @@
 <template>
   <div>
-    <div class="page-header">
-      <div class="header-logo">KHUVID(로고)</div>
-      <div class="header-user btn btn-xs btn-primary" @click="clickLogin">
-        {{ $auth.loggedIn ? 'LogOut' : 'LogIn' }}
+    <div
+      class="
+        flex
+        align-middle
+        justify-between
+        bg-white
+        pl-6
+        pr-6
+        h-16
+        shadow-sm
+      "
+    >
+      <div class="self-center">KHUVID(로고)</div>
+      <div
+        v-if="$auth.loggedIn === false"
+        class="btn btn-xs btn-primary self-center"
+        @click="clickLogin"
+      >
+        LogIn
+      </div>
+      <div v-else class="avatar self-center">
+        <div class="rounded-full w-10 h-10 self-center">
+          <img
+            class="self-center"
+            :src="$auth.$state.user ? $auth.$state.user.picture : ''"
+            @click="$auth.logout()"
+          />
+        </div>
       </div>
     </div>
     <FullScreen
