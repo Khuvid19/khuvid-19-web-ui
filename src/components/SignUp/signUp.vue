@@ -4,6 +4,7 @@
     title="회원가입"
     ok-text="완료"
     @onClickBack="onClickSignupBack"
+    @onClickOk="onClickSignupSubmit"
   >
     <div class="p-8">
       <div class="avatar flex justify-center">
@@ -107,6 +108,11 @@ export default {
   methods: {
     onClickSignupBack() {
       this.signupScreenFlag = false
+      this.$auth.logout()
+    },
+    onClickSignupSubmit() {
+      this.signupScreenFlag = false
+      // 로그인 처리 API 호출 필요
     },
   },
 }
