@@ -19,7 +19,7 @@
           이메일<input
             :disabled="true"
             class="input input-disabled w-64"
-            :value="$auth.$state.user.email"
+            :value="$auth.$state.user ? $auth.$state.user.email : ''"
           />
         </div>
         <div class="text-xl flex items-center justify-between mb-10">
