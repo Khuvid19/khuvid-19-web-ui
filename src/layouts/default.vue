@@ -3,7 +3,8 @@
     <Header />
     <Nuxt class="page-body overflow-y-hidden" />
     <Footer />
-    <FullScreen
+    <SignUp />
+    <!-- <FullScreen
       v-model="signupScreenFlag"
       title="회원가입"
       ok-text="완료"
@@ -63,31 +64,19 @@
           </div>
         </div>
       </div>
-    </FullScreen>
+    </FullScreen> -->
   </div>
 </template>
 
 <script>
-import FullScreen from '../components/_Common/fullScreen'
+import SignUp from '../components/SignUp/signUp'
 import Header from '@/components/_Common/header'
 import Footer from '@/components/_Common/footer'
 export default {
-  components: { Footer, Header, FullScreen },
-  data() {
-    return {
-      signupScreenFlag: false,
-    }
-  },
+  components: { Footer, Header, SignUp },
+  data() {},
   created() {
     if (this.$route.hash !== '') this.$router.replace('/main')
-    if (this.$auth.$state.loggedIn) {
-      this.signupScreenFlag = true
-    }
-  },
-  methods: {
-    onClickSignupBack() {
-      this.signupScreenFlag = false
-    },
   },
 }
 </script>
