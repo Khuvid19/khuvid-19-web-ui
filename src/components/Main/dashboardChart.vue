@@ -1,8 +1,12 @@
 <template>
   <client-only>
     <div class="chart-header">
+      <div class="chart-logo w-full flex flex-row">
+        <fa-icon :icon="['fas', 'chart-bar']" />
+        <span>증상</span>
+      </div>
       <bar-chart
-        class="w-full chart" style="height: 330px"
+        class="-mt-6" style="height: 330px"
         :data="chartData"
         :options="chartOptions"
       />
@@ -14,7 +18,7 @@
 import {defaultPlugins, defaultOptions} from "@/plugins/chartJs/defaultOptions";
 
 export default {
-  name: 'TestChart',
+  name: 'Chart',
   components: {
 
   },

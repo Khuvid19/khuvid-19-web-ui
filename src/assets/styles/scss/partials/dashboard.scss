@@ -2,26 +2,18 @@
   position: fixed;
   width: 90%;
   left: 5%;
-  height: $layoutHeight;
 }
 
 .dashboard-logo {
   font-size: 18px;
   margin-left: 15px;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 
   span {
     font-size: 14px;
+    margin-left: 5px;
   }
-}
-
-.hidden {
-  display: none;
-}
-
-.divline {
-  margin-top: 15px;
 }
 
 .status-border {
