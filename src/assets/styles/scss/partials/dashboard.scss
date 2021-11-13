@@ -2,7 +2,6 @@
   position: fixed;
   width: 90%;
   left: 5%;
-  height: $layoutHeight;
 }
 
 .dashboard-logo {
@@ -13,6 +12,7 @@
 
   span {
     font-size: 14px;
+    margin-left: 5px;
   }
 }
 

@@ -3,7 +3,7 @@
     <div class="flex flex-col w-full">
       <div class="dashboard-logo">
         <fa-icon icon="bullhorn" />
-        <span>&nbsp;상황판</span>
+        <span>상황판</span>
       </div>
       <div class="status-border grid h-20 card bg-base-300 rounded-box place-items-center">
         <div class="flex flex-row w-full">
