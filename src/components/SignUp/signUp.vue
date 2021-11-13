@@ -8,18 +8,18 @@
   >
     <div class="p-8">
       <div class="avatar flex justify-center">
-        <div class="mb-8 rounded-full w-20 h-20">
+        <div class="mb-12 rounded-full w-20 h-20">
           <img :src="$auth.$state.user ? $auth.$state.user.picture : ''" />
         </div>
       </div>
-      <div class="text-xl flex items-center justify-between mb-10">
+      <div class="text-xl flex items-center justify-between mb-12">
         이메일<input
           :disabled="true"
           class="input input-disabled w-64"
           :value="$auth.$state.user ? $auth.$state.user.email : ''"
         />
       </div>
-      <div class="text-xl flex items-center justify-between mb-10">
+      <div class="text-xl flex items-center justify-between mb-12">
         성별
         <div class="btn-group w-64">
           <input
@@ -38,7 +38,7 @@
           />
         </div>
       </div>
-      <div class="text-xl flex items-center justify-between mb-10">
+      <div class="text-xl flex items-center justify-between mb-12">
         생년월일
         <div class="flex justify-between w-64">
           <button
