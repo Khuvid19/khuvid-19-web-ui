@@ -8,7 +8,7 @@
       <div class="status-border grid h-20 card bg-base-300 rounded-box place-items-center">
         <div class="flex flex-row w-full">
           <div class="inoculator-area grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
-            전체 확진자<br>{{ all }}
+            전체 확진자<br> {{ all }}
           </div>
           <div class="hidden divider divider-vertical"></div> 
           <div class="inoculator-area grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
@@ -16,15 +16,18 @@
           </div>
         </div>
       </div> 
-      <div class="divline"></div>
+      <div class="mt-4"></div>
       <div class="status-border grid h-20 card bg-base-300 rounded-box place-items-center">
         <div class="flex flex-row w-full">
-          <div class="inoculator-area grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
-            1차 접종<br>{{ first }}
+          <div class="inoculator-area text-sm grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
+            1차 접종<br>{{ first }}<br>(퍼센트)
           </div> 
           <div class="hidden divider divider-vertical"></div> 
-          <div class="inoculator-area grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
-            2차 접종<br>{{ second }}
+          <div class="inoculator-area text-sm grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
+            2차 접종<br>{{ second }}<br>(퍼센트)
+          </div>
+          <div class="inoculator-area text-sm grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
+            3차 접종<br>{{ third }}<br>(퍼센트)
           </div>
         </div>
       </div>
@@ -39,10 +42,14 @@ const convert = require('xml-js')
 export default {
   data() {
     return {
-      all: '388,351',
-      today: '2520',
+      all: '388,351', // 11월 10일 기준 더미 데이터
+      today: '2,520',
       first: '',
       second: '',
+      third: '',
+      firstPercent: '',
+      secondPercent: '',
+      thirdPercent: '',
     }
   },
 
@@ -53,6 +60,7 @@ export default {
       const json = JSON.parse(convert.xml2json(xml, { compact: true }))
       this.first = json.response.body.items.item[2].firstCnt._text
       this.second = json.response.body.items.item[2].secondCnt._text
+      this.third = json.response.body.items.item[2].thirdCnt._text
     })
   },
 }
