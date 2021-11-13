@@ -37,7 +37,6 @@
               type="radio"
               name="options"
               data-title="여자"
-              checked="checked"
               class="btn bg-white w-32 text-gray-400 border-gray-400"
             />
           </div>
@@ -81,7 +80,7 @@ export default {
   },
   created() {
     if (this.$route.hash !== '') this.$router.replace('/main')
-    else if (this.$auth.$state.loggedIn) {
+    if (this.$auth.$state.loggedIn) {
       this.signupScreenFlag = true
     }
   },
