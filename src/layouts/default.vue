@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-lg shadow bg-base-200 drawer drawer-end h-screen">
+  <div class="rounded-lg shadow bg-gray-100 drawer drawer-end h-screen">
     <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
     <div class="flex flex-col items-center justify-center drawer-content">
       <Header />
