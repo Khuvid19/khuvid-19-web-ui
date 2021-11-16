@@ -1,7 +1,7 @@
 <script>
 export default {
-  // asyncData({ redirect }) {
-  //   return redirect('/main')
-  // },
+  asyncData({ redirect }) {
+    return redirect('/main')
+  },
 }
 </script>

@@ -15,7 +15,9 @@
         </div>
         <div class="self-center">
           <div class="text-lg font-bold">세균맨</div>
-          <div class="text-sm">{{ $auth.$state.user.email }}</div>
+          <div class="text-sm">
+            {{ $auth.$state.user ? $auth.$state.user.email : '' }}
+          </div>
         </div>
       </div>
       <li class="mb-2">
