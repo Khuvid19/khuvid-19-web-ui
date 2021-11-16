@@ -33,25 +33,11 @@
         </div>
       </label>
     </div>
-    <FullScreen
-      v-model="showLoginScreen"
-      title="로그인"
-      @onClickBack="(val) => (showLoginScreen = val)"
-    >
-      로그인 내용
-    </FullScreen>
   </div>
 </template>
 
 <script>
-import FullScreen from './fullScreen'
 export default {
-  components: { FullScreen },
-  data() {
-    return {
-      showLoginScreen: false,
-    }
-  },
   methods: {
     clickLogin() {
       if (this.$auth.loggedIn) {

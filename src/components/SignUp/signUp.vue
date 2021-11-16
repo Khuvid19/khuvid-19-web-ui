@@ -64,8 +64,10 @@
       <div class="text-xl flex items-center justify-between">
         닉네임
         <div class="w-64 flex justify-between align-middle">
-          <input class="input border-gray-400 bg-white w-40" />
-          <button class="btn btn-primary">중복확인</button>
+          <input ref="nickname" class="input border-gray-400 bg-white w-40" />
+          <button class="btn btn-primary" @click="checkNicknameDuplicate">
+            중복확인
+          </button>
         </div>
       </div>
     </div>
@@ -83,16 +85,21 @@ export default {
   data() {
     return {
       signupScreenFlag: false,
-      ageList: [
-        '10대이하',
-        '20대',
-        '30대',
-        '40대',
-        '50대',
-        '60대',
-        '70대 이상',
-      ],
+      ageList: ['10대이하', '20대', '30대', '40대', '50대', '60대', '70대이상'],
       ageListIdx: 0,
+    }
+  },
+  fetch() {
+    if (this.$auth.loggedIn === true) {
+      const accessToken = this.$auth.strategy.token.get().split(' ')[1]
+      console.log('accessToken', accessToken)
+      this.$axios
+        .post(`auth/google`, {
+          access_token: accessToken,
+        })
+        .then((r) => {
+          console.log('r', r)
+        })
     }
   },
   computed: {
@@ -106,6 +113,17 @@ export default {
     }
   },
   methods: {
+    checkNicknameDuplicate() {
+      this.$axios
+        .get('auth/user', {
+          params: {
+            nickName: this.$refs.nickname.value,
+          },
+        })
+        .then((res) => {
+          console.log('res', res.data)
+        })
+    },
     onClickSignupBack() {
       this.signupScreenFlag = false
       this.$auth.logout()
