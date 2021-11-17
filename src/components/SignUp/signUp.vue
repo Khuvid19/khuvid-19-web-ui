@@ -9,14 +9,14 @@
     <div class="p-8">
       <div class="avatar flex justify-center">
         <div class="mb-12 rounded-full w-20 h-20">
-          <img :src="$auth.$state.user ? $auth.$state.user.picture : ''" />
+          <img :src="profileImgSrl" />
         </div>
       </div>
       <div class="text-xl flex items-center justify-between mb-12">
         이메일<input
+          v-model="email"
           :disabled="true"
           class="input input-disabled w-64"
-          :value="$auth.$state.user ? $auth.$state.user.email : ''"
         />
       </div>
       <div class="text-xl flex items-center justify-between mb-12">
@@ -26,6 +26,7 @@
             id="option1"
             type="radio"
             name="options"
+            checked="checked"
             data-title="남자"
             class="btn bg-white w-32 text-gray-400 border-gray-400"
           />
@@ -39,7 +40,7 @@
         </div>
       </div>
       <div class="text-xl flex items-center justify-between mb-12">
-        생년월일
+        나이
         <div class="flex justify-between w-64">
           <button
             class="btn text-xl btn-primary"
@@ -64,10 +65,26 @@
       <div class="text-xl flex items-center justify-between">
         닉네임
         <div class="w-64 flex justify-between align-middle">
-          <input ref="nickname" class="input border-gray-400 bg-white w-40" />
-          <button class="btn btn-primary" @click="checkNicknameDuplicate">
-            중복확인
-          </button>
+          <input
+            v-model="nickname"
+            class="input border-gray-400 bg-white w-40"
+            @input="nicknameInputChange($event)"
+          />
+          <label
+            class="btn btn-primary modal-button"
+            :disabled="isEmptyNickname"
+            @click="checkNicknameDuplicate"
+            >중복 확인</label
+          >
+        </div>
+      </div>
+    </div>
+    <input id="modal" ref="modal" type="checkbox" class="modal-toggle" />
+    <div class="modal">
+      <div class="modal-box">
+        <p>{{ msgModal }}</p>
+        <div class="modal-action">
+          <label for="modal" class="btn">확인</label>
         </div>
       </div>
     </div>
@@ -87,18 +104,23 @@ export default {
       signupScreenFlag: false,
       ageList: ['10대이하', '20대', '30대', '40대', '50대', '60대', '70대이상'],
       ageListIdx: 0,
+      msgModal: '',
+      passDuplicate: false,
+      isEmptyNickname: true,
+      nickname: '',
+      email: '',
+      profileImgSrl: '',
     }
   },
   fetch() {
     if (this.$auth.loggedIn === true) {
       const accessToken = this.$auth.strategy.token.get().split(' ')[1]
-      console.log('accessToken', accessToken)
       this.$axios
         .post(`auth/google`, {
           access_token: accessToken,
         })
         .then((r) => {
-          console.log('r', r)
+          this.signupScreenFlag = r.data === ''
         })
     }
   },
@@ -109,19 +131,44 @@ export default {
   },
   created() {
     if (this.$auth.$state.loggedIn) {
+      this.email = this.$auth.$state.user.email
+      this.profileImgSrl = this.$auth.$state.user.picture
       this.signupScreenFlag = true
     }
   },
   methods: {
+    nicknameInputChange(event) {
+      const nickname = event.target.value.trim()
+
+      if (nickname === '') this.isEmptyNickname = true
+      else this.isEmptyNickname = false
+
+      this.passDuplicate = false
+    },
     checkNicknameDuplicate() {
+      if (this.nickName === '') {
+        this.msgModal = '닉네임을 입력해주세요.'
+        this.passDuplicate = false
+
+        this.$refs.modal.click()
+        return
+      }
+
       this.$axios
         .get('auth/user', {
           params: {
-            nickName: this.$refs.nickname.value,
+            nickName: this.nickname,
           },
         })
         .then((res) => {
-          console.log('res', res.data)
+          if (res.data) {
+            this.msgModal = '이미 존재하는 닉네임입니다.'
+            this.passDuplicate = false
+          } else {
+            this.msgModal = '사용 가능한 닉네임입니다.'
+            this.passDuplicate = true
+          }
+          this.$refs.modal.click()
         })
     },
     onClickSignupBack() {
@@ -129,7 +176,24 @@ export default {
       this.$auth.logout()
     },
     onClickSignupSubmit() {
-      this.signupScreenFlag = false
+      console.log('this.$auth.$state.user', this.$auth.$state.user)
+      if (this.passDuplicate) {
+        const signUpParams = {
+          // accessToken: 'string',
+          age: 'UNDER_TEEN',
+          email: 'string',
+          gender: 'FEMALE',
+          // id: 0,
+          jwtToken: 'string',
+          name: this.$auth.$state.user.name,
+          nickName: this.nickname,
+          picUrl: this.profileImgSrl,
+        }
+        this.signupScreenFlag = false
+      } else {
+        this.msgModal = '닉네임 중복확인을 해주세요.'
+        this.$refs.modal.click()
+      }
       // 로그인 처리 API 호출 필요
     },
   },
