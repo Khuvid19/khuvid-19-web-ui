@@ -1,18 +1,45 @@
 <template>
-  <div class="page-status flex flex-col w-full">
-    <div class="w-full shadow stats">
-    <div class="stat place-items-center place-content-center">
-      <div class="stat-title">누적 확진자</div> 
-      <div class="stat-value text-success">{{ all }}</div> 
-      <!-- <div class="stat-desc text-success">↗︎ 2,520</div> -->
-    </div> 
-    <div class="stat place-items-center place-content-center">
-      <div class="stat-title">신규 확진자</div> 
-      <div class="stat-value text-error">{{ today }}</div> 
-      <!-- <div class="stat-desc text-error">↘︎ 90 (14%)</div> -->
+  <div class="page-status mt-2 flex flex-col w-full">
+    <div class="w-full flex shadow stats">
+      <div class="bg-white stat place-items-center place-content-center">
+        <div class="stat-title">누적 확진자</div>
+        <div class="stat-value text-success">{{ all }}</div>
+      </div>
+      <div class="bg-white stat place-items-center place-content-center">
+        <div class="stat-title">신규 확진자</div>
+        <div class="stat-value text-error">{{ today }}</div>
+      </div>
     </div>
-    
-  </div>
+
+    <div class="mt-3 w-full shadow stats">
+      <div class="bg-white stat">
+        <div class="stat-title">전국 1차 접종</div>
+        <div class="stat-value text-primary">{{ firstPercent }}%</div>
+        <div class="hidden"></div> 
+        <div class="ml-3 -mt-3 text-sm grid flex-grow place-items-center">
+          누적 {{ first }} <br>
+          신규 {{ todayFirst }}↗︎
+        </div>
+      </div> 
+      <div class="bg-white stat">
+        <div class="stat-title">전국 2차 접종</div>
+        <div class="stat-value text-primary">{{ secondPercent }}%</div>
+        <div class="hidden"></div> 
+        <div class="ml-3 -mt-3 text-sm grid flex-grow place-items-center">
+          누적 {{ second }} <br>
+          신규 {{ todaySecond }}↗︎
+        </div>
+      </div>
+      <div class="bg-white stat">
+        <div class="stat-title">전국 3차 접종</div>
+        <div class="stat-value text-primary">{{ thirdPercent }}%</div>
+        <div class="hidden"></div> 
+        <div class="ml-3 -mt-3 text-sm grid flex-grow place-items-center">
+          누적 {{ third }} <br>
+          신규 {{ todayThird }}↗︎
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -28,6 +55,9 @@ export default {
       first: '',
       second: '',
       third: '',
+      todayFirst: '',
+      todaySecond: '',
+      todayThird: '',
       firstPercent: '',
       secondPercent: '',
       thirdPercent: '',
