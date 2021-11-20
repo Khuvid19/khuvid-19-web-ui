@@ -12,29 +12,29 @@
     </div>
 
     <div class="mt-3 w-full shadow stats">
-      <div class="bg-white stat">
+      <div class="bg-white stat mr-8">
         <div class="stat-title">전국 1차 접종</div>
         <div class="stat-value text-primary">{{ firstPercent }}%</div>
         <div class="hidden"></div> 
-        <div class="ml-3 -mt-3 text-sm grid flex-grow place-items-center">
+        <div class="ml-3 text-sm gray text-neutral grid flex-grow place-items-center">
           누적 {{ first }} <br>
           신규 {{ todayFirst }}↗︎
         </div>
       </div> 
-      <div class="bg-white stat">
+      <div class="bg-white stat mr-8">
         <div class="stat-title">전국 2차 접종</div>
         <div class="stat-value text-primary">{{ secondPercent }}%</div>
         <div class="hidden"></div> 
-        <div class="ml-3 -mt-3 text-sm grid flex-grow place-items-center">
+        <div class="ml-3 text-sm gray grid flex-grow place-items-center">
           누적 {{ second }} <br>
           신규 {{ todaySecond }}↗︎
         </div>
       </div>
-      <div class="bg-white stat">
+      <div class="bg-white stat mr-8">
         <div class="stat-title">전국 3차 접종</div>
         <div class="stat-value text-primary">{{ thirdPercent }}%</div>
         <div class="hidden"></div> 
-        <div class="ml-3 -mt-3 text-sm grid flex-grow place-items-center">
+        <div class="ml-3 text-sm gray grid flex-grow place-items-center">
           누적 {{ third }} <br>
           신규 {{ todayThird }}↗︎
         </div>
@@ -79,6 +79,12 @@ export default {
       this.first = internationalNumberFormat.format(this.first);
       this.second = internationalNumberFormat.format(this.second);
       this.third = internationalNumberFormat.format(this.third);
+      this.todayFirst = json.response.body.items.item[0].firstCnt._text
+      this.todaySecond = json.response.body.items.item[0].secondCnt._text
+      this.todayThird = json.response.body.items.item[0].thirdCnt._text
+      this.todayFirst = internationalNumberFormat.format(this.todayFirst);
+      this.todaySecond = internationalNumberFormat.format(this.todaySecond);
+      this.todayThird = internationalNumberFormat.format(this.todayThird);
     })
     const PATH_API2 = '/covid'
     axios.get(`/api/v2${PATH_API2}`).then(res => {
