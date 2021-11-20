@@ -122,5 +122,6 @@ export default {
   },
   proxy: {
     '/api/v1': { target: 'https://nip.kdca.go.kr', pathRewrite: { '^/api/v1': '' } },
+    '/api/v2': { target: 'http://125.130.125.108:20505', pathRewrite: { '^/api/v2': ''} },
   },
 }
