@@ -21,10 +21,12 @@
         </div>
       </div>
       <li class="mb-2">
-        <a><fa-icon class="text-2xl mr-6" :icon="['fas', 'user']" />내 정보</a>
+        <a @click="clickMenu('myInfo')"
+          ><fa-icon class="text-2xl mr-6" :icon="['fas', 'user']" />내 정보</a
+        >
       </li>
       <li class="mb-2">
-        <a
+        <a @click="clickMenu('myReview')"
           ><fa-icon class="text-2xl mr-5" :icon="['fas', 'edit']" />작성 후기</a
         >
       </li>
@@ -43,15 +45,32 @@
         >
       </li>
     </ul>
+    <MyInfoScreen ref="myInfoScreen" />
+    <my-review-screen ref="myReviewScreen" />
   </div>
 </template>
 
 <script>
+import MyInfoScreen from '../Drawer/myInfoScreen'
+import MyReviewScreen from '../Drawer/myReviewScreen'
 export default {
+  components: { MyInfoScreen, MyReviewScreen },
   methods: {
     clickLogout() {
       this.$auth.logout()
       this.$router.go()
+    },
+    clickMenu(menu) {
+      switch (menu) {
+        case 'myInfo':
+          this.$refs.myInfoScreen.myInfoScreenFlag = true
+          break
+        case 'myReview':
+          this.$refs.myReviewScreen.screenFlag = true
+          break
+        default:
+          break
+      }
     },
   },
 }
