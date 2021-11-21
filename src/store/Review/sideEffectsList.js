@@ -1,9 +1,12 @@
 export const state = () => ({
-  listContents: [],
+  listContents: {},
 });
 
 export const getters = {
   getListContents: (state) => state.listContents,
+  getSideEffectsName: (state) => (key) => {
+    return state.listContents[key];
+  },
 };
 
 export const actions = {

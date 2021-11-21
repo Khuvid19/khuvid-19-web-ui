@@ -4,6 +4,7 @@ export const actions = {
   add(context, params) {
     return new Promise((resolve, reject) => {
       const params={
+        // inputReview:{
         detailDisc: "string",
         diseaseDisc: "string",
         haveDisease: true,
@@ -12,11 +13,12 @@ export const actions = {
           "LOW_FEVER",
         ],
         vaccine: "ANSEN",
+        // },
       };
       this.$axios.get('/auth/dummy',{params:{dummy:'ss'}})
         .then((res)=>{
           const PATH_API = '/review'
-          axios.post(`/api/v3${PATH_API}`, params, {
+          axios.post(`/api/v2${PATH_API}`, params, {
             headers: {
               Authorization: `Baerer ${res.data.jwtToken}`,
             },

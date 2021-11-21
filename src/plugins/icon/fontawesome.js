@@ -15,6 +15,7 @@ const solid = [
   'faUser',
   'faEdit',
   'faFileAlt',
+  'faEllipsisV',
 ]
 const regular = ['faComments', 'faUser', 'faPaperPlane']
 const brands = []

@@ -1,5 +1,7 @@
 <template>
   <div>
+    <div @click="moveToScreen('detail')">sss</div>
+
     <search-filter @clickFilter="moveToScreen('filter')"/>
     <div class="w-full my-2 h-px bg-gray-200"></div>
     <div class="review-list overflow-y-scroll">

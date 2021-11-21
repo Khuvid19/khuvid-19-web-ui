@@ -1,7 +1,7 @@
 <template>
   <div class="w-screen">
     <div class="bg-white flex justify-between items-center m-2 p-2">
-      <input v-model="searchInput" class="w-full" type="text" placeholder="검색어를 입력해주세요."/>
+      <input v-model="detailDisc" class="w-full" type="text" placeholder="검색어를 입력해주세요."/>
       <fa-icon icon="search" class="bg-white" style="font-size: 20px"
                @click="clickSearch"
       />
@@ -20,20 +20,40 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
   name: "ReviewSearchFilter",
   data() {
     return {
-      searchInput: '',
+      detailDisc: '',
       searchTagList: ['발열', '화이자 1차'],
     }
   },
   methods: {
+    ...mapActions({
+      fetchReview:'Review/getPage/fetchPageContents',
+    }),
     clickSearch() {
+      const filters={
+        authorAge: this.authorAge,
+        authorGender: this.authorGender,
+        detailDisc: this.detailDisc,
+        startInoculated: this.startInoculated,
+        endInoculated: this.endInoculated,
+        haveDisease: this.haveDisease,
+        sideEffects: this.sideEffects,
+        vaccine: this.vaccine,
+      };
+      this.fetchReview({
+        page:0,
+        filters,
+      });
       // 검색 후 리스트 리로드
       console.log('검색 후 리스트 리로드')
     },
     openTagFilter() {
+      this.$emit('clickFilter')
 
     },
   },

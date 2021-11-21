@@ -118,6 +118,12 @@
 import {mapActions, mapGetters} from "vuex";
 
 export default {
+  props: {
+    detailContent: {
+      type: Object,
+      default: null,
+    },
+  },
   data() {
     return {
       date: new Date(),
@@ -136,6 +142,22 @@ export default {
       inoculatedDate: new Date(),
     }
   },
+  watch:{
+    detailContent:{
+      immediate:true,
+      deep:true,
+      handler(v){
+        if(v != null) {
+          this.sideEffects= v.sideEffects;
+          this.vaccine= v.vaccine;
+          this.haveDisease= String(v.haveDisease);
+          this.detailDisc= v.detailDisc;
+          this.diseaseDisc= v.diseaseDisc;
+          this.inoculatedDate= v.inoculatedDate;
+        }
+      },
+    },
+  },
   computed: {
     ...mapGetters({
       getSideEffects: 'Review/sideEffectsList/getListContents',
@@ -151,7 +173,7 @@ export default {
     ...mapActions({
       fetchSideEffects: 'Review/sideEffectsList/fetchListContents',
       fetchVaccine: 'Review/vaccineList/fetchListContents',
-      add: 'Review/add/add',
+      modify: 'Review/modify/modify',
     }),
     clearData(){
       this.sideEffects= [];
@@ -175,8 +197,9 @@ export default {
     clickHaveDisease(key) {
       this.haveDisease = key;
     },
-    clickAdd() {
+    clickModify() {
       const params = {
+        ...this.detailContent,
         detailDisc: this.detailDisc,
         diseaseDisc: this.diseaseDisc,
         haveDisease: this.haveDisease,
@@ -185,7 +208,7 @@ export default {
         vaccine: this.vaccine,
       };
       console.log(params)
-      this.add(params);
+      this.modify(params);
       this.clearData();
     },
   },

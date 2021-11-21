@@ -1,11 +1,13 @@
 export const state = () => ({
-  listContents: {},
+  listContents: [],
 });
 
 export const getters = {
   getListContents: (state) => state.listContents,
-  getVaccineName: (state) => (key) => {
-    return state.listContents[key];
+  getCodeName: (state) => (code) => {
+    const foundCode = state.listContents.find((v) => v.code === code );
+    if (foundCode == null) return '';
+    return foundCode.value;
   },
 };
 
@@ -13,7 +15,7 @@ export const actions = {
   fetchListContents(context) {
     return new Promise((resolve, reject) => {
       this.$axios({
-        url: '/review/types/vaccine',
+        url: '/auth/types/age',
         method: 'get',
       })
         .then((r) => {
