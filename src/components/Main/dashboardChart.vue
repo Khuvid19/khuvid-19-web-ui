@@ -1,20 +1,29 @@
 <template>
   <client-only>
     <div class="chart-header">
-      <div class="chart-logo w-full flex flex-row">
-        <fa-icon :icon="['fas', 'chart-bar']" />
-        <span>증상</span>
-      </div>
+      <div class="card shadow bg-white">
+        <div class="card-body p-4 stats">
+          <div class="tabs">
+            <div class="flex justify-between align-middle">
+              <button v-for="(item,idx) in vaccineList" :key="idx"
+                class="mr-2 btn btn-outline btn-primary btn-sm">
+                {{ item }}
+              </button>
+            </div>
+          </div>
+        </div>
       <bar-chart
-        class="-mt-6" style="height: 330px"
+        class="-mt-10 mb-3" style="width: 90%; margin-left: 5%; height:270px;"
         :data="chartData"
         :options="chartOptions"
       />
+      </div>
     </div>
   </client-only>
 </template>
 
 <script>
+import axios from 'axios'
 import {defaultPlugins, defaultOptions} from "@/plugins/chartJs/defaultOptions";
 
 export default {
@@ -29,6 +38,7 @@ export default {
         datasets: [],
       },
       chartOptions: null,
+      vaccineList: ['화이자 1차', '화이자 2차', '모더나 1차', '모더나 2차', '아스트라제네카 1차', '아스트라제네카 2차', '얀센', '얀센 부스터샷'],
     }
   },
   computed: {
@@ -36,6 +46,12 @@ export default {
   },
   created() {
     this.initChart();
+    const PATH_API = 'review/types/vaccine'
+    axios.get(`/api/v2${PATH_API}`).then(res => {
+      const data = res.data;
+      console.log(data);
+      console.log(data.ANSEN);
+    })
   },
   methods: {
     makeRandomNum(min, max){
