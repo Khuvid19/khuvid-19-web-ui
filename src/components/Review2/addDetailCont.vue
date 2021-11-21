@@ -1,85 +1,186 @@
 <template>
-  <div>
-    <div>
-      <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
-        <div class="text-lg mb-1 ml-1">백신 종류</div>
-        <div>
-          <button v-for="(item,idx) in vaccineList" :key="idx"
-                  class="m-1 btn btn-outline btn-primary btn-sm">
-            {{ item }}
-          </button>
-        </div>
-      </div>
-      <div class=" border rounded-box px-3 py-4 mx-4 my-2 bg-white">
-        <div class="text-lg mb-1 ml-1">접종 날짜</div>
-        <div>
-          <v-date-picker v-model="date" :masks="masks" class="inline-block h-full"
-          >
-            <template #default="{ inputValue, togglePopover }">
-              <div class="flex items-center">
-                <input
-                  :value="inputValue"
-                  class="text-center bg-white text-gray-700 w-full py-1 px-2 appearance-none border rounded-xl focus:outline-none focus:border-blue-500"
-                  readonly
-                  @click="togglePopover()"
-                />
-              </div>
-            </template>
-          </v-date-picker>
-        </div>
-      </div>
-      <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
-        <div class="text-lg mb-1 ml-1">기저질환</div>
-        <div>
-          <button v-for="(item,idx) in bb" :key="idx"
-                  class=" m-1 btn btn-outline btn-primary btn-sm">
-            {{ item }}
-          </button>
-        </div>
-        <div class="w-full my-2 h-px bg-gray-200"></div>
-        <div class="form-control">
-          <input type="text" placeholder="username" class="input input-sm input-bordered">
-        </div>
-      </div>
-      <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
-        <div class="text-lg mb-1 ml-1">이상반응</div>
-        <div>
-          <button v-for="(item,idx) in cc" :key="idx"
-                  class="m-1 btn btn-outline btn-primary btn-sm">
-            {{ item }}
-          </button>
-        </div>
-      </div>
-      <div class="card bordered px-4 py-4 mx-4 my-2 bg-white">
-        <div class="form-control">
-          <textarea class="textarea h-24 textarea-bordered" placeholder="Bio"></textarea>
-        </div>
+  <div class="p-3">
+    <div class="border-2 border-gray-300 p-2 rounded-lg  m-1 mb-2">
+      <div class="text-lg ml-1">백신종류</div>
+      <div v-for="(value, key) in getVaccine" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
+           :class="vaccine===key?'bg-red-500':'bg-white'"
+           :style="{
+           backgroundColor:vaccine===key?'#65C3C8 !important':'white !important',
+           color:vaccine===key?'white !important':'#65C3C8 !important'
+         }"
+           @click="clickVaccine(key)"
+      >
+        <label>{{ value }}</label>
+        <input type="checkbox" class="toggle"
+               style="display: none"
+               :checked="vaccine===key"
+        >
       </div>
     </div>
+    <div class="border-2 border-gray-300 p-2 rounded-lg  m-1 mb-2">
+      <div class="text-lg ml-1">접종날짜</div>
+      <div>
+        <v-date-picker v-model="inoculatedDate" class="inline-block h-full"
+                       masks="YYYY-MM-DD"
+        >
+          <template #default="{ inputValue, togglePopover }">
+            <div class="flex items-center">
+              <input
+                :value="inputValue"
+                class="text-center bg-white text-gray-700 py-1
+                px-2 appearance-none border rounded-xl
+                 focus:outline-none focus:border-blue-500"
+                readonly
+                @click="togglePopover()"
+              />
+            </div>
+          </template>
+        </v-date-picker>
+      </div>
+    </div>
+    <div class="border-2 border-gray-300 p-2 rounded-lg  m-1 mb-2 ">
+      <div class="text-lg ml-1">기저질환</div>
+      <div v-for="(value, key) in YNList" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
+           :class="haveDisease===key?'bg-red-500':'bg-white'"
+           :style="{
+           backgroundColor:haveDisease===key?'#65C3C8 !important':'white !important',
+           color:haveDisease===key?'white !important':'#65C3C8 !important'
+         }"
+           @click="clickHaveDisease(key)"
+      >
+        <label>{{ value }}</label>
+        <input type="checkbox" class="toggle"
+               style="display: none"
+               :checked="haveDisease===key"
+        >
+      </div>
+      <div class="h-px bg-gray-200 m-1"></div>
+      <input
+        v-model="diseaseDisc"
+        placeholder="기저질환을 입력해주세요."
+        class="
+        rounded-lg
+        border-2
+        focus:border-primary
+        outline-none
+        p-1
+        pl-2
+        w-full
+        my-2
+      "
+      />
+    </div>
+    <div class="border-2 border-gray-300 p-2 rounded-lg  m-1 mb-2">
+      <div class="text-lg ml-1">이상반응</div>
+      <div v-for="(value, key) in getSideEffects" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
+           :class="sideEffects.includes(key)?'bg-red-500':'bg-white'"
+           :style="{
+           backgroundColor:sideEffects.includes(key)?'#65C3C8 !important':'white !important',
+           color:sideEffects.includes(key)?'white !important':'#65C3C8 !important'
+         }"
+           @click="clickSideEffects(key)"
+      >
+        <label>{{ value }}</label>
+        <input type="checkbox" class="toggle"
+               style="display: none"
+               :checked="sideEffects.includes(key)"
+        >
+        <!--      style="display: none"-->
+      </div>
+    </div>
+    <textarea
+      v-model="detailDisc"
+      placeholder="내용을 입력해주세요."
+      class="
+        border-2
+        border-gray-300
+        p-2
+        focus:border-primary
+        outline-none
+        w-full
+        rounded-lg
+        h-auto
+        write-textarea
+        resize-none
+      "
+    />
   </div>
 </template>
 
 <script>
+import {mapActions, mapGetters} from "vuex";
+
 export default {
+  name: "DetailCont",
+  props: {
+    id: {
+      type: Number,
+      default: null,
+    },
+  },
   data() {
     return {
-      date: new Date(),
-      masks: {
-        input: 'YYYY-MM-DD',
+      checked: false,
+      YNList: {
+        true: '있음',
+        false: '없음',
       },
-      vaccineList: ['화이자', '모더나'],
-      bb: ['없음', '있음'],
-      cc: [
-        '미열', '고열', '접종부위 통증',
-        '구토', '메스꺼움', '두통',
-        '관절통', '근육통', '피로감',
-        '두드러기', '발진', '가려움증',
-        '부기', '기타',
-      ],
+      sideEffects: [],
+      vaccine: '',
+      haveDisease: '',
+      detailDisc: '',
+      diseaseDisc: '',
+      inoculatedDate: new Date(),
+
     }
+  },
+  computed: {
+    ...mapGetters({
+      getSideEffects: 'Review/sideEffectsList/getListContents',
+      getVaccine: 'Review/vaccineList/getListContents',
+    }),
+  },
+  created() {
+    this.fetchSideEffects();
+    this.fetchVaccine();
+  },
+
+  methods: {
+    ...mapActions({
+      fetchSideEffects: 'Review/sideEffectsList/fetchListContents',
+      fetchVaccine: 'Review/vaccineList/fetchListContents',
+      add: 'Review/add/add',
+    }),
+    clickSideEffects(key) {
+      if (this.sideEffects.includes(key)) {
+        const idx = this.sideEffects.findIndex((r) => r === key);
+        this.sideEffects.splice(idx, 1);
+      } else {
+        this.sideEffects.push(key);
+      }
+    },
+    clickVaccine(key) {
+      this.vaccine = key;
+    },
+    clickHaveDisease(key) {
+      this.haveDisease = key;
+    },
+    clickAdd() {
+      const params = {
+        detailDisc: this.detailDisc,
+        diseaseDisc: this.diseaseDisc,
+        haveDisease: this.haveDisease,
+        inoculatedDate: this.inoculatedDate,
+        sideEffects: this.sideEffects,
+        vaccine: this.vaccine,
+      };
+      console.log(params)
+      // this.add(params);
+    },
   },
 }
 </script>
 
-<style>
+<style scoped>
+
 </style>

@@ -9,10 +9,11 @@
       :title="screenTitle"
       :ok-text="screenOkText"
       :side-btn-text="screenSideBtnText"
-      @onClickBack="screenFlag = false"
+      @onClickBack="onClickBack"
+      @onClickOk="onClickOk"
     >
-      <detail-cont v-if="screenType === 'detail'" :id="id"/>
-      <add-cont v-if="screenType === 'add'" />
+      <detail-cont v-if="screenType === 'detail'" :detail-content="detailContent"/>
+      <add-cont v-if="screenType === 'add'" ref="addCont" />
     </full-screen>
 
     <button
@@ -25,12 +26,12 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from 'vuex'
 import SearchFilter from '@/components/Review/SearchFilter/index';
 import ListItem from '@/components/Review/listItem'
 import DetailCont from '@/components/Review/detailCont'
 import AddCont from '@/components/Review/addCont'
 import FullScreen from '@/components/_Common/fullScreen'
-
 export default {
   name: 'Review',
   components: {SearchFilter, ListItem, FullScreen, DetailCont,AddCont},
@@ -41,12 +42,24 @@ export default {
       screenTitle: '',
       screenOkText: '',
       screenSideBtnText: '',
-      id: null,
+      detailContent: null,
     }
   },
+  computed: {
+    ...mapGetters({
+      getPageParams:'Review/getPage/getPageParams',
+    }),
+  },
+  created () {
+    this.fetchPageContents(this.getPageParams);
+  },
   methods: {
-    clickDetail(id){
-      this.id = id;
+    ...mapActions({
+      fetchPageContents:'Review/getPage/fetchPageContents',
+      add:'Review/add/add',
+    }),
+    clickDetail(item){
+      this.detailContent = item;
       this.moveToScreen('detail');
     },
     moveToScreen(type) {
@@ -66,7 +79,11 @@ export default {
       this.screenFlag = true
     },
     onClickBack() {
-      console.log('hi')
+      this.screenFlag = false;
+      this.$refs.addCont.clearData();
+    },
+    onClickOk(){
+      this.$refs.addCont.clickAdd();
     },
   },
 }
