@@ -112,16 +112,20 @@ export default {
       profileImgSrl: '',
     }
   },
-  fetch() {
+  async fetch() {
     if (this.$auth.loggedIn === true) {
       const accessToken = this.$auth.strategy.token.get().split(' ')[1]
-      this.$axios
-        .post(`auth/google`, {
+      const loginRes = (
+        await this.$axios.post('auth/google', {
           access_token: accessToken,
         })
-        .then((r) => {
-          this.signupScreenFlag = r.data === ''
-        })
+      ).data
+
+      if (loginRes === '') {
+        this.signupScreenFlag = true
+        const ageTypeRes = (await this.$axios.get('auth/types/age')).data
+        console.log(ageTypeRes)
+      } else this.signupScreenFlag = false
     }
   },
   computed: {
@@ -180,15 +184,20 @@ export default {
       if (this.passDuplicate) {
         const signUpParams = {
           // accessToken: 'string',
-          age: 'UNDER_TEEN',
-          email: 'string',
-          gender: 'FEMALE',
+          age: 'TWENTIES',
+          email: this.email,
+          gender: 'MAIL',
           // id: 0,
           jwtToken: 'string',
           name: this.$auth.$state.user.name,
           nickName: this.nickname,
           picUrl: this.profileImgSrl,
         }
+
+        this.$axios.post('/auth/user', {
+          ...signUpParams,
+        })
+
         this.signupScreenFlag = false
       } else {
         this.msgModal = '닉네임 중복확인을 해주세요.'
