@@ -1,37 +1,9 @@
 .page-status {
   position: fixed;
-  width: 90%;
-  left: 5%;
-  height: $layoutHeight;
+  width: 95%;
+  left: 2.5%;
 }
 
-.dashboard-logo {
-  font-size: 18px;
-  margin-left: 15px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-
-  span {
-    font-size: 14px;
-  }
+.gray {
+    color: rgb(147, 138, 153);
 }
-
-.hidden {
-  display: none;
-}
-
-.divline {
-  margin-top: 15px;
-}
-
-.status-border {
-  border: 1px solid black;
-  background-color: white;
-}
-
-.inoculator-area {
-  text-align: center;
-  background-color: white;
-  margin-top: -22px;
-}
-
