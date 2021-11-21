@@ -34,10 +34,13 @@ export default {
       current: null,
     }
   },
-  computed: {},
-  watch: {},
-  created() {
-    this.current = this.$router.history.current.name
+  watch: {
+    $route: {
+      immediate: true,
+      handler(newVal) {
+        this.current = newVal.name
+      },
+    },
   },
   methods: {
     clickIcon(value) {

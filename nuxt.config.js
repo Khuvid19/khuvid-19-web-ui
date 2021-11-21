@@ -30,6 +30,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    `@/plugins/axios.js`,
     { src: '@/plugins/chartJs/index', mode: 'client' },
     { src: '@/plugins/calendar/vCalendar.js', ssr: false },
   ],
@@ -117,9 +118,10 @@ export default {
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    proxy: true,
+    baseUrl: 'http://125.130.125.108:20505/',
   },
   proxy: {
     '/api/v1': { target: 'https://nip.kdca.go.kr', pathRewrite: { '^/api/v1': '' } },
+    '/api/v2': { target: 'http://125.130.125.108:20505', pathRewrite: { '^/api/v2': ''} },
   },
 }
