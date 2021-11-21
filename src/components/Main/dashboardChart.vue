@@ -13,7 +13,7 @@
           </div>
         </div>
       <bar-chart
-        class="-mt-10 mb-3" style="width: 90%; margin-left: 5%; height:270px;"
+        class="-mt-8 mb-2" style="width: 90%; margin-left: 5%; height:270px;"
         :data="chartData"
         :options="chartOptions"
       />
@@ -39,6 +39,8 @@ export default {
       },
       chartOptions: null,
       vaccineList: ['화이자 1차', '화이자 2차', '모더나 1차', '모더나 2차', '아스트라제네카 1차', '아스트라제네카 2차', '얀센', '얀센 부스터샷'],
+      symptomList: ['두통', '관절통', '붓기', '고열', '근육통', '부위 통증', '미열', '피로감', '메스꺼움', '두드러기'],
+      // '발진', '구토', '가려움증', '기타'
     }
   },
   computed: {
@@ -46,12 +48,7 @@ export default {
   },
   created() {
     this.initChart();
-    const PATH_API = 'review/types/vaccine'
-    axios.get(`/api/v2${PATH_API}`).then(res => {
-      const data = res.data;
-      console.log(data);
-      console.log(data.ANSEN);
-    })
+
   },
   methods: {
     makeRandomNum(min, max){
@@ -70,26 +67,27 @@ export default {
             display: true,
             text: '',
             font: {
-              size: 22,
+              size: 20,
             },
           },
         },
       }
     },
     initData(){
-      this.chartData.labels = Array.from( {length: 12}, (_, i) => `증상${i+1}`)
+      // this.chartData.labels = Array.from( {length: 10}, (_, i) => `증상${i+1}`)
+      this.chartData.labels = this.symptomList
       this.chartData.datasets.push({
-        label: '1차',
-        borderColor: '#f43f5e',
-        backgroundColor: '#f43f5e',
-        data:  Array.from( {length: 12}, (_, i) => this.makeRandomNum(100, 300)),
+        label: '화이자 1차',
+        borderColor: 'rgb(98, 176, 182)',
+        backgroundColor: 'rgb(98, 176, 182)',
+        data: Array.from( {length: 14}, (_, i) => this.makeRandomNum(100, 300)),
       })
-      this.chartData.datasets.push({
-        label: '2차',
-        borderColor: '#0ea5e9',
-        backgroundColor: '#0ea5e9',
-        data:  Array.from( {length: 12}, (_, i) => this.makeRandomNum(200, 400)),
-      })
+      // this.chartData.datasets.push({
+      //   label: '2차',
+      //   borderColor: '#0ea5e9',
+      //   backgroundColor: '#0ea5e9',
+      //   data:  Array.from( {length: 12}, (_, i) => this.makeRandomNum(200, 400)),
+      // })
     },
   },
 }
