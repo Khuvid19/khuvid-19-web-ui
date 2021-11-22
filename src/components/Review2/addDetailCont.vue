@@ -3,7 +3,6 @@
     <div class="border-2 border-gray-300 p-2 rounded-lg  m-1 mb-2">
       <div class="text-lg ml-1">백신종류</div>
       <div v-for="(value, key) in getVaccine" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
-           :class="vaccine===key?'bg-red-500':'bg-white'"
            :style="{
            backgroundColor:vaccine===key?'#65C3C8 !important':'white !important',
            color:vaccine===key?'white !important':'#65C3C8 !important'
@@ -41,7 +40,6 @@
     <div class="border-2 border-gray-300 p-2 rounded-lg  m-1 mb-2 ">
       <div class="text-lg ml-1">기저질환</div>
       <div v-for="(value, key) in YNList" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
-           :class="haveDisease===key?'bg-red-500':'bg-white'"
            :style="{
            backgroundColor:haveDisease===key?'#65C3C8 !important':'white !important',
            color:haveDisease===key?'white !important':'#65C3C8 !important'
@@ -73,7 +71,6 @@
     <div class="border-2 border-gray-300 p-2 rounded-lg  m-1 mb-2">
       <div class="text-lg ml-1">이상반응</div>
       <div v-for="(value, key) in getSideEffects" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
-           :class="sideEffects.includes(key)?'bg-red-500':'bg-white'"
            :style="{
            backgroundColor:sideEffects.includes(key)?'#65C3C8 !important':'white !important',
            color:sideEffects.includes(key)?'white !important':'#65C3C8 !important'

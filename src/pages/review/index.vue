@@ -21,16 +21,16 @@
                    :detail-content="detailContent"
       />
       <add-cont v-if="screenType === 'add'" ref="addCont"
-                @closeScreen="closeScreen"
+                @afterAdd="afterAdd"
       />
       <modify-cont v-if="screenType === 'modify'"
                    ref="modifyCont"
                    :detail-content="detailContent"
-                   @sendDetail="sendDetail"/>
+                   @afterModify="afterModify"/>
     </full-screen>
 
     <button
-      class="absolute bottom-5 right-5 bg-primary w-16 h-16 rounded-full"
+      class="absolute bottom-0 right-5 bg-primary w-16 h-16 rounded-full"
       @click="moveToScreen('add')">
       <fa-icon class="text-white text-xl" icon="pen"/>
     </button>
@@ -90,7 +90,7 @@ export default {
     }),
   },
   created() {
-    this.fetchPageContents(this.getPageParams);
+    this.fetchPageContents({});
   },
   methods: {
     ...mapActions({
@@ -149,10 +149,11 @@ export default {
     },
     onClickBack() {
       this.screenFlag = false;
-      if (this.screenType === 'modify') {
+      if (this.screenType === 'add') {
+        this.$refs.addCont.clearData();
+      } else if (this.screenType === 'modify') {
         this.moveToScreen('detail');
       }
-      // this.$refs.addCont.clearData();
     },
     onClickOk() {
       if (this.screenType === 'add') {
@@ -166,15 +167,16 @@ export default {
           ...this.getPageParams.filters.authorAge.map((r) => {return this.getAgeName(r);}),
           ...this.getPageParams.filters.sideEffects.map((r) => {return this.getSideEffectName(r);}),
           ...this.getPageParams.filters.vaccine.map((r) => {return this.getVaccineName(r);}),
-          this.getPageParams.filters.authorGender,
+          this.getGenderName(this.getPageParams.filters.authorGender),
           `${this.getPageParams.filters.endInoculated.slice(0,10)}~${this.getPageParams.filters.startInoculated.slice(0,10)}`,
         ];
       }
     },
-    closeScreen(){
+    afterAdd(){
       this.screenFlag = false;
+      // 목록 리로드
     },
-    sendDetail(detail){
+    afterModify(detail){
       this.screenFlag = false;
       this.detailContent = detail;
       this.moveToScreen('detail');

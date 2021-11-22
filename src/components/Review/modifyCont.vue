@@ -5,7 +5,6 @@
         <div class="text-lg mb-1 ml-1">백신 종류</div>
         <div>
           <div v-for="(value, key) in getVaccine" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
-               :class="vaccine===key?'bg-red-500':'bg-white'"
                :style="{
            backgroundColor:vaccine===key?'#65C3C8 !important':'white !important',
            color:vaccine===key?'white !important':'#65C3C8 !important'
@@ -42,7 +41,6 @@
         <div class="text-lg mb-1 ml-1">기저질환</div>
         <div>
           <div v-for="(value, key) in YNList" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
-               :class="haveDisease===key?'bg-red-500':'bg-white'"
                :style="{
            backgroundColor:haveDisease===key?'#65C3C8 !important':'white !important',
            color:haveDisease===key?'white !important':'#65C3C8 !important'
@@ -77,7 +75,6 @@
         <div class="text-lg mb-1 ml-1">이상반응</div>
         <div>
           <div v-for="(value, key) in getSideEffects" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
-               :class="sideEffects.includes(key)?'bg-red-500':'bg-white'"
                :style="{
            backgroundColor:sideEffects.includes(key)?'#65C3C8 !important':'white !important',
            color:sideEffects.includes(key)?'white !important':'#65C3C8 !important'
@@ -111,13 +108,21 @@
         </div>
       </div>
     </div>
+    <confirm-modal :check-flag="modalFlag"
+                   :text="modalText"
+                   ok-text="확인"
+                   @closeModal="closeModal"/>
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
+import ConfirmModal from "@/components/Review/confirmModal";
 
 export default {
+  components: {
+    ConfirmModal,
+  },
   props: {
     detailContent: {
       type: Object,
@@ -126,6 +131,9 @@ export default {
   },
   data() {
     return {
+      modalFlag: false,
+      modalText:'',
+
       date: new Date(),
       masks: {
         input: 'YYYY-MM-DD',
@@ -176,6 +184,9 @@ export default {
       fetchVaccine: 'Review/vaccineList/fetchListContents',
       modify: 'Review/modify/modify',
     }),
+    closeModal() {
+      this.modalFlag = false;
+    },
     clearData(){
       this.sideEffects= [];
       this.vaccine= '';
@@ -200,20 +211,25 @@ export default {
     },
     clickModify() {
       const params = {
-        ...this.detailContent,
+        id: this.detailContent.id,
         detailDisc: this.detailDisc,
         diseaseDisc: this.diseaseDisc,
-        haveDisease: this.haveDisease,
-        inoculatedDate: typeof this.inoculatedDate==='string'?this.inoculatedDate:this.inoculatedDate.toISOString(),
+        haveDisease: this.haveDisease==='true',
+        inoculatedDate: (typeof this.inoculatedDate)==='string'?this.inoculatedDate.slice(0,10):this.inoculatedDate.toISOString().slice(0,10),
         sideEffects: this.sideEffects,
         vaccine: this.vaccine,
       };
-      this.modify(params)
-        .then(()=>{
-          this.$emit('sendDetail',params);
-          this.clearData();
-        })
-
+      if(this.haveDisease==='false') params.diseaseDisc = '';
+      if (this.haveDisease === 'true' && this.diseaseDisc === '') {
+        this.modalText = '기저질환을 입력해주세요.';
+        this.modalFlag = true;
+      } else {
+        this.modify(params)
+          .then(() => {
+            this.clearData();
+            this.$emit('afterModify', params);
+          })
+      }
     },
   },
 }
