@@ -7,16 +7,13 @@
       <div class="flex align-middle pl-4 mb-12">
         <div class="avatar self-center mr-4">
           <div class="rounded-full w-20 h-20 self-center">
-            <img
-              class="self-center"
-              :src="$auth.$state.user ? $auth.$state.user.picture : ''"
-            />
+            <img class="self-center" :src="user ? user.picUrl : ''" />
           </div>
         </div>
         <div class="self-center">
-          <div class="text-lg font-bold">세균맨</div>
+          <div class="text-lg font-bold">{{ user ? user.nickName : '' }}</div>
           <div class="text-sm">
-            {{ $auth.$state.user ? $auth.$state.user.email : '' }}
+            {{ user ? user.email : '' }}
           </div>
         </div>
       </div>
@@ -31,7 +28,7 @@
         >
       </li>
       <li>
-        <a
+        <a @click="clickMenu('myPost')"
           ><fa-icon class="text-2xl mr-7" :icon="['fas', 'file-alt']" />내가 쓴
           글</a
         >
@@ -47,14 +44,26 @@
     </ul>
     <MyInfoScreen ref="myInfoScreen" />
     <my-review-screen ref="myReviewScreen" />
+    <my-post-screen ref="myPostScreen" />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import MyInfoScreen from '../Drawer/myInfoScreen'
+import MyPostScreen from '../Drawer/myPostScreen'
 import MyReviewScreen from '../Drawer/myReviewScreen'
+
 export default {
-  components: { MyInfoScreen, MyReviewScreen },
+  components: { MyInfoScreen, MyReviewScreen, MyPostScreen },
+  computed: {
+    ...mapGetters({
+      user: 'getUser',
+    }),
+  },
+  created() {
+    console.log('this.user', this.user)
+  },
   methods: {
     clickLogout() {
       this.$auth.logout()
@@ -63,10 +72,15 @@ export default {
     clickMenu(menu) {
       switch (menu) {
         case 'myInfo':
-          this.$refs.myInfoScreen.myInfoScreenFlag = true
+          console.log('this.user', this.user)
+
+          // this.$refs.myInfoScreen.myInfoScreenFlag = true
           break
         case 'myReview':
           this.$refs.myReviewScreen.screenFlag = true
+          break
+        case 'myPost':
+          this.$refs.myPostScreen.screenFlag = true
           break
         default:
           break
