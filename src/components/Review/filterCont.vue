@@ -4,7 +4,6 @@
       <div class="text-lg mb-1 ml-1">백신 종류</div>
       <div>
         <div v-for="(value, key) in getVaccine" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
-             :class="vaccine.includes(key)?'bg-red-500':'bg-white'"
              :style="{
            backgroundColor:vaccine.includes(key)?'#65C3C8 !important':'white !important',
            color:vaccine.includes(key)?'white !important':'#65C3C8 !important'
@@ -23,7 +22,6 @@
       <div class="text-lg mb-1 ml-1">성별</div>
       <div>
         <div v-for="(value, idx) in getGender" :key="idx" class="m-1 btn btn-outline btn-primary btn-sm"
-             :class="authorGender===value.code?'bg-red-500':'bg-white'"
              :style="{
            backgroundColor:authorGender===value.code?'#65C3C8 !important':'white !important',
            color:authorGender===value.code?'white !important':'#65C3C8 !important'
@@ -42,7 +40,6 @@
       <div class="text-lg mb-1 ml-1">나이</div>
       <div>
         <div v-for="(value, idx) in getAge" :key="idx" class="m-1 btn btn-outline btn-primary btn-sm"
-             :class="authorAge.includes(value.code)?'bg-red-500':'bg-white'"
              :style="{
            backgroundColor:authorAge.includes(value.code)?'#65C3C8 !important':'white !important',
            color:authorAge.includes(value.code)?'white !important':'#65C3C8 !important'
@@ -61,7 +58,6 @@
       <div class="text-lg mb-1 ml-1">기저질환</div>
       <div>
         <div v-for="(value, key) in YNList" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
-             :class="haveDisease===key?'bg-red-500':'bg-white'"
              :style="{
            backgroundColor:haveDisease===key?'#65C3C8 !important':'white !important',
            color:haveDisease===key?'white !important':'#65C3C8 !important'
@@ -114,7 +110,6 @@
       <div class="text-lg mb-1 ml-1">이상반응</div>
       <div>
         <div v-for="(value, key) in getSideEffects" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
-             :class="sideEffects.includes(key)?'bg-red-500':'bg-white'"
              :style="{
            backgroundColor:sideEffects.includes(key)?'#65C3C8 !important':'white !important',
            color:sideEffects.includes(key)?'white !important':'#65C3C8 !important'

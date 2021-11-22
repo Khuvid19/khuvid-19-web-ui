@@ -5,7 +5,6 @@
         <div class="text-lg mb-1 ml-1">백신 종류</div>
         <div>
           <div v-for="(value, key) in getVaccine" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
-               :class="vaccine===key?'bg-red-500':'bg-white'"
                :style="{
            backgroundColor:vaccine===key?'#65C3C8 !important':'white !important',
            color:vaccine===key?'white !important':'#65C3C8 !important'
@@ -42,7 +41,6 @@
         <div class="text-lg mb-1 ml-1">기저질환</div>
         <div>
           <div v-for="(value, key) in YNList" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
-               :class="haveDisease===key?'bg-red-500':'bg-white'"
                :style="{
            backgroundColor:haveDisease===key?'#65C3C8 !important':'white !important',
            color:haveDisease===key?'white !important':'#65C3C8 !important'
@@ -77,7 +75,6 @@
         <div class="text-lg mb-1 ml-1">이상반응</div>
         <div>
           <div v-for="(value, key) in getSideEffects" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
-               :class="sideEffects.includes(key)?'bg-red-500':'bg-white'"
                :style="{
            backgroundColor:sideEffects.includes(key)?'#65C3C8 !important':'white !important',
            color:sideEffects.includes(key)?'white !important':'#65C3C8 !important'
@@ -89,8 +86,23 @@
                    style="display: none"
                    :checked="sideEffects.includes(key)"
             >
-            <!--      style="display: none"-->
           </div>
+          <div v-if="sideEffects.includes('OTHER')" class="h-px bg-gray-200 m-1"></div>
+          <input
+            v-if="sideEffects.includes('OTHER')"
+            v-model="sideEffectsDisc"
+            placeholder="이상반응을 입력해주세요."
+            class="
+        rounded-lg
+        border-2
+        focus:border-primary
+        outline-none
+        p-1
+        pl-2
+        w-full
+        my-2
+      "
+          />
         </div>
       </div>
       <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
@@ -112,7 +124,7 @@
       </div>
     </div>
     <confirm-modal :check-flag="modalFlag"
-                   text="백신종류는 필수 입력 항목입니다."
+                   :text="modalText"
                    ok-text="확인"
                    @closeModal="closeModal"/>
   </div>
@@ -129,6 +141,7 @@ export default {
   data() {
     return {
       modalFlag: false,
+      modalText:'',
       date: new Date(),
       masks: {
         input: 'YYYY-MM-DD',
@@ -143,6 +156,7 @@ export default {
       detailDisc: '',
       diseaseDisc: '',
       inoculatedDate: new Date(),
+      sideEffectsDisc:null,
     }
   },
   computed: {
@@ -192,21 +206,25 @@ export default {
         detailDisc: this.detailDisc,
         diseaseDisc: this.diseaseDisc,
         haveDisease: this.haveDisease,
-        inoculatedDate: this.inoculatedDate,
+        inoculatedDate: this.inoculatedDate.toISOString().slice(0,10),
         sideEffects: this.sideEffects,
         vaccine: this.vaccine,
       };
+      // if(this.sideEffectsDisc)params.sideEffects.push(this.sideEffectsDisc);
+      if(this.haveDisease==='false')params.diseaseDisc='';
       if (this.vaccine === '') {
+        this.modalText = '백신종류는 필수 입력 항목입니다.';
+        this.modalFlag = true;
+      }else if (this.haveDisease === 'true'&&this.diseaseDisc==='') {
+        this.modalText = '기저질환을 입력해주세요.';
         this.modalFlag = true;
       } else {
         this.add(params)
           .then(() => {
             this.clearData();
-            this.$emit('closeScreen');
+            this.$emit('afterAdd');
           })
       }
-
-
     },
   },
 }
