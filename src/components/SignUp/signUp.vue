@@ -86,6 +86,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import FullScreen from '@/components/_Common/fullScreen'
 
 export default {
@@ -114,7 +115,7 @@ export default {
       const accessToken = this.$auth.strategy.token.get().split(' ')[1]
 
       const loginRes = (
-        await this.$axios.post('auth/google?access_token', {
+        await this.$axios.post('auth/google', {
           access_token: accessToken,
         })
       ).data
@@ -132,7 +133,7 @@ export default {
 
         this.signupScreenFlag = true
       } else {
-        console.log(loginRes)
+        this.setUser(loginRes)
         this.signupScreenFlag = false
       }
     }
@@ -143,6 +144,9 @@ export default {
     },
   },
   methods: {
+    ...mapActions({
+      setUser: 'setUser',
+    }),
     nicknameInputChange(event) {
       const nickname = event.target.value.trim()
 
@@ -199,7 +203,7 @@ export default {
             ...signUpParams,
           })
           .then((r) => {
-            console.log('r', r.data)
+            localStorage.setItem('jwtToken', r.data.jwtToken)
           })
 
         this.signupScreenFlag = false
