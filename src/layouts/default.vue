@@ -3,7 +3,7 @@
     <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
     <div class="flex flex-col items-center justify-center drawer-content">
       <Header />
-      <Nuxt class="page-body overflow-y-hidden" />
+      <Nuxt class="page-body overflow-y-hidden w-full" />
       <Footer />
       <SignUp />
     </div>
