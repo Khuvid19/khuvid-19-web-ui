@@ -23,18 +23,12 @@
         성별
         <div class="btn-group w-64">
           <input
-            id="option1"
+            v-for="gender in genderList"
+            :key="gender.code"
+            v-model="genderValue"
+            :value="gender.code"
             type="radio"
-            name="options"
-            checked="checked"
-            data-title="남자"
-            class="btn bg-white w-32 text-gray-400 border-gray-400"
-          />
-          <input
-            id="option2"
-            type="radio"
-            name="options"
-            data-title="여자"
+            :data-title="gender.value"
             class="btn bg-white w-32 text-gray-400 border-gray-400"
           />
         </div>
@@ -101,9 +95,12 @@ export default {
   },
   data() {
     return {
+      genderValue: '',
       signupScreenFlag: false,
-      ageList: ['10대이하', '20대', '30대', '40대', '50대', '60대', '70대이상'],
+      ageList: ['1234'], // 임시방편
       ageListIdx: 0,
+      genderList: [],
+      genderListIdx: 0,
       msgModal: '',
       passDuplicate: false,
       isEmptyNickname: true,
@@ -115,30 +112,35 @@ export default {
   async fetch() {
     if (this.$auth.loggedIn === true) {
       const accessToken = this.$auth.strategy.token.get().split(' ')[1]
+
       const loginRes = (
-        await this.$axios.post('auth/google', {
+        await this.$axios.post('auth/google?access_token', {
           access_token: accessToken,
         })
       ).data
 
+      this.email = this.$auth.$state.user.email
+      this.profileImgSrl = this.$auth.$state.user.picture
+
       if (loginRes === '') {
-        this.signupScreenFlag = true
         const ageTypeRes = (await this.$axios.get('auth/types/age')).data
-        console.log(ageTypeRes)
-      } else this.signupScreenFlag = false
+        this.ageList = ageTypeRes
+
+        const genderTypeRes = (await this.$axios.get('auth/types/gender')).data
+        this.genderList = genderTypeRes
+        this.genderValue = this.genderList[0].code
+
+        this.signupScreenFlag = true
+      } else {
+        console.log(loginRes)
+        this.signupScreenFlag = false
+      }
     }
   },
   computed: {
     ageValue() {
-      return this.ageList[this.ageListIdx]
+      return this.ageList[this.ageListIdx].value
     },
-  },
-  created() {
-    if (this.$auth.$state.loggedIn) {
-      this.email = this.$auth.$state.user.email
-      this.profileImgSrl = this.$auth.$state.user.picture
-      this.signupScreenFlag = true
-    }
   },
   methods: {
     nicknameInputChange(event) {
@@ -180,30 +182,31 @@ export default {
       this.$auth.logout()
     },
     onClickSignupSubmit() {
-      console.log('this.$auth.$state.user', this.$auth.$state.user)
       if (this.passDuplicate) {
         const signUpParams = {
-          // accessToken: 'string',
-          age: 'TWENTIES',
+          age: this.ageList[this.ageListIdx].code,
           email: this.email,
-          gender: 'MAIL',
-          // id: 0,
-          jwtToken: 'string',
+          gender: this.genderValue,
           name: this.$auth.$state.user.name,
           nickName: this.nickname,
           picUrl: this.profileImgSrl,
         }
 
-        this.$axios.post('/auth/user', {
-          ...signUpParams,
-        })
+        console.log('signUpParams', signUpParams)
+
+        this.$axios
+          .post('auth/user', {
+            ...signUpParams,
+          })
+          .then((r) => {
+            console.log('r', r.data)
+          })
 
         this.signupScreenFlag = false
       } else {
         this.msgModal = '닉네임 중복확인을 해주세요.'
         this.$refs.modal.click()
       }
-      // 로그인 처리 API 호출 필요
     },
   },
 }
