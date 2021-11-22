@@ -1,8 +1,8 @@
 export default function ({ $axios, redirect, store }) {
   $axios.onRequest(config => {
-    // config.headers.common[]
-    // console.log('config', config)
-    // console.log(store.state.user)
+    if(store.state.user) {
+      config.headers.Authorization = `Bearer ${store.state.user.jwtToken}`
+    }
     // console.log('Making request to ' + config.url)
   })
   

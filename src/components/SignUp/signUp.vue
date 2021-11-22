@@ -111,38 +111,30 @@ export default {
     }
   },
   async fetch() {
-    if (this.$auth.loggedIn === true) {
-      const accessToken = this.$auth.strategy.token.get().split(' ')[1]
+    const ageTypeRes = (await this.$axios.get('auth/types/age')).data
+    this.ageList = ageTypeRes
 
-      const loginRes = (
-        await this.$axios.post('auth/google', {
-          access_token: accessToken,
-        })
-      ).data
-
-      this.email = this.$auth.$state.user.email
-      this.profileImgSrl = this.$auth.$state.user.picture
-
-      if (loginRes === '') {
-        const ageTypeRes = (await this.$axios.get('auth/types/age')).data
-        this.ageList = ageTypeRes
-
-        const genderTypeRes = (await this.$axios.get('auth/types/gender')).data
-        this.genderList = genderTypeRes
-        this.genderValue = this.genderList[0].code
-
-        this.signupScreenFlag = true
-      } else {
-        this.setUser(loginRes)
-        this.signupScreenFlag = false
-      }
-    }
+    const genderTypeRes = (await this.$axios.get('auth/types/gender')).data
+    this.genderList = genderTypeRes
+    this.genderValue = this.genderList[0].code
   },
   computed: {
     ageValue() {
       return this.ageList[this.ageListIdx].value
     },
   },
+  watch: {
+    signupScreenFlag: {
+      immediate: true,
+      handler(newVal) {
+        if (newVal) {
+          this.email = this.$auth.$state.user.email
+          this.profileImgSrl = this.$auth.$state.user.picture
+        }
+      },
+    },
+  },
+  created() {},
   methods: {
     ...mapActions({
       setUser: 'setUser',

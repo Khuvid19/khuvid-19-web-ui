@@ -5,23 +5,44 @@
       <Header />
       <Nuxt class="page-body overflow-y-hidden w-full" />
       <Footer />
-      <SignUp />
+      <SignUp ref="signUpScreen" />
     </div>
     <DrawerSide />
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import SignUp from '../components/SignUp/signUp'
 import Header from '@/components/_Common/header'
 import Footer from '@/components/_Common/footer'
 import DrawerSide from '@/components/_Common/drawerSide'
 export default {
   components: { Footer, Header, SignUp, DrawerSide },
-  created() {
+  async created() {
     if (this.$route.hash !== '') this.$router.replace('/main')
+    if (this.$auth.loggedIn === true) {
+      const accessToken = this.$auth.strategy.token.get().split(' ')[1]
+
+      const loginRes = (
+        await this.$axios.post('auth/google', {
+          access_token: accessToken,
+        })
+      ).data
+
+      if (loginRes === '') {
+        this.$refs.signUpScreen.signupScreenFlag = true
+      } else {
+        this.setUser(loginRes)
+        this.$refs.signUpScreen.signupScreenFlag = false
+      }
+    }
   },
-  methods: {},
+  methods: {
+    ...mapActions({
+      setUser: 'setUser',
+    }),
+  },
 }
 </script>
 
