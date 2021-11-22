@@ -1,102 +1,124 @@
 <template>
   <div>
-    <search-filter @clickFilter="moveToScreen('filter')"/>
-    <div class="w-full my-2 h-px bg-gray-200"></div>
-    <div class="board-list overflow-y-scroll">
-      <list-cont @click="moveToScreen('detail')"/>
-      <list-cont @click="moveToScreen('detail')"/>
-      <list-cont @click="moveToScreen('detail')"/>
-      <list-cont @click="moveToScreen('detail')"/>
-      <list-cont @click="moveToScreen('detail')"/>
-      <list-cont @click="moveToScreen('detail')"/>
-      <list-cont @click="moveToScreen('detail')"/>
-    </div>
-    <button
-      v-if="!btnFlag"
-      class="absolute bottom-5 right-5 bg-primary w-16 h-16 rounded-full"
-      @click="btnFlag=true"
-    >
-      <fa-icon class="text-white text-xl" icon="pen"/>
-    </button>
-    <div
-      v-else
-      class="absolute bottom-5 right-5 w-full h-16"
-    >
-      <div class="flex justify-end items-center gap-4">
-        <button class="text-white text-xl bg-primary w-40 h-16 rounded-xl"
-                @click="openSimple">
-          간편후기
-        </button>
-        <button class="text-white text-xl bg-primary w-40 h-16 rounded-xl"
-                @click="moveToScreen('addDetail')">
-          상세후기
-        </button>
-        <button class="bg-primary w-16 h-16 rounded-full"
-                @click="btnFlag=false">
-          <fa-icon class="text-white text-xl" icon="times"/>
-        </button>
-      </div>
-    </div>
-    <FullScreen
+    <search-filter ref="searchFilter"
+                   :filter-tag-list="filterTagList"
+                   @clickFilter="moveToScreen('filter')"/>
+    <div class="h-px bg-gray-200"></div>
+    <list-item @clickDetail="clickDetail"/>
+
+    <full-screen
       v-model="screenFlag"
       :title="screenTitle"
       :ok-text="screenOkText"
-      @onClickBack="screenFlag = false"
+      :side-btn-text="screenSideBtnText"
+      @onClickBack="onClickBack"
+      @onClickOk="onClickOk"
     >
-      <filter-cont v-if="screenType === 'filter'"/>
-      <add-detail-cont v-if="screenType === 'addDetail'"/>
-      <detail-cont v-if="screenType === 'detail'"/>
-    </FullScreen>
-    <add-simple-cont :check-flag="simpleFlag" @closeModal="closeModal"/>
+      <filter-cont v-if="screenType === 'filter'" ref="filterCont"/>
+      <detail-cont v-if="screenType === 'detail'"
+                   :detail-content="detailContent"
+                   @clickModify="moveToScreen('modify')"
+                   @clickRemove="clickRemove"
+      />
+      <add-cont v-if="screenType === 'add'" ref="addCont"
+                @closeScreen="closeScreen"
+      />
+      <modify-cont v-if="screenType === 'modify'"
+                   ref="modifyCont"
+                   :detail-content="detailContent"
+                   @sendDetail="sendDetail"/>
+    </full-screen>
+
+    <button
+      class="absolute bottom-5 right-5 bg-primary w-16 h-16 rounded-full"
+      @click="moveToScreen('add')">
+      <fa-icon class="text-white text-xl" icon="pen"/>
+    </button>
+    <confirm-modal :check-flag="modalFlag"
+                   text="후기를 삭제하시겠습니까?"
+                   ok-text="삭제"
+                   cancel-text="취소"
+                   @closeModal="closeModal"/>
+
   </div>
 </template>
 
 <script>
-import SearchFilter from '@/components/Review/searchFilter'
-import ListCont from '@/components/Review/listCont'
-import AddDetailCont from '@/components/Review/addDetailCont'
-import AddSimpleCont from '@/components/Review/addSimpleCont'
+import {mapActions, mapGetters} from 'vuex'
+import SearchFilter from '@/components/Review/SearchFilter/index';
+import ListItem from '@/components/Review/listItem'
 import DetailCont from '@/components/Review/detailCont'
+import AddCont from '@/components/Review/addCont'
+import ModifyCont from '@/components/Review/modifyCont'
 import FilterCont from '@/components/Review/filterCont'
 import FullScreen from '@/components/_Common/fullScreen'
+import ConfirmModal from "@/components/Review/confirmModal";
 
 export default {
-  components: {AddSimpleCont, DetailCont, AddDetailCont, FilterCont, FullScreen, SearchFilter, ListCont},
+  name: 'Review',
+  components: {
+    ConfirmModal,
+    SearchFilter,
+    ListItem,
+    FullScreen,
+    DetailCont,
+    AddCont,
+    FilterCont,
+    ModifyCont,
+  },
   data() {
     return {
+      modalFlag: false,
       screenType: null,
       screenFlag: false,
       screenTitle: '',
       screenOkText: '',
-      btnFlag: false,
-      simpleFlag: false,
+      screenSideBtnText: '',
+      detailContent: null,
+      filterTagList:[],
     }
   },
-  watch:{
-    screenFlag(v){
-      if(!v){
-        this.btnFlag = false;
-      }
-    },
+  computed: {
+    ...mapGetters({
+      getPageParams: 'Review/getPage/getPageParams',
+      getVaccineName: 'Review/vaccineList/getVaccineName',
+      getSideEffectName: 'Review/sideEffectsList/getSideEffectsName',
+      getGenderName: 'User/getGenderType/getCodeName',
+      getAgeName: 'User/getAgeType/getCodeName',
+    }),
+  },
+  created() {
+    this.fetchPageContents(this.getPageParams);
   },
   methods: {
+    ...mapActions({
+      fetchPageContents: 'Review/getPage/fetchPageContents',
+      remove: 'Review/remove/remove',
+    }),
     closeModal(){
-      this.simpleFlag = false;
-      this.btnFlag = false;
+      this.modalFlag = false;
     },
-    openSimple() {
-      this.simpleFlag = true;
+    clickDetail(item) {
+      this.detailContent = item;
+      this.moveToScreen('detail');
     },
     moveToScreen(type) {
       this.screenType = type
       switch (type) {
-        case 'addDetail':
+        case 'add':
           this.screenTitle = '접종후기'
           this.screenOkText = '완료'
+          this.screenSideBtnText = ''
+          break
+        case 'modify':
+          this.screenTitle = '접종후기'
+          this.screenOkText = '완료'
+          this.screenSideBtnText = ''
           break
         case 'detail':
           this.screenTitle = '접종후기'
           this.screenOkText = null
+          this.screenSideBtnText = ''
           break
         case 'filter':
           this.screenTitle = '필터설정'
@@ -104,6 +126,42 @@ export default {
           break
       }
       this.screenFlag = true
+    },
+    onClickBack() {
+      this.screenFlag = false;
+      if (this.screenType === 'modify') {
+        this.moveToScreen('detail');
+      }
+      // this.$refs.addCont.clearData();
+    },
+    onClickOk() {
+      if (this.screenType === 'add') {
+        this.$refs.addCont.clickAdd();
+      } else if (this.screenType === 'modify') {
+        this.$refs.modifyCont.clickModify();
+      } else if (this.screenType === 'filter') {
+        this.$refs.filterCont.clickSearch();
+        this.screenFlag = false;
+        this.filterTagList = [
+          ...this.getPageParams.filters.authorAge.map((r) => {return this.getAgeName(r);}),
+          ...this.getPageParams.filters.sideEffects.map((r) => {return this.getSideEffectName(r);}),
+          ...this.getPageParams.filters.vaccine.map((r) => {return this.getVaccineName(r);}),
+          this.getPageParams.filters.authorGender,
+          `${this.getPageParams.filters.endInoculated.slice(0,10)}~${this.getPageParams.filters.startInoculated.slice(0,10)}`,
+        ];
+      }
+    },
+    closeScreen(){
+      this.screenFlag = false;
+    },
+    sendDetail(detail){
+      this.screenFlag = false;
+      this.detailContent = detail;
+      this.moveToScreen('detail');
+    },
+    clickRemove(){
+      this.modalFlag = true;
+      this.remove({id:this.detailContent.id});
     },
   },
 }
