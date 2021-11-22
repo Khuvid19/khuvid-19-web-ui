@@ -129,6 +129,9 @@ export default {
     },
     onClickBack() {
       this.screenFlag = false;
+      if (this.screenType === 'modify') {
+        this.moveToScreen('detail');
+      }
       // this.$refs.addCont.clearData();
     },
     onClickOk() {
