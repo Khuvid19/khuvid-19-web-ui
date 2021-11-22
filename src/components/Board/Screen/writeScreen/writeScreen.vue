@@ -1,6 +1,7 @@
 <template>
   <div class="pl-4 pr-4 pt-4 h-fll">
     <input
+      v-model="title"
       placeholder="제목을 입력해주세요."
       class="
         rounded-lg
@@ -14,6 +15,7 @@
       "
     />
     <textarea
+      v-model="content"
       placeholder="내용을 입력해주세요."
       class="
         border-2
@@ -33,6 +35,12 @@
 <script>
 export default {
   name: 'BoardWriteScreen',
+  data() {
+    return {
+      title: '',
+      content: '',
+    }
+  },
 }
 </script>
 

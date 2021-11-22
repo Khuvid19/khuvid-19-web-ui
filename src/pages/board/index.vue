@@ -2,8 +2,22 @@
   <div>
     <SearchComponent />
     <div class="board-list overflow-y-scroll">
-      <ListItem @click="moveToScreen('detail')" />
-      <ListItem />
+      <ListItem
+        title="제목"
+        content="내용"
+        nickname="테스터"
+        :comment-cnt="0"
+        @click="moveToScreen('detail')"
+      />
+      <ListItem
+        v-for="item in boardList"
+        :key="item.id"
+        :title="item.title"
+        :content="item.content"
+        :nickname="item.user.nickName"
+        :comment-cnt="item.comments"
+        @click="moveToScreen('detail')"
+      />
       <ListItem />
       <ListItem />
       <ListItem />
@@ -19,14 +33,16 @@
     >
       <fa-icon class="text-white text-xl" icon="pen" />
     </button>
+
     <FullScreen
       v-model="screenFlag"
       :title="screenTitle"
       :ok-text="screenOkText"
       @onClickBack="screenFlag = false"
+      @onClickOk="onClickOk"
     >
-      <WriteScreen v-if="screenType === 'write'" />
-      <DetailScreen v-if="screenType === 'detail'" />
+      <WriteScreen v-if="screenType === 'write'" ref="writeScreen" />
+      <DetailScreen v-if="screenType === 'detail'" ref="detailScreen" />
     </FullScreen>
   </div>
 </template>
@@ -52,7 +68,12 @@ export default {
       screenFlag: false,
       screenTitle: '',
       screenOkText: '',
+      boardList: [],
     }
+  },
+  async fetch() {
+    const res = (await this.$axios.get('board?page=0')).data
+    this.boardList = res.content
   },
   methods: {
     moveToScreen(type) {
@@ -69,8 +90,17 @@ export default {
       }
       this.screenFlag = true
     },
-    onClickBack() {
-      console.log('hi')
+    onClickOk() {
+      if (this.screenType === 'write') {
+        const params = {
+          title: this.$refs.writeScreen.title,
+          content: this.$refs.writeScreen.content,
+        }
+
+        this.$axios.post('board', params).then((r) => {
+          console.log('r', r)
+        })
+      }
     },
   },
 }
