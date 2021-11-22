@@ -15,19 +15,16 @@ export const actions = {
         vaccine: "ANSEN",
         // },
       };
-      this.$axios.get('/auth/dummy',{params:{dummy:'ss'}})
-        .then((res)=>{
-          const PATH_API = '/review'
-          axios.post(`/api/v2${PATH_API}`, params, {
-            headers: {
-              Authorization: `Baerer ${res.data.jwtToken}`,
-            },
-          }).then((data) => {
-            resolve(data);
-          })
-            .catch((error) => reject(error));
-        })
+      this.$axios.$post('/review', params, {
+        headers: {
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxZXIiLCJ1c2VyIjp7ImlkIjpudWxsLCJlbWFpbCI6InFlciIsIm5hbWUiOiJxZXIiLCJhY2Nlc3NUb2tlbiI6ImFjY2Vzc190b2tlbiIsInBpY1VybCI6InBpY1VSbCIsIm5pY2tOYW1lIjoicWVyIiwiZ2VuZGVyIjpudWxsLCJhZ2UiOm51bGwsImp3dFRva2VuIjpudWxsfSwicm9sZXMiOiJST0xFX1VTRVIiLCJpYXQiOjE2Mzc1NzEzODMsImV4cCI6MTYzNzY1Nzc4M30.jPzT43PNssO6TS6giNkOPNtl9M-4rTOtR6OBuQbmcgU',
+        },
+      }).then((data) => {
+        resolve(data);
+      })
+        .catch((error) => reject(error));
+    })
 
-    });
+    // });
   },
 };

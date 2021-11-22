@@ -148,12 +148,13 @@ export default {
       deep:true,
       handler(v){
         if(v != null) {
-          this.sideEffects= v.sideEffects;
-          this.vaccine= v.vaccine;
-          this.haveDisease= String(v.haveDisease);
-          this.detailDisc= v.detailDisc;
-          this.diseaseDisc= v.diseaseDisc;
-          this.inoculatedDate= v.inoculatedDate;
+          const temp = JSON.parse(JSON.stringify(v))
+          this.sideEffects= temp.sideEffects;
+          this.vaccine= temp.vaccine;
+          this.haveDisease= String(temp.haveDisease);
+          this.detailDisc= temp.detailDisc;
+          this.diseaseDisc= temp.diseaseDisc;
+          this.inoculatedDate= temp.inoculatedDate;
         }
       },
     },
@@ -203,13 +204,16 @@ export default {
         detailDisc: this.detailDisc,
         diseaseDisc: this.diseaseDisc,
         haveDisease: this.haveDisease,
-        inoculatedDate: this.inoculatedDate,
+        inoculatedDate: typeof this.inoculatedDate==='string'?this.inoculatedDate:this.inoculatedDate.toISOString(),
         sideEffects: this.sideEffects,
         vaccine: this.vaccine,
       };
-      console.log(params)
-      this.modify(params);
-      this.clearData();
+      this.modify(params)
+        .then(()=>{
+          this.$emit('sendDetail',params);
+          this.clearData();
+        })
+
     },
   },
 }

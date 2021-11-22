@@ -11,9 +11,12 @@
       <fa-icon icon="filter" class="bg-white mr-2" style="font-size: 20px"
                @click="openTagFilter"
       />
-      <div v-for="(item) in searchTagList" :key="item" :value="item"
-              class="m-1 btn btn-outline btn-primary btn-sm">
-        {{ item }}
+      <div class="flex w-full overflow-x-scroll">
+        <div v-for="(item) in filterTagList" v-show="item" :key="item"
+             :value="item"
+             class="m-1 btn btn-outline btn-primary btn-sm">
+          <div>{{ item }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -24,6 +27,12 @@ import {mapActions} from "vuex";
 
 export default {
   name: "ReviewSearchFilter",
+  props: {
+    filterTagList: {
+      type: Array,
+      default: null,
+    },
+  },
   data() {
     return {
       detailDisc: '',
@@ -32,10 +41,10 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchReview:'Review/getPage/fetchPageContents',
+      fetchReview: 'Review/getPage/fetchPageContents',
     }),
     clickSearch() {
-      const filters={
+      const filters = {
         authorAge: this.authorAge,
         authorGender: this.authorGender,
         detailDisc: this.detailDisc,
@@ -46,11 +55,9 @@ export default {
         vaccine: this.vaccine,
       };
       this.fetchReview({
-        page:0,
+        page: 0,
         filters,
       });
-      // 검색 후 리스트 리로드
-      console.log('검색 후 리스트 리로드')
     },
     openTagFilter() {
       this.$emit('clickFilter')

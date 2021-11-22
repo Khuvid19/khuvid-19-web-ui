@@ -50,14 +50,14 @@
       <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
         <div class="flex justify-between items-center">
           <div class="text-lg mb-1 ml-1">기저질환</div>
-          <div class=" m-1 btn btn-outline btn-primary btn-sm"
+          <div class="m-1 btn btn-outline btn-primary btn-sm"
                style="background-color: white; color: #65C3C8;
                  border: 1px solid #65C3C8">
-            {{ detailContent.haveDisease?'있음':'없음' }}
+            {{ detailContent.haveDisease==='true'?'있음':'없음' }}
           </div>
         </div>
-        <div class="w-full my-2 h-px bg-gray-200"></div>
-        <div class="">
+        <div v-show="detailContent.haveDisease==='true'" class="w-full my-2 h-px bg-gray-200"></div>
+        <div v-show="detailContent.haveDisease==='true'">
           {{ detailContent.diseaseDisc }}
         </div>
       </div>

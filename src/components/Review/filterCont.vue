@@ -4,17 +4,17 @@
       <div class="text-lg mb-1 ml-1">백신 종류</div>
       <div>
         <div v-for="(value, key) in getVaccine" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
-             :class="vaccine===key?'bg-red-500':'bg-white'"
+             :class="vaccine.includes(key)?'bg-red-500':'bg-white'"
              :style="{
-           backgroundColor:vaccine===key?'#65C3C8 !important':'white !important',
-           color:vaccine===key?'white !important':'#65C3C8 !important'
+           backgroundColor:vaccine.includes(key)?'#65C3C8 !important':'white !important',
+           color:vaccine.includes(key)?'white !important':'#65C3C8 !important'
          }"
              @click="clickVaccine(key)"
         >
           <label>{{ value }}</label>
           <input type="checkbox" class="toggle"
                  style="display: none"
-                 :checked="vaccine===key"
+                 :checked="vaccine.includes(key)"
           >
         </div>
       </div>
@@ -22,28 +22,58 @@
     <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
       <div class="text-lg mb-1 ml-1">성별</div>
       <div>
-        <button v-for="(item,idx) in gender" :key="idx"
-                class=" m-1 btn btn-outline btn-primary btn-sm">
-          {{ item }}
-        </button>
+        <div v-for="(value, idx) in getGender" :key="idx" class="m-1 btn btn-outline btn-primary btn-sm"
+             :class="authorGender===value.code?'bg-red-500':'bg-white'"
+             :style="{
+           backgroundColor:authorGender===value.code?'#65C3C8 !important':'white !important',
+           color:authorGender===value.code?'white !important':'#65C3C8 !important'
+         }"
+             @click="clickGender(value.code)"
+        >
+          <label>{{ value.value }}</label>
+          <input type="checkbox" class="toggle"
+                 style="display: none"
+                 :checked="authorGender===value.code"
+          >
+        </div>
       </div>
     </div>
     <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
       <div class="text-lg mb-1 ml-1">나이</div>
       <div>
-        <button v-for="(item,idx) in age" :key="idx"
-                class="m-1 btn btn-outline btn-primary btn-sm">
-          {{ item }}
-        </button>
+        <div v-for="(value, idx) in getAge" :key="idx" class="m-1 btn btn-outline btn-primary btn-sm"
+             :class="authorAge.includes(value.code)?'bg-red-500':'bg-white'"
+             :style="{
+           backgroundColor:authorAge.includes(value.code)?'#65C3C8 !important':'white !important',
+           color:authorAge.includes(value.code)?'white !important':'#65C3C8 !important'
+         }"
+             @click="clickAge(value.code)"
+        >
+          <label>{{ value.value }}</label>
+          <input type="checkbox" class="toggle"
+                 style="display: none"
+                 :checked="authorAge.includes(value.code)"
+          >
+        </div>
       </div>
     </div>
     <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
       <div class="text-lg mb-1 ml-1">기저질환</div>
       <div>
-        <button v-for="(item,idx) in bb" :key="idx"
-                class="m-1 btn btn-outline btn-primary btn-sm">
-          {{ item }}
-        </button>
+        <div v-for="(value, key) in YNList" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
+             :class="haveDisease===key?'bg-red-500':'bg-white'"
+             :style="{
+           backgroundColor:haveDisease===key?'#65C3C8 !important':'white !important',
+           color:haveDisease===key?'white !important':'#65C3C8 !important'
+         }"
+             @click="clickHaveDisease(key)"
+        >
+          <label>{{ value }}</label>
+          <input type="checkbox" class="toggle"
+                 style="display: none"
+                 :checked="haveDisease===key"
+          >
+        </div>
       </div>
     </div>
     <div class="border rounded-box px-3 py-4 mx-4 my-2 bg-white">
@@ -83,10 +113,20 @@
     <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
       <div class="text-lg mb-1 ml-1">이상반응</div>
       <div>
-        <button v-for="(item,idx) in cc" :key="idx"
-                class="m-1 btn btn-outline btn-primary btn-sm">
-          {{ item }}
-        </button>
+        <div v-for="(value, key) in getSideEffects" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
+             :class="sideEffects.includes(key)?'bg-red-500':'bg-white'"
+             :style="{
+           backgroundColor:sideEffects.includes(key)?'#65C3C8 !important':'white !important',
+           color:sideEffects.includes(key)?'white !important':'#65C3C8 !important'
+         }"
+             @click="clickSideEffects(key)"
+        >
+          <label>{{ value }}</label>
+          <input type="checkbox" class="toggle"
+                 style="display: none"
+                 :checked="sideEffects.includes(key)"
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -99,20 +139,9 @@ export default {
   data() {
     return {
       range: {
-        start: new Date(2020, 9, 12),
-        end: new Date(2020, 9, 16),
+        start: new Date(),
+        end: new Date(),
       },
-      vaccineList: ['화이자', '모더나'],
-      bb: ['없음', '있음'],
-      gender: ['여자', '남자'],
-      age: ['10대', '20대', '30대', '40대', '50대', '60대 이상'],
-      cc: [
-        '미열', '고열', '접종부위 통증',
-        '구토', '메스꺼움', '두통',
-        '관절통', '근육통', '피로감',
-        '두드러기', '발진', '가려움증',
-        '부기', '기타',
-      ],
       date: new Date(),
       masks: {
         input: 'YYYY-MM-DD',
@@ -121,37 +150,49 @@ export default {
         true: '있음',
         false: '없음',
       },
+      authorAge: [],
+      authorGender: '',
       sideEffects: [],
-      vaccine: '',
-      haveDisease: 'false',
+      vaccine: [],
+      haveDisease: '',
       detailDisc: '',
-      diseaseDisc: '',
-      inoculatedDate: new Date(),
+      endInoculated: new Date(),
+      startInoculated: new Date(),
     }
   },
   computed: {
     ...mapGetters({
+      getReviewParams: 'Review/getPage/getPageParams',
       getSideEffects: 'Review/sideEffectsList/getListContents',
       getVaccine: 'Review/vaccineList/getListContents',
+      getAge: 'User/getAgeType/getListContents',
+      getGender: 'User/getGenderType/getListContents',
     }),
   },
   created() {
     this.fetchSideEffects();
     this.fetchVaccine();
+    this.fetchAge();
+    this.fetchGender();
   },
 
   methods: {
     ...mapActions({
+      fetchReview: 'Review/getPage/fetchPageContents',
+      setReviewParams: 'Review/getPage/setPageParams',
       fetchSideEffects: 'Review/sideEffectsList/fetchListContents',
       fetchVaccine: 'Review/vaccineList/fetchListContents',
+      fetchAge: 'User/getAgeType/fetchListContents',
+      fetchGender: 'User/getGenderType/fetchListContents',
       add: 'Review/add/add',
     }),
     clearData(){
+      this.authorAge= [];
+      this.authorGender= [];
       this.sideEffects= [];
-      this.vaccine= '';
-      this.haveDisease= 'false';
+      this.vaccine= [];
+      this.haveDisease= [];
       this.detailDisc= '';
-      this.diseaseDisc= '';
       this.inoculatedDate= new Date();
     },
     clickSideEffects(key) {
@@ -162,23 +203,43 @@ export default {
         this.sideEffects.push(key);
       }
     },
+    clickAge(key) {
+      if (this.authorAge.includes(key)) {
+        const idx = this.authorAge.findIndex((r) => r === key);
+        this.authorAge.splice(idx, 1);
+      } else {
+        this.authorAge.push(key);
+      }
+    },
+    clickGender(key) {
+      this.authorGender = key;
+    },
     clickVaccine(key) {
-      this.vaccine = key;
+      if (this.vaccine.includes(key)) {
+        const idx = this.vaccine.findIndex((r) => r === key);
+        this.vaccine.splice(idx, 1);
+      } else {
+        this.vaccine.push(key);
+      }
     },
     clickHaveDisease(key) {
       this.haveDisease = key;
     },
-    clickAdd() {
+    clickSearch() {
+      console.log(typeof this.range.start, this.range.start)
       const params = {
+        authorAge: this.authorAge,
+        authorGender: this.authorGender,
         detailDisc: this.detailDisc,
-        diseaseDisc: this.diseaseDisc,
+        endInoculated: this.range.end.toISOString().slice(0,10),
         haveDisease: this.haveDisease,
-        inoculatedDate: this.inoculatedDate,
+        startInoculated: this.range.start.toISOString().slice(0,10),
         sideEffects: this.sideEffects,
         vaccine: this.vaccine,
       };
-      console.log(params)
-      // this.add(params);
+      // typeof this.inoculatedDate==='string'?this.inoculatedDate:this.inoculatedDate.toISOString(),
+      this.setReviewParams(params);
+      this.fetchReview(params);
       this.clearData();
     },
   },

@@ -55,7 +55,7 @@
                    :checked="haveDisease===key"
             >
           </div>
-          <div  v-if="haveDisease==='true'" class="h-px bg-gray-200 m-1"></div>
+          <div v-if="haveDisease==='true'" class="h-px bg-gray-200 m-1"></div>
           <input
             v-if="haveDisease==='true'"
             v-model="diseaseDisc"
@@ -94,7 +94,7 @@
         </div>
       </div>
       <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
-      <div class="form-control">
+        <div class="form-control">
           <textarea
             v-model="detailDisc"
             placeholder="내용을 입력해주세요."
@@ -111,15 +111,24 @@
         </div>
       </div>
     </div>
+    <confirm-modal :check-flag="modalFlag"
+                   text="백신종류는 필수 입력 항목입니다."
+                   ok-text="확인"
+                   @closeModal="closeModal"/>
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
+import ConfirmModal from "@/components/Review/confirmModal";
 
 export default {
+  components: {
+    ConfirmModal,
+  },
   data() {
     return {
+      modalFlag: false,
       date: new Date(),
       masks: {
         input: 'YYYY-MM-DD',
@@ -153,13 +162,16 @@ export default {
       fetchVaccine: 'Review/vaccineList/fetchListContents',
       add: 'Review/add/add',
     }),
-    clearData(){
-      this.sideEffects= [];
-      this.vaccine= '';
-      this.haveDisease= 'false';
-      this.detailDisc= '';
-      this.diseaseDisc= '';
-      this.inoculatedDate= new Date();
+    closeModal() {
+      this.modalFlag = false;
+    },
+    clearData() {
+      this.sideEffects = [];
+      this.vaccine = '';
+      this.haveDisease = 'false';
+      this.detailDisc = '';
+      this.diseaseDisc = '';
+      this.inoculatedDate = new Date();
     },
     clickSideEffects(key) {
       if (this.sideEffects.includes(key)) {
@@ -184,9 +196,17 @@ export default {
         sideEffects: this.sideEffects,
         vaccine: this.vaccine,
       };
-      console.log(params)
-      this.add(params);
-      this.clearData();
+      if (this.vaccine === '') {
+        this.modalFlag = true;
+      } else {
+        this.add(params)
+          .then(() => {
+            this.clearData();
+            this.$emit('closeScreen');
+          })
+      }
+
+
     },
   },
 }
