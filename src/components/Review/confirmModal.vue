@@ -39,9 +39,11 @@ export default {
   },
   methods: {
     clickOk(){
+      this.$emit('clickOk')
       this.closeModal();
     },
     clickCancel(){
+      this.$emit('clickCancel')
       this.closeModal();
     },
     closeModal() {

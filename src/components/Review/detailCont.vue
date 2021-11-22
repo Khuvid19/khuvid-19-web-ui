@@ -1,7 +1,5 @@
 <template>
   <div>
-    <button @click="$emit('clickModify')">수정</button>
-    <button @click="$emit('clickRemove')">삭제</button>
     <div>
       <div class="flex mx-4 my-2 gap-2" style="width: calc(100% - 2rem)">
         <div class="w-1/2 card bordered px-1 py-2 bg-white">

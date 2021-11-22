@@ -11,14 +11,14 @@
       :title="screenTitle"
       :ok-text="screenOkText"
       :side-btn-text="screenSideBtnText"
+      :menu-list="['수정','삭제']"
+      @onClickMenu="onClickMenu"
       @onClickBack="onClickBack"
       @onClickOk="onClickOk"
     >
       <filter-cont v-if="screenType === 'filter'" ref="filterCont"/>
       <detail-cont v-if="screenType === 'detail'"
                    :detail-content="detailContent"
-                   @clickModify="moveToScreen('modify')"
-                   @clickRemove="clickRemove"
       />
       <add-cont v-if="screenType === 'add'" ref="addCont"
                 @closeScreen="closeScreen"
@@ -38,6 +38,8 @@
                    text="후기를 삭제하시겠습니까?"
                    ok-text="삭제"
                    cancel-text="취소"
+                   @clickOk="clickOk"
+                   @clickCancel="clickCancel"
                    @closeModal="closeModal"/>
 
   </div>
@@ -95,6 +97,24 @@ export default {
       fetchPageContents: 'Review/getPage/fetchPageContents',
       remove: 'Review/remove/remove',
     }),
+    clickOk(){
+      this.screenFlag = false;
+      this.remove({id:this.detailContent.id})
+        .then(()=>{
+          this.screenFlag = false;
+        })
+
+    },
+    clickCancel(){
+      this.modalFlag=false;
+    },
+    onClickMenu(type){
+      if(type==='수정'){
+        this.moveToScreen('modify')
+      }else if(type==='삭제'){
+        this.clickRemove();
+      }
+    },
     closeModal(){
       this.modalFlag = false;
     },
@@ -161,7 +181,7 @@ export default {
     },
     clickRemove(){
       this.modalFlag = true;
-      this.remove({id:this.detailContent.id});
+
     },
   },
 }
