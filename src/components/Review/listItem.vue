@@ -6,13 +6,13 @@
           <div class="flex justify-between align-middle mb-2">
             <div>
               <div class="flex justify-start items-center">
-                <div class="m-1 text-sm">{{ getVaccineName(item.vaccine) }}</div>
-                <div class="m-1 text-sm">| {{ getGenderName(item.authorGender) }}</div>
-                <div class="m-1 text-sm">| {{ getAgeName(item.authorAge) }}</div>
-                <div v-if="item.haveDisease" class="m-1 text-sm">
+                <div class="m-1 text-base font-semibold">{{ getVaccineName(item.vaccine) }}</div>
+                <div class="m-1 text-base font-semibold">| {{ getGenderName(item.authorGender) }}</div>
+                <div class="m-1 text-base font-semibold">| {{ getAgeName(item.authorAge) }}</div>
+                <div v-if="item.haveDisease" class="m-1 text-base font-semibold">
                   | {{ item.diseaseDisc }}
                 </div>
-                <div class="m-1 text-sm">| {{ item.inoculatedDate.slice(0,10) }}</div>
+                <div class="m-1 text-base font-semibold">| {{ item.inoculatedDate.slice(0,10) }}</div>
               </div>
             </div>
             <div class="text-2xs flex items-center">
@@ -26,7 +26,8 @@
               {{ getSideEffectsName(effec) }}
             </div>
           </div>
-          <p class="text-xs mb-2">
+          <p v-show="item.detailDisc" class="text-sm ml-1 mt-1">
+            {{ item.detailDisc }}
           </p>
         </div>
       </div>
