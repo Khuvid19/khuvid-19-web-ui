@@ -1,7 +1,7 @@
 <template>
   <full-screen
     v-model="screenFlag"
-    title="글쓰기"
+    :title="mode === 'edit' ? '게시글 수정' : '게시글 쓰기'"
     ok-text="완료"
     @onClickBack="onClickBack"
     @onClickOk="onClickOk"
@@ -45,12 +45,41 @@ import fullScreen from '@/components/_Common/fullScreen'
 export default {
   name: 'BoardWriteScreen',
   components: { fullScreen },
+  props: {
+    mode: {
+      type: String,
+      default: 'add',
+    },
+    editTitle: {
+      type: String,
+      default: null,
+    },
+    editContent: {
+      type: String,
+      default: null,
+    },
+    boardId: {
+      type: Number,
+      default: null,
+    },
+  },
   data() {
     return {
       screenFlag: false,
       title: '',
       content: '',
     }
+  },
+  watch: {
+    screenFlag: {
+      immediate: true,
+      handler(newVal) {
+        if (newVal && this.mode === 'edit') {
+          this.title = this.editTitle
+          this.content = this.editContent
+        }
+      },
+    },
   },
   methods: {
     onClickBack() {
@@ -64,10 +93,18 @@ export default {
         content: this.content,
       }
 
-      this.$axios.post('board', params).then(() => {
-        this.$emit('afterWrite')
-        this.onClickBack()
-      })
+      if (this.mode === 'add') {
+        this.$axios.post('board', params).then(() => {
+          this.$emit('afterWrite')
+          this.onClickBack()
+        })
+      } else if (this.mode === 'edit') {
+        params.boardId = this.boardId
+        this.$axios.put('board', params).then(() => {
+          this.$emit('afterEdit')
+          this.onClickBack()
+        })
+      }
     },
   },
 }
