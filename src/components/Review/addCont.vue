@@ -210,7 +210,7 @@ export default {
         sideEffects: this.sideEffects,
         vaccine: this.vaccine,
       };
-      // if(this.sideEffectsDisc)params.sideEffects.push(this.sideEffectsDisc);
+      if(this.sideEffectsDisc)params.sideEffects.push(this.sideEffectsDisc);
       if(this.haveDisease==='false')params.diseaseDisc='';
       if (this.vaccine === '') {
         this.modalText = '백신종류는 필수 입력 항목입니다.';

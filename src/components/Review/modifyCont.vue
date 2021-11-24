@@ -86,8 +86,23 @@
                    style="display: none"
                    :checked="sideEffects.includes(key)"
             >
-            <!--      style="display: none"-->
           </div>
+          <div v-if="sideEffects.includes('OTHER')" class="h-px bg-gray-200 m-1"></div>
+          <input
+            v-if="sideEffects.includes('OTHER')"
+            v-model="sideEffectsDisc"
+            placeholder="이상반응을 입력해주세요."
+            class="
+        rounded-lg
+        border-2
+        focus:border-primary
+        outline-none
+        p-1
+        pl-2
+        w-full
+        my-2
+      "
+          />
         </div>
       </div>
       <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
@@ -148,6 +163,8 @@ export default {
       detailDisc: '',
       diseaseDisc: '',
       inoculatedDate: new Date(),
+      sideEffectsDisc:null,
+
     }
   },
   watch:{
@@ -211,6 +228,7 @@ export default {
     },
     clickModify() {
       const params = {
+        ...this.detailContent,
         id: this.detailContent.id,
         detailDisc: this.detailDisc,
         diseaseDisc: this.diseaseDisc,
@@ -219,6 +237,7 @@ export default {
         sideEffects: this.sideEffects,
         vaccine: this.vaccine,
       };
+      if(this.sideEffectsDisc)params.sideEffects.push(this.sideEffectsDisc);
       if(this.haveDisease==='false') params.diseaseDisc = '';
       if (this.haveDisease === 'true' && this.diseaseDisc === '') {
         this.modalText = '기저질환을 입력해주세요.';

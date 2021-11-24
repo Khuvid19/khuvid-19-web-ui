@@ -151,8 +151,6 @@ export default {
       vaccine: [],
       haveDisease: '',
       detailDisc: '',
-      endInoculated: new Date(),
-      startInoculated: new Date(),
     }
   },
   computed: {
@@ -221,7 +219,6 @@ export default {
       this.haveDisease = key;
     },
     clickSearch() {
-      console.log(typeof this.range.start, this.range.start)
       const params = {
         authorAge: this.authorAge,
         authorGender: this.authorGender,
@@ -232,7 +229,6 @@ export default {
         sideEffects: this.sideEffects,
         vaccine: this.vaccine,
       };
-      // typeof this.inoculatedDate==='string'?this.inoculatedDate:this.inoculatedDate.toISOString(),
       this.setReviewParams(params);
       this.fetchReview(params);
       this.clearData();

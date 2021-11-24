@@ -11,14 +11,15 @@ export const getters = {
 
 export const actions = {
   fetchPageContents(context, params) {
-    return new Promise((resolve, reject) => {
-      this.$axios.post('/review/search?page=0', params)
-        .then((r) => {
-          context.commit('SET_PAGE_CONTENTS', r.data);
-          resolve(r);
-        })
-        .catch((error) => reject(error));
-    });
+    console.log('fetch Review List',params);
+    // return new Promise((resolve, reject) => {
+    //   this.$axios.post('/review/search?page=0', params)
+    //     .then((r) => {
+    //       context.commit('SET_PAGE_CONTENTS', r.data);
+    //       resolve(r);
+    //     })
+    //     .catch((error) => reject(error));
+    // });
   },
   setPageParams(context, params) {
     context.commit('SET_PAGE_PARAMS', params);

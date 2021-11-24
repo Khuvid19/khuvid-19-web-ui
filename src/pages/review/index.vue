@@ -35,9 +35,9 @@
       <fa-icon class="text-white text-xl" icon="pen"/>
     </button>
     <confirm-modal :check-flag="modalFlag"
-                   text="후기를 삭제하시겠습니까?"
-                   ok-text="삭제"
-                   cancel-text="취소"
+                   :text="modalText"
+                   :ok-text="okText"
+                   :cancel-text="cancelText"
                    @clickOk="clickOk"
                    @clickCancel="clickCancel"
                    @closeModal="closeModal"/>
@@ -70,7 +70,10 @@ export default {
   },
   data() {
     return {
+      modalText: '',
       modalFlag: false,
+      okText:null,
+      cancelText:null,
       screenType: null,
       screenFlag: false,
       screenTitle: '',
@@ -98,12 +101,15 @@ export default {
       remove: 'Review/remove/remove',
     }),
     clickOk(){
-      this.screenFlag = false;
-      this.remove({id:this.detailContent.id})
-        .then(()=>{
-          this.screenFlag = false;
-        })
-
+      if(this.okText==='삭제') {
+        this.remove(this.detailContent.id)
+          .then(()=>{
+            this.screenFlag = false;
+            this.fetchPageContents({});
+          })
+      }else{
+        this.screenFlag = false;
+      }
     },
     clickCancel(){
       this.modalFlag=false;
@@ -126,6 +132,13 @@ export default {
       this.screenType = type
       switch (type) {
         case 'add':
+          if(this.$store.getters.getUser===null){
+            this.modalText = '로그인 후 작성해주세요.'
+            this.okText = '확인';
+            this.cancelText = null;
+            this.modalFlag = true;
+            return;
+          }
           this.screenTitle = '접종후기'
           this.screenOkText = '완료'
           this.screenSideBtnText = ''
@@ -174,14 +187,18 @@ export default {
     },
     afterAdd(){
       this.screenFlag = false;
-      // 목록 리로드
+      this.fetchPageContents({})
     },
     afterModify(detail){
       this.screenFlag = false;
       this.detailContent = detail;
       this.moveToScreen('detail');
+      this.fetchPageContents({});
     },
     clickRemove(){
+      this.modalText = '후기를 삭제하시겠습니까?';
+      this.okText = '삭제';
+      this.cancelText = '취소';
       this.modalFlag = true;
 
     },
