@@ -37,7 +37,7 @@
           </div>
         </template>
       </div>
-      <CommentInput :board-id="data.boardId" />
+      <CommentInput :board-id="data.boardId" @afterCommentWrite="fetchData" />
     </div>
     <modal
       ref="modal"
@@ -76,8 +76,8 @@ export default {
   },
   props: {
     boardId: {
-      type: String,
-      default: '',
+      type: Number,
+      default: null,
     },
   },
   data() {
@@ -93,10 +93,17 @@ export default {
       user: 'getUser',
     }),
   },
+  watch: {
+    screenFlag: {
+      handler(newVal) {
+        if (newVal) this.fetchData()
+      },
+    },
+  },
   methods: {
-    async fetchData(boardId) {
+    async fetchData() {
       this.data = (
-        await this.$axios.get(`board/detail?boardId=${boardId}`)
+        await this.$axios.get(`board/detail?boardId=${this.boardId}`)
       ).data
 
       if (this.data.userName === this.user.nickName) this.isOwn = true
@@ -120,7 +127,7 @@ export default {
       }
     },
     afterEdit() {
-      this.fetchData(this.data.boardId)
+      this.fetchData()
     },
   },
 }

@@ -46,8 +46,9 @@ export default {
         boardId: this.boardId,
         content: this.commentValue,
       }
-      this.$axios.post('board/comment', params).then((r) => {
-        console.log('r', r)
+      this.$axios.post('board/comment', params).then(() => {
+        this.$emit('afterCommentWrite', this.boardId)
+        this.commentValue = null
       })
     },
   },

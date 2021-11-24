@@ -20,7 +20,7 @@
     </button>
 
     <write-screen ref="writeScreen" @afterWrite="fetchBoardList" />
-    <detail-screen ref="detailScreen" />
+    <detail-screen ref="detailScreen" :board-id="boardId" />
   </div>
 </template>
 
@@ -44,6 +44,7 @@ export default {
       screenTitle: '',
       screenOkText: '',
       boardList: [],
+      boardId: null,
     }
   },
   fetch() {
@@ -58,7 +59,7 @@ export default {
       this.$refs.writeScreen.screenFlag = true
     },
     clickBoardItem(boardId) {
-      this.$refs.detailScreen.fetchData(boardId)
+      this.boardId = boardId
       this.$refs.detailScreen.screenFlag = true
     },
     onClickBack() {
