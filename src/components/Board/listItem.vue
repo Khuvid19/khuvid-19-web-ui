@@ -3,7 +3,7 @@
     <div class="card-body p-4">
       <div class="flex justify-between align-middle mb-2">
         <div class="text-sm font-bold">{{ title }}</div>
-        <div class="text-2xs flex items-center">3분전</div>
+        <div class="text-2xs flex items-center">{{ mm_formatDate(date) }}</div>
       </div>
       <p class="text-xs mb-2">{{ content }}</p>
       <div class="flex justify-between">
@@ -22,15 +22,19 @@ export default {
   props: {
     title: {
       type: String,
-      default: '',
+      default: null,
+    },
+    date: {
+      type: String,
+      default: null,
     },
     content: {
       type: String,
-      default: '',
+      default: null,
     },
     nickname: {
       type: String,
-      default: '',
+      default: null,
     },
     commentCnt: {
       type: Number,

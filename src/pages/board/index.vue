@@ -6,6 +6,7 @@
         v-for="item in boardList"
         :key="item.id"
         :title="item.title"
+        :date="item.date"
         :content="item.content"
         :nickname="item.user.nickName"
         :comment-cnt="item.comments"
