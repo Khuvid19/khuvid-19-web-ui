@@ -33,6 +33,7 @@ export default {
     `@/plugins/axios.js`,
     { src: '@/plugins/chartJs/index', mode: 'client' },
     { src: '@/plugins/calendar/vCalendar.js', ssr: false },
+    { src: '@/plugins/mixins.js'},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -110,6 +111,7 @@ export default {
     '@nuxtjs/auth-next',
     '@nuxtjs/proxy',
     'nuxt-client-init-module',
+    '@nuxtjs/dayjs',
   ],
   alias: {
     '@': resolve(__dirname, './src'),
