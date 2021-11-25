@@ -11,6 +11,7 @@
         :nickname="item.user.nickName"
         :comment-cnt="item.comments"
         @click="clickBoardItem(item.id)"
+        @fetchBoardList="fetchBoardList"
       />
     </div>
     <button
@@ -21,7 +22,11 @@
     </button>
 
     <write-screen ref="writeScreen" @afterWrite="fetchBoardList" />
-    <detail-screen ref="detailScreen" :board-id="boardId" />
+    <detail-screen
+      ref="detailScreen"
+      :board-id="boardId"
+      @afterEdit="fetchBoardList"
+    />
   </div>
 </template>
 

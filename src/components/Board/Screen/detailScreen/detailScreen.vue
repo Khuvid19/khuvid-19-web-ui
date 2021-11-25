@@ -116,6 +116,7 @@ export default {
         boardId: this.data.boardId,
       }
       this.$axios.delete('board', { data: params }).then((r) => {
+        this.$emit('afterEdit')
         this.screenFlag = false
       })
     },
@@ -128,6 +129,7 @@ export default {
     },
     afterEdit() {
       this.fetchData()
+      this.$emit('afterEdit')
     },
   },
 }
