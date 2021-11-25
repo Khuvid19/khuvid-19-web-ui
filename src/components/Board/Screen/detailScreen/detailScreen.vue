@@ -37,7 +37,10 @@
           </div>
         </template>
       </div>
-      <CommentInput :board-id="data.boardId" @afterCommentWrite="fetchData" />
+      <CommentInput
+        :board-id="data.boardId"
+        @afterCommentWrite="afterCommentWrite"
+      />
     </div>
     <modal
       ref="modal"
@@ -126,6 +129,10 @@ export default {
       } else if (menu === '수정') {
         this.$refs.writeScreen.screenFlag = true
       }
+    },
+    afterCommentWrite() {
+      this.fetchData()
+      this.$emit('afterEdit')
     },
     afterEdit() {
       this.fetchData()
