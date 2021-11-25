@@ -14,14 +14,45 @@
         pr-3
       "
     >
-      <input class="bg-transparent outline-none w-full" />
-      <fa-icon class="text-xl text-primary" :icon="['far', 'paper-plane']" />
+      <input
+        v-model="commentValue"
+        class="bg-transparent outline-none w-full"
+      />
+      <fa-icon
+        class="text-xl text-primary"
+        :icon="['far', 'paper-plane']"
+        @click="clickSendBtn"
+      />
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    boardId: {
+      type: Number,
+      default: null,
+    },
+  },
+  data() {
+    return {
+      commentValue: '',
+    }
+  },
+  methods: {
+    clickSendBtn() {
+      const params = {
+        boardId: this.boardId,
+        content: this.commentValue,
+      }
+      this.$axios.post('board/comment', params).then(() => {
+        this.$emit('afterCommentWrite', this.boardId)
+        this.commentValue = null
+      })
+    },
+  },
+}
 </script>
 
 <style>

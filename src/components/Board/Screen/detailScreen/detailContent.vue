@@ -6,19 +6,38 @@
         class="text-4xl bg-white p-1 text-primary rounded"
       />
       <div class="ml-2">
-        <div class="text-sm">백신이 너무좋아</div>
-        <div class="text-2xs text-gray-400">09/30 12:00</div>
+        <div class="text-sm">{{ nickname }}</div>
+        <div class="text-2xs text-gray-400">{{ mm_formatDate(date) }}</div>
       </div>
     </div>
-    <div class="font-bold text-lg mb-2">제목입니다</div>
+    <div class="font-bold text-lg mb-2">{{ title }}</div>
     <div class="text-sm">
-      내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다
+      {{ content }}
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    title: {
+      type: String,
+      default: null,
+    },
+    nickname: {
+      type: String,
+      default: null,
+    },
+    content: {
+      type: String,
+      default: null,
+    },
+    date: {
+      type: String,
+      default: null,
+    },
+  },
+}
 </script>
 
 <style>
