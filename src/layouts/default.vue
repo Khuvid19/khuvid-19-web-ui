@@ -16,7 +16,7 @@ import { mapActions } from 'vuex'
 import SignUp from '../components/SignUp/signUp'
 import Header from '@/components/_Common/header'
 import Footer from '@/components/_Common/footer'
-import DrawerSide from '@/components/_Common/drawerSide'
+import DrawerSide from '@/components/Drawer/drawerSide'
 export default {
   components: { Footer, Header, SignUp, DrawerSide },
   async created() {
@@ -31,10 +31,10 @@ export default {
       ).data
 
       if (loginRes === '') {
-        this.$refs.signUpScreen.signupScreenFlag = true
+        this.$refs.signUpScreen.screenFlag = true
       } else {
         this.setUser(loginRes)
-        this.$refs.signUpScreen.signupScreenFlag = false
+        this.$refs.signUpScreen.screenFlag = false
       }
     }
   },

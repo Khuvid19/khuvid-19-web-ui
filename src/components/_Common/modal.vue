@@ -8,7 +8,13 @@
           <label :for="modalId" class="btn btn-primary" @click="clickOkBtn"
             >확인</label
           >
-          <label :for="modalId" class="btn" @click="clickCancelBtn">취소</label>
+          <label
+            v-if="!hiddenCancelBtn"
+            :for="modalId"
+            class="btn"
+            @click="clickCancelBtn"
+            >취소</label
+          >
         </div>
       </div>
     </div>
@@ -25,6 +31,10 @@ export default {
     modalId: {
       type: String,
       default: null,
+    },
+    hiddenCancelBtn: {
+      type: Boolean,
+      default: false,
     },
   },
   methods: {
