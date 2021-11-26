@@ -14,7 +14,7 @@ export const actions = {
     const promiseList = [
       dispatch('User/getGenderType/fetchListContents'),
       dispatch('User/getAgeType/fetchListContents'),
-      dispatch('Review/sideEffectList/fetchListContents'),
+      dispatch('Review/sideEffectsList/fetchListContents'),
       dispatch('Review/vaccineList/fetchListContents'),
     ]
 
