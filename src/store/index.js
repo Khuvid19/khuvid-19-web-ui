@@ -3,14 +3,22 @@ export const state = () => ({
 });
 
 export const actions = {
-  async nuxtClientInit({ commit }, ctx) {
+  async nuxtClientInit({ dispatch, commit }, ctx) {
     if(ctx.route.hash !== '') {
     // const userInfo = await ctx.$axios('https://www.googleapis.com/oauth2/v3/userinfo')
     // ctx.$auth.setUser(userInfo)
-
-
       await ctx.$auth.fetchUser()
     }
+
+    // 태그 값 fetch
+    const promiseList = [
+      dispatch('User/getGenderType/fetchListContents'),
+      dispatch('User/getAgeType/fetchListContents'),
+      dispatch('Review/sideEffectList/fetchListContents'),
+      dispatch('Review/vaccineList/fetchListContents'),
+    ]
+
+    await Promise.all(promiseList)
   },
   setUser(context, params) {
     context.commit('SET_USER', params)
