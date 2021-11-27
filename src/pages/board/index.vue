@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SearchComponent />
+    <SearchComponent @searchKeyword="fetchBoardListKeyword"/>
     <div class="board-list overflow-y-scroll">
       <ListItem
         v-for="item in boardList"
@@ -57,6 +57,10 @@ export default {
     this.fetchBoardList()
   },
   methods: {
+    async fetchBoardListKeyword(keyword) {
+      const res = (await this.$axios.get(`board/list?page=0&search=${keyword}`)).data
+      this.boardList = res.content
+    },
     async fetchBoardList() {
       const res = (await this.$axios.get('board?page=0')).data // 무한 스크롤 구현하기
       this.boardList = res.content
