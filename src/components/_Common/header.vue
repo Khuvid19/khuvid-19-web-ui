@@ -6,8 +6,8 @@
         align-middle
         justify-between
         bg-white
-        pl-6
-        pr-6
+        pl-4
+        pr-4
         h-16
         shadow-sm
         fixed
@@ -16,7 +16,7 @@
         w-full
       "
     >
-      <div class="self-center">KHUVID(로고)</div>
+      <div class="self-center text-4xl font-bold text-primary">KHUVID</div>
       <div
         v-if="$auth.loggedIn === false"
         class="btn btn-xs btn-primary self-center"
