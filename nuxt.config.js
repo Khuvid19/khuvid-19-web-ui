@@ -20,6 +20,7 @@ export default {
       { hid: 'stripe', src: 'https://js.stripe.com/v3/', defer: true },
     ],
   },
+  loading: false,
   srcDir: 'src/',
   ssr: false,
   // Global CSS: https://go.nuxtjs.dev/config-css
