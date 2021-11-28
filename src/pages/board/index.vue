@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SearchComponent @searchKeyword="fetchBoardListKeyword"/>
+    <SearchComponent @searchKeyword="fetchBoardListKeyword" />
     <div class="board-list overflow-y-scroll">
       <ListItem
         v-for="item in boardList"
@@ -15,10 +15,26 @@
       />
     </div>
     <button
-      class="absolute bottom-5 right-5 bg-primary w-16 h-16 rounded-full"
+      class="
+        absolute
+        bottom-3
+        right-1/2
+        w-24
+        h-8
+        rounded-full
+        flex
+        justify-center
+        items-center
+        border border-primary
+        bg-white
+        text-primary
+        transform
+        translate-x-1/2
+      "
       @click="clickWriteBtn"
     >
-      <fa-icon class="text-white text-xl" icon="pen" />
+      <fa-icon class="text-md mr-2" icon="pen" />
+      <div>글쓰기</div>
     </button>
 
     <write-screen ref="writeScreen" @afterWrite="fetchBoardList" />
@@ -58,7 +74,8 @@ export default {
   },
   methods: {
     async fetchBoardListKeyword(keyword) {
-      const res = (await this.$axios.get(`board/list?page=0&search=${keyword}`)).data
+      const res = (await this.$axios.get(`board/list?page=0&search=${keyword}`))
+        .data
       this.boardList = res.content
     },
     async fetchBoardList() {
