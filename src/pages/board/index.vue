@@ -14,29 +14,7 @@
         @fetchBoardList="fetchBoardList"
       />
     </div>
-    <button
-      class="
-        absolute
-        bottom-3
-        right-1/2
-        w-24
-        h-8
-        rounded-full
-        flex
-        justify-center
-        items-center
-        border border-primary
-        bg-white
-        text-primary
-        transform
-        translate-x-1/2
-      "
-      @click="clickWriteBtn"
-    >
-      <fa-icon class="text-md mr-2" icon="pen" />
-      <div>글쓰기</div>
-    </button>
-
+    <write-btn content="글쓰기" @clickWriteBtn="clickWriteBtn" />
     <write-screen ref="writeScreen" @afterWrite="fetchBoardList" />
     <detail-screen
       ref="detailScreen"
@@ -51,6 +29,7 @@ import DetailScreen from '@/components/Board/Screen/detailScreen/detailScreen'
 import SearchComponent from '@/components/Board/search'
 import ListItem from '@/components/Board/listItem'
 import WriteScreen from '@/components/Board/Screen/writeScreen/writeScreen'
+import WriteBtn from '@/components/_Common/writeBtn'
 
 export default {
   components: {
@@ -58,6 +37,7 @@ export default {
     ListItem,
     WriteScreen,
     DetailScreen,
+    WriteBtn,
   },
   data() {
     return {
