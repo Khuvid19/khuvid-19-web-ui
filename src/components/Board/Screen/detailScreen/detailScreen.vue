@@ -38,6 +38,7 @@
         </template>
       </div>
       <CommentInput
+        v-if="$auth.loggedIn"
         :board-id="data.boardId"
         @afterCommentWrite="afterCommentWrite"
       />
@@ -108,8 +109,8 @@ export default {
       this.data = (
         await this.$axios.get(`board/detail?boardId=${this.boardId}`)
       ).data
-
-      if (this.data.userName === this.user.nickName) this.isOwn = true
+      if (this.user && this.data.userName === this.user.nickName)
+        this.isOwn = true
     },
     onClickBack() {
       this.screenFlag = false

@@ -14,7 +14,11 @@
         @fetchBoardList="fetchBoardList"
       />
     </div>
-    <write-btn content="글쓰기" @clickWriteBtn="clickWriteBtn" />
+    <write-btn
+      v-if="$auth.loggedIn"
+      content="글쓰기"
+      @clickWriteBtn="clickWriteBtn"
+    />
     <write-screen ref="writeScreen" @afterWrite="fetchBoardList" />
     <detail-screen
       ref="detailScreen"
