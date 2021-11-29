@@ -1,5 +1,5 @@
 <template>
-  <div class="page-footer fixed w-full bg-white bottom-0 grid grid-cols-3">
+  <div class="page-footer w-full bg-white grid grid-cols-3">
     <div
       to="/main"
       :class="`flex justify-center items-center`"
