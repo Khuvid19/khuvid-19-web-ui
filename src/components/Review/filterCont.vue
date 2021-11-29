@@ -5,15 +5,15 @@
       <div>
         <div v-for="(value, key) in getVaccine" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
              :style="{
-           backgroundColor:vaccine.includes(key)?'#65C3C8 !important':'white !important',
-           color:vaccine.includes(key)?'white !important':'#65C3C8 !important'
+           backgroundColor:vaccine.includes(value.code)?'#65C3C8 !important':'white !important',
+           color:vaccine.includes(value.code)?'white !important':'#65C3C8 !important'
          }"
-             @click="clickVaccine(key)"
+             @click="clickVaccine(value.code)"
         >
-          <label>{{ value }}</label>
+          <label>{{ value.value }}</label>
           <input type="checkbox" class="toggle"
                  style="display: none"
-                 :checked="vaccine.includes(key)"
+                 :checked="vaccine.includes(value.code)"
           >
         </div>
       </div>
@@ -109,17 +109,17 @@
     <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
       <div class="text-lg mb-1 ml-1">이상반응</div>
       <div>
-        <div v-for="(value, key) in getSideEffects" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
+        <div v-for="(value) in getSideEffects" :key="value.code" class="m-1 btn btn-outline btn-primary btn-sm"
              :style="{
-           backgroundColor:sideEffects.includes(key)?'#65C3C8 !important':'white !important',
-           color:sideEffects.includes(key)?'white !important':'#65C3C8 !important'
+           backgroundColor:sideEffects.includes(value.code)?'#65C3C8 !important':'white !important',
+           color:sideEffects.includes(value.code)?'white !important':'#65C3C8 !important'
          }"
-             @click="clickSideEffects(key)"
+             @click="clickSideEffects(value.code)"
         >
-          <label>{{ value }}</label>
+          <label>{{ value.value }}</label>
           <input type="checkbox" class="toggle"
                  style="display: none"
-                 :checked="sideEffects.includes(key)"
+                 :checked="sideEffects.includes(value.code)"
           >
         </div>
       </div>
@@ -230,7 +230,7 @@ export default {
         vaccine: this.vaccine,
       };
       this.setReviewParams(params);
-      this.fetchReview(params);
+      // this.fetchReview(params);
       this.clearData();
     },
   },

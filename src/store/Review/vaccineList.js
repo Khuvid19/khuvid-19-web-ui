@@ -4,8 +4,13 @@ export const state = () => ({
 
 export const getters = {
   getListContents: (state) => state.listContents,
-  getVaccineName: (state) => (key) => {
-    return state.listContents[key];
+  // getVaccineName: (state) => (key) => {
+  //   return state.listContents[key];
+  // },
+  getVaccineName: (state) => (code) => {
+    const foundCode = state.listContents.find((v) => v.code === code );
+    if (foundCode == null) return '';
+    return foundCode.value;
   },
 };
 
