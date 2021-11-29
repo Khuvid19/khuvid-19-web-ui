@@ -16,6 +16,7 @@ const solid = [
   'faEdit',
   'faFileAlt',
   'faEllipsisV',
+  'faInfoCircle',
 ]
 const regular = ['faComments', 'faUser', 'faPaperPlane']
 const brands = []

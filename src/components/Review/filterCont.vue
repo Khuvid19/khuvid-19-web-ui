@@ -5,15 +5,15 @@
       <div>
         <div v-for="(value, key) in getVaccine" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
              :style="{
-           backgroundColor:vaccine.includes(key)?'#65C3C8 !important':'white !important',
-           color:vaccine.includes(key)?'white !important':'#65C3C8 !important'
+           backgroundColor:vaccine.includes(value.code)?'#65C3C8 !important':'white !important',
+           color:vaccine.includes(value.code)?'white !important':'#65C3C8 !important'
          }"
-             @click="clickVaccine(key)"
+             @click="clickVaccine(value.code)"
         >
-          <label>{{ value }}</label>
+          <label>{{ value.value }}</label>
           <input type="checkbox" class="toggle"
                  style="display: none"
-                 :checked="vaccine.includes(key)"
+                 :checked="vaccine.includes(value.code)"
           >
         </div>
       </div>
@@ -23,15 +23,15 @@
       <div>
         <div v-for="(value, idx) in getGender" :key="idx" class="m-1 btn btn-outline btn-primary btn-sm"
              :style="{
-           backgroundColor:authorGender===value.code?'#65C3C8 !important':'white !important',
-           color:authorGender===value.code?'white !important':'#65C3C8 !important'
+           backgroundColor:authorGender.includes(value.code)?'#65C3C8 !important':'white !important',
+           color:authorGender.includes(value.code)?'white !important':'#65C3C8 !important'
          }"
              @click="clickGender(value.code)"
         >
           <label>{{ value.value }}</label>
           <input type="checkbox" class="toggle"
                  style="display: none"
-                 :checked="authorGender===value.code"
+                 :checked="authorGender.includes(value.code)"
           >
         </div>
       </div>
@@ -109,17 +109,17 @@
     <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
       <div class="text-lg mb-1 ml-1">이상반응</div>
       <div>
-        <div v-for="(value, key) in getSideEffects" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
+        <div v-for="(value) in getSideEffects" :key="value.code" class="m-1 btn btn-outline btn-primary btn-sm"
              :style="{
-           backgroundColor:sideEffects.includes(key)?'#65C3C8 !important':'white !important',
-           color:sideEffects.includes(key)?'white !important':'#65C3C8 !important'
+           backgroundColor:sideEffects.includes(value.code)?'#65C3C8 !important':'white !important',
+           color:sideEffects.includes(value.code)?'white !important':'#65C3C8 !important'
          }"
-             @click="clickSideEffects(key)"
+             @click="clickSideEffects(value.code)"
         >
-          <label>{{ value }}</label>
+          <label>{{ value.value }}</label>
           <input type="checkbox" class="toggle"
                  style="display: none"
-                 :checked="sideEffects.includes(key)"
+                 :checked="sideEffects.includes(value.code)"
           >
         </div>
       </div>
@@ -146,13 +146,11 @@ export default {
         false: '없음',
       },
       authorAge: [],
-      authorGender: '',
+      authorGender: [],
       sideEffects: [],
       vaccine: [],
       haveDisease: '',
       detailDisc: '',
-      endInoculated: new Date(),
-      startInoculated: new Date(),
     }
   },
   computed: {
@@ -207,7 +205,12 @@ export default {
       }
     },
     clickGender(key) {
-      this.authorGender = key;
+      if (this.authorGender.includes(key)) {
+        const idx = this.authorGender.findIndex((r) => r === key);
+        this.authorGender.splice(idx, 1);
+      } else {
+        this.authorGender.push(key);
+      }
     },
     clickVaccine(key) {
       if (this.vaccine.includes(key)) {
@@ -221,20 +224,18 @@ export default {
       this.haveDisease = key;
     },
     clickSearch() {
-      console.log(typeof this.range.start, this.range.start)
       const params = {
-        authorAge: this.authorAge,
-        authorGender: this.authorGender,
+        authorAges: this.authorAge,
+        authorGenders: this.authorGender,
         detailDisc: this.detailDisc,
         endInoculated: this.range.end.toISOString().slice(0,10),
         haveDisease: this.haveDisease,
         startInoculated: this.range.start.toISOString().slice(0,10),
         sideEffects: this.sideEffects,
-        vaccine: this.vaccine,
+        vaccines: this.vaccine,
       };
-      // typeof this.inoculatedDate==='string'?this.inoculatedDate:this.inoculatedDate.toISOString(),
       this.setReviewParams(params);
-      this.fetchReview(params);
+      this.fetchReview({page:0, filters:params});
       this.clearData();
     },
   },

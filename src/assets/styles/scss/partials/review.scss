@@ -1,5 +1,5 @@
 .review-list {
-  height: calc(100vh - #{$layoutHeight} - 180px);
+  height: calc(100vh - #{$layoutHeight} - 170px);
 }
 .tag{
   @apply m-1 btn btn-outline btn-primary btn-sm;

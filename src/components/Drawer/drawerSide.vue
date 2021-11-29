@@ -46,7 +46,7 @@
     </ul>
     <sign-up ref="myInfoScreen" mode="myInfo" />
     <MyInfoScreen />
-    <my-review-screen ref="myReviewScreen" />
+    <my-review-screen ref="myReviewScreen"/>
     <my-post-screen ref="myPostScreen" />
   </div>
 </template>

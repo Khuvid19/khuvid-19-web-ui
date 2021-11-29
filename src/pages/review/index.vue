@@ -11,7 +11,7 @@
       :title="screenTitle"
       :ok-text="screenOkText"
       :side-btn-text="screenSideBtnText"
-      :menu-list="['수정','삭제']"
+      :menu-list="myReview?['수정','삭제']:[]"
       @onClickMenu="onClickMenu"
       @onClickBack="onClickBack"
       @onClickOk="onClickOk"
@@ -28,16 +28,12 @@
                    :detail-content="detailContent"
                    @afterModify="afterModify"/>
     </full-screen>
+    <write-btn content="글쓰기" @clickWriteBtn="moveToScreen('add')"/>
 
-    <button
-      class="absolute bottom-0 right-5 bg-primary w-16 h-16 rounded-full"
-      @click="moveToScreen('add')">
-      <fa-icon class="text-white text-xl" icon="pen"/>
-    </button>
     <confirm-modal :check-flag="modalFlag"
-                   text="후기를 삭제하시겠습니까?"
-                   ok-text="삭제"
-                   cancel-text="취소"
+                   :text="modalText"
+                   :ok-text="okText"
+                   :cancel-text="cancelText"
                    @clickOk="clickOk"
                    @clickCancel="clickCancel"
                    @closeModal="closeModal"/>
@@ -55,6 +51,7 @@ import ModifyCont from '@/components/Review/modifyCont'
 import FilterCont from '@/components/Review/filterCont'
 import FullScreen from '@/components/_Common/fullScreen'
 import ConfirmModal from "@/components/Review/confirmModal";
+import WriteBtn from '@/components/_Common/writeBtn'
 
 export default {
   name: 'Review',
@@ -67,17 +64,22 @@ export default {
     AddCont,
     FilterCont,
     ModifyCont,
+    WriteBtn,
   },
   data() {
     return {
+      modalText: '',
       modalFlag: false,
+      okText: null,
+      cancelText: null,
       screenType: null,
       screenFlag: false,
       screenTitle: '',
       screenOkText: '',
       screenSideBtnText: '',
       detailContent: null,
-      filterTagList:[],
+      filterTagList: [],
+      myReview: false,
     }
   },
   computed: {
@@ -97,25 +99,30 @@ export default {
       fetchPageContents: 'Review/getPage/fetchPageContents',
       remove: 'Review/remove/remove',
     }),
-    clickOk(){
-      this.screenFlag = false;
-      this.remove({id:this.detailContent.id})
-        .then(()=>{
-          this.screenFlag = false;
-        })
-
+    clickOk() {
+      if (this.okText === '삭제') {
+        this.remove(this.detailContent.id)
+          .then(() => {
+            this.screenFlag = false;
+            this.fetchPageContents({});
+          })
+      } else if (this.okText === '로그인') {
+        this.$auth.loginWith('google', { params: { prompt: 'select_account' } })
+      } else {
+        this.screenFlag = false;
+      }
     },
-    clickCancel(){
-      this.modalFlag=false;
+    clickCancel() {
+      this.modalFlag = false;
     },
-    onClickMenu(type){
-      if(type==='수정'){
+    onClickMenu(type) {
+      if (type === '수정') {
         this.moveToScreen('modify')
-      }else if(type==='삭제'){
+      } else if (type === '삭제') {
         this.clickRemove();
       }
     },
-    closeModal(){
+    closeModal() {
       this.modalFlag = false;
     },
     clickDetail(item) {
@@ -126,6 +133,13 @@ export default {
       this.screenType = type
       switch (type) {
         case 'add':
+          if (this.$store.getters.getUser === null) {
+            this.modalText = '로그인 후 작성해주세요.'
+            this.okText = '로그인';
+            this.cancelText = '닫기';
+            this.modalFlag = true;
+            return;
+          }
           this.screenTitle = '접종후기'
           this.screenOkText = '완료'
           this.screenSideBtnText = ''
@@ -136,6 +150,12 @@ export default {
           this.screenSideBtnText = ''
           break
         case 'detail':
+          if(this.$store.getters.getUser === null){
+            this.myReview = false;
+          }else{
+            this.myReview = this.$store.getters.getUser.id === this.detailContent.authorId;
+
+          }
           this.screenTitle = '접종후기'
           this.screenOkText = null
           this.screenSideBtnText = ''
@@ -164,24 +184,36 @@ export default {
         this.$refs.filterCont.clickSearch();
         this.screenFlag = false;
         this.filterTagList = [
-          ...this.getPageParams.filters.authorAge.map((r) => {return this.getAgeName(r);}),
-          ...this.getPageParams.filters.sideEffects.map((r) => {return this.getSideEffectName(r);}),
-          ...this.getPageParams.filters.vaccine.map((r) => {return this.getVaccineName(r);}),
-          this.getGenderName(this.getPageParams.filters.authorGender),
-          `${this.getPageParams.filters.endInoculated.slice(0,10)}~${this.getPageParams.filters.startInoculated.slice(0,10)}`,
+          ...this.getPageParams.authorAges.map((r) => {
+            return this.getAgeName(r);
+          }),
+          ...this.getPageParams.sideEffects.map((r) => {
+            return this.getSideEffectName(r);
+          }),
+          ...this.getPageParams.vaccines.map((r) => {
+            return this.getVaccineName(r);
+          }),
+          ...this.getPageParams.authorGenders.map((r) => {
+            return this.getGenderName(r);
+          }),
+          `${this.getPageParams.endInoculated.slice(0, 10)}~${this.getPageParams.startInoculated.slice(0, 10)}`,
         ];
       }
     },
-    afterAdd(){
+    afterAdd() {
       this.screenFlag = false;
-      // 목록 리로드
+      this.fetchPageContents({})
     },
-    afterModify(detail){
+    afterModify(detail) {
       this.screenFlag = false;
       this.detailContent = detail;
       this.moveToScreen('detail');
+      this.fetchPageContents({});
     },
-    clickRemove(){
+    clickRemove() {
+      this.modalText = '후기를 삭제하시겠습니까?';
+      this.okText = '삭제';
+      this.cancelText = '취소';
       this.modalFlag = true;
 
     },
