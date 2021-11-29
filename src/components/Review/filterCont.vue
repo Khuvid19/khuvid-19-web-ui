@@ -235,7 +235,7 @@ export default {
         vaccines: this.vaccine,
       };
       this.setReviewParams(params);
-      this.fetchReview(params);
+      this.fetchReview({page:0, filters:params});
       this.clearData();
     },
   },
