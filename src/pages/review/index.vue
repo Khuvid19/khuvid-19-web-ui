@@ -190,7 +190,7 @@ export default {
           ...this.getPageParams.sideEffects.map((r) => {
             return this.getSideEffectName(r);
           }),
-          ...this.getPageParams.vaccine.map((r) => {
+          ...this.getPageParams.vaccines.map((r) => {
             return this.getVaccineName(r);
           }),
           ...this.getPageParams.authorGenders.map((r) => {

@@ -232,7 +232,7 @@ export default {
         haveDisease: this.haveDisease,
         startInoculated: this.range.start.toISOString().slice(0,10),
         sideEffects: this.sideEffects,
-        vaccine: this.vaccine,
+        vaccines: this.vaccine,
       };
       this.setReviewParams(params);
       this.fetchReview(params);
