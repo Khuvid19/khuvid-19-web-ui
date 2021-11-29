@@ -3,3 +3,9 @@
   position: fixed;
   top: calc(100vh - #{$layoutHeight});
 }
+
+@media screen and (max-height: 550px) {
+  .page-footer {
+    display: none;
+  }
+}

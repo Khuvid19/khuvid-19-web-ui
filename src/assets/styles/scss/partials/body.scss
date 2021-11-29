@@ -3,3 +3,11 @@
   top: $layoutHeight;
   max-height: calc(100vh - 2 * #{$layoutHeight});
 }
+
+@media screen and (max-height: 550px) {
+  .page-body {
+    position: absolute;
+    top: $layoutHeight;
+    max-height: calc(100vh - #{$layoutHeight});
+  }
+}
