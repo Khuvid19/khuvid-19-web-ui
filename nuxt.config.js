@@ -20,6 +20,7 @@ export default {
       { hid: 'stripe', src: 'https://js.stripe.com/v3/', defer: true },
     ],
   },
+  loading: false,
   srcDir: 'src/',
   ssr: false,
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -103,7 +104,23 @@ export default {
     component: 'fa',
     suffix: true,
   },
-
+  manifest: {
+    name: 'KHUVID-19',
+    short_name: 'KHUVID-19',
+    start_url: '/main',
+    display: 'standalone',
+    background_color: '#000',
+  },
+  workbox: {
+    offline: false,
+    runtimeCaching: [
+      {
+        urlPattern: "/*",
+        handler: "networkFirst",
+        method: "GET",
+      },
+    ],
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
@@ -112,6 +129,7 @@ export default {
     '@nuxtjs/proxy',
     'nuxt-client-init-module',
     '@nuxtjs/dayjs',
+    '@nuxtjs/pwa',
   ],
   alias: {
     '@': resolve(__dirname, './src'),

@@ -37,14 +37,21 @@
         "
       />
     </div>
+    <modal
+      ref="wrtieScreenModal"
+      :content="modalMsg"
+      modal-id="wrtieScreen"
+      :hidden-cancel-btn="true"
+    />
   </full-screen>
 </template>
 
 <script>
 import fullScreen from '@/components/_Common/fullScreen'
+import Modal from '@/components/_Common/modal'
 export default {
   name: 'BoardWriteScreen',
-  components: { fullScreen },
+  components: { fullScreen, Modal },
   props: {
     mode: {
       type: String,
@@ -68,6 +75,7 @@ export default {
       screenFlag: false,
       title: '',
       content: '',
+      modalMsg: '',
     }
   },
   watch: {
@@ -88,6 +96,16 @@ export default {
       this.screenFlag = false
     },
     onClickOk() {
+      if (this.title === '') {
+        this.$refs.wrtieScreenModal.openModal()
+        this.modalMsg = '제목을 입력하세요.'
+        return
+      } else if (this.content === '') {
+        this.$refs.wrtieScreenModal.openModal()
+        this.modalMsg = '내용을 입력하세요.'
+        return
+      }
+
       const params = {
         title: this.title,
         content: this.content,

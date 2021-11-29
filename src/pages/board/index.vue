@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SearchComponent @searchKeyword="fetchBoardListKeyword"/>
+    <SearchComponent @searchKeyword="fetchBoardListKeyword" />
     <div class="board-list overflow-y-scroll">
       <ListItem
         v-for="item in boardList"
@@ -14,13 +14,7 @@
         @fetchBoardList="fetchBoardList"
       />
     </div>
-    <button
-      class="absolute bottom-5 right-5 bg-primary w-16 h-16 rounded-full"
-      @click="clickWriteBtn"
-    >
-      <fa-icon class="text-white text-xl" icon="pen" />
-    </button>
-
+    <write-btn content="글쓰기" @clickWriteBtn="clickWriteBtn" />
     <write-screen ref="writeScreen" @afterWrite="fetchBoardList" />
     <detail-screen
       ref="detailScreen"
@@ -35,6 +29,7 @@ import DetailScreen from '@/components/Board/Screen/detailScreen/detailScreen'
 import SearchComponent from '@/components/Board/search'
 import ListItem from '@/components/Board/listItem'
 import WriteScreen from '@/components/Board/Screen/writeScreen/writeScreen'
+import WriteBtn from '@/components/_Common/writeBtn'
 
 export default {
   components: {
@@ -42,6 +37,7 @@ export default {
     ListItem,
     WriteScreen,
     DetailScreen,
+    WriteBtn,
   },
   data() {
     return {
@@ -58,7 +54,8 @@ export default {
   },
   methods: {
     async fetchBoardListKeyword(keyword) {
-      const res = (await this.$axios.get(`board/list?page=0&search=${keyword}`)).data
+      const res = (await this.$axios.get(`board/list?page=0&search=${keyword}`))
+        .data
       this.boardList = res.content
     },
     async fetchBoardList() {

@@ -1,28 +1,34 @@
 <template>
-  <div class="page-footer grid grid-cols-3">
+  <div class="page-footer fixed w-full bg-white bottom-0 grid grid-cols-3">
     <div
       to="/main"
-      :class="`footer-col ${iconBorder('main')}`"
+      :class="`flex justify-center items-center`"
       @click="clickIcon('main')"
     >
-      <fa-icon icon="home" />
-      <div>대시보드</div>
+      <div :class="footerIconStyle('main')">
+        <fa-icon class="text-2xl self-center" icon="home" />
+        <div class="text-2xs text-center">대시보드</div>
+      </div>
     </div>
     <div
       to="/review"
-      :class="`footer-col ${iconBorder('review')}`"
+      :class="`flex justify-center items-center`"
       @click="clickIcon('review')"
     >
-      <fa-icon icon="band-aid" />
-      <div>접종후기</div>
+      <div :class="footerIconStyle('review')">
+        <fa-icon class="text-2xl self-center" icon="band-aid" />
+        <div class="text-2xs text-center">접종후기</div>
+      </div>
     </div>
     <div
       to="board"
-      :class="`footer-col ${iconBorder('board')}`"
+      :class="`flex justify-center items-center`"
       @click="clickIcon('board')"
     >
-      <fa-icon icon="clipboard" />
-      <div>게시판</div>
+      <div :class="footerIconStyle('board')">
+        <fa-icon class="text-2xl self-center" icon="clipboard" />
+        <div class="text-2xs text-center">게시판</div>
+      </div>
     </div>
   </div>
 </template>
@@ -49,9 +55,10 @@ export default {
         this.$router.push(`/${value}`)
       }
     },
-    iconBorder(value) {
-      if (this.current === value) return 'bg-base-200'
-      return ''
+    footerIconStyle(value) {
+      if (this.current === value)
+        return 'flex flex-col align-middle bg-primary rounded-lg p-2 w-4/6 text-white'
+      return 'flex flex-col align-middle rounded-lg p-2'
     },
   },
 }
