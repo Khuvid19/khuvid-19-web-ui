@@ -59,7 +59,19 @@
           </div>
         </div>
       </div>
-      <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
+      <div v-if="detailContent.sideEffects.length===0" class="card mx-4 my-2 gap-2 bordered px-1 py-2 bg-white">
+        <div class="mx-2">
+          <div class="flex justify-between items-center">
+            <div class="text-lg">이상반응</div>
+            <div class="btn btn-outline btn-primary btn-sm"
+                 style="background-color: white; color: #65C3C8;
+                 border: 1px solid #65C3C8">
+              없음
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-else class="card bordered px-3 py-4 mx-4 my-2 bg-white">
         <div class="text-lg mb-1 ml-1">이상반응</div>
         <div>
           <div v-for="(item,idx) in detailContent.sideEffects" :key="idx"
