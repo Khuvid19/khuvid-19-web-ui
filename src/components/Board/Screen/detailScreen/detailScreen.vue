@@ -6,7 +6,13 @@
     @onClickBack="onClickBack"
     @onClickMenu="onClickMenu"
   >
-    <div class="h-full">
+    <div
+      :class="`h-full overflow-y-scroll ${
+        $auth.loggedIn
+          ? 'detailMemberScreenContent'
+          : 'detailGuestScreenContent'
+      }`"
+    >
       <DetailContent
         :title="data.title"
         :content="data.content"
@@ -146,5 +152,11 @@ export default {
 <style scoped lang="scss">
 .write-textarea {
   height: calc(100vh - theme('spacing.50'));
+}
+.detailGuestScreenContent {
+  height: calc(100vh - 4rem);
+}
+.detailMemberScreenContent {
+  height: calc(100vh - 7rem - 0.5rem);
 }
 </style>
