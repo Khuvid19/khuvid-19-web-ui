@@ -2,7 +2,7 @@
   <client-only>
     <div class="chart-header">
       <div class="card shadow bg-white">
-        <div class="card-body p-4 stats">
+        <div class="casrd-body p-4 stats">
           <div class="tabs">
             <div class="flex justify-between align-middle">
               <button v-for="(item,idx) in vaccineList" :key="idx"
@@ -13,7 +13,7 @@
           </div>
         </div>
       <bar-chart
-        class="-mt-8 mb-2" style="width: 95%; margin-left: 2.5%; height:400px;"
+        class="-mt-8 mb-4" style="width: 95%; margin-left: 2.5%; height:400px;"
         :data="chartData"
         :options="chartOptions"
       />
