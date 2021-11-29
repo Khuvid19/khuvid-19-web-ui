@@ -19,10 +19,20 @@
             tabindex="0"
             class="text-2xl cursor-pointer padding-5"
             :icon="['fas', 'ellipsis-v']"
+            @click="clickEllipsis"
           />
           <ul
+            v-if="renderMenu"
             tabindex="0"
-            class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52"
+            class="
+              p-2
+              shadow
+              menu
+              dropdown-content
+              bg-base-100
+              rounded-box
+              w-52
+            "
           >
             <li v-for="menu in menuList" :key="menu">
               <a @click="onClickMenu(menu)">{{ menu }}</a>
@@ -86,6 +96,11 @@ export default {
       default: () => [],
     },
   },
+  data() {
+    return {
+      renderMenu: false,
+    }
+  },
   methods: {
     onClickBack() {
       this.$emit('onClickBack')
@@ -97,7 +112,11 @@ export default {
       this.$emit('onClickOk')
     },
     onClickMenu(menu) {
+      this.renderMenu = false
       this.$emit('onClickMenu', menu)
+    },
+    clickEllipsis() {
+      this.renderMenu = true
     },
   },
 }
@@ -110,7 +129,7 @@ export default {
 }
 
 .fade-enter,
-.fade-leave-to{
+.fade-leave-to {
   transform: translateX(100%);
 }
 </style>
