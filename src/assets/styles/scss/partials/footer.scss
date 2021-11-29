@@ -1,3 +1,5 @@
 .page-footer {
-  height: $layoutHeight
+  height: $layoutHeight;
+  position: fixed;
+  top: calc(100vh - #{$layoutHeight});
 }
