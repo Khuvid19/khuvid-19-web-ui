@@ -6,15 +6,15 @@
         <div>
           <div v-for="(value, key) in getVaccine" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
                :style="{
-           backgroundColor:vaccine===key?'#65C3C8 !important':'white !important',
-           color:vaccine===key?'white !important':'#65C3C8 !important'
+           backgroundColor:vaccine===value.code?'#65C3C8 !important':'white !important',
+           color:vaccine===value.code?'white !important':'#65C3C8 !important'
          }"
-               @click="clickVaccine(key)"
+               @click="clickVaccine(value.code)"
           >
-            <label>{{ value }}</label>
+            <label>{{ value.value }}</label>
             <input type="checkbox" class="toggle"
                    style="display: none"
-                   :checked="vaccine===key"
+                   :checked="vaccine===value.code"
             >
           </div>
         </div>
@@ -76,15 +76,15 @@
         <div>
           <div v-for="(value, key) in getSideEffects" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
                :style="{
-           backgroundColor:sideEffects.includes(key)?'#65C3C8 !important':'white !important',
-           color:sideEffects.includes(key)?'white !important':'#65C3C8 !important'
+           backgroundColor:sideEffects.includes(value.code)?'#65C3C8 !important':'white !important',
+           color:sideEffects.includes(value.code)?'white !important':'#65C3C8 !important'
          }"
-               @click="clickSideEffects(key)"
+               @click="clickSideEffects(value.code)"
           >
-            <label>{{ value }}</label>
+            <label>{{ value.value }}</label>
             <input type="checkbox" class="toggle"
                    style="display: none"
-                   :checked="sideEffects.includes(key)"
+                   :checked="sideEffects.includes(value.code)"
             >
           </div>
           <div v-if="sideEffects.includes('OTHER')" class="h-px bg-gray-200 m-1"></div>

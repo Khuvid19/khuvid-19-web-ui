@@ -11,7 +11,7 @@ export const getters = {
 
 export const actions = {
   fetchPageContents(context, params) {
-    // console.log('fetch Review List',params);
+    console.log('fetch Review List',params);
     return new Promise((resolve, reject) => {
       this.$axios.post('/review/search?page=0', params)
         .then((r) => {

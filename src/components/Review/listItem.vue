@@ -6,23 +6,24 @@
           <div class="flex justify-between align-middle mb-2">
             <div>
               <div class="flex justify-start items-center">
-                <div class="m-1 text-base font-semibold">{{ getVaccineName(item.vaccine) }}</div>
-                <div class="m-1 text-base font-semibold">| {{ getGenderName(item.authorGender) }}</div>
-                <div class="m-1 text-base font-semibold">| {{ getAgeName(item.authorAge) }}</div>
-                <div v-if="item.haveDisease" class="m-1 text-base font-semibold">
+                <div class="m-1 text-sm font-semibold">{{ getVaccineName(item.vaccine) }}</div>
+                <div class="m-1 text-sm font-semibold">| {{ getGenderName(item.authorGender) }}</div>
+                <div class="m-1 text-sm font-semibold">| {{ getAgeName(item.authorAge) }}</div>
+                <div v-if="item.haveDisease" class="m-1 text-sm font-semibold">
                   | {{ item.diseaseDisc }}
                 </div>
-                <div class="m-1 text-base font-semibold">| {{ item.inoculatedDate.slice(0,10) }}</div>
+                <div class="m-1 text-sm font-semibold">| {{ item.inoculatedDate.slice(0,10) }}</div>
               </div>
             </div>
             <div class="text-2xs flex items-center">
-              {{ item.createdDate.slice(5,7) }}월
-              {{ item.createdDate.slice(8,10) }}일
+              {{ mm_formatDate(item.createdDate) }}
             </div>
           </div>
           <div>
             <div v-for="(effec,i) in item.sideEffects" :key="i"
-                    class="mr-2 mb-2 btn btn-outline btn-primary btn-sm">
+                    class="mr-2 mb-2 btn btn-outline btn-primary btn-sm"
+                 style="background-color: white; color: #65C3C8;
+                 border: 1px solid #65C3C8">
               {{ getSideEffectsName(effec) }}
             </div>
           </div>

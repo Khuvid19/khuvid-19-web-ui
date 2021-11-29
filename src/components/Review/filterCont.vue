@@ -23,15 +23,15 @@
       <div>
         <div v-for="(value, idx) in getGender" :key="idx" class="m-1 btn btn-outline btn-primary btn-sm"
              :style="{
-           backgroundColor:authorGender===value.code?'#65C3C8 !important':'white !important',
-           color:authorGender===value.code?'white !important':'#65C3C8 !important'
+           backgroundColor:authorGender.includes(value.code)?'#65C3C8 !important':'white !important',
+           color:authorGender.includes(value.code)?'white !important':'#65C3C8 !important'
          }"
              @click="clickGender(value.code)"
         >
           <label>{{ value.value }}</label>
           <input type="checkbox" class="toggle"
                  style="display: none"
-                 :checked="authorGender===value.code"
+                 :checked="authorGender.includes(value.code)"
           >
         </div>
       </div>
@@ -146,7 +146,7 @@ export default {
         false: '없음',
       },
       authorAge: [],
-      authorGender: '',
+      authorGender: [],
       sideEffects: [],
       vaccine: [],
       haveDisease: '',
@@ -205,7 +205,12 @@ export default {
       }
     },
     clickGender(key) {
-      this.authorGender = key;
+      if (this.authorGender.includes(key)) {
+        const idx = this.authorGender.findIndex((r) => r === key);
+        this.authorGender.splice(idx, 1);
+      } else {
+        this.authorGender.push(key);
+      }
     },
     clickVaccine(key) {
       if (this.vaccine.includes(key)) {
@@ -220,8 +225,8 @@ export default {
     },
     clickSearch() {
       const params = {
-        authorAge: this.authorAge,
-        authorGender: this.authorGender,
+        authorAges: this.authorAge,
+        authorGenders: this.authorGender,
         detailDisc: this.detailDisc,
         endInoculated: this.range.end.toISOString().slice(0,10),
         haveDisease: this.haveDisease,
@@ -230,7 +235,7 @@ export default {
         vaccine: this.vaccine,
       };
       this.setReviewParams(params);
-      // this.fetchReview(params);
+      this.fetchReview(params);
       this.clearData();
     },
   },
