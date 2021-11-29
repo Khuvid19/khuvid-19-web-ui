@@ -40,10 +40,10 @@
         </div>
       </div>
     </div>
-    <div class="-mt-10 z-10 ml-1 flex justify-center w-full py-4 space-x-2">
-        <a href="#item1" class="btn-link btn-xs">1</a> 
-        <a href="#item2" class="btn-link btn-xs">2</a> 
-        <a href="#item3" class="btn-link btn-xs">3</a>
+    <div class="-mt-9 -mb-2 z-10 ml-1 flex justify-center w-full py-4 space-x-3">
+        <div class="bg-base-300 btn-circle" style="width: 0.6rem; height: 0.6rem;"></div> 
+        <div class="bg-base-300 btn-circle" style="width: 0.6rem; height: 0.6rem;"></div> 
+        <div class="bg-base-300 btn-circle" style="width: 0.6rem; height: 0.6rem;"></div>
     </div>
   </div>
 </template>

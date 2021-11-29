@@ -2,7 +2,7 @@
   <div class="overflow-y-scroll">
     <Dashboard />
     <div class="w-full mt-60 bg-gray-200"></div>
-    <Chart class="-mt-60 mb-2"/>
+    <Chart class="-mt-56 mb-2"/>
   </div>
 </template>
 
