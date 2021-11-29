@@ -4,8 +4,13 @@ export const state = () => ({
 
 export const getters = {
   getListContents: (state) => state.listContents,
-  getSideEffectsName: (state) => (key) => {
-    return state.listContents[key];
+  // getSideEffectsName: (state) => (key) => {
+  //   return state.listContents[key];
+  // },
+  getSideEffectsName: (state) => (code) => {
+    const foundCode = state.listContents.find((v) => v.code === code );
+    if (foundCode == null) return '';
+    return foundCode.value;
   },
 };
 
