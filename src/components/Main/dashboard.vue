@@ -11,34 +11,39 @@
       </div>
     </div>
 
-    <div class="mt-3 w-full shadow stats">
-      <div class="bg-white stat mr-8">
-        <div class="stat-title">전국 1차 접종</div>
-        <div class="stat-value text-primary">{{ firstPercent }}%</div>
-        <div class="hidden"></div> 
-        <div class="ml-3 text-sm gray text-neutral grid flex-grow place-items-center">
+    <div class="mt-3 rounded-2xl shadow w-full carousel place-items-center">
+      <div id="item1" class="bg-white stat carousel-item">
+        <div class="ml-2 stat-title">전국 1차 접종</div>
+        <div class="ml-2 stat-value text-primary">{{ firstPercent }}%</div>
+        <div class="hidden"></div>
+        <div class="-mt-1 mr-16 text-sm gray text-neutral flex-grow">
           누적 {{ first }} <br>
-          신규 {{ todayFirst }}↗︎
+          신규 {{ todayFirst }} ↗︎
         </div>
       </div> 
-      <div class="bg-white stat mr-8">
-        <div class="stat-title">전국 2차 접종</div>
-        <div class="stat-value text-primary">{{ secondPercent }}%</div>
+      <div id="item2" class="bg-white stat carousel-item">
+        <div class="ml-2 stat-title">전국 2차 접종</div>
+        <div class="ml-2 stat-value text-primary">{{ secondPercent }}%</div>
         <div class="hidden"></div> 
-        <div class="ml-3 text-sm gray grid flex-grow place-items-center">
+        <div class="-mt-1 mr-16 text-sm gray grid flex-grow place-items-center">
           누적 {{ second }} <br>
-          신규 {{ todaySecond }}↗︎
+          신규 {{ todaySecond }} ↗︎
         </div>
       </div>
-      <div class="bg-white stat mr-8">
-        <div class="stat-title">전국 3차 접종</div>
-        <div class="stat-value text-primary">{{ thirdPercent }}%</div>
-        <div class="hidden"></div> 
-        <div class="ml-3 text-sm gray grid flex-grow place-items-center">
+      <div id="item3" class="bg-white stat carousel-item">
+        <div class="ml-2 stat-title">전국 3차 접종</div>
+        <div class="ml-2 stat-value text-primary">{{ thirdPercent }}%</div>
+        <div class="hidden"></div>
+        <div class="-mt-1 mr-16 text-sm gray grid flex-grow place-items-center">
           누적 {{ third }} <br>
-          신규 {{ todayThird }}↗︎
+          신규 {{ todayThird }} ↗︎
         </div>
       </div>
+    </div>
+    <div class="-mt-10 z-10 ml-1 flex justify-center w-full py-4 space-x-2">
+        <a href="#item1" class="btn-link btn-xs">1</a> 
+        <a href="#item2" class="btn-link btn-xs">2</a> 
+        <a href="#item3" class="btn-link btn-xs">3</a>
     </div>
   </div>
 </template>
