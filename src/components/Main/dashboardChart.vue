@@ -40,8 +40,13 @@ export default {
       },
       chartOptions: null,
       label: '화이자 1차',
+      borderColor: 'rgb(98, 176, 182)',
+      backgroundColor: 'rgb(98, 176, 182)',
       vaccineList: ['화이자 1차', '화이자 2차', '모더나 1차', '모더나 2차', '아스트라제네카 1차', '아스트라제네카 2차', '얀센', '얀센 부스터샷'],
-      symptomList: ['두통', '관절통', '붓기', '고열', '근육통', '부위 통증', '미열', '피로감', '메스꺼움', '두드러기', '발진', '구토', '가려움증', '기타'],
+      vaccine: 'PFIZER_FIRST',
+      symptomCode: [],
+      symptomList: [],
+      symptomCount: [],
     }
   },
   computed: {
@@ -49,7 +54,25 @@ export default {
   },
   created() {
     this.initChart();
+    const SYMPTOMLIST = '/review/types/sideEffects'
+    axios.get(`/api/v2${SYMPTOMLIST}`).then(res => {
+      const data = res.data
+      console.log(data);
+      for (let i = 0; i < 14; i++) {
+        this.symptomCode.push(data[i].code)
+        this.symptomList.push(data[i].value)
+      }
+      console.log(this.symptomCode);
+    })
+    const SYMPTOMCOUNT = `review/sideEffects?vaccine=${this.vaccine}`
+    axios.get(`/api/v2${SYMPTOMCOUNT}`).then(res => {
+      const data2 = res.data
+      console.log(data2);
+      for (let i = 0; i < 14; i++) {
 
+        this.symptomCount.push(data2[i].value)
+      }
+    })
   },
   methods: {
     makeRandomNum(min, max){
@@ -79,13 +102,22 @@ export default {
       this.chartData.labels = this.symptomList
       this.chartData.datasets.push({
         label: this.label,
-        borderColor: 'rgb(98, 176, 182)',
-        backgroundColor: 'rgb(98, 176, 182)',
+        borderColor: this.borderColor,
+        backgroundColor: this.backgroundColor,
+        // 237, 98, 56
         data: Array.from( {length: 14}, (_, i) => this.makeRandomNum(100, 300)),
       })
     },
     ChangeChart(item) {
       this.label = item;
+      if (item.includes("모더나")) {
+        this.borderColor = 'rgb(237, 98, 56)'
+        this.backgroundColor = 'rgb(237, 98, 56)'
+      }
+      else if (item.includes("화이자")) {
+        this.borderColor = 'rgb(98, 176, 182)'
+        this.backgroundColor = 'rgb(98, 176, 182)'
+      }
       this.chartData.datasets.pop();
       this.initData();
     },
