@@ -16,7 +16,9 @@
       @onClickBack="onClickBack"
       @onClickOk="onClickOk"
     >
-      <filter-cont v-if="screenType === 'filter'" ref="filterCont"/>
+      <filter-cont v-if="screenType === 'filter'" ref="filterCont"
+                   :filter-tag-list="filterTagList"
+      />
       <detail-cont v-if="screenType === 'detail'"
                    :detail-content="detailContent"
       />
@@ -183,21 +185,29 @@ export default {
       } else if (this.screenType === 'filter') {
         this.$refs.filterCont.clickSearch();
         this.screenFlag = false;
-        this.filterTagList = [
-          ...this.getPageParams.authorAges.map((r) => {
+        if(this.getPageParams.authorAges){
+          this.filterTagList.push( ...this.getPageParams.authorAges.map((r) => {
             return this.getAgeName(r);
-          }),
-          ...this.getPageParams.sideEffects.map((r) => {
+          }))
+        }
+        if(this.getPageParams.sideEffects){
+          this.filterTagList.push( ...this.getPageParams.sideEffects.map((r) => {
             return this.getSideEffectName(r);
-          }),
-          ...this.getPageParams.vaccines.map((r) => {
+          }))
+        }
+        if(this.getPageParams.vaccines){
+          this.filterTagList.push( ...this.getPageParams.vaccines.map((r) => {
             return this.getVaccineName(r);
-          }),
-          ...this.getPageParams.authorGenders.map((r) => {
+          }))
+        }
+        if(this.getPageParams.authorGenders){
+          this.filterTagList.push( ...this.getPageParams.authorGenders.map((r) => {
             return this.getGenderName(r);
-          }),
-          `${this.getPageParams.endInoculated.slice(0, 10)}~${this.getPageParams.startInoculated.slice(0, 10)}`,
-        ];
+          }))
+        }
+        if(this.getPageParams.endInoculated){
+          this.filterTagList.push(`${this.getPageParams.endInoculated.slice(0, 10)}~${this.getPageParams.startInoculated.slice(0, 10)}`)
+        }
       }
     },
     afterAdd() {

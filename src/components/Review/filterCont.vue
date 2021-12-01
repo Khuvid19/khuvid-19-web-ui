@@ -5,15 +5,15 @@
       <div>
         <div v-for="(value, key) in getVaccine" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
              :style="{
-           backgroundColor:vaccine.includes(value.code)?'#65C3C8 !important':'white !important',
-           color:vaccine.includes(value.code)?'white !important':'#65C3C8 !important'
+           backgroundColor:vaccines.includes(value.code)?'#65C3C8 !important':'white !important',
+           color:vaccines.includes(value.code)?'white !important':'#65C3C8 !important'
          }"
              @click="clickVaccine(value.code)"
         >
           <label>{{ value.value }}</label>
           <input type="checkbox" class="toggle"
                  style="display: none"
-                 :checked="vaccine.includes(value.code)"
+                 :checked="vaccines.includes(value.code)"
           >
         </div>
       </div>
@@ -23,15 +23,15 @@
       <div>
         <div v-for="(value, idx) in getGender" :key="idx" class="m-1 btn btn-outline btn-primary btn-sm"
              :style="{
-           backgroundColor:authorGender.includes(value.code)?'#65C3C8 !important':'white !important',
-           color:authorGender.includes(value.code)?'white !important':'#65C3C8 !important'
+           backgroundColor:authorGenders.includes(value.code)?'#65C3C8 !important':'white !important',
+           color:authorGenders.includes(value.code)?'white !important':'#65C3C8 !important'
          }"
              @click="clickGender(value.code)"
         >
           <label>{{ value.value }}</label>
           <input type="checkbox" class="toggle"
                  style="display: none"
-                 :checked="authorGender.includes(value.code)"
+                 :checked="authorGenders.includes(value.code)"
           >
         </div>
       </div>
@@ -41,15 +41,15 @@
       <div>
         <div v-for="(value, idx) in getAge" :key="idx" class="m-1 btn btn-outline btn-primary btn-sm"
              :style="{
-           backgroundColor:authorAge.includes(value.code)?'#65C3C8 !important':'white !important',
-           color:authorAge.includes(value.code)?'white !important':'#65C3C8 !important'
+           backgroundColor:authorAges.includes(value.code)?'#65C3C8 !important':'white !important',
+           color:authorAges.includes(value.code)?'white !important':'#65C3C8 !important'
          }"
              @click="clickAge(value.code)"
         >
           <label>{{ value.value }}</label>
           <input type="checkbox" class="toggle"
                  style="display: none"
-                 :checked="authorAge.includes(value.code)"
+                 :checked="authorAges.includes(value.code)"
           >
         </div>
       </div>
@@ -131,11 +131,19 @@
 import {mapActions, mapGetters} from "vuex";
 
 export default {
+  props:{
+    filterTagList :{
+      type: Array,
+      default: null,
+    },
+  },
   data() {
     return {
       range: {
-        start: new Date(),
-        end: new Date(),
+        start: null,
+        end: null,
+        // start: new Date(),
+        // end: new Date(),
       },
       date: new Date(),
       masks: {
@@ -145,12 +153,11 @@ export default {
         true: '있음',
         false: '없음',
       },
-      authorAge: [],
-      authorGender: [],
+      authorAges: [],
+      authorGenders: [],
       sideEffects: [],
-      vaccine: [],
-      haveDisease: '',
-      detailDisc: '',
+      vaccines: [],
+      haveDisease: null,
     }
   },
   computed: {
@@ -162,30 +169,29 @@ export default {
       getGender: 'User/getGenderType/getListContents',
     }),
   },
-  created() {
-    this.fetchSideEffects();
-    this.fetchVaccine();
-    this.fetchAge();
-    this.fetchGender();
+  watch:{
+    getReviewParams(v){
+      if(v!=null){
+        // this.authorAges = this.getReviewParams.authorAges;
+        // this.authorGenders = this.getReviewParams.authorGenders;
+        // this.vaccines = this.getReviewParams.vaccines;
+        // this.haveDisease = this.getReviewParams.haveDisease;
+        // this.sideEffects = this.getReviewParams.sideEffects;
+      }
+    },
   },
-
   methods: {
     ...mapActions({
-      fetchReview: 'Review/getPage/fetchPageContents',
+      fetchPageContents: 'Review/getPage/fetchPageContents',
       setReviewParams: 'Review/getPage/setPageParams',
-      fetchSideEffects: 'Review/sideEffectsList/fetchListContents',
-      fetchVaccine: 'Review/vaccineList/fetchListContents',
-      fetchAge: 'User/getAgeType/fetchListContents',
-      fetchGender: 'User/getGenderType/fetchListContents',
       add: 'Review/add/add',
     }),
     clearData(){
-      this.authorAge= [];
-      this.authorGender= [];
+      this.authorAges= [];
+      this.authorGenders= [];
       this.sideEffects= [];
-      this.vaccine= [];
+      this.vaccines= [];
       this.haveDisease= [];
-      this.detailDisc= '';
       this.inoculatedDate= new Date();
     },
     clickSideEffects(key) {
@@ -197,45 +203,44 @@ export default {
       }
     },
     clickAge(key) {
-      if (this.authorAge.includes(key)) {
-        const idx = this.authorAge.findIndex((r) => r === key);
-        this.authorAge.splice(idx, 1);
+      if (this.authorAges.includes(key)) {
+        const idx = this.authorAges.findIndex((r) => r === key);
+        this.authorAges.splice(idx, 1);
       } else {
-        this.authorAge.push(key);
+        this.authorAges.push(key);
       }
     },
     clickGender(key) {
-      if (this.authorGender.includes(key)) {
-        const idx = this.authorGender.findIndex((r) => r === key);
-        this.authorGender.splice(idx, 1);
+      if (this.authorGenders.includes(key)) {
+        const idx = this.authorGenders.findIndex((r) => r === key);
+        this.authorGenders.splice(idx, 1);
       } else {
-        this.authorGender.push(key);
+        this.authorGenders.push(key);
       }
     },
     clickVaccine(key) {
-      if (this.vaccine.includes(key)) {
-        const idx = this.vaccine.findIndex((r) => r === key);
-        this.vaccine.splice(idx, 1);
+      if (this.vaccines.includes(key)) {
+        const idx = this.vaccines.findIndex((r) => r === key);
+        this.vaccines.splice(idx, 1);
       } else {
-        this.vaccine.push(key);
+        this.vaccines.push(key);
       }
     },
     clickHaveDisease(key) {
       this.haveDisease = key;
     },
     clickSearch() {
-      const params = {
-        authorAges: this.authorAge,
-        authorGenders: this.authorGender,
-        detailDisc: this.detailDisc,
-        endInoculated: this.range.end.toISOString().slice(0,10),
-        haveDisease: this.haveDisease,
-        startInoculated: this.range.start.toISOString().slice(0,10),
-        sideEffects: this.sideEffects,
-        vaccines: this.vaccine,
-      };
+      const params = {};
+      if(this.authorAges.length>0) params.authorAges = this.authorAges;
+      if(this.authorGenders.length>0) params.authorGenders = this.authorGenders;
+      if(this.getReviewParams.detailDisc) params.detailDisc = this.getReviewParams.detailDisc;
+      if(this.vaccines.length>0)  params.vaccines = this.vaccines;
+      if(this.sideEffects.length>0)  params.sideEffects = this.sideEffects;
+      if(this.haveDisease!=null)  params.haveDisease = this.haveDisease;
+      if(this.range.end!=null)  params.endInoculated = this.range.end.toISOString().slice(0,10);
+      if(this.range.start!=null)  params.startInoculated = this.range.start.toISOString().slice(0,10);
       this.setReviewParams(params);
-      this.fetchReview({page:0, filters:params});
+      this.fetchPageContents( params);
       this.clearData();
     },
   },

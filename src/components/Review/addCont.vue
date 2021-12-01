@@ -90,7 +90,7 @@
           <div v-if="sideEffects.includes('OTHER')" class="h-px bg-gray-200 m-1"></div>
           <input
             v-if="sideEffects.includes('OTHER')"
-            v-model="sideEffectsDisc"
+            v-model="etcSideEffect"
             placeholder="이상반응을 입력해주세요."
             class="
         rounded-lg
@@ -156,7 +156,7 @@ export default {
       detailDisc: '',
       diseaseDisc: '',
       inoculatedDate: new Date(),
-      sideEffectsDisc:null,
+      etcSideEffect:null,
     }
   },
   computed: {
@@ -165,15 +165,8 @@ export default {
       getVaccine: 'Review/vaccineList/getListContents',
     }),
   },
-  created() {
-    this.fetchSideEffects();
-    this.fetchVaccine();
-  },
-
   methods: {
     ...mapActions({
-      fetchSideEffects: 'Review/sideEffectsList/fetchListContents',
-      fetchVaccine: 'Review/vaccineList/fetchListContents',
       add: 'Review/add/add',
     }),
     closeModal() {
@@ -208,9 +201,9 @@ export default {
         haveDisease: this.haveDisease==='true',
         inoculatedDate: this.inoculatedDate.toISOString().slice(0,10),
         sideEffects: this.sideEffects,
+        etcSideEffect: this.etcSideEffect,
         vaccine: this.vaccine,
       };
-      if(this.sideEffectsDisc)params.sideEffects.push(this.sideEffectsDisc);
       if(this.haveDisease==='false')params.diseaseDisc='';
       if (this.vaccine === '') {
         this.modalText = '백신종류는 필수 입력 항목입니다.';
