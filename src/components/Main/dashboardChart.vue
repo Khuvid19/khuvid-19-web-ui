@@ -52,8 +52,6 @@ export default {
     }
   },
   created() {
-    console.log("야 인마");
-    console.log(this.vaccine);
     this.initChart();
   },
   methods: {
@@ -99,7 +97,6 @@ export default {
             this.symptomList.push(data[i].value)
           }
         })
-        console.log(this.vaccine);
         const SYMPTOMCOUNT = `review/sideEffects?vaccine=${this.vaccine}`
         await axios.get(`/api/v2${SYMPTOMCOUNT}`).then(res => {
           const data = res.data
@@ -107,8 +104,6 @@ export default {
             this.symptomCount[data.key] = data[data.key]
             this.allCount += data[data.key]
           }
-          console.log(this.symptomCount);
-          console.log(this.allCount);
         })
       } catch (error) {
         console.log(error);
