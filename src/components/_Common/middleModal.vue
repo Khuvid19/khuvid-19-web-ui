@@ -1,15 +1,24 @@
 <template>
   <div>
-    <input type="checkbox" class="modal-toggle" :checked="checkFlag">
+    <input type="checkbox" class="modal-toggle" :checked="checkFlag" />
     <div class="modal items-center">
       <div class="modal-box w-11/12 rounded-box px-0 py-2 h-auto">
         <div class="px-4 py-3 text-lg">{{ text }}</div>
         <div class="modal-action w-full px-5 my-3">
-          <button v-if="cancelText" class="btn btn-outline btn-primary w-1/2 rounded-xl"
-                  @click="clickCancel">{{ cancelText }}</button>
-          <button class="btn btn-primary rounded-xl"
-                  :class="cancelText?'w-1/2':'w-full'"
-                  @click="clickOk">{{ okText }}</button>
+          <button
+            v-if="cancelText"
+            class="btn btn-outline btn-primary w-1/2 rounded-xl"
+            @click="clickCancel"
+          >
+            {{ cancelText }}
+          </button>
+          <button
+            class="btn btn-primary rounded-xl"
+            :class="cancelText ? 'w-1/2' : 'w-full'"
+            @click="clickOk"
+          >
+            {{ okText }}
+          </button>
         </div>
       </div>
     </div>
@@ -18,8 +27,8 @@
 
 <script>
 export default {
-  name: "ConfirmModal",
-  props:{
+  name: 'ConfirmModal',
+  props: {
     checkFlag: {
       type: Boolean,
       default: null,
@@ -38,21 +47,20 @@ export default {
     },
   },
   methods: {
-    clickOk(){
+    clickOk() {
       this.$emit('clickOk')
-      this.closeModal();
+      this.closeModal()
     },
-    clickCancel(){
+    clickCancel() {
       this.$emit('clickCancel')
-      this.closeModal();
+      this.closeModal()
     },
     closeModal() {
-      this.$emit('closeModal');
+      this.$emit('closeModal')
     },
   },
 }
 </script>
 
 <style scoped>
-
 </style>
