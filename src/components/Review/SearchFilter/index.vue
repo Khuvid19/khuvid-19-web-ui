@@ -36,7 +36,6 @@ export default {
   data() {
     return {
       detailDisc: '',
-      searchTagList: ['발열', '화이자 1차'],
     }
   },
   methods: {
@@ -54,10 +53,7 @@ export default {
         sideEffects: this.sideEffects,
         vaccine: this.vaccine,
       };
-      this.fetchReview({
-        page: 0,
-        filters,
-      });
+      this.fetchReview(filters);
     },
     openTagFilter() {
       this.$emit('clickFilter')

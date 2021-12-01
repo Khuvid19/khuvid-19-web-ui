@@ -50,20 +50,6 @@ export default {
       getGenderName: 'User/getGenderType/getCodeName',
     }),
   },
-  created() {
-    this.fetchSideEffectsName();
-    this.fetchVaccineName();
-    this.fetchAgeName();
-    this.fetchGenderName();
-  },
-  methods: {
-    ...mapActions({
-      fetchSideEffectsName: 'Review/sideEffectsList/fetchListContents',
-      fetchVaccineName: 'Review/vaccineList/fetchListContents',
-      fetchAgeName: 'User/getAgeType/fetchListContents',
-      fetchGenderName: 'User/getGenderType/fetchListContents',
-    }),
-  },
 }
 </script>
 

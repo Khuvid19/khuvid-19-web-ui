@@ -80,6 +80,10 @@
                  border: 1px solid #65C3C8">
             {{ getSideEffectsName(item) }}
           </div>
+          <div v-show="detailContent.etcSideEffect" class="w-full my-2 h-px bg-gray-200"></div>
+          <div v-show="detailContent.etcSideEffect" class="pl-1 pb-1">
+            {{ detailContent.etcSideEffect }}
+          </div>
         </div>
       </div>
       <div v-show="detailContent.detailDisc"
@@ -109,20 +113,6 @@ export default {
       getVaccineName: 'Review/vaccineList/getVaccineName',
       getAgeName: 'User/getAgeType/getCodeName',
       getGenderName: 'User/getGenderType/getCodeName',
-    }),
-  },
-  created() {
-    this.fetchSideEffectsName();
-    this.fetchVaccineName();
-    this.fetchAgeName();
-    this.fetchGenderName();
-  },
-  methods: {
-    ...mapActions({
-      fetchSideEffectsName: 'Review/sideEffectsList/fetchListContents',
-      fetchVaccineName: 'Review/vaccineList/fetchListContents',
-      fetchAgeName: 'User/getAgeType/fetchListContents',
-      fetchGenderName: 'User/getGenderType/fetchListContents',
     }),
   },
 }

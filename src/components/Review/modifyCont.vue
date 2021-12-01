@@ -90,7 +90,7 @@
           <div v-if="sideEffects.includes('OTHER')" class="h-px bg-gray-200 m-1"></div>
           <input
             v-if="sideEffects.includes('OTHER')"
-            v-model="sideEffectsDisc"
+            v-model="etcSideEffect"
             placeholder="이상반응을 입력해주세요."
             class="
         rounded-lg
@@ -163,7 +163,7 @@ export default {
       detailDisc: '',
       diseaseDisc: '',
       inoculatedDate: new Date(),
-      sideEffectsDisc:null,
+      etcSideEffect:null,
 
     }
   },
@@ -178,6 +178,7 @@ export default {
           this.vaccine= temp.vaccine;
           this.haveDisease= String(temp.haveDisease);
           this.detailDisc= temp.detailDisc;
+          this.etcSideEffect= temp.etcSideEffect;
           this.diseaseDisc= temp.diseaseDisc;
           this.inoculatedDate= temp.inoculatedDate;
         }
@@ -190,15 +191,8 @@ export default {
       getVaccine: 'Review/vaccineList/getListContents',
     }),
   },
-  created() {
-    this.fetchSideEffects();
-    this.fetchVaccine();
-  },
-
   methods: {
     ...mapActions({
-      fetchSideEffects: 'Review/sideEffectsList/fetchListContents',
-      fetchVaccine: 'Review/vaccineList/fetchListContents',
       modify: 'Review/modify/modify',
     }),
     closeModal() {
@@ -235,18 +229,18 @@ export default {
         haveDisease: this.haveDisease==='true',
         inoculatedDate: (typeof this.inoculatedDate)==='string'?this.inoculatedDate.slice(0,10):this.inoculatedDate.toISOString().slice(0,10),
         sideEffects: this.sideEffects,
+        etcSideEffect: this.etcSideEffect,
         vaccine: this.vaccine,
       };
-      if(this.sideEffectsDisc)params.sideEffects.push(this.sideEffectsDisc);
       if(this.haveDisease==='false') params.diseaseDisc = '';
       if (this.haveDisease === 'true' && this.diseaseDisc === '') {
         this.modalText = '기저질환을 입력해주세요.';
         this.modalFlag = true;
       } else {
         this.modify(params)
-          .then(() => {
+          .then((r) => {
             this.clearData();
-            this.$emit('afterModify', params);
+            this.$emit('afterModify', r.data);
           })
       }
     },
