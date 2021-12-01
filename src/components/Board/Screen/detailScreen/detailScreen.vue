@@ -6,7 +6,13 @@
     @onClickBack="onClickBack"
     @onClickMenu="onClickMenu"
   >
-    <div class="h-full">
+    <div
+      :class="`h-full overflow-y-scroll ${
+        $auth.loggedIn
+          ? 'detailMemberScreenContent'
+          : 'detailGuestScreenContent'
+      }`"
+    >
       <DetailContent
         :title="data.title"
         :content="data.content"
@@ -38,10 +44,12 @@
         </template>
       </div>
       <CommentInput
+        v-if="$auth.loggedIn"
         :board-id="data.boardId"
         @afterCommentWrite="afterCommentWrite"
       />
     </div>
+    <middle-modal />
     <modal
       ref="modal"
       modal-id="deleteBoardModal"
@@ -67,6 +75,7 @@ import CommentInput from './commentInput'
 import CommentItem from './commentItem'
 import FullScreen from '@/components/_Common/fullScreen'
 import Modal from '@/components/_Common/modal'
+import MiddleModal from '@/components/_Common/middleModal'
 export default {
   name: 'BoardDetailScreen',
   components: {
@@ -76,6 +85,7 @@ export default {
     FullScreen,
     Modal,
     WriteScreen,
+    MiddleModal,
   },
   props: {
     boardId: {
@@ -108,8 +118,8 @@ export default {
       this.data = (
         await this.$axios.get(`board/detail?boardId=${this.boardId}`)
       ).data
-
-      if (this.data.userName === this.user.nickName) this.isOwn = true
+      if (this.user && this.data.userName === this.user.nickName)
+        this.isOwn = true
     },
     onClickBack() {
       this.screenFlag = false
@@ -145,5 +155,11 @@ export default {
 <style scoped lang="scss">
 .write-textarea {
   height: calc(100vh - theme('spacing.50'));
+}
+.detailGuestScreenContent {
+  height: calc(100vh - 4rem);
+}
+.detailMemberScreenContent {
+  height: calc(100vh - 7rem - 0.5rem);
 }
 </style>

@@ -14,6 +14,14 @@
         @fetchBoardList="fetchBoardList"
       />
     </div>
+    <middle-modal
+      :check-flag="middleModalFlag"
+      text="로그인이 필요합니다."
+      ok-text="로그인"
+      cancel-text="취소"
+      @clickOk="clickModalOk"
+      @clickCancel="clickModalCancel"
+    />
     <write-btn content="글쓰기" @clickWriteBtn="clickWriteBtn" />
     <write-screen ref="writeScreen" @afterWrite="fetchBoardList" />
     <detail-screen
@@ -30,7 +38,7 @@ import SearchComponent from '@/components/Board/search'
 import ListItem from '@/components/Board/listItem'
 import WriteScreen from '@/components/Board/Screen/writeScreen/writeScreen'
 import WriteBtn from '@/components/_Common/writeBtn'
-
+import MiddleModal from '@/components/_Common/middleModal'
 export default {
   components: {
     SearchComponent,
@@ -38,9 +46,11 @@ export default {
     WriteScreen,
     DetailScreen,
     WriteBtn,
+    MiddleModal,
   },
   data() {
     return {
+      middleModalFlag: false,
       screenType: null,
       screenFlag: false,
       screenTitle: '',
@@ -63,7 +73,14 @@ export default {
       this.boardList = res.content
     },
     clickWriteBtn() {
-      this.$refs.writeScreen.screenFlag = true
+      if (!this.$auth.loggedIn) this.middleModalFlag = true
+      else this.$refs.writeScreen.screenFlag = true
+    },
+    clickModalCancel() {
+      this.middleModalFlag = false
+    },
+    clickModalOk() {
+      this.$auth.loginWith('google', { params: { prompt: 'select_account' } })
     },
     clickBoardItem(boardId) {
       this.boardId = boardId

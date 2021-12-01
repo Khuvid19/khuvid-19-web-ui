@@ -5,9 +5,9 @@ export default {
       const dateYear = this.$dayjs(date).format('YYYY')
 
       if(currentYear === dateYear) {
-        return this.$dayjs(date).format('MM/DD hh:mm')
+        return this.$dayjs(date).format('MM/DD HH:mm')
       }
-      return this.$dayjs(date).format('YYYY/MM/DD hh:mm')
+      return this.$dayjs(date).format('YYYY/MM/DD HH:mm')
     },
   },
 }
