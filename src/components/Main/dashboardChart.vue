@@ -5,8 +5,11 @@
         <div class="casrd-body p-4 stats">
           <div class="tabs">
             <div class="flex justify-between align-middle">
-              <button v-for="(item,idx) in vaccineList" :key="idx"
-                class="mr-2 mb-1 btn btn-outline btn-primary btn-sm"
+              <button 
+                v-for="(item,idx) in vaccineList" 
+                :key="idx"
+                class="mr-2 mb-1 btn btn-outline gray btn-sm"
+                :class="changeBtnColor()"
                 @click="ChangeChart(item)">
                 {{ item }}
               </button>
@@ -39,9 +42,10 @@ export default {
         datasets: [],
       },
       chartOptions: null,
+      current: '',
       label: '화이자 1차',
-      borderColor: 'rgb(98, 176, 182)',
-      backgroundColor: 'rgb(98, 176, 182)',
+      borderColor: 'rgb(180, 110, 188)',
+      backgroundColor: 'rgb(180, 110, 188)',
       vaccineList: ['화이자 1차', '화이자 2차', '모더나 1차', '모더나 2차', '아스트라제네카 1차', '아스트라제네카 2차', '얀센', '얀센 부스터샷'],
       vaccine: 'PFIZER_FIRST',
       symptomCode: [],
@@ -63,15 +67,12 @@ export default {
         this.symptomList.push(data[i].value)
       }
       console.log(this.symptomCode);
+      console.log(this.symptomList);
     })
     const SYMPTOMCOUNT = `review/sideEffects?vaccine=${this.vaccine}`
     axios.get(`/api/v2${SYMPTOMCOUNT}`).then(res => {
       const data2 = res.data
       console.log(data2);
-      for (let i = 0; i < 14; i++) {
-
-        this.symptomCount.push(data2[i].value)
-      }
     })
   },
   methods: {
@@ -88,13 +89,6 @@ export default {
         indexAxis: 'y',
         plugins: {
           ...defaultPlugins,
-          title: {
-            display: true,
-            text: '',
-            font: {
-              size: 20,
-            },
-          },
         },
       }
     },
@@ -104,19 +98,45 @@ export default {
         label: this.label,
         borderColor: this.borderColor,
         backgroundColor: this.backgroundColor,
-        // 237, 98, 56
         data: Array.from( {length: 14}, (_, i) => this.makeRandomNum(100, 300)),
       })
     },
+    changeBtnColor() {
+      if (this.current === 'PFIZER')
+        return 'PFIZER'
+      else if (this.current === 'MODERNA')
+        return 'MODERNA'
+      else if (this.current === 'AZ')
+        return 'AZ'
+      else if (this.current === 'ANSEN')
+        return 'ANSEN'
+    },
     ChangeChart(item) {
       this.label = item;
-      if (item.includes("모더나")) {
+      if (item.includes("화이자")) {
+        // 보라색
+        this.current = 'PFIZER'
+        this.borderColor = 'rgb(180, 110, 188)'
+        this.backgroundColor = 'rgb(180, 110, 188)' 
+      }
+      else if (item.includes("모더나")) {
+        // 빨간색
+        this.current = 'MODERNA'
         this.borderColor = 'rgb(237, 98, 56)'
         this.backgroundColor = 'rgb(237, 98, 56)'
       }
-      else if (item.includes("화이자")) {
+      
+      else if (item.includes("아스트라제네카")) {
+        // 흰색인데 기본색으로 표현
+        this.current = 'AZ'
         this.borderColor = 'rgb(98, 176, 182)'
         this.backgroundColor = 'rgb(98, 176, 182)'
+      }
+      else if (item.includes("얀센")) {
+        // 파란색
+        this.current = 'ANSEN'
+        this.borderColor = 'rgb(81, 134, 236)'
+        this.backgroundColor = 'rgb(81, 134, 236)'
       }
       this.chartData.datasets.pop();
       this.initData();
