@@ -10,7 +10,7 @@
                 :key="idx"
                 class="mr-2 mb-1 btn btn-outline gray btn-sm"
                 :class="changeBtnColor()"
-                @click="ChangeChart(item)">
+                @click="changeChart(item)">
                 {{ item }}
               </button>
             </div>
@@ -32,9 +32,6 @@ import {defaultPlugins, defaultOptions} from "@/plugins/chartJs/defaultOptions";
 
 export default {
   name: 'Chart',
-  components: {
-
-  },
   data() {
     return {
       chartData: {
@@ -63,8 +60,9 @@ export default {
     makeRandomNum(min, max){
       return Math.floor(Math.random() * (max - min) + min)
     },
-    initChart(){
+    async initChart(){
       this.initOptions()
+      await this.getAPI()
       this.initData()
     },
     initOptions() {
@@ -126,7 +124,7 @@ export default {
       else if (this.current === 'ANSEN')
         return 'ANSEN'
     },
-    ChangeChart(item) {
+    changeChart(item) {
       this.label = item;
       if (item.includes("화이자")) {
         // 보라색
