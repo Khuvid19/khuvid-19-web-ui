@@ -1,6 +1,7 @@
 <template>
   <div>
     <SearchComponent @searchKeyword="fetchBoardListKeyword" />
+    <div class="h-px bg-gray-200 m-2"></div>
     <div class="board-list overflow-y-scroll">
       <ListItem
         v-for="item in boardList"

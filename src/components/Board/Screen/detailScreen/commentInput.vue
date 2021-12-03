@@ -19,7 +19,9 @@
         class="bg-transparent outline-none w-full"
       />
       <fa-icon
-        class="text-xl text-primary"
+        :class="`text-xl ${
+          commentValue.trim() === '' ? 'text-gray-400' : 'text-primary'
+        }`"
         :icon="['far', 'paper-plane']"
         @click="clickSendBtn"
       />
@@ -48,7 +50,7 @@ export default {
       }
       this.$axios.post('board/comment', params).then(() => {
         this.$emit('afterCommentWrite', this.boardId)
-        this.commentValue = null
+        this.commentValue = ''
       })
     },
   },
