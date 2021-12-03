@@ -17,7 +17,7 @@
     </div>
     <middle-modal
       :check-flag="middleModalFlag"
-      text="로그인이 필요합니다."
+      text="로그인 후 작성해주세요."
       ok-text="로그인"
       cancel-text="취소"
       @clickOk="clickModalOk"
