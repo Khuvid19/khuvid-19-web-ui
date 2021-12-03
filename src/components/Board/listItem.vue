@@ -1,5 +1,5 @@
 <template>
-  <div class="card shadow m-2 bg-white" @click="$emit('click')">
+  <div class="card shadow mx-2 mb-2 bg-white" @click="$emit('click')">
     <div class="card-body p-4">
       <div class="flex justify-between align-middle mb-2">
         <div class="text-sm font-bold">{{ title }}</div>

@@ -1,9 +1,9 @@
 .board-list {
-  height: calc(100vh - #{$layoutHeight} - theme('spacing.16') - 35px - 1rem);
+  height: calc(100vh - #{$layoutHeight} - theme('spacing.16') - 36px - 1rem - 0.5rem);
 }
 
 @media screen and (max-height: 550px) {
   .board-list {
-    height: calc(100vh - theme('spacing.16') - 35px - 1rem);
+    height: calc(100vh - theme('spacing.16') - 36px - 1rem - 0.5rem);
   }
 }
