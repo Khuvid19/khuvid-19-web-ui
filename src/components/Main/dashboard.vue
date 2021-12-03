@@ -3,11 +3,13 @@
     <div class="w-full flex shadow stats">
       <div class="bg-white stat place-items-center place-content-center">
         <div class="stat-title">누적 확진자</div>
-        <div class="stat-value text-success">{{ all }}</div>
+        <div class="stat-value text-success">{{ todayAll }}</div>
+        <div class="stat-desc text-success text-sm">↗︎ {{ today }} ({{ decideDoD }})%</div>
       </div>
       <div class="bg-white stat place-items-center place-content-center">
         <div class="stat-title">신규 확진자</div>
         <div class="stat-value text-error">{{ today }}</div>
+        <div class="stat-desc text-error text-sm">{{ todayDoD }}</div>
       </div>
     </div>
 
@@ -55,8 +57,12 @@ const convert = require('xml-js')
 export default {
   data() {
     return {
-      all: '',
+      todayAll: '',
       today: '',
+      yesterday: '',
+      yesterdayAll: '',
+      decideDoD: '',
+      todayDoD: '',
       first: '',
       second: '',
       third: '',
@@ -95,9 +101,21 @@ export default {
     axios.get(`/api/v2${PATH_API2}`).then(res => {
       const internationalNumberFormat = new Intl.NumberFormat('en-US')
       const data = res.data
-      this.all = data.decideCnt
-      this.today = data.todayCnt
-      this.all = internationalNumberFormat.format(this.all)
+      this.todayAll = data[0].decideCnt
+      this.today = data[0].todayCnt
+      this.yesterday = data[1].todayCnt
+      this.yesterdayAll = data[1].decideCnt
+      const figure = ((this.today - this.yesterday) / this.yesterday * 100).toFixed(1)
+      console.log(figure);
+      if (figure < 0) {
+        this.todayDoD = `↘︎ ${-(this.today - this.yesterday)} (${-figure})%`
+      } else if (figure === 0) {
+        this.todayDoD = `- 0 (0)%`
+      } else {
+        this.todayDoD = `↗︎ ${this.today - this.yesterday} (${figure})%`
+      }
+      this.decideDoD = ((this.todayAll - this.yesterdayAll) / this.yesterdayAll * 100).toFixed(1)
+      this.todayAll = internationalNumberFormat.format(this.todayAll)
       this.today = internationalNumberFormat.format(this.today)
     })
   },
