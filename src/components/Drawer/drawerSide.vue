@@ -45,8 +45,7 @@
       </li>
     </ul>
     <sign-up ref="myInfoScreen" mode="myInfo" />
-    <MyInfoScreen />
-    <my-review-screen ref="myReviewScreen"/>
+    <my-review-screen ref="myReviewScreen" />
     <my-post-screen ref="myPostScreen" />
   </div>
 </template>
@@ -54,12 +53,11 @@
 <script>
 import { mapGetters } from 'vuex'
 import SignUp from '../SignUp/signUp'
-import MyInfoScreen from './myInfoScreen'
 import MyPostScreen from './myPostScreen'
 import MyReviewScreen from './myReviewScreen'
 
 export default {
-  components: { MyInfoScreen, MyReviewScreen, MyPostScreen, SignUp },
+  components: { MyReviewScreen, MyPostScreen, SignUp },
   computed: {
     ...mapGetters({
       user: 'getUser',

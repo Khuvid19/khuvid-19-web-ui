@@ -1,7 +1,7 @@
 <template>
   <full-screen
     v-model="screenFlag"
-    title="작성 후기"
+    title="내가 쓴 후기"
     @onClickBack="onClickBack"
   >
     <div class="w-screen review-list overflow-y-scroll">
