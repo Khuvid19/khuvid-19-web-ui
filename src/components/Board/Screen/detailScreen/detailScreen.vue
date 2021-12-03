@@ -49,12 +49,13 @@
         @afterCommentWrite="afterCommentWrite"
       />
     </div>
-    <middle-modal />
-    <modal
-      ref="modal"
-      modal-id="deleteBoardModal"
-      content="게시물을 삭제하시겠습니까?"
-      @clikcOkBtn="handleBoardDelete"
+    <middle-modal
+      :check-flag="middleModalFlag"
+      text="게시물을 삭제하시겠습니까?"
+      ok-text="삭제"
+      cancel-text="취소"
+      @clickOk="clickModalOk"
+      @clickCancel="clickModalCancel"
     />
     <write-screen
       ref="writeScreen"
@@ -74,7 +75,6 @@ import DetailContent from './detailContent'
 import CommentInput from './commentInput'
 import CommentItem from './commentItem'
 import FullScreen from '@/components/_Common/fullScreen'
-import Modal from '@/components/_Common/modal'
 import MiddleModal from '@/components/_Common/middleModal'
 export default {
   name: 'BoardDetailScreen',
@@ -83,7 +83,6 @@ export default {
     CommentItem,
     DetailContent,
     FullScreen,
-    Modal,
     WriteScreen,
     MiddleModal,
   },
@@ -95,6 +94,7 @@ export default {
   },
   data() {
     return {
+      middleModalFlag: false,
       screenFlag: false,
       data: {},
       writeScreenFlag: false,
@@ -135,7 +135,7 @@ export default {
     },
     onClickMenu(menu) {
       if (menu === '삭제') {
-        this.$refs.modal.openModal()
+        this.middleModalFlag = true
       } else if (menu === '수정') {
         this.$refs.writeScreen.screenFlag = true
       }
@@ -147,6 +147,21 @@ export default {
     afterEdit() {
       this.fetchData()
       this.$emit('afterEdit')
+    },
+    clickModalCancel() {
+      this.middleModalFlag = false
+    },
+    clickModalOk() {
+      this.middleModalFlag = false
+
+      const params = {
+        boardId: this.data.boardId,
+      }
+
+      this.$axios.delete('board', { data: params }).then((r) => {
+        this.$emit('afterEdit')
+        this.screenFlag = false
+      })
     },
   },
 }
