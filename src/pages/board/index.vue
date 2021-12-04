@@ -37,12 +37,12 @@
 </template>
 
 <script>
-import DetailScreen from '@/components/Board/Screen/detailScreen/detailScreen'
-import SearchComponent from '@/components/Board/search'
-import ListItem from '@/components/Board/listItem'
-import WriteScreen from '@/components/Board/Screen/writeScreen/writeScreen'
-import WriteBtn from '@/components/_Common/writeBtn'
-import MiddleModal from '@/components/_Common/middleModal'
+import DetailScreen from '@/components/Board/Screen/detailScreen/detailScreen';
+import SearchComponent from '@/components/Board/search';
+import ListItem from '@/components/Board/listItem';
+import WriteScreen from '@/components/Board/Screen/writeScreen/writeScreen';
+import WriteBtn from '@/components/_Common/writeBtn';
+import MiddleModal from '@/components/_Common/middleModal';
 export default {
   components: {
     SearchComponent,
@@ -63,50 +63,50 @@ export default {
       boardList: [],
       boardId: null,
       keyword: '',
-    }
+    };
   },
   fetch () {
-    this.fetchBoardList()
+    this.fetchBoardList();
   },
   methods: {
     setKeyword (keyword) {
-      this.currentPage = 0
-      this.keyword = keyword
-      this.boardList = []
-      this.fetchBoardList()
+      this.currentPage = 0;
+      this.keyword = keyword;
+      this.boardList = [];
+      this.fetchBoardList();
     },
     async fetchBoardList () {
-      const res = (await this.$axios.get(`board/list?page=${this.currentPage}&search=${this.keyword}`)).data // 무한 스크롤 구현하기
-      this.boardList.push(...res.content)
+      const res = (await this.$axios.get(`board/list?page=${this.currentPage}&search=${this.keyword}`)).data; // 무한 스크롤 구현하기
+      this.boardList.push(...res.content);
     },
     clickWriteBtn () {
       if (!this.$auth.loggedIn) {
-        this.middleModalFlag = true
+        this.middleModalFlag = true;
       } else {
-        this.$refs.writeScreen.screenFlag = true
+        this.$refs.writeScreen.screenFlag = true;
       }
     },
     clickModalCancel () {
-      this.middleModalFlag = false
+      this.middleModalFlag = false;
     },
     clickModalOk () {
-      this.$auth.loginWith('google', { params: { prompt: 'select_account' } })
+      this.$auth.loginWith('google', { params: { prompt: 'select_account' } });
     },
     clickBoardItem (boardId) {
-      this.boardId = boardId
-      this.$refs.detailScreen.screenFlag = true
+      this.boardId = boardId;
+      this.$refs.detailScreen.screenFlag = true;
     },
     onClickBack () {
-      this.screenFlag = false
+      this.screenFlag = false;
     },
     scrolling ($state) {
-      this.currentPage += 1
-      const beforeLength = this.boardList.length
-      this.fetchBoardList()
-      const afterLength = this.boardList.length
+      this.currentPage += 1;
+      const beforeLength = this.boardList.length;
+      this.fetchBoardList();
+      const afterLength = this.boardList.length;
 
-      if (beforeLength === afterLength) { $state.complete() }
+      if (beforeLength === afterLength) { $state.complete(); }
     },
   },
-}
+};
 </script>

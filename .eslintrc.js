@@ -30,6 +30,7 @@ module.exports = {
         vue: 'never',
       },
     ],
+    semi: [2, 'always'],
     indent: ['error', 2, { SwitchCase: 1 }],
     // indent: [2, 2],
   },
