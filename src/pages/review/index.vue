@@ -139,6 +139,7 @@ export default {
       this.screenType = type
       switch (type) {
         case 'add':
+          this.myReview = false;
           if (this.$store.getters.getUser === null) {
             this.modalText = '로그인 후 작성해주세요.'
             this.okText = '로그인';
@@ -151,6 +152,7 @@ export default {
           this.screenSideBtnText = ''
           break
         case 'modify':
+          this.myReview = false;
           this.screenTitle = '접종후기'
           this.screenOkText = '완료'
           this.screenSideBtnText = ''
@@ -167,6 +169,7 @@ export default {
           this.screenSideBtnText = ''
           break
         case 'filter':
+          this.myReview = false;
           this.screenTitle = '필터설정'
           this.screenOkText = '완료'
           this.screenSideBtnText = '초기화'
