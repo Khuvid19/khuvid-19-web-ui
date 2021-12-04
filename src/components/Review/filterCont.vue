@@ -175,14 +175,16 @@ export default {
       type: Array,
       default: null,
     },
+    screenFlag: {
+      type: Boolean,
+      default: null,
+    },
   },
   data () {
     return {
       range: {
         start: null,
         end: null,
-        // start: new Date(),
-        // end: new Date(),
       },
       date: new Date(),
       masks: {
@@ -199,6 +201,23 @@ export default {
       haveDisease: null,
     }
   },
+  watch: {
+    screenFlag: {
+      immediate: true,
+      handler (v) {
+        if (v) {
+          const temp = JSON.parse(JSON.stringify(this.getReviewParams))
+          this.authorAges = temp.authorAges ?? []
+          this.authorGenders = temp.authorGenders ?? []
+          this.sideEffects = temp.sideEffects ?? []
+          this.vaccines = temp.vaccines ?? []
+          this.haveDisease = temp.haveDisease ?? null
+          this.range.start = temp.startInoculated ?? null
+          this.range.end = temp.endInoculated ?? null
+        }
+      },
+    },
+  },
   computed: {
     ...mapGetters({
       getReviewParams: 'Review/getPage/getPageParams',
@@ -208,29 +227,22 @@ export default {
       getGender: 'User/getGenderType/getListContents',
     }),
   },
-  watch: {
-    getReviewParams (v) {
-      if (v != null) {
-        // this.authorAges = this.getReviewParams.authorAges;
-        // this.authorGenders = this.getReviewParams.authorGenders;
-        // this.vaccines = this.getReviewParams.vaccines;
-        // this.haveDisease = this.getReviewParams.haveDisease;
-        // this.sideEffects = this.getReviewParams.sideEffects;
-      }
-    },
-  },
   methods: {
     ...mapActions({
       fetchPageContents: 'Review/getPage/fetchPageContents',
       setReviewParams: 'Review/getPage/setPageParams',
       add: 'Review/add/add',
     }),
+    setTag () {
+      console.log('sdf')
+      // console.log(this.getReviewParams)
+    },
     clearData () {
       this.authorAges = []
       this.authorGenders = []
       this.sideEffects = []
       this.vaccines = []
-      this.haveDisease = []
+      this.haveDisease = null
       this.range = {
         start: null,
         end: null,
@@ -279,8 +291,8 @@ export default {
       if (this.vaccines.length > 0) { params.vaccines = this.vaccines }
       if (this.sideEffects.length > 0) { params.sideEffects = this.sideEffects }
       if (this.haveDisease != null) { params.haveDisease = this.haveDisease }
-      if (this.range.end != null) { params.endInoculated = this.range.end.toISOString().slice(0, 10) }
-      if (this.range.start != null) { params.startInoculated = this.range.start.toISOString().slice(0, 10) }
+      if (typeof this.range.end === 'string') { params.endInoculated = this.range.end } else if (this.range.end != null) { params.endInoculated = this.range.end.toISOString().slice(0, 10) }
+      if (typeof this.range.start === 'string') { params.startInoculated = this.range.start } else if (this.range.start != null) { params.startInoculated = this.range.start.toISOString().slice(0, 10) }
       this.setReviewParams(params)
       this.fetchPageContents(params)
       this.clearData()

@@ -1,17 +1,19 @@
 <template>
   <div class="drawer-side">
-    <label for="my-drawer-4" class="drawer-overlay"></label>
+    <label for="my-drawer-4" class="drawer-overlay" />
     <ul
       class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content pt-14"
     >
       <div class="flex align-middle pl-4 mb-12">
         <div class="avatar self-center mr-4">
           <div class="rounded-full w-20 h-20 self-center">
-            <img class="self-center" :src="user ? user.picUrl : ''" />
+            <img class="self-center" :src="user ? user.picUrl : ''">
           </div>
         </div>
         <div class="self-center">
-          <div class="text-lg font-bold">{{ user ? user.nickName : '' }}</div>
+          <div class="text-lg font-bold">
+            {{ user ? user.nickName : '' }}
+          </div>
           <div class="text-sm">
             {{ user ? user.email : '' }}
           </div>
@@ -36,12 +38,14 @@
         </a>
       </li>
       <li class="bottom-5 absolute">
-        <a @click="clickLogout"
-          ><fa-icon
+        <a
+          @click="clickLogout"
+        >
+          <fa-icon
             class="text-2xl mr-6"
             :icon="['fas', 'sign-out-alt']"
-          />로그아웃</a
-        >
+          />
+          로그아웃</a>
       </li>
     </ul>
     <sign-up ref="myInfoScreen" mode="myInfo" />
@@ -63,15 +67,15 @@ export default {
       user: 'getUser',
     }),
   },
-  created() {
+  created () {
     console.log('this.user', this.user)
   },
   methods: {
-    clickLogout() {
+    clickLogout () {
       this.$auth.logout()
       this.$router.go()
     },
-    clickMenu(menu) {
+    clickMenu (menu) {
       switch (menu) {
         case 'myInfo':
           console.log('1234')

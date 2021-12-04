@@ -20,7 +20,7 @@
           w-full
           mb-2
         "
-      />
+      >
       <textarea
         v-model="content"
         placeholder="내용을 입력해주세요."
@@ -70,7 +70,7 @@ export default {
       default: null,
     },
   },
-  data() {
+  data () {
     return {
       middleModalFlag: false,
       screenFlag: false,
@@ -82,7 +82,7 @@ export default {
   watch: {
     screenFlag: {
       immediate: true,
-      handler(newVal) {
+      handler (newVal) {
         if (newVal && this.mode === 'edit') {
           this.title = this.editTitle
           this.content = this.editContent
@@ -91,15 +91,15 @@ export default {
     },
   },
   methods: {
-    onClickBack() {
+    onClickBack () {
       this.title = ''
       this.content = ''
       this.screenFlag = false
     },
-    clickModalOk() {
+    clickModalOk () {
       this.middleModalFlag = false
     },
-    onClickOk() {
+    onClickOk () {
       if (this.title === '') {
         this.modalMsg = '제목을 입력하세요.'
         this.middleModalFlag = true

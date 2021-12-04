@@ -36,7 +36,7 @@ export default {
     ListItem,
     DetailScreen,
   },
-  data() {
+  data () {
     return {
       screenFlag: false,
       myBoardList: null,
@@ -45,21 +45,21 @@ export default {
   },
   watch: {
     screenFlag: {
-      handler(newVal) {
-        if (newVal) this.fetchBoardList()
+      handler (newVal) {
+        if (newVal) { this.fetchBoardList() }
       },
     },
   },
   methods: {
-    fetchBoardList() {
+    fetchBoardList () {
       this.$axios.get('board/user').then((r) => {
         this.myBoardList = r.data
       })
     },
-    onClickBack() {
+    onClickBack () {
       this.screenFlag = false
     },
-    clickBoardItem(boardId) {
+    clickBoardItem (boardId) {
       this.boardId = boardId
       this.$refs.detailScreen.screenFlag = true
     },

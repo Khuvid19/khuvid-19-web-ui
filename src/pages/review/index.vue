@@ -22,6 +22,7 @@
       <filter-cont
         v-if="screenType === 'filter'"
         ref="filterCont"
+        :screen-flag="screenFlag&&screenType==='filter'"
         :filter-tag-list="filterTagList"
       />
       <detail-cont
@@ -105,10 +106,12 @@ export default {
     }),
   },
   created () {
+    this.clearPageParams()
     this.fetchPageContents({})
   },
   methods: {
     ...mapActions({
+      clearPageParams: 'Review/getPage/clearPageParams',
       fetchPageContents: 'Review/getPage/fetchPageContents',
       remove: 'Review/remove/remove',
     }),
@@ -117,7 +120,7 @@ export default {
         this.remove(this.detailContent.id)
           .then(() => {
             this.screenFlag = false
-            this.fetchPageContents({})
+            this.fetchPageContents(this.getPageParams)
           })
       } else if (this.okText === '로그인') {
         this.$auth.loginWith('google', { params: { prompt: 'select_account' } })
@@ -202,6 +205,7 @@ export default {
       } else if (this.screenType === 'filter') {
         this.$refs.filterCont.clickSearch()
         this.screenFlag = false
+        this.filterTagList = []
         if (this.getPageParams.authorAges) {
           this.filterTagList.push(...this.getPageParams.authorAges.map((r) => {
             return this.getAgeName(r)
@@ -223,19 +227,19 @@ export default {
           }))
         }
         if (this.getPageParams.endInoculated) {
-          this.filterTagList.push(`${this.getPageParams.endInoculated.slice(0, 10)}~${this.getPageParams.startInoculated.slice(0, 10)}`)
+          this.filterTagList.push(`${this.getPageParams.startInoculated.slice(0, 10)}~${this.getPageParams.endInoculated.slice(0, 10)}`)
         }
       }
     },
     afterAdd () {
       this.screenFlag = false
-      this.fetchPageContents({})
+      this.fetchPageContents(this.getPageParams)
     },
     afterModify (detail) {
       this.screenFlag = false
       this.detailContent = detail
       this.moveToScreen('detail')
-      this.fetchPageContents({})
+      this.fetchPageContents(this.getPageParams)
     },
     clickRemove () {
       this.modalText = '후기를 삭제하시겠습니까?'

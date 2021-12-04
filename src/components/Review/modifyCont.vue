@@ -268,7 +268,7 @@ export default {
         this.modify(params)
           .then((r) => {
             this.clearData()
-            this.$emit('afterModify', r.data)
+            this.$emit('afterModify', params)
           })
       }
     },
