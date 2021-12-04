@@ -16,6 +16,7 @@
       />
       <infinite-loading v-if="boardList.length" @infinite="scrolling">
         <div slot="no-results" />
+        <div slot="no-more" />
       </infinite-loading>
     </div>
     <middle-modal
@@ -99,13 +100,14 @@ export default {
     onClickBack () {
       this.screenFlag = false;
     },
-    scrolling ($state) {
+    async scrolling ($state) {
       this.currentPage += 1;
       const beforeLength = this.boardList.length;
-      this.fetchBoardList();
+
+      await this.fetchBoardList();
       const afterLength = this.boardList.length;
 
-      if (beforeLength === afterLength) { $state.complete(); }
+      if (beforeLength === afterLength) { $state.complete(); } else { $state.loaded(); };
     },
   },
 };
