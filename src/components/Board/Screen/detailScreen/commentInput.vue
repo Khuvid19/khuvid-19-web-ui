@@ -20,7 +20,7 @@
       />
       <fa-icon
         :class="`text-xl ${
-          commentValue.trim() === '' ? 'text-gray-400' : 'text-primary'
+          isEmptyCommentValue ? 'text-gray-400' : 'text-primary'
         }`"
         :icon="['far', 'paper-plane']"
         @click="clickSendBtn"
@@ -42,8 +42,16 @@ export default {
       commentValue: '',
     }
   },
+  computed: {
+    isEmptyCommentValue() {
+      return this.commentValue.trim() === ''
+    },
+  },
   methods: {
     clickSendBtn() {
+      if (this.isEmptyCommentValue) {
+        return
+      }
       const params = {
         boardId: this.boardId,
         content: this.commentValue,
