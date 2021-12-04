@@ -2,8 +2,8 @@
   <client-only>
     <div class="chart-header">
       <div class="card shadow bg-white">
-        <div class="cards-body p-4 -ml-1 mr-2 stats">
-          <div class="tabs">
+        <div class="cards-body p-4 ml-2 mr-2 stats">
+          <div class="tabs -ml-3">
             <div class="flex justify-between align-middle">
               <button 
                 v-for="(item,idx) in vaccineList" 
