@@ -8,10 +8,7 @@ const defaultOptions = {
 
 const defaultPlugins = {
   legend: {
-    position: 'bottom',
-    labels: {
-      boxWidth: 20,
-    },
+    display: false,
   },
   title: {
     display: true,

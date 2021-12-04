@@ -41,7 +41,6 @@ export default {
       },
       chartOptions: null,
       current: '',
-      label: '화이자 1차',
       borderColor: 'rgb(180, 110, 188)',
       backgroundColor: 'rgb(180, 110, 188)',
       vaccineList: ['화이자 1차', '화이자 2차', '모더나 1차', '모더나 2차', '아스트라제네카 1차', '아스트라제네카 2차', '얀센', '얀센 부스터샷'],
@@ -85,7 +84,6 @@ export default {
       this.chartData.labels = this.symptomList
       await this.getAPI()
       this.chartData.datasets.push({
-        label: this.label,
         borderColor: this.borderColor,
         backgroundColor: this.backgroundColor,
         data: Array.from( {length: 14}, (_, i) => (this.symptomCount[this.symptomCode[i]]/this.allCount) * 100),
@@ -120,7 +118,6 @@ export default {
       }
     },
     changeChart(item) {
-      this.label = item
       this.current = item
       if (item.includes("화이자")) {
         // 보라색
