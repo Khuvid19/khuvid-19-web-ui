@@ -7,15 +7,31 @@
             <div>
               <div class="flex justify-start items-center">
                 <div class="flex justify-center items-center">
-                  <div class="badge badge-xs mr-2"
-                       :style="{backgroundColor: getColor(item.vaccine), border: 0}"></div>
-                  <div class="mr-2 text-lg font-semibold">{{ getVaccineName(item.vaccine) }}</div>
+                  <div
+                    class="badge badge-xs mr-2"
+                    :style="{backgroundColor: getColor(item.vaccine), border: 0}"
+                  />
+                  <div class="mr-2 text-lg font-semibold">
+                    {{ getVaccineName(item.vaccine) }}
+                  </div>
                 </div>
-                <div class=" text-2xs ">{{ getAgeName(item.authorAge) }}</div>
-                <div class="text-lg" style="margin-left: 3px; margin-right: 3px">・</div>
-                <div class=" text-2xs ">{{ getGenderName(item.authorGender) }}</div>
-                <div class="text-lg" style="margin-left: 3px; margin-right: 3px">・</div>
-                <div class=" text-2xs ">{{ item.authorNickName }}</div>
+                <div class="flex justify-start items-center bg-gray-100 rounded-lg px-2">
+                  <div class="text-2xs">
+                    {{ getAgeName(item.authorAge) }}
+                  </div>
+                  <div class="text-lg" style="margin-left: 3px; margin-right: 3px">
+                    ・
+                  </div>
+                  <div class="text-2xs">
+                    {{ getGenderName(item.authorGender) }}
+                  </div>
+                  <div class="text-lg" style="margin-left: 3px; margin-right: 3px">
+                    ・
+                  </div>
+                  <div class="text-2xs">
+                    {{ item.authorNickName }}
+                  </div>
+                </div>
               </div>
             </div>
             <div class="text-2xs flex items-center">
@@ -23,23 +39,30 @@
             </div>
           </div>
           <div>
-            <div v-if="item.haveDisease"
-                 class="mr-1 mb-2 btn btn-outline btn-primary btn-sm"
-                 style="background-color: white; color: #009485;
-                 border: 1px solid #009485">
+            <div
+              v-if="item.haveDisease"
+              class="mr-1 mb-2 btn btn-outline btn-primary btn-sm"
+              style="background-color: white; color: #009485;
+                 border: 1px solid #009485"
+            >
               기저질환
             </div>
-            <div v-for="(effec,i) in item.sideEffects" v-show="i<4"
-                 :key="i"
-                 class="mr-2 mb-2 btn btn-outline btn-primary btn-sm"
-                 style="background-color: white; color: #65C3C8;
-                 border: 1px solid #65C3C8">
+            <div
+              v-for="(effec,i) in item.sideEffects"
+              v-show="i<4"
+              :key="i"
+              class="mr-2 mb-2 btn btn-outline btn-primary btn-sm"
+              style="background-color: white; color: #65C3C8;
+                 border: 1px solid #65C3C8"
+            >
               {{ getSideEffectsName(effec) }}
             </div>
-            <div v-if="item.sideEffects.length>4"
-                 class="mr-1 mb-2 btn btn-outline btn-primary btn-sm"
-                 style="background-color: white; color: #65C3C8;
-                 border: 1px solid #65C3C8">
+            <div
+              v-if="item.sideEffects.length>4"
+              class="mr-1 mb-2 btn btn-outline btn-primary btn-sm"
+              style="background-color: white; color: #65C3C8;
+                 border: 1px solid #65C3C8"
+            >
               ...
             </div>
           </div>
@@ -53,10 +76,10 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  name: "ListCont",
+  name: 'ListCont',
   computed: {
     ...mapGetters({
       getReviewList: 'Review/getPage/getPageContents',
@@ -67,20 +90,20 @@ export default {
     }),
   },
   methods: {
-    getColor(vaccine) {
+    getColor (vaccine) {
       switch (vaccine) {
         case 'ANSEN':
         case 'ANSEN_BOOST':
-          return 'rgb(81, 134, 236)';
+          return 'rgb(81, 134, 236)'
         case 'PFIZER_FIRST':
         case 'PFIZER_SECOND':
-          return 'rgb(180, 110, 188)';
+          return 'rgb(180, 110, 188)'
         case 'MODERNA_FIRST':
         case 'MODERNA_SECOND':
-          return 'rgb(237, 98, 56)';
+          return 'rgb(237, 98, 56)'
         case 'AZ_FIRST':
         case 'AZ_SECOND':
-          return 'rgb(98, 176, 182)';
+          return 'rgb(98, 176, 182)'
       }
     },
   },

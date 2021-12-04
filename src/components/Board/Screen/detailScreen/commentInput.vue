@@ -17,7 +17,7 @@
       <input
         v-model="commentValue"
         class="bg-transparent outline-none w-full"
-      />
+      >
       <fa-icon
         :class="`text-xl ${
           isEmptyCommentValue ? 'text-gray-400' : 'text-primary'
@@ -37,18 +37,18 @@ export default {
       default: null,
     },
   },
-  data() {
+  data () {
     return {
       commentValue: '',
     }
   },
   computed: {
-    isEmptyCommentValue() {
+    isEmptyCommentValue () {
       return this.commentValue.trim() === ''
     },
   },
   methods: {
-    clickSendBtn() {
+    clickSendBtn () {
       if (this.isEmptyCommentValue) {
         return
       }

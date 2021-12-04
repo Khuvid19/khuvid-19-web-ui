@@ -4,21 +4,39 @@
     title="내가 쓴 후기"
     @onClickBack="onClickBack"
   >
-    <div class="w-screen review-list overflow-y-scroll">
+    <div class="w-screen overflow-y-scroll">
       <div v-for="(item,idx) in getPageContents" :key="idx">
-<!--        <div class="card shadow m-2 bg-white" @click="$emit('clickDetail',item)">-->
         <div class="card shadow m-2 bg-white" @click="clickDetail(item)">
           <div class="card-body p-4">
             <div class="flex justify-between align-middle mb-2">
               <div>
                 <div class="flex justify-start items-center">
-                  <div class="m-1 text-sm font-semibold">{{ getVaccineName(item.vaccine) }}</div>
-                  <div class="m-1 text-sm font-semibold">| {{ getGenderName(item.authorGender) }}</div>
-                  <div class="m-1 text-sm font-semibold">| {{ getAgeName(item.authorAge) }}</div>
-                  <div v-if="item.haveDisease" class="m-1 text-sm font-semibold">
-                    | {{ item.diseaseDisc }}
+                  <div class="flex justify-center items-center">
+                    <div
+                      class="badge badge-xs mr-2"
+                      :style="{backgroundColor: getColor(item.vaccine), border: 0}"
+                    />
+                    <div class="mr-2 text-lg font-semibold">
+                      {{ getVaccineName(item.vaccine) }}
+                    </div>
                   </div>
-                  <div class="m-1 text-sm font-semibold">| {{ item.inoculatedDate.slice(0,10) }}</div>
+                  <div class="flex justify-start items-center bg-gray-100 rounded-lg px-2">
+                    <div class="text-2xs">
+                      {{ getAgeName(item.authorAge) }}
+                    </div>
+                    <div class="text-lg" style="margin-left: 3px; margin-right: 3px">
+                      ・
+                    </div>
+                    <div class="text-2xs">
+                      {{ getGenderName(item.authorGender) }}
+                    </div>
+                    <div class="text-lg" style="margin-left: 3px; margin-right: 3px">
+                      ・
+                    </div>
+                    <div class="text-2xs">
+                      {{ item.authorNickName }}
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="text-2xs flex items-center">
@@ -26,11 +44,31 @@
               </div>
             </div>
             <div>
-              <div v-for="(effec,i) in item.sideEffects" :key="i"
-                   class="mr-2 mb-2 btn btn-outline btn-primary btn-sm"
-                   style="background-color: white; color: #65C3C8;
-                 border: 1px solid #65C3C8">
+              <div
+                v-if="item.haveDisease"
+                class="mr-1 mb-2 btn btn-outline btn-primary btn-sm"
+                style="background-color: white; color: #009485;
+                 border: 1px solid #009485"
+              >
+                기저질환
+              </div>
+              <div
+                v-for="(effec,i) in item.sideEffects"
+                v-show="i<4"
+                :key="i"
+                class="mr-2 mb-2 btn btn-outline btn-primary btn-sm"
+                style="background-color: white; color: #65C3C8;
+                 border: 1px solid #65C3C8"
+              >
                 {{ getSideEffectsName(effec) }}
+              </div>
+              <div
+                v-if="item.sideEffects.length>4"
+                class="mr-1 mb-2 btn btn-outline btn-primary btn-sm"
+                style="background-color: white; color: #65C3C8;
+                 border: 1px solid #65C3C8"
+              >
+                ...
               </div>
             </div>
             <p v-show="item.detailDisc" class="text-sm ml-1 mt-1">
@@ -45,72 +83,88 @@
       :detail-content="detailContent"
       @afterModify="afterModify"
     />
-
   </full-screen>
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import { mapActions, mapGetters } from 'vuex'
 import fullScreen from '../_Common/fullScreen'
 import DetailScreen from './myReviewDetail'
+
 export default {
   components: {
     fullScreen,
     DetailScreen,
   },
-  data() {
+  data () {
     return {
       screenFlag: false,
-      detailContent:{
-        authorAge: "",
-        authorGender: "",
+      detailContent: {
+        authorAge: '',
+        authorGender: '',
         authorId: 0,
-        createdDate: "",
-        detailDisc: "",
-        diseaseDisc: "",
+        createdDate: '',
+        detailDisc: '',
+        diseaseDisc: '',
         haveDisease: true,
         id: 0,
-        inoculatedDate: "",
+        inoculatedDate: '',
         sideEffects: [],
-        vaccine: "",
+        vaccine: '',
       },
     }
   },
   computed: {
     ...mapGetters({
-      getPageContents:'Review/getMyList/getPageContents',
+      getPageContents: 'Review/getMyList/getPageContents',
       getSideEffectsName: 'Review/sideEffectsList/getSideEffectsName',
       getVaccineName: 'Review/vaccineList/getVaccineName',
       getAgeName: 'User/getAgeType/getCodeName',
       getGenderName: 'User/getGenderType/getCodeName',
     }),
   },
-  watch:{
-    screenFlag(v){
-      if(v){
+  watch: {
+    screenFlag (v) {
+      if (v) {
         this.fetchPageContent()
       }
     },
   },
-  created() {
+  created () {
     // this.fetchPageContent();
   },
   methods: {
     ...mapActions({
-      fetchPageContent:'Review/getMyList/fetchPageContents',
-      fetchPage:'Review/getPage/fetchPageContents',
+      fetchPageContent: 'Review/getMyList/fetchPageContents',
+      fetchPage: 'Review/getPage/fetchPageContents',
     }),
-    afterModify(detail){
+    afterModify (detail) {
       this.fetchPageContent()
       this.fetchPage({})
-      this.detailContent = detail;
+      this.detailContent = detail
     },
-    clickDetail(item){
-      this.detailContent = item;
+    clickDetail (item) {
+      this.detailContent = item
       this.$refs.detailScreen.screenFlag = true
     },
-    onClickBack() {
+    onClickBack () {
       this.screenFlag = false
+    },
+    getColor (vaccine) {
+      switch (vaccine) {
+        case 'ANSEN':
+        case 'ANSEN_BOOST':
+          return 'rgb(81, 134, 236)'
+        case 'PFIZER_FIRST':
+        case 'PFIZER_SECOND':
+          return 'rgb(180, 110, 188)'
+        case 'MODERNA_FIRST':
+        case 'MODERNA_SECOND':
+          return 'rgb(237, 98, 56)'
+        case 'AZ_FIRST':
+        case 'AZ_SECOND':
+          return 'rgb(98, 176, 182)'
+      }
     },
   },
 }

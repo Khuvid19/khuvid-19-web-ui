@@ -10,7 +10,9 @@
           icon="arrow-left"
           @click="onClickBack"
         />
-        <div class="text-xl text-center">{{ title }}</div>
+        <div class="text-xl text-center">
+          {{ title }}
+        </div>
         <div
           v-if="menuList.length !== 0"
           class="dropdown dropdown-end text-right pr-5"
@@ -39,7 +41,7 @@
             </li>
           </ul>
         </div>
-        <div class="text-right mr-5 cursor-pointer" @click="onClickSideBtn">
+        <div v-if="sideBtnText" class="text-right mr-5 cursor-pointer" @click="onClickSideBtn">
           {{ sideBtnText }}
         </div>
       </header>
@@ -48,7 +50,7 @@
           okText !== null ? 'content-area' : 'h-full'
         }`"
       >
-        <slot></slot>
+        <slot />
       </main>
       <footer
         v-if="okText !== null"
@@ -96,26 +98,26 @@ export default {
       default: () => [],
     },
   },
-  data() {
+  data () {
     return {
       renderMenu: false,
     }
   },
   methods: {
-    onClickBack() {
+    onClickBack () {
       this.$emit('onClickBack')
     },
-    onClickSideBtn() {
+    onClickSideBtn () {
       this.$emit('onClickSideBtn')
     },
-    onClickOk() {
+    onClickOk () {
       this.$emit('onClickOk')
     },
-    onClickMenu(menu) {
+    onClickMenu (menu) {
       this.renderMenu = false
       this.$emit('onClickMenu', menu)
     },
-    clickEllipsis() {
+    clickEllipsis () {
       this.renderMenu = true
     },
   },
