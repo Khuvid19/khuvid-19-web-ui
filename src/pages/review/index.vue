@@ -13,6 +13,7 @@
       :side-btn-text="screenSideBtnText"
       :menu-list="myReview?['수정','삭제']:[]"
       @onClickMenu="onClickMenu"
+      @onClickSideBtn="onClickSideBtn"
       @onClickBack="onClickBack"
       @onClickOk="onClickOk"
     >
@@ -131,6 +132,9 @@ export default {
       this.detailContent = item;
       this.moveToScreen('detail');
     },
+    onClickSideBtn(){
+      this.$refs.filterCont.clearData();
+    },
     moveToScreen(type) {
       this.screenType = type
       switch (type) {
@@ -165,6 +169,7 @@ export default {
         case 'filter':
           this.screenTitle = '필터설정'
           this.screenOkText = '완료'
+          this.screenSideBtnText = '초기화'
           break
       }
       this.screenFlag = true

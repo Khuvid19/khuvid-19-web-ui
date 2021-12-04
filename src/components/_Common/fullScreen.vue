@@ -39,9 +39,9 @@
             </li>
           </ul>
         </div>
-        <!-- <div class="text-right mr-5 cursor-pointer" @click="onClickSideBtn">
+        <div class="text-right mr-5 cursor-pointer" @click="onClickSideBtn">
           {{ sideBtnText }}
-        </div> -->
+        </div>
       </header>
       <main
         :class="`w-full overflow-y-scroll ${

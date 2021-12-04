@@ -4,7 +4,7 @@
     <div class="modal items-center">
       <div class="modal-box w-11/12 rounded-box px-0 py-2 h-auto">
         <div class="px-4 py-3 text-lg">{{ text }}</div>
-        <div class="modal-action w-full px-5 my-3">
+        <div class="modal-action w-full px-5 my-3 flex justify-center">
           <button v-if="cancelText" class="btn btn-outline btn-primary w-1/2 rounded-xl"
                   @click="clickCancel">{{ cancelText }}</button>
           <button class="btn btn-primary rounded-xl"

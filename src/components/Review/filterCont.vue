@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-4">
     <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
       <div class="text-lg mb-1 ml-1">백신 종류</div>
       <div>
@@ -74,13 +74,14 @@
     </div>
     <div class="border rounded-box px-3 py-4 mx-4 my-2 bg-white">
       <div class="text-lg mb-1 ml-1">처방날짜</div>
-      <div>
+      <div class="w-full">
         <v-date-picker v-model="range" is-range :masks="masks">
           <template #default="{ inputValue, inputEvents }">
             <div class="flex justify-between items-center">
               <input
                 :value="inputValue.start"
-                class="border px-2 py-1 w-44 rounded focus:outline-none focus:border-indigo-300"
+                class="border px-2 py-1 rounded focus:outline-none focus:border-indigo-300"
+                style="width: calc(50% - 20px)"
                 v-on="inputEvents.start"
               />
               <svg
@@ -98,7 +99,8 @@
               </svg>
               <input
                 :value="inputValue.end"
-                class="border px-2 py-1 w-44 rounded focus:outline-none focus:border-indigo-300"
+                class="border px-2 py-1 rounded focus:outline-none focus:border-indigo-300"
+                style="width: calc(50% - 20px)"
                 v-on="inputEvents.end"
               />
             </div>
@@ -192,7 +194,10 @@ export default {
       this.sideEffects= [];
       this.vaccines= [];
       this.haveDisease= [];
-      this.inoculatedDate= new Date();
+      this.range = {
+        start: null,
+        end: null,
+      };
     },
     clickSideEffects(key) {
       if (this.sideEffects.includes(key)) {
