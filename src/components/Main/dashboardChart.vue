@@ -53,6 +53,14 @@ export default {
     }
   },
   created() {
+    const SYMPTOMLIST = '/review/types/sideEffects'
+    axios.get(`/api/v2${SYMPTOMLIST}`).then(res => {
+      const data = res.data
+      for (let i = 0; i < 14; i++) {
+        this.symptomCode.push(data[i].code)
+        this.symptomList.push(data[i].value)
+      }
+    })
     this.initChart();
   },
   methods: {
@@ -80,7 +88,6 @@ export default {
         label: this.label,
         borderColor: this.borderColor,
         backgroundColor: this.backgroundColor,
-        // data: Array.from( {length: 14}, (_, i) => this.makeRandomNum(100, 300)),
         data: Array.from( {length: 14}, (_, i) => (this.symptomCount[this.symptomCode[i]]/this.allCount) * 100),
       })
     },
@@ -88,16 +95,6 @@ export default {
       try {
         this.allCount = 0
         this.symptomCount = {}
-        this.symptomCode = []
-        this.symptomList = []
-        const SYMPTOMLIST = '/review/types/sideEffects'
-        await axios.get(`/api/v2${SYMPTOMLIST}`).then(res => {
-          const data = res.data
-          for (let i = 0; i < 14; i++) {
-            this.symptomCode.push(data[i].code)
-            this.symptomList.push(data[i].value)
-          }
-        })
         const SYMPTOMCOUNT = `review/sideEffects?vaccine=${this.vaccine}`
         await axios.get(`/api/v2${SYMPTOMCOUNT}`).then(res => {
           const data = res.data
