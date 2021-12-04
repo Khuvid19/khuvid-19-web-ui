@@ -13,48 +13,53 @@
       </div>
     </div>
 
-    <div class="mt-3 rounded-2xl shadow w-full carousel place-items-center">
-      <div id="item1" class="bg-white stat carousel-item">
+    <carousel 
+    :perPage=1
+    :pagination-active-color="'#9ed0d3'"
+    :pagination-padding=7
+    :autoplay=true
+    class="mt-3 rounded-2xl shadow w-full place-items-center">
+      <slide id="item1" class="bg-white rounded-2xl stat">
         <div class="ml-2 stat-title">전국 1차 접종</div>
         <div class="ml-2 stat-value text-primary">{{ firstPercent }}%</div>
         <div class="hidden"></div>
-        <div class="-mt-1 mr-16 text-sm gray text-neutral flex-grow">
+        <div class="-mt-1 mr-4 text-sm gray text-neutral flex-grow">
           누적 {{ first }} <br>
           신규 {{ todayFirst }} ↗︎
         </div>
-      </div> 
-      <div id="item2" class="bg-white stat carousel-item">
+      </slide> 
+      <slide id="item2" class="bg-white rounded-2xl stat">
         <div class="ml-2 stat-title">전국 2차 접종</div>
         <div class="ml-2 stat-value text-primary">{{ secondPercent }}%</div>
         <div class="hidden"></div> 
-        <div class="-mt-1 mr-16 text-sm gray grid flex-grow place-items-center">
+        <div class="-mt-1 mr-4 text-sm gray grid flex-grow place-items-center">
           누적 {{ second }} <br>
           신규 {{ todaySecond }} ↗︎
         </div>
-      </div>
-      <div id="item3" class="bg-white stat carousel-item">
+      </slide>
+      <slide id="item3" class="bg-white rounded-2xl stat">
         <div class="ml-2 stat-title">전국 3차 접종</div>
         <div class="ml-2 stat-value text-primary">{{ thirdPercent }}%</div>
         <div class="hidden"></div>
-        <div class="-mt-1 mr-16 text-sm gray grid flex-grow place-items-center">
+        <div class="-mt-1 mr-4 text-sm gray grid flex-grow place-items-center">
           누적 {{ third }} <br>
           신규 {{ todayThird }} ↗︎
         </div>
-      </div>
-    </div>
-    <div class="-mt-9 -mb-2 z-10 ml-1 flex justify-center w-full py-4 space-x-3">
-        <div class="bg-base-300 btn-circle" style="width: 0.6rem; height: 0.6rem;"></div> 
-        <div class="bg-base-300 btn-circle" style="width: 0.6rem; height: 0.6rem;"></div> 
-        <div class="bg-base-300 btn-circle" style="width: 0.6rem; height: 0.6rem;"></div>
-    </div>
+      </slide>
+    </carousel>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import { Carousel, Slide } from 'vue-carousel'
 const convert = require('xml-js')
 
 export default {
+  components: {
+    Carousel,
+    Slide,
+  },
   data() {
     return {
       todayAll: '',
@@ -74,7 +79,6 @@ export default {
       thirdPercent: '',
     }
   },
-
   created () {
     const PATH_API = '/irgd/cov19stats.do?list=all'
     axios.get(`/api/v1${PATH_API}`).then(res => {
@@ -105,8 +109,8 @@ export default {
       this.today = data[0].todayCnt
       this.yesterday = data[1].todayCnt
       this.yesterdayAll = data[1].decideCnt
+      this.decideDoD = ((this.todayAll - this.yesterdayAll) / this.yesterdayAll * 100).toFixed(1)
       const figure = ((this.today - this.yesterday) / this.yesterday * 100).toFixed(1)
-      console.log(figure);
       if (figure < 0) {
         this.todayDoD = `↘︎ ${-(this.today - this.yesterday)} (${-figure})%`
       } else if (figure === 0) {
@@ -114,7 +118,6 @@ export default {
       } else {
         this.todayDoD = `↗︎ ${this.today - this.yesterday} (${figure})%`
       }
-      this.decideDoD = ((this.todayAll - this.yesterdayAll) / this.yesterdayAll * 100).toFixed(1)
       this.todayAll = internationalNumberFormat.format(this.todayAll)
       this.today = internationalNumberFormat.format(this.today)
     })

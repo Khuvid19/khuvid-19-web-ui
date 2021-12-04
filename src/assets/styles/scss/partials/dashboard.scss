@@ -7,3 +7,23 @@
 .gray {
   color: rgb(147, 138, 153);
 }
+
+.active {
+  background-color: rgb(158, 208, 211);
+  // #9ed0d3
+}
+
+.VueCarousel {
+  overflow: hidden;
+}
+
+.VueCarousel-pagination {
+  margin-top: -1.65rem;
+  z-index: 10;
+  .VueCarousel-dot-container {
+    margin-top: -1rem!important;
+    .VueCarousel-dot {
+      margin-top: -1rem!important;
+    }
+  }
+}
