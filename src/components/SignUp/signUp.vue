@@ -188,8 +188,18 @@ export default {
       this.passDuplicate = false
     },
     checkNicknameDuplicate() {
-      if (this.nickName === '') {
-        this.msgModal = '닉네임을 입력해주세요.'
+      const regExp = /^[a-zA-Zㄱ-힣0-9]*$/ // 닉네임 정규식
+      const lengthRegExp = /^.{2,8}$/ // 닉네임 정규식
+
+      if (!regExp.test(this.nickname)) {
+        this.msgModal =
+          '닉네임은 한글, 영문, 숫자만 가능하며 공백 및 특수문자는 불가능합니다.'
+        this.passDuplicate = false
+
+        this.$refs[this.modalId].openModal()
+        return
+      } else if (!lengthRegExp.test(this.nickname)) {
+        this.msgModal = '닉네임은 2-8자리만 가능합니다.'
         this.passDuplicate = false
 
         this.$refs[this.modalId].openModal()
