@@ -5,15 +5,17 @@
         <div class="card-body p-4">
           <div class="flex justify-between align-middle mb-2">
             <div>
-              <div class="flex justify-start items-end">
+              <div class="flex justify-start items-center">
                 <div class="flex justify-center items-center">
                   <div class="badge badge-xs mr-2"
                        :style="{backgroundColor: getColor(item.vaccine), border: 0}"></div>
                   <div class="mr-2 text-lg font-semibold">{{ getVaccineName(item.vaccine) }}</div>
                 </div>
-                <div class="m-1 text-2xs ">{{ getAgeName(item.authorAge) }}</div>
-                <div class="m-1 text-2xs ">・ {{ getGenderName(item.authorGender) }}</div>
-                <div class="m-1 text-2xs ">・ {{ item.authorNickName }}</div>
+                <div class=" text-2xs ">{{ getAgeName(item.authorAge) }}</div>
+                <div class="text-lg" style="margin-left: 3px; margin-right: 3px">・</div>
+                <div class=" text-2xs ">{{ getGenderName(item.authorGender) }}</div>
+                <div class="text-lg" style="margin-left: 3px; margin-right: 3px">・</div>
+                <div class=" text-2xs ">{{ item.authorNickName }}</div>
               </div>
             </div>
             <div class="text-2xs flex items-center">
