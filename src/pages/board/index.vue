@@ -28,11 +28,11 @@
       @clickCancel="clickModalCancel"
     />
     <write-btn content="글쓰기" @clickWriteBtn="clickWriteBtn" />
-    <write-screen ref="writeScreen" @afterWrite="fetchBoardList" />
+    <write-screen ref="writeScreen" @afterWrite="afterEdit" />
     <detail-screen
       ref="detailScreen"
       :board-id="boardId"
-      @afterEdit="fetchBoardList"
+      @afterEdit="afterEdit"
     />
   </div>
 </template>
@@ -71,14 +71,20 @@ export default {
   },
   methods: {
     setKeyword (keyword) {
-      this.currentPage = 0;
       this.keyword = keyword;
       this.boardList = [];
+      this.currentPage = 0;
+      this.fetchBoardList();
+    },
+    afterEdit () {
+      this.keyword = '';
+      this.boardList = [];
+      this.currentPage = 0;
       this.fetchBoardList();
     },
     async fetchBoardList () {
       const res = (await this.$axios.get(`board/list?page=${this.currentPage}&search=${this.keyword}`)).data; // 무한 스크롤 구현하기
-      this.boardList.push(...res.content);
+      this.boardList = res.content;
     },
     clickWriteBtn () {
       if (!this.$auth.loggedIn) {
@@ -100,14 +106,18 @@ export default {
     onClickBack () {
       this.screenFlag = false;
     },
-    async scrolling ($state) {
+    scrolling ($state) {
       this.currentPage += 1;
-      const beforeLength = this.boardList.length;
 
-      await this.fetchBoardList();
-      const afterLength = this.boardList.length;
-
-      if (beforeLength === afterLength) { $state.complete(); } else { $state.loaded(); };
+      this.$axios.get(`board/list?page=${this.currentPage}&search=${this.keyword}`)
+        .then((r) => {
+          if (r.data.content.length !== 0) {
+            this.boardList.push(...r.data.content);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        });
     },
   },
 };
