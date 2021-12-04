@@ -24,22 +24,30 @@
   color: rgb(81, 134, 236);
 }
 
-.PFIZER:hover {
-  background-color: rgb(180, 110, 188);
-  color: white;
+.PFIZER {
+  // 보라색
+  background-color: rgb(180, 110, 188)!important;
+  color: white!important;
+  border-color: gray!important;
 }
 
-.MODERNA:hover {
-  background-color: rgb(237, 98, 56);
-  color: white;
+.MODERNA {
+  // 빨간색
+  background-color: rgb(237, 98, 56)!important;
+  color: white!important;
+  border-color: gray!important;
 }
 
-.AZ:hover {
-  background-color: rgb(98, 176, 182);
-  color: white;
+.AZ {
+  // 기본색
+  background-color: rgb(98, 176, 182)!important;
+  color: white!important;
+  border-color: gray!important;
 }
 
-.ANSEN:hover {
-  background-color: rgb(81, 134, 236);
-  color: white;
+.ANSEN {
+  //파란색
+  background-color: rgb(81, 134, 236)!important;
+  color: white!important;
+  border-color: gray!important;
 }

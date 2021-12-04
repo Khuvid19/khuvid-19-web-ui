@@ -9,7 +9,7 @@
                 v-for="(item,idx) in vaccineList" 
                 :key="idx"
                 class="mr-2 mb-1 btn btn-outline gray btn-sm"
-                :class="changeBtnColor()"
+                :class="changeBtnColor(item)"
                 @click="changeChart(item)">
                 {{ item }}
               </button>
@@ -109,21 +109,23 @@ export default {
         console.log(error);
       }
     },
-    changeBtnColor() {
-      if (this.current === 'PFIZER')
-        return 'PFIZER'
-      else if (this.current === 'MODERNA')
-        return 'MODERNA'
-      else if (this.current === 'AZ')
-        return 'AZ'
-      else if (this.current === 'ANSEN')
-        return 'ANSEN'
+    changeBtnColor(item) {
+      if (this.current === item) {
+        if (item.includes("화이자"))
+          return 'PFIZER'
+        else if (item.includes("모더나"))
+          return 'MODERNA'
+        else if (item.includes("아스트라제네카"))
+          return 'AZ'
+        else if (item.includes("얀센"))
+          return 'ANSEN'
+      }
     },
     changeChart(item) {
-      this.label = item;
+      this.label = item
+      this.current = item
       if (item.includes("화이자")) {
         // 보라색
-        this.current = 'PFIZER'
         if (item.includes("1차")) {
           this.vaccine = 'PFIZER_FIRST'
         } else {
@@ -134,7 +136,6 @@ export default {
       }
       else if (item.includes("모더나")) {
         // 빨간색
-        this.current = 'MODERNA'
         if (item.includes("1차")) {
           this.vaccine = 'MODERNA_FIRST'
         } else {
@@ -144,8 +145,7 @@ export default {
         this.backgroundColor = 'rgb(237, 98, 56)'
       }
       else if (item.includes("아스트라제네카")) {
-        // 흰색인데 기본색으로 표현
-        this.current = 'AZ'
+        // 기본색
         if (item.includes("1차")) {
           this.vaccine = 'AZ_FIRST'
         } else {
@@ -156,7 +156,6 @@ export default {
       }
       else if (item.includes("얀센")) {
         // 파란색
-        this.current = 'ANSEN'
         if (item.includes("부스터샷")) {
           this.vaccine = 'ANSEN_BOOST'
         } else {
