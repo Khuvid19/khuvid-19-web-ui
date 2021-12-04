@@ -4,7 +4,7 @@
     title="내가 쓴 글"
     @onClickBack="onClickBack"
   >
-    <div class="board-list overflow-y-scroll bg-gray-100">
+    <div class="my-post-list pt-2 overflow-y-scroll bg-gray-100">
       <list-item
         v-for="item in myBoardList"
         :key="item.id"
