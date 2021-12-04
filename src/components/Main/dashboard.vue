@@ -88,18 +88,18 @@ export default {
       this.first = json.response.body.items.item[2].firstCnt._text
       this.second = json.response.body.items.item[2].secondCnt._text
       this.third = json.response.body.items.item[2].thirdCnt._text
-      this.firstPercent = (this.first / 51667688 * 100).toFixed(1);
-      this.secondPercent = (this.second / 51667688 * 100).toFixed(1);
-      this.thirdPercent = (this.third / 51667688 * 100).toFixed(1);
-      this.first = internationalNumberFormat.format(this.first);
-      this.second = internationalNumberFormat.format(this.second);
-      this.third = internationalNumberFormat.format(this.third);
+      this.firstPercent = (this.first / 51667688 * 100).toFixed(1)
+      this.secondPercent = (this.second / 51667688 * 100).toFixed(1)
+      this.thirdPercent = (this.third / 51667688 * 100).toFixed(1)
+      this.first = internationalNumberFormat.format(this.first)
+      this.second = internationalNumberFormat.format(this.second)
+      this.third = internationalNumberFormat.format(this.third)
       this.todayFirst = json.response.body.items.item[0].firstCnt._text
       this.todaySecond = json.response.body.items.item[0].secondCnt._text
       this.todayThird = json.response.body.items.item[0].thirdCnt._text
-      this.todayFirst = internationalNumberFormat.format(this.todayFirst);
-      this.todaySecond = internationalNumberFormat.format(this.todaySecond);
-      this.todayThird = internationalNumberFormat.format(this.todayThird);
+      this.todayFirst = internationalNumberFormat.format(this.todayFirst)
+      this.todaySecond = internationalNumberFormat.format(this.todaySecond)
+      this.todayThird = internationalNumberFormat.format(this.todayThird)
     })
     const PATH_API2 = '/covid'
     axios.get(`/api/v2${PATH_API2}`).then(res => {

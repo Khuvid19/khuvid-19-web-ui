@@ -16,12 +16,12 @@
             </div>
           </div>
         </div>
-      <div class="divline -mt-2 mb-2"></div>
-      <bar-chart
-        class="-mt-8 mb-4" style="width: 95%; margin-left: 2.5%; height:400px;"
-        :data="chartData"
-        :options="chartOptions"
-      />
+        <div class="divline -mt-2 mb-2"></div>
+        <bar-chart
+          class="-mt-8 mb-4" style="width: 95%; margin-left: 2%"
+          :data="chartData"
+          :options="chartOptions"
+        />
       </div>
     </div>
   </client-only>
@@ -75,7 +75,7 @@ export default {
         scales: {
           x: {
             ticks: {
-              callback(value, index, values) {
+              callback(value) {
                 return value + '%'
               },
             },
