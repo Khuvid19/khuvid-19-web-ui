@@ -63,9 +63,6 @@ export default {
     this.initChart();
   },
   methods: {
-    makeRandomNum(min, max){
-      return Math.floor(Math.random() * (max - min) + min)
-    },
     async initChart(){
       this.initOptions()
       await this.getAPI()
@@ -75,6 +72,15 @@ export default {
       this.chartOptions = {
         ...defaultOptions,
         indexAxis: 'y',
+        scales: {
+          x: {
+            ticks: {
+              callback(value, index, values) {
+                return value + '%';
+              },
+            },
+          },
+        },
         plugins: {
           ...defaultPlugins,
         },
