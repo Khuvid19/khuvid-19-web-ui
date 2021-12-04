@@ -9,7 +9,7 @@
                 v-for="(item,idx) in vaccineList" 
                 :key="idx"
                 class="mr-2 mb-1 btn btn-outline gray btn-sm"
-                :class="changeBtnColor(item)"
+                :class="[changeBtnColor(item), hoverColor(idx)]"
                 @click="changeChart(item)">
                 {{ item }}
               </button>
@@ -29,7 +29,7 @@
 
 <script>
 import axios from 'axios'
-import {defaultPlugins, defaultOptions} from "@/plugins/chartJs/defaultOptions";
+import {defaultPlugins, defaultOptions} from "@/plugins/chartJs/defaultOptions"
 
 export default {
   name: 'Chart',
@@ -40,7 +40,7 @@ export default {
         datasets: [],
       },
       chartOptions: null,
-      current: '',
+      current: '화이자 1차',
       borderColor: 'rgb(180, 110, 188)',
       backgroundColor: 'rgb(180, 110, 188)',
       vaccineList: ['화이자 1차', '화이자 2차', '모더나 1차', '모더나 2차', '아스트라제네카 1차', '아스트라제네카 2차', '얀센', '얀센 부스터샷'],
@@ -60,7 +60,7 @@ export default {
         this.symptomList.push(data[i].value)
       }
     })
-    this.initChart();
+    this.initChart()
   },
   methods: {
     async initChart(){
@@ -76,7 +76,7 @@ export default {
           x: {
             ticks: {
               callback(value, index, values) {
-                return value + '%';
+                return value + '%'
               },
             },
           },
@@ -108,10 +108,21 @@ export default {
           }
         })
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
     },
-    changeBtnColor(item) {
+    hoverColor(idx) {
+      if (idx === 0 || idx === 1) {
+        return 'hoverPFIZER'
+      } else if (idx === 2 || idx === 3) {
+        return 'hoverMODERNA'
+      } else if (idx === 4|| idx === 5) {
+        return 'hoverAZ'
+      } else {
+        return 'hoverANSEN'
+      }
+    },
+    changeBtnColor(item, idx) {
       if (this.current === item) {
         if (item.includes("화이자"))
           return 'PFIZER'
@@ -165,8 +176,8 @@ export default {
         this.borderColor = 'rgb(81, 134, 236)'
         this.backgroundColor = 'rgb(81, 134, 236)'
       }
-      this.chartData.datasets.pop();
-      this.initData();
+      this.chartData.datasets.pop()
+      this.initData()
     },
   },
 }
