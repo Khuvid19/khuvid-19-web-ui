@@ -4,7 +4,7 @@
     title="내가 쓴 글"
     @onClickBack="onClickBack"
   >
-    <div class="board-list overflow-y-scroll">
+    <div class="my-post-list pt-2 overflow-y-scroll bg-gray-100">
       <list-item
         v-for="item in myBoardList"
         :key="item.id"
@@ -36,7 +36,7 @@ export default {
     ListItem,
     DetailScreen,
   },
-  data() {
+  data () {
     return {
       screenFlag: false,
       myBoardList: null,
@@ -45,21 +45,21 @@ export default {
   },
   watch: {
     screenFlag: {
-      handler(newVal) {
-        if (newVal) this.fetchBoardList()
+      handler (newVal) {
+        if (newVal) { this.fetchBoardList() }
       },
     },
   },
   methods: {
-    fetchBoardList() {
+    fetchBoardList () {
       this.$axios.get('board/user').then((r) => {
         this.myBoardList = r.data
       })
     },
-    onClickBack() {
+    onClickBack () {
       this.screenFlag = false
     },
-    clickBoardItem(boardId) {
+    clickBoardItem (boardId) {
       this.boardId = boardId
       this.$refs.detailScreen.screenFlag = true
     },

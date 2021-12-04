@@ -4,7 +4,8 @@
       v-model="keyword"
       class="w-full mr-2 outline-none"
       placeholder="검색어를 입력해주세요."
-    />
+      @keypress.enter="clickSearch"
+    >
     <fa-icon
       icon="search"
       class="bg-white"
@@ -16,17 +17,17 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       keyword: '',
-    }
+    };
   },
   methods: {
-    clickSearch() {
-      this.$emit('searchKeyword', this.keyword)
+    clickSearch () {
+      this.$emit('searchKeyword', this.keyword);
     },
   },
-}
+};
 </script>
 
 <style>

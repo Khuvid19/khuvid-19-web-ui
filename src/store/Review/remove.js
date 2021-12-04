@@ -1,17 +1,14 @@
-import axios from "axios";
 
 export const actions = {
-  remove(context, params) {
+  remove (context, params) {
     return new Promise((resolve, reject) => {
-      this.$axios.delete('/review', params, {
-        headers: {
-          // Authorization: `Baerer ${res.data.jwtToken}`,
-        },
-      }).then((data) => {
-        resolve(data);
+      this.$axios.delete('/review', {
+        params: { id: params },
       })
-        .catch((error) => reject(error));
+        .then((data) => {
+          resolve(data)
+        })
+        .catch(error => reject(error))
     })
-    // });
   },
-};
+}

@@ -1,6 +1,7 @@
 <template>
   <div>
-    <SearchComponent @searchKeyword="fetchBoardListKeyword" />
+    <SearchComponent @searchKeyword="setKeyword" />
+    <div class="h-px bg-gray-200 m-2" />
     <div class="board-list overflow-y-scroll">
       <ListItem
         v-for="item in boardList"
@@ -13,24 +14,36 @@
         @click="clickBoardItem(item.id)"
         @fetchBoardList="fetchBoardList"
       />
+      <infinite-loading v-if="boardList.length" @infinite="scrolling">
+        <div slot="no-results" />
+        <div slot="no-more" />
+      </infinite-loading>
     </div>
+    <middle-modal
+      :check-flag="middleModalFlag"
+      text="로그인 후 작성해주세요."
+      ok-text="로그인"
+      cancel-text="취소"
+      @clickOk="clickModalOk"
+      @clickCancel="clickModalCancel"
+    />
     <write-btn content="글쓰기" @clickWriteBtn="clickWriteBtn" />
-    <write-screen ref="writeScreen" @afterWrite="fetchBoardList" />
+    <write-screen ref="writeScreen" @afterWrite="afterEdit" />
     <detail-screen
       ref="detailScreen"
       :board-id="boardId"
-      @afterEdit="fetchBoardList"
+      @afterEdit="afterEdit"
     />
   </div>
 </template>
 
 <script>
-import DetailScreen from '@/components/Board/Screen/detailScreen/detailScreen'
-import SearchComponent from '@/components/Board/search'
-import ListItem from '@/components/Board/listItem'
-import WriteScreen from '@/components/Board/Screen/writeScreen/writeScreen'
-import WriteBtn from '@/components/_Common/writeBtn'
-
+import DetailScreen from '@/components/Board/Screen/detailScreen/detailScreen';
+import SearchComponent from '@/components/Board/search';
+import ListItem from '@/components/Board/listItem';
+import WriteScreen from '@/components/Board/Screen/writeScreen/writeScreen';
+import WriteBtn from '@/components/_Common/writeBtn';
+import MiddleModal from '@/components/_Common/middleModal';
 export default {
   components: {
     SearchComponent,
@@ -38,40 +51,74 @@ export default {
     WriteScreen,
     DetailScreen,
     WriteBtn,
+    MiddleModal,
   },
-  data() {
+  data () {
     return {
+      middleModalFlag: false,
+      currentPage: 0,
       screenType: null,
       screenFlag: false,
       screenTitle: '',
       screenOkText: '',
       boardList: [],
       boardId: null,
-    }
+      keyword: '',
+    };
   },
-  fetch() {
-    this.fetchBoardList()
+  fetch () {
+    this.fetchBoardList();
   },
   methods: {
-    async fetchBoardListKeyword(keyword) {
-      const res = (await this.$axios.get(`board/list?page=0&search=${keyword}`))
-        .data
-      this.boardList = res.content
+    setKeyword (keyword) {
+      this.keyword = keyword;
+      this.boardList = [];
+      this.currentPage = 0;
+      this.fetchBoardList();
     },
-    async fetchBoardList() {
-      const res = (await this.$axios.get('board?page=0')).data // 무한 스크롤 구현하기
-      this.boardList = res.content
+    afterEdit () {
+      this.keyword = '';
+      this.boardList = [];
+      this.currentPage = 0;
+      this.fetchBoardList();
     },
-    clickWriteBtn() {
-      this.$refs.writeScreen.screenFlag = true
+    async fetchBoardList () {
+      const res = (await this.$axios.get(`board/list?page=${this.currentPage}&search=${this.keyword}`)).data; // 무한 스크롤 구현하기
+      this.boardList = res.content;
     },
-    clickBoardItem(boardId) {
-      this.boardId = boardId
-      this.$refs.detailScreen.screenFlag = true
+    clickWriteBtn () {
+      if (!this.$auth.loggedIn) {
+        this.middleModalFlag = true;
+      } else {
+        this.$refs.writeScreen.screenFlag = true;
+      }
     },
-    onClickBack() {
-      this.screenFlag = false
+    clickModalCancel () {
+      this.middleModalFlag = false;
+    },
+    clickModalOk () {
+      this.$auth.loginWith('google', { params: { prompt: 'select_account' } });
+    },
+    clickBoardItem (boardId) {
+      this.boardId = boardId;
+      this.$refs.detailScreen.screenFlag = true;
+    },
+    onClickBack () {
+      this.screenFlag = false;
+    },
+    scrolling ($state) {
+      this.currentPage += 1;
+
+      this.$axios.get(`board/list?page=${this.currentPage}&search=${this.keyword}`)
+        .then((r) => {
+          if (r.data.content.length !== 0) {
+            this.boardList.push(...r.data.content);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        });
     },
   },
-}
+};
 </script>

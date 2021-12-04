@@ -5,8 +5,8 @@
         <div class="cards-body p-4 ml-2 mr-2 stats">
           <div class="tabs -ml-3">
             <div class="flex justify-between align-middle">
-              <button 
-                v-for="(item,idx) in vaccineList" 
+              <button
+                v-for="(item,idx) in vaccineList"
                 :key="idx"
                 class="mr-2 mb-1 btn btn-outline gray btn-sm"
                 :class="[changeBtnColor(item), hoverColor(idx)]"
@@ -33,7 +33,7 @@ import {defaultPlugins, defaultOptions} from "@/plugins/chartJs/defaultOptions"
 
 export default {
   name: 'Chart',
-  data() {
+  data () {
     return {
       chartData: {
         labels: [],
@@ -68,7 +68,7 @@ export default {
       await this.getAPI()
       this.initData()
     },
-    initOptions() {
+    initOptions () {
       this.chartOptions = {
         ...defaultOptions,
         indexAxis: 'y',
@@ -86,7 +86,7 @@ export default {
         },
       }
     },
-    async initData() {
+    async initData () {
       this.chartData.labels = this.symptomList
       await this.getAPI()
       this.chartData.datasets.push({
@@ -95,12 +95,12 @@ export default {
         data: Array.from( {length: 14}, (_, i) => (this.symptomCount[this.symptomCode[i]]/this.allCount) * 100),
       })
     },
-    async getAPI() {
+    async getAPI () {
       try {
         this.allCount = 0
         this.symptomCount = {}
         const SYMPTOMCOUNT = `review/sideEffects?vaccine=${this.vaccine}`
-        await axios.get(`/api/v2${SYMPTOMCOUNT}`).then(res => {
+        await axios.get(`/api/v2${SYMPTOMCOUNT}`).then((res) => {
           const data = res.data
           for (data.key in data) {
             this.symptomCount[data.key] = data[data.key]
@@ -144,9 +144,8 @@ export default {
           this.vaccine = 'PFIZER_SECOND'
         }
         this.borderColor = 'rgb(180, 110, 188)'
-        this.backgroundColor = 'rgb(180, 110, 188)' 
-      }
-      else if (item.includes("모더나")) {
+        this.backgroundColor = 'rgb(180, 110, 188)'
+      } else if (item.includes('모더나')) {
         // 빨간색
         if (item.includes("1차")) {
           this.vaccine = 'MODERNA_FIRST'
@@ -165,8 +164,7 @@ export default {
         }
         this.borderColor = 'rgb(98, 176, 182)'
         this.backgroundColor = 'rgb(98, 176, 182)'
-      }
-      else if (item.includes("얀센")) {
+      } else if (item.includes('얀센')) {
         // 파란색
         if (item.includes("부스터샷")) {
           this.vaccine = 'ANSEN_BOOST'

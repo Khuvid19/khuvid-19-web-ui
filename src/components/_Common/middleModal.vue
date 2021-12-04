@@ -16,7 +16,7 @@
           </button>
           <button
             class="btn btn-primary rounded-xl"
-            :class="cancelText?'w-1/2':'w-full'"
+            :class="cancelText ? 'w-1/2' : 'w-full'"
             @click="clickOk"
           >
             {{ okText }}
@@ -65,5 +65,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

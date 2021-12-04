@@ -1,4 +1,4 @@
-import { resolve } from 'path';
+import { resolve } from 'path'
 import * as FontAwesome from './src/plugins/icon/fontawesome'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -13,12 +13,8 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-    ],
-    script: [
-      { hid: 'stripe', src: 'https://js.stripe.com/v3/', defer: true },
-    ],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: [{ hid: 'stripe', src: 'https://js.stripe.com/v3/', defer: true }],
   },
   loading: false,
   srcDir: 'src/',
@@ -31,10 +27,11 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    `@/plugins/axios.js`,
+    '@/plugins/axios.js',
     { src: '@/plugins/chartJs/index', mode: 'client' },
     { src: '@/plugins/calendar/vCalendar.js', ssr: false },
-    { src: '@/plugins/mixins.js'},
+    { src: '@/plugins/mixins.js' },
+    { src: '@/plugins/infinite-loading.js', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -52,7 +49,8 @@ export default {
   auth: {
     strategies: {
       google: {
-        clientId: '442366876413-4a1q3lpghs2rc3pqeeg6fnqfp4cn1frk.apps.googleusercontent.com',
+        clientId:
+          '442366876413-4a1q3lpghs2rc3pqeeg6fnqfp4cn1frk.apps.googleusercontent.com',
         codeChallengeMethod: '',
         responseType: ['token', 'id_token'],
         // responseType: 'code',
@@ -115,9 +113,9 @@ export default {
     offline: false,
     runtimeCaching: [
       {
-        urlPattern: "/*",
-        handler: "networkFirst",
-        method: "GET",
+        urlPattern: '/*',
+        handler: 'networkFirst',
+        method: 'GET',
       },
     ],
   },
@@ -141,7 +139,13 @@ export default {
     baseUrl: 'http://125.130.125.108:20505/',
   },
   proxy: {
-    '/api/v1': { target: 'https://nip.kdca.go.kr', pathRewrite: { '^/api/v1': '' } },
-    '/api/v2': { target: 'http://125.130.125.108:20505', pathRewrite: { '^/api/v2': ''} },
+    '/api/v1': {
+      target: 'https://nip.kdca.go.kr',
+      pathRewrite: { '^/api/v1': '' },
+    },
+    '/api/v2': {
+      target: 'http://125.130.125.108:20505',
+      pathRewrite: { '^/api/v2': '' },
+    },
   },
 }

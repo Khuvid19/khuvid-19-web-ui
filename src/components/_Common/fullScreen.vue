@@ -10,7 +10,9 @@
           icon="arrow-left"
           @click="onClickBack"
         />
-        <div class="text-xl text-center">{{ title }}</div>
+        <div class="text-xl text-center">
+          {{ title }}
+        </div>
         <div
           v-if="menuList.length !== 0"
           class="dropdown dropdown-end text-right pr-5"
@@ -19,26 +21,36 @@
             tabindex="0"
             class="text-2xl cursor-pointer padding-5"
             :icon="['fas', 'ellipsis-v']"
+            @click="clickEllipsis"
           />
           <ul
+            v-if="renderMenu"
             tabindex="0"
-            class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52"
+            class="
+              p-2
+              shadow
+              menu
+              dropdown-content
+              bg-base-100
+              rounded-box
+              w-52
+            "
           >
             <li v-for="menu in menuList" :key="menu">
               <a @click="onClickMenu(menu)">{{ menu }}</a>
             </li>
           </ul>
         </div>
-        <!-- <div class="text-right mr-5 cursor-pointer" @click="onClickSideBtn">
+        <div v-if="sideBtnText" class="text-right mr-5 cursor-pointer" @click="onClickSideBtn">
           {{ sideBtnText }}
-        </div> -->
+        </div>
       </header>
       <main
         :class="`w-full overflow-y-scroll ${
           okText !== null ? 'content-area' : 'h-full'
         }`"
       >
-        <slot></slot>
+        <slot />
       </main>
       <footer
         v-if="okText !== null"
@@ -86,18 +98,27 @@ export default {
       default: () => [],
     },
   },
+  data () {
+    return {
+      renderMenu: false,
+    }
+  },
   methods: {
-    onClickBack() {
+    onClickBack () {
       this.$emit('onClickBack')
     },
-    onClickSideBtn() {
+    onClickSideBtn () {
       this.$emit('onClickSideBtn')
     },
-    onClickOk() {
+    onClickOk () {
       this.$emit('onClickOk')
     },
-    onClickMenu(menu) {
+    onClickMenu (menu) {
+      this.renderMenu = false
       this.$emit('onClickMenu', menu)
+    },
+    clickEllipsis () {
+      this.renderMenu = true
     },
   },
 }
@@ -110,7 +131,7 @@ export default {
 }
 
 .fade-enter,
-.fade-leave-to{
+.fade-leave-to {
   transform: translateX(100%);
 }
 </style>

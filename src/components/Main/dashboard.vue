@@ -81,7 +81,7 @@ export default {
   },
   created () {
     const PATH_API = '/irgd/cov19stats.do?list=all'
-    axios.get(`/api/v1${PATH_API}`).then(res => {
+    axios.get(`/api/v1${PATH_API}`).then((res) => {
       const internationalNumberFormat = new Intl.NumberFormat('en-US')
       const xml = res.data
       const json = JSON.parse(convert.xml2json(xml, { compact: true }))
@@ -102,7 +102,7 @@ export default {
       this.todayThird = internationalNumberFormat.format(this.todayThird)
     })
     const PATH_API2 = '/covid'
-    axios.get(`/api/v2${PATH_API2}`).then(res => {
+    axios.get(`/api/v2${PATH_API2}`).then((res) => {
       const internationalNumberFormat = new Intl.NumberFormat('en-US')
       const data = res.data
       this.todayAll = data[0].decideCnt
