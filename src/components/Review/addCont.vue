@@ -244,6 +244,11 @@ export default {
           .then(() => {
             this.clearData()
             this.$emit('afterAdd')
+          }).catch((e) => {
+            if (e.response.status === 410) {
+              this.modalText = '이미 등록된 백신 후기가 존재합니다.'
+              this.modalFlag = true
+            }
           })
       }
     },

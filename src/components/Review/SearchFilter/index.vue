@@ -1,11 +1,13 @@
 <template>
   <div class="w-screen">
     <div class="bg-white flex justify-between items-center m-2 p-2">
-      <input
-        v-model="detailDisc"
-        class="w-full outline-none"
-        placeholder="검색어를 입력해주세요."
-      >
+      <form @submit.prevent="clickSearch">
+        <input
+          v-model="detailDisc"
+          class="w-full outline-none"
+          placeholder="검색어를 입력해주세요."
+        >
+      </form>
       <fa-icon
         icon="search"
         class="bg-white"
