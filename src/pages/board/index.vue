@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SearchComponent @searchKeyword="fetchBoardListKeyword" />
+    <SearchComponent @searchKeyword="setKeyword" />
     <div class="h-px bg-gray-200 m-2" />
     <div class="board-list overflow-y-scroll">
       <ListItem
@@ -14,7 +14,10 @@
         @click="clickBoardItem(item.id)"
         @fetchBoardList="fetchBoardList"
       />
-      <infinite-loading v-if="boardList.length" @infinite="scrolling" />
+      <infinite-loading v-if="boardList.length" @infinite="scrolling">
+        <div slot="no-results" />
+        <div slot="no-more" />
+      </infinite-loading>
     </div>
     <middle-modal
       :check-flag="middleModalFlag"
@@ -25,22 +28,22 @@
       @clickCancel="clickModalCancel"
     />
     <write-btn content="글쓰기" @clickWriteBtn="clickWriteBtn" />
-    <write-screen ref="writeScreen" @afterWrite="fetchBoardList" />
+    <write-screen ref="writeScreen" @afterWrite="afterEdit" />
     <detail-screen
       ref="detailScreen"
       :board-id="boardId"
-      @afterEdit="fetchBoardList"
+      @afterEdit="afterEdit"
     />
   </div>
 </template>
 
 <script>
-import DetailScreen from '@/components/Board/Screen/detailScreen/detailScreen'
-import SearchComponent from '@/components/Board/search'
-import ListItem from '@/components/Board/listItem'
-import WriteScreen from '@/components/Board/Screen/writeScreen/writeScreen'
-import WriteBtn from '@/components/_Common/writeBtn'
-import MiddleModal from '@/components/_Common/middleModal'
+import DetailScreen from '@/components/Board/Screen/detailScreen/detailScreen';
+import SearchComponent from '@/components/Board/search';
+import ListItem from '@/components/Board/listItem';
+import WriteScreen from '@/components/Board/Screen/writeScreen/writeScreen';
+import WriteBtn from '@/components/_Common/writeBtn';
+import MiddleModal from '@/components/_Common/middleModal';
 export default {
   components: {
     SearchComponent,
@@ -60,47 +63,62 @@ export default {
       screenOkText: '',
       boardList: [],
       boardId: null,
-    }
+      keyword: '',
+    };
   },
   fetch () {
-    this.fetchBoardList()
+    this.fetchBoardList();
   },
   methods: {
-    async fetchBoardListKeyword (keyword) {
-      const res = (
-        await this.$axios.get(
-          `board/list?page=${this.currentPage}&search=${keyword}`,
-        )
-      ).data
-      this.boardList = res.content
+    setKeyword (keyword) {
+      this.keyword = keyword;
+      this.boardList = [];
+      this.currentPage = 0;
+      this.fetchBoardList();
+    },
+    afterEdit () {
+      this.keyword = '';
+      this.boardList = [];
+      this.currentPage = 0;
+      this.fetchBoardList();
     },
     async fetchBoardList () {
-      const res = (await this.$axios.get(`board?page=${this.currentPage}`)).data // 무한 스크롤 구현하기
-      this.boardList = res.content
+      const res = (await this.$axios.get(`board/list?page=${this.currentPage}&search=${this.keyword}`)).data; // 무한 스크롤 구현하기
+      this.boardList = res.content;
     },
     clickWriteBtn () {
       if (!this.$auth.loggedIn) {
-        this.middleModalFlag = true
+        this.middleModalFlag = true;
       } else {
-        this.$refs.writeScreen.screenFlag = true
+        this.$refs.writeScreen.screenFlag = true;
       }
     },
     clickModalCancel () {
-      this.middleModalFlag = false
+      this.middleModalFlag = false;
     },
     clickModalOk () {
-      this.$auth.loginWith('google', { params: { prompt: 'select_account' } })
+      this.$auth.loginWith('google', { params: { prompt: 'select_account' } });
     },
     clickBoardItem (boardId) {
-      this.boardId = boardId
-      this.$refs.detailScreen.screenFlag = true
+      this.boardId = boardId;
+      this.$refs.detailScreen.screenFlag = true;
     },
     onClickBack () {
-      this.screenFlag = false
+      this.screenFlag = false;
     },
-    scrolling () {
-      console.log('1234')
+    scrolling ($state) {
+      this.currentPage += 1;
+
+      this.$axios.get(`board/list?page=${this.currentPage}&search=${this.keyword}`)
+        .then((r) => {
+          if (r.data.content.length !== 0) {
+            this.boardList.push(...r.data.content);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        });
     },
   },
-}
+};
 </script>
