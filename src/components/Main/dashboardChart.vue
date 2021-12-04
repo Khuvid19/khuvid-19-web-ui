@@ -2,7 +2,7 @@
   <client-only>
     <div class="chart-header">
       <div class="card shadow bg-white">
-        <div class="casrd-body p-4 stats">
+        <div class="casrd-body p-4 -ml-1 mr-2 stats">
           <div class="tabs">
             <div class="flex justify-between align-middle">
               <button 
