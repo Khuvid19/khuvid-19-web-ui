@@ -2,7 +2,7 @@
   <client-only>
     <div class="chart-header">
       <div class="card shadow bg-white">
-        <div class="casrd-body p-4 -ml-1 mr-2 stats">
+        <div class="cards-body p-4 -ml-1 mr-2 stats">
           <div class="tabs">
             <div class="flex justify-between align-middle">
               <button 
@@ -16,6 +16,7 @@
             </div>
           </div>
         </div>
+      <div class="divline -mt-2 mb-2"></div>
       <bar-chart
         class="-mt-8 mb-4" style="width: 95%; margin-left: 2.5%; height:400px;"
         :data="chartData"

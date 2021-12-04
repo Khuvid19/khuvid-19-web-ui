@@ -4,6 +4,19 @@
   left: 2.5%;
 }
 
+.cards-body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.cards-body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+
+.divline {
+  border: 1px solid;
+  border-color: rgb(239, 239, 239);
+}
+
 .gray {
   color: rgb(147, 138, 153);
 }
