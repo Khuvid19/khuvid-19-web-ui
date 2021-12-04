@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SearchComponent @searchKeyword="fetchBoardListKeyword" />
+    <SearchComponent @searchKeyword="setKeyword" />
     <div class="h-px bg-gray-200 m-2" />
     <div class="board-list overflow-y-scroll">
       <ListItem
@@ -14,7 +14,9 @@
         @click="clickBoardItem(item.id)"
         @fetchBoardList="fetchBoardList"
       />
-      <infinite-loading v-if="boardList.length" @infinite="scrolling" />
+      <infinite-loading v-if="boardList.length" @infinite="scrolling">
+        <div slot="no-results" />
+      </infinite-loading>
     </div>
     <middle-modal
       :check-flag="middleModalFlag"
@@ -60,23 +62,22 @@ export default {
       screenOkText: '',
       boardList: [],
       boardId: null,
+      keyword: '',
     }
   },
   fetch () {
     this.fetchBoardList()
   },
   methods: {
-    async fetchBoardListKeyword (keyword) {
-      const res = (
-        await this.$axios.get(
-          `board/list?page=${this.currentPage}&search=${keyword}`,
-        )
-      ).data
-      this.boardList = res.content
+    setKeyword (keyword) {
+      this.currentPage = 0
+      this.keyword = keyword
+      this.boardList = []
+      this.fetchBoardList()
     },
     async fetchBoardList () {
-      const res = (await this.$axios.get(`board?page=${this.currentPage}`)).data // 무한 스크롤 구현하기
-      this.boardList = res.content
+      const res = (await this.$axios.get(`board/list?page=${this.currentPage}&search=${this.keyword}`)).data // 무한 스크롤 구현하기
+      this.boardList.push(...res.content)
     },
     clickWriteBtn () {
       if (!this.$auth.loggedIn) {
@@ -98,8 +99,13 @@ export default {
     onClickBack () {
       this.screenFlag = false
     },
-    scrolling () {
-      console.log('1234')
+    scrolling ($state) {
+      this.currentPage += 1
+      const beforeLength = this.boardList.length
+      this.fetchBoardList()
+      const afterLength = this.boardList.length
+
+      if (beforeLength === afterLength) { $state.complete() }
     },
   },
 }
