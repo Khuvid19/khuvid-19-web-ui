@@ -17,7 +17,8 @@
       <input
         v-model="commentValue"
         class="bg-transparent outline-none w-full"
-      />
+        @keyup.enter="clickSendBtn"
+      >
       <fa-icon
         :class="`text-xl ${
           isEmptyCommentValue ? 'text-gray-400' : 'text-primary'
@@ -37,32 +38,32 @@ export default {
       default: null,
     },
   },
-  data() {
+  data () {
     return {
       commentValue: '',
-    }
+    };
   },
   computed: {
-    isEmptyCommentValue() {
-      return this.commentValue.trim() === ''
+    isEmptyCommentValue () {
+      return this.commentValue.trim() === '';
     },
   },
   methods: {
-    clickSendBtn() {
+    clickSendBtn () {
       if (this.isEmptyCommentValue) {
-        return
+        return;
       }
       const params = {
         boardId: this.boardId,
         content: this.commentValue,
-      }
+      };
       this.$axios.post('board/comment', params).then(() => {
-        this.$emit('afterCommentWrite', this.boardId)
-        this.commentValue = ''
-      })
+        this.$emit('afterCommentWrite', this.boardId);
+        this.commentValue = '';
+      });
     },
   },
-}
+};
 </script>
 
 <style>

@@ -4,7 +4,7 @@
       v-model="keyword"
       class="w-full mr-2 outline-none"
       placeholder="검색어를 입력해주세요."
-      @keyup.enter="clickSearch"
+      @keypress.enter="clickSearch"
     >
     <fa-icon
       icon="search"
