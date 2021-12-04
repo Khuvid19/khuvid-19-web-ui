@@ -1,7 +1,7 @@
 <template>
   <div>
     <SearchComponent @searchKeyword="fetchBoardListKeyword" />
-    <div class="h-px bg-gray-200 m-2"></div>
+    <div class="h-px bg-gray-200 m-2" />
     <div class="board-list overflow-y-scroll">
       <ListItem
         v-for="item in boardList"
@@ -14,6 +14,7 @@
         @click="clickBoardItem(item.id)"
         @fetchBoardList="fetchBoardList"
       />
+      <infinite-loading v-if="boardList.length" @infinite="scrolling" />
     </div>
     <middle-modal
       :check-flag="middleModalFlag"
@@ -49,9 +50,10 @@ export default {
     WriteBtn,
     MiddleModal,
   },
-  data() {
+  data () {
     return {
       middleModalFlag: false,
+      currentPage: 0,
       screenType: null,
       screenFlag: false,
       screenTitle: '',
@@ -60,35 +62,44 @@ export default {
       boardId: null,
     }
   },
-  fetch() {
+  fetch () {
     this.fetchBoardList()
   },
   methods: {
-    async fetchBoardListKeyword(keyword) {
-      const res = (await this.$axios.get(`board/list?page=0&search=${keyword}`))
-        .data
+    async fetchBoardListKeyword (keyword) {
+      const res = (
+        await this.$axios.get(
+          `board/list?page=${this.currentPage}&search=${keyword}`,
+        )
+      ).data
       this.boardList = res.content
     },
-    async fetchBoardList() {
-      const res = (await this.$axios.get('board?page=0')).data // 무한 스크롤 구현하기
+    async fetchBoardList () {
+      const res = (await this.$axios.get(`board?page=${this.currentPage}`)).data // 무한 스크롤 구현하기
       this.boardList = res.content
     },
-    clickWriteBtn() {
-      if (!this.$auth.loggedIn) this.middleModalFlag = true
-      else this.$refs.writeScreen.screenFlag = true
+    clickWriteBtn () {
+      if (!this.$auth.loggedIn) {
+        this.middleModalFlag = true
+      } else {
+        this.$refs.writeScreen.screenFlag = true
+      }
     },
-    clickModalCancel() {
+    clickModalCancel () {
       this.middleModalFlag = false
     },
-    clickModalOk() {
+    clickModalOk () {
       this.$auth.loginWith('google', { params: { prompt: 'select_account' } })
     },
-    clickBoardItem(boardId) {
+    clickBoardItem (boardId) {
       this.boardId = boardId
       this.$refs.detailScreen.screenFlag = true
     },
-    onClickBack() {
+    onClickBack () {
       this.screenFlag = false
+    },
+    scrolling () {
+      console.log('1234')
     },
   },
 }
