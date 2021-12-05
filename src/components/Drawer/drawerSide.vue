@@ -40,12 +40,10 @@
       <li class="bottom-5 absolute">
         <a
           @click="clickLogout"
-        >
-          <fa-icon
-            class="text-2xl mr-6"
-            :icon="['fas', 'sign-out-alt']"
-          />
-          로그아웃</a>
+        ><fa-icon
+          class="text-2xl mr-6"
+          :icon="['fas', 'sign-out-alt']"
+        />로그아웃</a>
       </li>
     </ul>
     <sign-up ref="myInfoScreen" mode="myInfo" />
@@ -55,10 +53,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import SignUp from '../SignUp/signUp'
-import MyPostScreen from './myPostScreen'
-import MyReviewScreen from './myReviewScreen'
+import { mapGetters } from 'vuex';
+import SignUp from '../SignUp/signUp';
+import MyPostScreen from './myPostScreen';
+import MyReviewScreen from './myReviewScreen';
 
 export default {
   components: { MyReviewScreen, MyPostScreen, SignUp },
@@ -68,31 +66,30 @@ export default {
     }),
   },
   created () {
-    console.log('this.user', this.user)
+    console.log('this.user', this.user);
   },
   methods: {
     clickLogout () {
-      this.$auth.logout()
-      this.$router.go()
+      this.$auth.logout();
+      this.$router.go();
     },
     clickMenu (menu) {
       switch (menu) {
         case 'myInfo':
-          console.log('1234')
-          this.$refs.myInfoScreen.screenFlag = true
-          break
+          this.$refs.myInfoScreen.screenFlag = true;
+          break;
         case 'myReview':
-          this.$refs.myReviewScreen.screenFlag = true
-          break
+          this.$refs.myReviewScreen.screenFlag = true;
+          break;
         case 'myPost':
-          this.$refs.myPostScreen.screenFlag = true
-          break
+          this.$refs.myPostScreen.screenFlag = true;
+          break;
         default:
-          break
+          break;
       }
     },
   },
-}
+};
 </script>
 
 <style>
