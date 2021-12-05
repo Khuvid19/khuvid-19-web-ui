@@ -4,42 +4,71 @@
   left: 2.5%;
 }
 
+.cards-body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.cards-body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+
+.divline {
+  border: 1px solid;
+  border-color: rgb(239, 239, 239);
+}
+
 .gray {
   color: rgb(147, 138, 153);
 }
 
-.purple {
-  color: rgb(180, 110, 188);
+// 보라색, 화이자
+.PFIZER {
+  background-color: rgb(180, 110, 188)!important;
+  border-color: gray!important;
+  color: white!important;
 }
 
-.red {
-  color: rgb(237, 98, 56);
+.hoverPFIZER:hover {
+  background-color: rgb(180, 110, 188)!important;
+  border-color: gray!important;
+  color: white!important;
 }
 
-.basecolor {
-  color: rgb(98, 176, 182);
+// 빨간색, 모더나
+.MODERNA {
+  background-color: rgb(237, 98, 56)!important;
+  border-color: gray!important;
+  color: white!important;
 }
 
-.blue {
-  color: rgb(81, 134, 236);
+.hoverMODERNA:hover {
+  background-color: rgb(237, 98, 56)!important;
+  border-color: gray!important;
+  color: white!important;
 }
 
-.PFIZER:hover {
-  background-color: rgb(180, 110, 188);
-  color: white;
+// 기본색, 아스트라제네카
+.AZ {
+  background-color: rgb(98, 176, 182)!important;
+  border-color: gray!important;
+  color: white!important;
 }
 
-.MODERNA:hover {
-  background-color: rgb(237, 98, 56);
-  color: white;
+.hoverAZ:hover {
+  background-color: rgb(98, 176, 182)!important;
+  border-color: gray!important;
+  color: white!important;
 }
 
-.AZ:hover {
-  background-color: rgb(98, 176, 182);
-  color: white;
+//파란색, 얀센
+.ANSEN {
+  background-color: rgb(81, 134, 236)!important;
+  border-color: gray!important;
+  color: white!important;
 }
 
-.ANSEN:hover {
-  background-color: rgb(81, 134, 236);
-  color: white;
+.hoverANSEN:hover {
+  background-color: rgb(81, 134, 236)!important;
+  border-color: gray!important;
+  color: white!important;
 }

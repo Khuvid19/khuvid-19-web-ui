@@ -6,11 +6,17 @@
         class="text-4xl bg-white p-1 text-primary rounded"
       />
       <div class="ml-2">
-        <div class="text-sm">{{ nickname }}</div>
-        <div class="text-2xs text-gray-400">{{ mm_formatDate(date) }}</div>
+        <div class="text-sm">
+          {{ nickname }}
+        </div>
+        <div class="text-2xs text-gray-400">
+          {{ mm_formatDate(date) }}
+        </div>
       </div>
     </div>
-    <div class="font-bold text-lg mb-2">{{ title }}</div>
+    <div class="font-bold text-lg mb-2">
+      {{ title }}
+    </div>
     <div class="text-sm">
       {{ content }}
     </div>
@@ -39,6 +45,3 @@ export default {
   },
 }
 </script>
-
-<style>
-</style>

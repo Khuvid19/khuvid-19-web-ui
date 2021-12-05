@@ -2,27 +2,39 @@
   <div>
     <div>
       <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
-        <div class="text-lg mb-1 ml-1">백신 종류</div>
+        <div class="text-lg mb-1 ml-1">
+          백신 종류
+        </div>
         <div>
-          <div v-for="(value, key) in getVaccine" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
-               :style="{
-           backgroundColor:vaccine===value.code?'#65C3C8 !important':'white !important',
-           color:vaccine===value.code?'white !important':'#65C3C8 !important'
-         }"
-               @click="clickVaccine(value.code)"
+          <div
+            v-for="(value, key) in getVaccine"
+            :key="key"
+            class="m-1 btn btn-outline btn-primary btn-sm"
+            :style="{
+              backgroundColor:vaccine===value.code?'#65C3C8 !important':'white !important',
+              color:vaccine===value.code?'white !important':'#65C3C8 !important'
+            }"
+            @click="clickVaccine(value.code)"
           >
             <label>{{ value.value }}</label>
-            <input type="checkbox" class="toggle"
-                   style="display: none"
-                   :checked="vaccine===value.code"
+            <input
+              type="checkbox"
+              class="toggle"
+              style="display: none"
+              :checked="vaccine===value.code"
             >
           </div>
         </div>
       </div>
       <div class=" border rounded-box px-3 py-4 mx-4 my-2 bg-white">
-        <div class="text-lg mb-1 ml-1">접종 날짜</div>
+        <div class="text-lg mb-1 ml-1">
+          접종 날짜
+        </div>
         <div>
-          <v-date-picker v-model="inoculatedDate" :masks="masks" class="inline-block h-full"
+          <v-date-picker
+            v-model="inoculatedDate"
+            :masks="masks"
+            class="inline-block h-full"
           >
             <template #default="{ inputValue, togglePopover }">
               <div class="flex items-center">
@@ -31,29 +43,36 @@
                   class="text-center bg-white text-gray-700 w-full py-1 px-2 appearance-none border rounded-xl focus:outline-none focus:border-blue-500"
                   readonly
                   @click="togglePopover()"
-                />
+                >
               </div>
             </template>
           </v-date-picker>
         </div>
       </div>
       <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
-        <div class="text-lg mb-1 ml-1">기저질환</div>
+        <div class="text-lg mb-1 ml-1">
+          기저질환
+        </div>
         <div>
-          <div v-for="(value, key) in YNList" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
-               :style="{
-           backgroundColor:haveDisease===key?'#65C3C8 !important':'white !important',
-           color:haveDisease===key?'white !important':'#65C3C8 !important'
-         }"
-               @click="clickHaveDisease(key)"
+          <div
+            v-for="(value, key) in YNList"
+            :key="key"
+            class="m-1 btn btn-outline btn-primary btn-sm"
+            :style="{
+              backgroundColor:haveDisease===key?'#65C3C8 !important':'white !important',
+              color:haveDisease===key?'white !important':'#65C3C8 !important'
+            }"
+            @click="clickHaveDisease(key)"
           >
             <label>{{ value }}</label>
-            <input type="checkbox" class="toggle"
-                   style="display: none"
-                   :checked="haveDisease===key"
+            <input
+              type="checkbox"
+              class="toggle"
+              style="display: none"
+              :checked="haveDisease===key"
             >
           </div>
-          <div v-if="haveDisease==='true'" class="h-px bg-gray-200 m-1"></div>
+          <div v-if="haveDisease==='true'" class="h-px bg-gray-200 m-1" />
           <input
             v-if="haveDisease==='true'"
             v-model="diseaseDisc"
@@ -68,26 +87,33 @@
         w-full
         my-2
       "
-          />
+          >
         </div>
       </div>
       <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
-        <div class="text-lg mb-1 ml-1">이상반응</div>
+        <div class="text-lg mb-1 ml-1">
+          이상반응
+        </div>
         <div>
-          <div v-for="(value, key) in getSideEffects" :key="key" class="m-1 btn btn-outline btn-primary btn-sm"
-               :style="{
-           backgroundColor:sideEffects.includes(value.code)?'#65C3C8 !important':'white !important',
-           color:sideEffects.includes(value.code)?'white !important':'#65C3C8 !important'
-         }"
-               @click="clickSideEffects(value.code)"
+          <div
+            v-for="(value, key) in getSideEffects"
+            :key="key"
+            class="m-1 btn btn-outline btn-primary btn-sm"
+            :style="{
+              backgroundColor:sideEffects.includes(value.code)?'#65C3C8 !important':'white !important',
+              color:sideEffects.includes(value.code)?'white !important':'#65C3C8 !important'
+            }"
+            @click="clickSideEffects(value.code)"
           >
             <label>{{ value.value }}</label>
-            <input type="checkbox" class="toggle"
-                   style="display: none"
-                   :checked="sideEffects.includes(value.code)"
+            <input
+              type="checkbox"
+              class="toggle"
+              style="display: none"
+              :checked="sideEffects.includes(value.code)"
             >
           </div>
-          <div v-if="sideEffects.includes('OTHER')" class="h-px bg-gray-200 m-1"></div>
+          <div v-if="sideEffects.includes('OTHER')" class="h-px bg-gray-200 m-1" />
           <input
             v-if="sideEffects.includes('OTHER')"
             v-model="etcSideEffect"
@@ -102,7 +128,7 @@
         w-full
         my-2
       "
-          />
+          >
         </div>
       </div>
       <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
@@ -123,25 +149,27 @@
         </div>
       </div>
     </div>
-    <confirm-modal :check-flag="modalFlag"
-                   :text="modalText"
-                   ok-text="확인"
-                   @closeModal="closeModal"/>
+    <confirm-modal
+      :check-flag="modalFlag"
+      :text="modalText"
+      ok-text="확인"
+      @closeModal="closeModal"
+    />
   </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
-import ConfirmModal from "@/components/Review/confirmModal";
+import { mapActions, mapGetters } from 'vuex'
+import ConfirmModal from '@/components/Review/confirmModal'
 
 export default {
   components: {
     ConfirmModal,
   },
-  data() {
+  data () {
     return {
       modalFlag: false,
-      modalText:'',
+      modalText: '',
       date: new Date(),
       masks: {
         input: 'YYYY-MM-DD',
@@ -156,7 +184,7 @@ export default {
       detailDisc: '',
       diseaseDisc: '',
       inoculatedDate: new Date(),
-      etcSideEffect:null,
+      etcSideEffect: null,
     }
   },
   computed: {
@@ -169,53 +197,58 @@ export default {
     ...mapActions({
       add: 'Review/add/add',
     }),
-    closeModal() {
-      this.modalFlag = false;
+    closeModal () {
+      this.modalFlag = false
     },
-    clearData() {
-      this.sideEffects = [];
-      this.vaccine = '';
-      this.haveDisease = 'false';
-      this.detailDisc = '';
-      this.diseaseDisc = '';
-      this.inoculatedDate = new Date();
+    clearData () {
+      this.sideEffects = []
+      this.vaccine = ''
+      this.haveDisease = 'false'
+      this.detailDisc = ''
+      this.diseaseDisc = ''
+      this.inoculatedDate = new Date()
     },
-    clickSideEffects(key) {
+    clickSideEffects (key) {
       if (this.sideEffects.includes(key)) {
-        const idx = this.sideEffects.findIndex((r) => r === key);
-        this.sideEffects.splice(idx, 1);
+        const idx = this.sideEffects.findIndex(r => r === key)
+        this.sideEffects.splice(idx, 1)
       } else {
-        this.sideEffects.push(key);
+        this.sideEffects.push(key)
       }
     },
-    clickVaccine(key) {
-      this.vaccine = key;
+    clickVaccine (key) {
+      this.vaccine = key
     },
-    clickHaveDisease(key) {
-      this.haveDisease = key;
+    clickHaveDisease (key) {
+      this.haveDisease = key
     },
-    clickAdd() {
+    clickAdd () {
       const params = {
         detailDisc: this.detailDisc,
         diseaseDisc: this.diseaseDisc,
-        haveDisease: this.haveDisease==='true',
-        inoculatedDate: this.inoculatedDate.toISOString().slice(0,10),
+        haveDisease: this.haveDisease === 'true',
+        inoculatedDate: this.inoculatedDate.toISOString().slice(0, 10),
         sideEffects: this.sideEffects,
         etcSideEffect: this.etcSideEffect,
         vaccine: this.vaccine,
-      };
-      if(this.haveDisease==='false')params.diseaseDisc='';
+      }
+      if (this.haveDisease === 'false') { params.diseaseDisc = '' }
       if (this.vaccine === '') {
-        this.modalText = '백신종류는 필수 입력 항목입니다.';
-        this.modalFlag = true;
-      }else if (this.haveDisease === 'true'&&this.diseaseDisc==='') {
-        this.modalText = '기저질환을 입력해주세요.';
-        this.modalFlag = true;
+        this.modalText = '백신종류는 필수 입력 항목입니다.'
+        this.modalFlag = true
+      } else if (this.haveDisease === 'true' && this.diseaseDisc === '') {
+        this.modalText = '기저질환을 입력해주세요.'
+        this.modalFlag = true
       } else {
         this.add(params)
           .then(() => {
-            this.clearData();
-            this.$emit('afterAdd');
+            this.clearData()
+            this.$emit('afterAdd')
+          }).catch((e) => {
+            if (e.response.status === 410) {
+              this.modalText = '이미 등록된 백신 후기가 존재합니다.'
+              this.modalFlag = true
+            }
           })
       }
     },

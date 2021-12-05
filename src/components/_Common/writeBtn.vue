@@ -32,7 +32,7 @@ export default {
     },
   },
   methods: {
-    clickWriteBtn() {
+    clickWriteBtn () {
       this.$emit('clickWriteBtn')
     },
   },

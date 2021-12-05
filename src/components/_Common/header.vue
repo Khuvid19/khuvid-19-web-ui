@@ -16,7 +16,9 @@
         w-full
       "
     >
-      <div class="self-center text-4xl font-bold text-primary">KHUVID</div>
+      <div class="self-center text-4xl font-bold text-primary">
+        KHUVID
+      </div>
       <div
         v-if="$auth.loggedIn === false"
         class="btn btn-xs btn-primary self-center"
@@ -29,7 +31,7 @@
           <img
             class="self-center"
             :src="$auth.$state.user ? $auth.$state.user.picture : ''"
-          />
+          >
         </div>
       </label>
     </div>
@@ -39,7 +41,7 @@
 <script>
 export default {
   methods: {
-    clickLogin() {
+    clickLogin () {
       if (this.$auth.loggedIn) {
         this.$auth.logout()
         return

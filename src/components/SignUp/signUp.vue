@@ -9,7 +9,7 @@
     <div class="p-8">
       <div class="avatar flex justify-center">
         <div class="mb-12 rounded-full w-20 h-20">
-          <img :src="profileImgSrl" />
+          <img :src="profileImgSrl">
         </div>
       </div>
       <div class="text-xl flex items-center justify-between mb-12">
@@ -17,7 +17,7 @@
           v-model="email"
           :disabled="true"
           class="input input-disabled w-64"
-        />
+        >
       </div>
       <div class="text-xl flex items-center justify-between mb-12">
         성별
@@ -30,7 +30,7 @@
             type="radio"
             :data-title="gender.value"
             class="btn bg-white w-32 text-gray-400 border-gray-400"
-          />
+          >
         </div>
       </div>
       <div class="text-xl flex items-center justify-between mb-12">
@@ -43,7 +43,7 @@
                 ageListIdx === 0 ? ageList.length - 1 : ageListIdx - 1
             "
           >
-            <fa-icon :icon="['fas', 'caret-left']"></fa-icon>
+            <fa-icon :icon="['fas', 'caret-left']" />
           </button>
           <div
             style="border-width: 1px"
@@ -71,7 +71,7 @@
             class="btn text-xl btn-primary"
             @click="ageListIdx = (ageListIdx + 1) % ageList.length"
           >
-            <fa-icon :icon="['fas', 'caret-right']"></fa-icon>
+            <fa-icon :icon="['fas', 'caret-right']" />
           </button>
         </div>
       </div>
@@ -82,16 +82,15 @@
             v-model="nickname"
             class="input border-gray-400 bg-white w-40"
             @input="nicknameInputChange($event)"
-          />
+          >
           <label
             class="btn btn-primary modal-button"
             :disabled="
               isEmptyNickname ||
-              (mode === 'myInfo' && getUser.nickName === nickname)
+                (mode === 'myInfo' && getUser.nickName === nickname)
             "
             @click="checkNicknameDuplicate"
-            >중복 확인</label
-          >
+          >중복 확인</label>
         </div>
       </div>
     </div>
@@ -121,7 +120,7 @@ export default {
       type: String,
     },
   },
-  data() {
+  data () {
     return {
       genderValue: '',
       screenFlag: false,
@@ -143,13 +142,13 @@ export default {
       getAgeList: 'User/getAgeType/getListContents',
       getGenderList: 'User/getGenderType/getListContents',
     }),
-    ageValue() {
+    ageValue () {
       return this.ageList[this.ageListIdx].value
     },
   },
   watch: {
     screenFlag: {
-      handler(newVal) {
+      handler (newVal) {
         if (newVal) {
           this.ageList = this.getAgeList
           this.genderList = this.getGenderList
@@ -179,15 +178,14 @@ export default {
     ...mapActions({
       setUser: 'setUser',
     }),
-    nicknameInputChange(event) {
+    nicknameInputChange (event) {
       const nickname = event.target.value.trim()
 
-      if (nickname === '') this.isEmptyNickname = true
-      else this.isEmptyNickname = false
+      if (nickname === '') { this.isEmptyNickname = true } else { this.isEmptyNickname = false }
 
       this.passDuplicate = false
     },
-    checkNicknameDuplicate() {
+    checkNicknameDuplicate () {
       const regExp = /^[a-zA-Zㄱ-힣0-9]*$/ // 닉네임 정규식
       const lengthRegExp = /^.{2,8}$/ // 닉네임 정규식
 
@@ -223,11 +221,11 @@ export default {
           this.$refs[this.modalId].openModal()
         })
     },
-    onClickSignupBack() {
-      if (this.mode === 'signUp') this.$auth.logout()
+    onClickSignupBack () {
+      if (this.mode === 'signUp') { this.$auth.logout() }
       this.screenFlag = false
     },
-    onClickSignupSubmit() {
+    onClickSignupSubmit () {
       if (
         this.mode === 'signUp'
           ? this.passDuplicate
