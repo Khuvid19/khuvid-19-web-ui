@@ -37,7 +37,7 @@
           내가 쓴 글
         </a>
       </li>
-      <li class="bottom-5 absolute">
+      <li class="bottom-5 absolute w-80 pr-8">
         <a
           @click="clickLogout"
         ><fa-icon
