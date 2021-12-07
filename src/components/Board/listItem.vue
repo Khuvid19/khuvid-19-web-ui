@@ -1,19 +1,19 @@
 <template>
   <div class="card shadow mx-2 mb-2 bg-white" @click="$emit('click')">
     <div class="card-body p-4">
-      <div class="flex justify-between align-top mb-2">
-        <div class="text-sm font-bold truncate">
+      <div class="flex justify-between items-center mb-2">
+        <div class="text-lg font-bold truncate">
           {{ title }}
         </div>
-        <div class="text-2xs text-right w-32">
+        <div class="text-2xs text-right min-w-max">
           {{ mm_formatDate(date) }}
         </div>
       </div>
-      <p class="text-sm mb-2">
-        {{ ellipsisContent }}
+      <p class="text mb-2 truncate">
+        {{ content }}
       </p>
-      <div class="flex justify-between">
-        <div class="text-2xs">
+      <div class="flex justify-between items-center">
+        <div class="text-2xs ">
           {{ nickname }}
         </div>
         <div class="text-2xs">
@@ -47,12 +47,6 @@ export default {
     commentCnt: {
       type: Number,
       default: 0,
-    },
-  },
-  computed: {
-    ellipsisContent () {
-      const textLimit = 100;
-      if (this.content.length > textLimit) { return this.content.substring(0, textLimit) + '...'; } else { return this.content; };
     },
   },
   methods: {},
