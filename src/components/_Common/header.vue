@@ -21,7 +21,7 @@
       </div>
       <div
         v-if="$auth.loggedIn === false"
-        class="btn btn-xs btn-primary self-center"
+        class="btn btn-sm text-xs btn-primary self-center"
         @click="clickLogin"
       >
         LogIn
@@ -43,13 +43,13 @@ export default {
   methods: {
     clickLogin () {
       if (this.$auth.loggedIn) {
-        this.$auth.logout()
-        return
+        this.$auth.logout();
+        return;
       }
-      this.$auth.loginWith('google', { params: { prompt: 'select_account' } })
+      this.$auth.loginWith('google', { params: { prompt: 'select_account' } });
     },
   },
-}
+};
 </script>
 
 <style>
