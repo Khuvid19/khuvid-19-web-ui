@@ -94,25 +94,25 @@
         </div>
       </div>
     </div>
-    <modal
-      :ref="modalId"
-      :content="msgModal"
-      :modal-id="modalId"
-      :hidden-cancel-btn="true"
+    <middle-modal
+      :check-flag="middleModalFlag"
+      :text="msgModal"
+      ok-text="확인"
+      @clickOk="clickModalOk"
     />
   </FullScreen>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import Modal from '../_Common/modal'
-import FullScreen from '@/components/_Common/fullScreen'
+import { mapActions, mapGetters } from 'vuex';
+import FullScreen from '@/components/_Common/fullScreen';
+import MiddleModal from '@/components/_Common/middleModal';
 
 export default {
   name: 'SignUp',
   components: {
     FullScreen,
-    Modal,
+    MiddleModal,
   },
   props: {
     mode: {
@@ -122,6 +122,7 @@ export default {
   },
   data () {
     return {
+      middleModalFlag: false,
       genderValue: '',
       screenFlag: false,
       ageList: ['123'], // 임시방편
@@ -134,7 +135,7 @@ export default {
       profileImgSrl: '',
       nickname: '',
       modalId: null,
-    }
+    };
   },
   computed: {
     ...mapGetters({
@@ -143,30 +144,30 @@ export default {
       getGenderList: 'User/getGenderType/getListContents',
     }),
     ageValue () {
-      return this.ageList[this.ageListIdx].value
+      return this.ageList[this.ageListIdx].value;
     },
   },
   watch: {
     screenFlag: {
       handler (newVal) {
         if (newVal) {
-          this.ageList = this.getAgeList
-          this.genderList = this.getGenderList
-          this.email = this.$auth.$state.user.email
-          this.profileImgSrl = this.$auth.$state.user.picture
+          this.ageList = this.getAgeList;
+          this.genderList = this.getGenderList;
+          this.email = this.$auth.$state.user.email;
+          this.profileImgSrl = this.$auth.$state.user.picture;
 
           if (this.mode === 'signUp') {
-            this.modalId = 'signUpModal'
-            this.ageListIdx = 0
-            this.genderValue = this.genderList[0].code
+            this.modalId = 'signUpModal';
+            this.ageListIdx = 0;
+            this.genderValue = this.genderList[0].code;
           } else if (this.mode === 'myInfo') {
-            this.modalId = 'myInfoModal'
-            this.nickname = this.getUser?.nickName
-            this.genderValue = this.getUser.gender
+            this.modalId = 'myInfoModal';
+            this.nickname = this.getUser?.nickName;
+            this.genderValue = this.getUser.gender;
 
             for (let i = 0; i < this.ageList.length; i++) {
               if (this.ageList[i].code === this.getUser.age) {
-                this.ageListIdx = i
+                this.ageListIdx = i;
               }
             }
           }
@@ -179,29 +180,29 @@ export default {
       setUser: 'setUser',
     }),
     nicknameInputChange (event) {
-      const nickname = event.target.value.trim()
+      const nickname = event.target.value.trim();
 
-      if (nickname === '') { this.isEmptyNickname = true } else { this.isEmptyNickname = false }
+      if (nickname === '') { this.isEmptyNickname = true; } else { this.isEmptyNickname = false; }
 
-      this.passDuplicate = false
+      this.passDuplicate = false;
     },
     checkNicknameDuplicate () {
-      const regExp = /^[a-zA-Zㄱ-힣0-9]*$/ // 닉네임 정규식
-      const lengthRegExp = /^.{2,8}$/ // 닉네임 정규식
+      const regExp = /^[a-zA-Zㄱ-힣0-9]*$/; // 닉네임 정규식
+      const lengthRegExp = /^.{2,8}$/; // 닉네임 정규식
 
       if (!regExp.test(this.nickname)) {
         this.msgModal =
-          '닉네임은 한글, 영문, 숫자만 가능하며 공백 및 특수문자는 불가능합니다.'
-        this.passDuplicate = false
+          '닉네임은 한글, 영문, 숫자만 가능하며 공백 및 특수문자는 불가능합니다.';
+        this.passDuplicate = false;
 
-        this.$refs[this.modalId].openModal()
-        return
+        this.middleModalFlag = true;
+        return;
       } else if (!lengthRegExp.test(this.nickname)) {
-        this.msgModal = '닉네임은 2-8자리만 가능합니다.'
-        this.passDuplicate = false
+        this.msgModal = '닉네임은 2-8자리만 가능합니다.';
+        this.passDuplicate = false;
 
-        this.$refs[this.modalId].openModal()
-        return
+        this.middleModalFlag = true;
+        return;
       }
 
       this.$axios
@@ -212,18 +213,18 @@ export default {
         })
         .then((res) => {
           if (res.data) {
-            this.msgModal = '이미 존재하는 닉네임입니다.'
-            this.passDuplicate = false
+            this.msgModal = '이미 존재하는 닉네임입니다.';
+            this.passDuplicate = false;
           } else {
-            this.msgModal = '사용 가능한 닉네임입니다.'
-            this.passDuplicate = true
+            this.msgModal = '사용 가능한 닉네임입니다.';
+            this.passDuplicate = true;
           }
-          this.$refs[this.modalId].openModal()
-        })
+          this.middleModalFlag = true;
+        });
     },
     onClickSignupBack () {
-      if (this.mode === 'signUp') { this.$auth.logout() }
-      this.screenFlag = false
+      if (this.mode === 'signUp') { this.$auth.logout(); }
+      this.screenFlag = false;
     },
     onClickSignupSubmit () {
       if (
@@ -239,42 +240,45 @@ export default {
             name: this.$auth.$state.user.name,
             nickName: this.nickname,
             picUrl: this.profileImgSrl,
-          }
+          };
           this.$axios
             .post('auth/user', {
               ...params,
             })
             .then((r) => {
-              this.setUser(r.data)
+              this.setUser(r.data);
             })
             .finally(() => {
-              this.screenFlag = false
-            })
+              this.screenFlag = false;
+            });
         } else if (this.mode === 'myInfo') {
           const params = {
             age: this.ageList[this.ageListIdx].code,
             gender: this.genderValue,
             nickName: this.nickname,
-          }
+          };
 
           this.$axios
             .put('auth', {
               ...params,
             })
             .then((r) => {
-              this.setUser(r.data)
+              this.setUser(r.data);
             })
             .finally(() => {
-              this.screenFlag = false
-            })
+              this.screenFlag = false;
+            });
         }
       } else {
-        this.msgModal = '닉네임 중복확인을 해주세요.'
-        this.$refs[this.modalId].openModal()
+        this.msgModal = '닉네임 중복확인을 해주세요.';
+        this.middleModalFlag = true;
       }
     },
+    clickModalOk () {
+      this.middleModalFlag = false;
+    },
   },
-}
+};
 </script>
 
 <style>

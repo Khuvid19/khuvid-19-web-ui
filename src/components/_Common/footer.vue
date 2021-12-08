@@ -44,29 +44,29 @@ export default {
   data () {
     return {
       current: null,
-    }
+    };
   },
   watch: {
     $route: {
       immediate: true,
       handler (newVal) {
-        this.current = newVal.name
+        this.current = newVal.name;
       },
     },
   },
   methods: {
     clickIcon (value) {
       if (this.current !== value) {
-        this.current = value
-        this.$router.push(`/${value}`)
+        this.current = value;
+        this.$router.push(`/${value}`);
       }
     },
     footerIconStyle (value) {
-      if (this.current === value) { return 'flex flex-col align-middle bg-primary rounded-lg p-2 w-4/6 text-white' }
-      return 'flex flex-col align-middle rounded-lg p-2'
+      if (this.current === value) { return 'flex flex-col align-middle bg-primary rounded-lg p-2 w-4/6 text-white'; }
+      return 'flex flex-col align-middle rounded-lg p-2';
     },
   },
-}
+};
 </script>
 
 <style>

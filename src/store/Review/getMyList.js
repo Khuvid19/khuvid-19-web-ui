@@ -1,11 +1,10 @@
 export const state = () => ({
-  pageContents: null,
-
-})
+  pageContents: [],
+});
 
 export const getters = {
   getPageContents: state => state.pageContents,
-}
+};
 
 export const actions = {
   fetchPageContents (context) {
@@ -15,19 +14,19 @@ export const actions = {
         method: 'get',
       })
         .then((r) => {
-          context.commit('SET_PAGE_CONTENTS', r.data)
-          resolve(r)
+          context.commit('SET_PAGE_CONTENTS', r.data);
+          resolve(r);
         })
-        .catch(error => reject(error))
-    })
+        .catch(error => reject(error));
+    });
   },
-}
+};
 
 export const mutations = {
   SET_PAGE_CONTENTS: (state, result) => {
-    state.pageContents = result
+    state.pageContents = result;
   },
   DEL_PAGE_CONTENTS: (state) => {
-    state.pageContents = null
+    state.pageContents = [];
   },
-}
+};

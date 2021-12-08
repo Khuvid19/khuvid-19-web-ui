@@ -9,6 +9,7 @@
     <div class="pl-4 pr-4 pt-4 h-fll">
       <input
         v-model="title"
+        :maxlength="100"
         placeholder="제목을 입력해주세요."
         class="
           rounded-lg
@@ -23,6 +24,7 @@
       >
       <textarea
         v-model="content"
+        :maxlength="5000"
         placeholder="내용을 입력해주세요."
         class="
           border-2
@@ -47,8 +49,8 @@
 </template>
 
 <script>
-import fullScreen from '@/components/_Common/fullScreen'
-import MiddleModal from '@/components/_Common/middleModal'
+import fullScreen from '@/components/_Common/fullScreen';
+import MiddleModal from '@/components/_Common/middleModal';
 export default {
   name: 'BoardWriteScreen',
   components: { fullScreen, MiddleModal },
@@ -77,59 +79,59 @@ export default {
       title: '',
       content: '',
       modalMsg: '',
-    }
+    };
   },
   watch: {
     screenFlag: {
       immediate: true,
       handler (newVal) {
         if (newVal && this.mode === 'edit') {
-          this.title = this.editTitle
-          this.content = this.editContent
+          this.title = this.editTitle;
+          this.content = this.editContent;
         }
       },
     },
   },
   methods: {
     onClickBack () {
-      this.title = ''
-      this.content = ''
-      this.screenFlag = false
+      this.title = '';
+      this.content = '';
+      this.screenFlag = false;
     },
     clickModalOk () {
-      this.middleModalFlag = false
+      this.middleModalFlag = false;
     },
     onClickOk () {
       if (this.title === '') {
-        this.modalMsg = '제목을 입력하세요.'
-        this.middleModalFlag = true
-        return
+        this.modalMsg = '제목을 입력하세요.';
+        this.middleModalFlag = true;
+        return;
       } else if (this.content === '') {
-        this.modalMsg = '내용을 입력하세요.'
-        this.middleModalFlag = true
-        return
+        this.modalMsg = '내용을 입력하세요.';
+        this.middleModalFlag = true;
+        return;
       }
 
       const params = {
         title: this.title,
         content: this.content,
-      }
+      };
 
       if (this.mode === 'add') {
         this.$axios.post('board', params).then(() => {
-          this.$emit('afterWrite')
-          this.onClickBack()
-        })
+          this.$emit('afterWrite');
+          this.onClickBack();
+        });
       } else if (this.mode === 'edit') {
-        params.boardId = this.boardId
+        params.boardId = this.boardId;
         this.$axios.put('board', params).then(() => {
-          this.$emit('afterEdit')
-          this.onClickBack()
-        })
+          this.$emit('afterEdit');
+          this.onClickBack();
+        });
       }
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">

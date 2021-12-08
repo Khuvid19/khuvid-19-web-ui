@@ -16,12 +16,15 @@
         w-full
       "
     >
-      <div class="self-center text-4xl font-bold text-primary">
+      <div
+        class="self-center text-4xl font-bold text-primary"
+        @click="clickLogo"
+      >
         KHUVID
       </div>
       <div
         v-if="$auth.loggedIn === false"
-        class="btn btn-xs btn-primary self-center"
+        class="btn btn-sm text-xs btn-primary self-center"
         @click="clickLogin"
       >
         LogIn
@@ -41,15 +44,18 @@
 <script>
 export default {
   methods: {
+    clickLogo () {
+      this.$router.push('/main');
+    },
     clickLogin () {
       if (this.$auth.loggedIn) {
-        this.$auth.logout()
-        return
+        this.$auth.logout();
+        return;
       }
-      this.$auth.loginWith('google', { params: { prompt: 'select_account' } })
+      this.$auth.loginWith('google', { params: { prompt: 'select_account' } });
     },
   },
-}
+};
 </script>
 
 <style>

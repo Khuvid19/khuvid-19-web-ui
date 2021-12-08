@@ -5,7 +5,7 @@
       :filter-tag-list="filterTagList"
       @clickFilter="moveToScreen('filter')"
     />
-    <div class="h-px bg-gray-200" />
+    <div class="h-px bg-gray-200 mx-2" />
     <list-item @clickDetail="clickDetail" />
 
     <full-screen
@@ -56,16 +56,16 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import SearchFilter from '@/components/Review/SearchFilter/index'
-import ListItem from '@/components/Review/listItem'
-import DetailCont from '@/components/Review/detailCont'
-import AddCont from '@/components/Review/addCont'
-import ModifyCont from '@/components/Review/modifyCont'
-import FilterCont from '@/components/Review/filterCont'
-import FullScreen from '@/components/_Common/fullScreen'
-import ConfirmModal from '@/components/Review/confirmModal'
-import WriteBtn from '@/components/_Common/writeBtn'
+import { mapActions, mapGetters } from 'vuex';
+import SearchFilter from '@/components/Review/SearchFilter/index';
+import ListItem from '@/components/Review/listItem';
+import DetailCont from '@/components/Review/detailCont';
+import AddCont from '@/components/Review/addCont';
+import ModifyCont from '@/components/Review/modifyCont';
+import FilterCont from '@/components/Review/filterCont';
+import FullScreen from '@/components/_Common/fullScreen';
+import ConfirmModal from '@/components/Review/confirmModal';
+import WriteBtn from '@/components/_Common/writeBtn';
 
 export default {
   name: 'Review',
@@ -94,7 +94,7 @@ export default {
       detailContent: null,
       filterTagList: [],
       myReview: false,
-    }
+    };
   },
   computed: {
     ...mapGetters({
@@ -106,8 +106,8 @@ export default {
     }),
   },
   created () {
-    this.clearPageParams()
-    this.fetchPageContents({})
+    this.clearPageParams();
+    this.fetchPageContents({});
   },
   methods: {
     ...mapActions({
@@ -119,134 +119,134 @@ export default {
       if (this.okText === '삭제') {
         this.remove(this.detailContent.id)
           .then(() => {
-            this.screenFlag = false
-            this.fetchPageContents(this.getPageParams)
-          })
+            this.screenFlag = false;
+            this.fetchPageContents(this.getPageParams);
+          });
       } else if (this.okText === '로그인') {
-        this.$auth.loginWith('google', { params: { prompt: 'select_account' } })
+        this.$auth.loginWith('google', { params: { prompt: 'select_account' } });
       } else {
-        this.screenFlag = false
+        this.screenFlag = false;
       }
     },
     clickCancel () {
-      this.modalFlag = false
+      this.modalFlag = false;
     },
     onClickMenu (type) {
       if (type === '수정') {
-        this.moveToScreen('modify')
+        this.moveToScreen('modify');
       } else if (type === '삭제') {
-        this.clickRemove()
+        this.clickRemove();
       }
     },
     closeModal () {
-      this.modalFlag = false
+      this.modalFlag = false;
     },
     clickDetail (item) {
-      this.detailContent = item
-      this.moveToScreen('detail')
+      this.detailContent = item;
+      this.moveToScreen('detail');
     },
     onClickSideBtn () {
-      this.$refs.filterCont.clearData()
+      this.$refs.filterCont.clearData();
     },
     moveToScreen (type) {
-      this.screenType = type
+      this.screenType = type;
       switch (type) {
         case 'add':
-          this.myReview = false
+          this.myReview = false;
           if (this.$store.getters.getUser === null) {
-            this.modalText = '로그인 후 작성해주세요.'
-            this.okText = '로그인'
-            this.cancelText = '닫기'
-            this.modalFlag = true
-            return
+            this.modalText = '로그인 후 작성해주세요.';
+            this.okText = '로그인';
+            this.cancelText = '닫기';
+            this.modalFlag = true;
+            return;
           }
-          this.screenTitle = '접종후기'
-          this.screenOkText = '완료'
-          this.screenSideBtnText = ''
-          break
+          this.screenTitle = '접종후기';
+          this.screenOkText = '완료';
+          this.screenSideBtnText = '';
+          break;
         case 'modify':
-          this.myReview = false
-          this.screenTitle = '접종후기'
-          this.screenOkText = '완료'
-          this.screenSideBtnText = ''
-          break
+          this.myReview = false;
+          this.screenTitle = '접종후기';
+          this.screenOkText = '완료';
+          this.screenSideBtnText = '';
+          break;
         case 'detail':
           if (this.$store.getters.getUser === null) {
-            this.myReview = false
+            this.myReview = false;
           } else {
-            this.myReview = this.$store.getters.getUser.id === this.detailContent.authorId
+            this.myReview = this.$store.getters.getUser.id === this.detailContent.authorId;
           }
-          this.screenTitle = '접종후기'
-          this.screenOkText = null
-          this.screenSideBtnText = ''
-          break
+          this.screenTitle = '접종후기';
+          this.screenOkText = null;
+          this.screenSideBtnText = '';
+          break;
         case 'filter':
-          this.myReview = false
-          this.screenTitle = '필터설정'
-          this.screenOkText = '완료'
-          this.screenSideBtnText = '초기화'
-          break
+          this.myReview = false;
+          this.screenTitle = '필터설정';
+          this.screenOkText = '완료';
+          this.screenSideBtnText = '초기화';
+          break;
       }
-      this.screenFlag = true
+      this.screenFlag = true;
     },
     onClickBack () {
-      this.screenFlag = false
+      this.screenFlag = false;
       if (this.screenType === 'add') {
-        this.$refs.addCont.clearData()
+        this.$refs.addCont.clearData();
       } else if (this.screenType === 'modify') {
-        this.moveToScreen('detail')
+        this.moveToScreen('detail');
       }
     },
     onClickOk () {
       if (this.screenType === 'add') {
-        this.$refs.addCont.clickAdd()
+        this.$refs.addCont.clickAdd();
       } else if (this.screenType === 'modify') {
-        this.$refs.modifyCont.clickModify()
+        this.$refs.modifyCont.clickModify();
       } else if (this.screenType === 'filter') {
-        this.$refs.filterCont.clickSearch()
-        this.screenFlag = false
-        this.filterTagList = []
+        this.$refs.filterCont.clickSearch();
+        this.screenFlag = false;
+        this.filterTagList = [];
         if (this.getPageParams.authorAges) {
           this.filterTagList.push(...this.getPageParams.authorAges.map((r) => {
-            return this.getAgeName(r)
-          }))
+            return this.getAgeName(r);
+          }));
         }
         if (this.getPageParams.sideEffects) {
           this.filterTagList.push(...this.getPageParams.sideEffects.map((r) => {
-            return this.getSideEffectName(r)
-          }))
+            return this.getSideEffectName(r);
+          }));
         }
         if (this.getPageParams.vaccines) {
           this.filterTagList.push(...this.getPageParams.vaccines.map((r) => {
-            return this.getVaccineName(r)
-          }))
+            return this.getVaccineName(r);
+          }));
         }
         if (this.getPageParams.authorGenders) {
           this.filterTagList.push(...this.getPageParams.authorGenders.map((r) => {
-            return this.getGenderName(r)
-          }))
+            return this.getGenderName(r);
+          }));
         }
         if (this.getPageParams.endInoculated) {
-          this.filterTagList.push(`${this.getPageParams.startInoculated.slice(0, 10)}~${this.getPageParams.endInoculated.slice(0, 10)}`)
+          this.filterTagList.push(`${this.getPageParams.startInoculated.slice(0, 10)}~${this.getPageParams.endInoculated.slice(0, 10)}`);
         }
       }
     },
     afterAdd () {
-      this.screenFlag = false
-      this.fetchPageContents(this.getPageParams)
+      this.screenFlag = false;
+      this.fetchPageContents(this.getPageParams);
     },
     afterModify (detail) {
-      this.screenFlag = false
-      this.detailContent = detail
-      this.moveToScreen('detail')
-      this.fetchPageContents(this.getPageParams)
+      this.screenFlag = false;
+      this.detailContent = detail;
+      this.moveToScreen('detail');
+      this.fetchPageContents(this.getPageParams);
     },
     clickRemove () {
-      this.modalText = '후기를 삭제하시겠습니까?'
-      this.okText = '삭제'
-      this.cancelText = '취소'
-      this.modalFlag = true
+      this.modalText = '후기를 삭제하시겠습니까?';
+      this.okText = '삭제';
+      this.cancelText = '취소';
+      this.modalFlag = true;
     },
   },
-}
+};
 </script>

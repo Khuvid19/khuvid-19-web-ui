@@ -136,6 +136,7 @@
           <textarea
             v-model="detailDisc"
             placeholder="내용을 입력해주세요."
+            style="min-height: 200px"
             class="
         focus:border-primary
         outline-none
@@ -159,8 +160,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import ConfirmModal from '@/components/Review/confirmModal'
+import { mapActions, mapGetters } from 'vuex';
+import ConfirmModal from '@/components/Review/confirmModal';
 
 export default {
   components: {
@@ -193,7 +194,7 @@ export default {
       inoculatedDate: new Date(),
       etcSideEffect: null,
 
-    }
+    };
   },
   watch: {
     detailContent: {
@@ -201,14 +202,14 @@ export default {
       deep: true,
       handler (v) {
         if (v != null) {
-          const temp = JSON.parse(JSON.stringify(v))
-          this.sideEffects = temp.sideEffects
-          this.vaccine = temp.vaccine
-          this.haveDisease = String(temp.haveDisease)
-          this.detailDisc = temp.detailDisc
-          this.etcSideEffect = temp.etcSideEffect
-          this.diseaseDisc = temp.diseaseDisc
-          this.inoculatedDate = temp.inoculatedDate
+          const temp = JSON.parse(JSON.stringify(v));
+          this.sideEffects = temp.sideEffects;
+          this.vaccine = temp.vaccine;
+          this.haveDisease = String(temp.haveDisease);
+          this.detailDisc = temp.detailDisc;
+          this.etcSideEffect = temp.etcSideEffect;
+          this.diseaseDisc = temp.diseaseDisc;
+          this.inoculatedDate = temp.inoculatedDate;
         }
       },
     },
@@ -224,29 +225,29 @@ export default {
       modify: 'Review/modify/modify',
     }),
     closeModal () {
-      this.modalFlag = false
+      this.modalFlag = false;
     },
     clearData () {
-      this.sideEffects = []
-      this.vaccine = ''
-      this.haveDisease = 'false'
-      this.detailDisc = ''
-      this.diseaseDisc = ''
-      this.inoculatedDate = new Date()
+      this.sideEffects = [];
+      this.vaccine = '';
+      this.haveDisease = 'false';
+      this.detailDisc = '';
+      this.diseaseDisc = '';
+      this.inoculatedDate = new Date();
     },
     clickSideEffects (key) {
       if (this.sideEffects.includes(key)) {
-        const idx = this.sideEffects.findIndex(r => r === key)
-        this.sideEffects.splice(idx, 1)
+        const idx = this.sideEffects.findIndex(r => r === key);
+        this.sideEffects.splice(idx, 1);
       } else {
-        this.sideEffects.push(key)
+        this.sideEffects.push(key);
       }
     },
     clickVaccine (key) {
-      this.vaccine = key
+      this.vaccine = key;
     },
     clickHaveDisease (key) {
-      this.haveDisease = key
+      this.haveDisease = key;
     },
     clickModify () {
       const params = {
@@ -259,21 +260,21 @@ export default {
         sideEffects: this.sideEffects,
         etcSideEffect: this.etcSideEffect,
         vaccine: this.vaccine,
-      }
-      if (this.haveDisease === 'false') { params.diseaseDisc = '' }
+      };
+      if (this.haveDisease === 'false') { params.diseaseDisc = ''; }
       if (this.haveDisease === 'true' && this.diseaseDisc === '') {
-        this.modalText = '기저질환을 입력해주세요.'
-        this.modalFlag = true
+        this.modalText = '기저질환을 입력해주세요.';
+        this.modalFlag = true;
       } else {
         this.modify(params)
           .then((r) => {
-            this.clearData()
-            this.$emit('afterModify', params)
-          })
+            this.clearData();
+            this.$emit('afterModify', params);
+          });
       }
     },
   },
-}
+};
 </script>
 
 <style>

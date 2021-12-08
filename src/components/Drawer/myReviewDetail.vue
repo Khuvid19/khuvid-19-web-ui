@@ -144,10 +144,10 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import fullScreen from '../_Common/fullScreen'
-import ModifyScreen from './myReviewModify'
-import ConfirmModal from '@/components/Review/confirmModal'
+import { mapActions, mapGetters } from 'vuex';
+import fullScreen from '../_Common/fullScreen';
+import ModifyScreen from './myReviewModify';
+import ConfirmModal from '@/components/Review/confirmModal';
 
 export default {
   components: {
@@ -168,7 +168,7 @@ export default {
       modalText: '',
       okText: null,
       cancelText: null,
-    }
+    };
   },
   computed: {
     ...mapGetters({
@@ -189,44 +189,44 @@ export default {
     }),
     onClickMenu (type) {
       if (type === '수정') {
-        this.$refs.modifyScreen.screenFlag = true
+        this.$refs.modifyScreen.screenFlag = true;
       } else if (type === '삭제') {
-        this.clickRemove()
+        this.clickRemove();
       }
     },
     clickRemove () {
-      this.modalText = '후기를 삭제하시겠습니까?'
-      this.okText = '삭제'
-      this.cancelText = '취소'
-      this.modalFlag = true
+      this.modalText = '후기를 삭제하시겠습니까?';
+      this.okText = '삭제';
+      this.cancelText = '취소';
+      this.modalFlag = true;
     },
     onClickBack () {
-      this.screenFlag = false
+      this.screenFlag = false;
     },
     clickOk () {
       if (this.okText === '삭제') {
         this.remove(this.detailContent.id)
           .then(() => {
-            this.screenFlag = false
-            this.fetchPageContent()
-          })
+            this.screenFlag = false;
+            this.fetchPageContent();
+          });
       } else if (this.okText === '로그인') {
-        this.$auth.loginWith('google', { params: { prompt: 'select_account' } })
+        this.$auth.loginWith('google', { params: { prompt: 'select_account' } });
       } else {
-        this.screenFlag = false
+        this.screenFlag = false;
       }
     },
     afterModify (detail) {
-      this.$emit('afterModify', detail)
+      this.$emit('afterModify', detail);
     },
     clickCancel () {
-      this.modalFlag = false
+      this.modalFlag = false;
     },
     closeModal () {
-      this.modalFlag = false
+      this.modalFlag = false;
     },
   },
-}
+};
 </script>
 
 <style>
