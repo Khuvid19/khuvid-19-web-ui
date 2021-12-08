@@ -136,6 +136,7 @@
           <textarea
             v-model="detailDisc"
             placeholder="내용을 입력해주세요."
+            style="min-height: 200px"
             class="
         focus:border-primary
         outline-none
@@ -159,8 +160,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import ConfirmModal from '@/components/Review/confirmModal'
+import { mapActions, mapGetters } from 'vuex';
+import ConfirmModal from '@/components/Review/confirmModal';
 
 export default {
   components: {
@@ -185,7 +186,7 @@ export default {
       diseaseDisc: '',
       inoculatedDate: new Date(),
       etcSideEffect: null,
-    }
+    };
   },
   computed: {
     ...mapGetters({
@@ -198,29 +199,29 @@ export default {
       add: 'Review/add/add',
     }),
     closeModal () {
-      this.modalFlag = false
+      this.modalFlag = false;
     },
     clearData () {
-      this.sideEffects = []
-      this.vaccine = ''
-      this.haveDisease = 'false'
-      this.detailDisc = ''
-      this.diseaseDisc = ''
-      this.inoculatedDate = new Date()
+      this.sideEffects = [];
+      this.vaccine = '';
+      this.haveDisease = 'false';
+      this.detailDisc = '';
+      this.diseaseDisc = '';
+      this.inoculatedDate = new Date();
     },
     clickSideEffects (key) {
       if (this.sideEffects.includes(key)) {
-        const idx = this.sideEffects.findIndex(r => r === key)
-        this.sideEffects.splice(idx, 1)
+        const idx = this.sideEffects.findIndex(r => r === key);
+        this.sideEffects.splice(idx, 1);
       } else {
-        this.sideEffects.push(key)
+        this.sideEffects.push(key);
       }
     },
     clickVaccine (key) {
-      this.vaccine = key
+      this.vaccine = key;
     },
     clickHaveDisease (key) {
-      this.haveDisease = key
+      this.haveDisease = key;
     },
     clickAdd () {
       const params = {
@@ -231,29 +232,29 @@ export default {
         sideEffects: this.sideEffects,
         etcSideEffect: this.etcSideEffect,
         vaccine: this.vaccine,
-      }
-      if (this.haveDisease === 'false') { params.diseaseDisc = '' }
+      };
+      if (this.haveDisease === 'false') { params.diseaseDisc = ''; }
       if (this.vaccine === '') {
-        this.modalText = '백신종류는 필수 입력 항목입니다.'
-        this.modalFlag = true
+        this.modalText = '백신종류는 필수 입력 항목입니다.';
+        this.modalFlag = true;
       } else if (this.haveDisease === 'true' && this.diseaseDisc === '') {
-        this.modalText = '기저질환을 입력해주세요.'
-        this.modalFlag = true
+        this.modalText = '기저질환을 입력해주세요.';
+        this.modalFlag = true;
       } else {
         this.add(params)
           .then(() => {
-            this.clearData()
-            this.$emit('afterAdd')
+            this.clearData();
+            this.$emit('afterAdd');
           }).catch((e) => {
             if (e.response.status === 410) {
-              this.modalText = '이미 등록된 백신 후기가 존재합니다.'
-              this.modalFlag = true
+              this.modalText = '이미 등록된 백신 후기가 존재합니다.';
+              this.modalFlag = true;
             }
-          })
+          });
       }
     },
   },
-}
+};
 </script>
 
 <style>

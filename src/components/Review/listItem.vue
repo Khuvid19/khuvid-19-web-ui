@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="w-screen review-list overflow-y-scroll">
-      <div v-for="(item,idx) in getReviewList" :key="idx">
+      <div v-for="(item,idx) in getReviewList" v-show="getReviewList.length>0" :key="idx">
         <div class="card shadow m-2 bg-white" @click="$emit('clickDetail',item)">
           <div class="card-body p-4">
             <div class="flex justify-between align-middle mb-2">
@@ -67,10 +67,15 @@
                 ...
               </div>
             </div>
-            <p v-show="item.detailDisc" class="text-sm ml-1 mt-1">
+            <p v-show="item.detailDisc" class="text-sm ml-1 mt-1 truncate">
               {{ item.detailDisc }}
             </p>
           </div>
+        </div>
+      </div>
+      <div v-show="getReviewList.length===0" class="w-full h-full flex justify-center items-center">
+        <div class="text-gray-500 text-lg">
+          작성된 후기가 없습니다.
         </div>
       </div>
     </div>

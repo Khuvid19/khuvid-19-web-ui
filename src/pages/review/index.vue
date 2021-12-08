@@ -5,7 +5,7 @@
       :filter-tag-list="filterTagList"
       @clickFilter="moveToScreen('filter')"
     />
-    <div class="h-px bg-gray-200" />
+    <div class="h-px bg-gray-200 mx-2" />
     <list-item @clickDetail="clickDetail" />
 
     <full-screen

@@ -16,7 +16,10 @@
         w-full
       "
     >
-      <div class="self-center text-4xl font-bold text-primary">
+      <div
+        class="self-center text-4xl font-bold text-primary"
+        @click="clickLogo"
+      >
         KHUVID
       </div>
       <div
@@ -41,6 +44,9 @@
 <script>
 export default {
   methods: {
+    clickLogo () {
+      this.$router.push('/main');
+    },
     clickLogin () {
       if (this.$auth.loggedIn) {
         this.$auth.logout();
