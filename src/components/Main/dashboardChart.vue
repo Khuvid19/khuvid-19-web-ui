@@ -104,9 +104,10 @@ export default {
         const SYMPTOMCOUNT = `review/sideEffects?vaccine=${this.vaccine}`;
         await axios.get(`/api/v2${SYMPTOMCOUNT}`).then((res) => {
           const data = res.data;
-          for (data.key in data) {
-            this.symptomCount[data.key] = data[data.key];
-            this.allCount += data[data.key];
+          this.allCount = data.totalPeopleCount;
+          const sideEffects = data.sideEffects;
+          for (sideEffects.key in sideEffects) {
+            this.symptomCount[sideEffects.key] = sideEffects[sideEffects.key];
           }
         });
       } catch (error) {
