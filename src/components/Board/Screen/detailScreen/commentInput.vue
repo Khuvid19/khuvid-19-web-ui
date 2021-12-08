@@ -17,7 +17,7 @@
       <input
         v-model="commentValue"
         class="bg-transparent outline-none w-full"
-        @keyup.enter="clickSendBtn"
+        @keypress.enter="clickSendBtn"
       >
       <fa-icon
         :class="`text-xl ${

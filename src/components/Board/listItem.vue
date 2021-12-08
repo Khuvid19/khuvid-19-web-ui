@@ -1,19 +1,19 @@
 <template>
   <div class="card shadow mx-2 mb-2 bg-white" @click="$emit('click')">
     <div class="card-body p-4">
-      <div class="flex justify-between align-middle mb-2">
-        <div class="text-sm font-bold">
+      <div class="flex justify-between items-center mb-2">
+        <div class="text-lg font-bold truncate">
           {{ title }}
         </div>
-        <div class="text-2xs flex items-center">
+        <div class="text-2xs text-right min-w-max">
           {{ mm_formatDate(date) }}
         </div>
       </div>
-      <p class="text-xs mb-2">
+      <p class="text mb-2 truncate">
         {{ content }}
       </p>
-      <div class="flex justify-between">
-        <div class="text-2xs">
+      <div class="flex justify-between items-center">
+        <div class="text-2xs ">
           {{ nickname }}
         </div>
         <div class="text-2xs">
@@ -30,7 +30,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: null,
+      default: '',
     },
     date: {
       type: String,
@@ -38,7 +38,7 @@ export default {
     },
     content: {
       type: String,
-      default: null,
+      default: '',
     },
     nickname: {
       type: String,
