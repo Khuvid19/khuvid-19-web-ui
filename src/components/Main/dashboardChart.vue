@@ -45,7 +45,7 @@ export default {
       current: '화이자 1차',
       borderColor: 'rgb(180, 110, 188)',
       backgroundColor: 'rgb(180, 110, 188)',
-      vaccineList: ['화이자 1차', '화이자 2차', '모더나 1차', '모더나 2차', '아스트라제네카 1차', '아스트라제네카 2차', '얀센', '얀센 부스터샷'],
+      vaccineList: [],
       vaccine: 'PFIZER_FIRST',
       allCount: 0,
       symptomCode: [],
@@ -54,10 +54,17 @@ export default {
     };
   },
   created () {
+    const VACCINELIST = '/review/types/vaccine';
+    axios.get(`/api/v2${VACCINELIST}`).then((res) => {
+      const data = res.data;
+      for (let i = 0; i < data.length; i++) {
+        this.vaccineList.push(data[i].value);
+      }
+    });
     const SYMPTOMLIST = '/review/types/sideEffects';
     axios.get(`/api/v2${SYMPTOMLIST}`).then((res) => {
       const data = res.data;
-      for (let i = 0; i < 14; i++) {
+      for (let i = 0; i < data.length; i++) {
         this.symptomCode.push(data[i].code);
         this.symptomList.push(data[i].value);
       }
