@@ -95,6 +95,7 @@ export default {
           tooltip: {
             callbacks: {
               label (context) {
+                console.log(context);
                 const NumberFormat = new Intl.NumberFormat('en-US');
                 const idx = context.dataIndex;
                 const tooltip = context.dataset.data[idx].toFixed(1);
@@ -136,7 +137,7 @@ export default {
         return 'hoverPFIZER';
       } else if (item.includes('모더나')) {
         return 'hoverMODERNA';
-      } else if (item.includes('아스트라제네카')) {
+      } else if (item.includes('AZ')) {
         return 'hoverAZ';
       } else if (item.includes('얀센')) {
         return 'hoverANSEN';
@@ -148,7 +149,7 @@ export default {
           return 'PFIZER';
         } else if (item.includes('모더나')) {
           return 'MODERNA';
-        } else if (item.includes('아스트라제네카')) {
+        } else if (item.includes('AZ')) {
           return 'AZ';
         } else if (item.includes('얀센')) {
           return 'ANSEN';
@@ -175,7 +176,7 @@ export default {
         }
         this.borderColor = 'rgb(237, 98, 56)';
         this.backgroundColor = 'rgb(237, 98, 56)';
-      } else if (item.includes('아스트라제네카')) {
+      } else if (item.includes('AZ')) {
         // 기본색
         if (item.includes('1차')) {
           this.vaccine = 'AZ_FIRST';
