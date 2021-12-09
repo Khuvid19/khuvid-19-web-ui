@@ -92,6 +92,16 @@ export default {
         },
         plugins: {
           ...defaultPlugins,
+          tooltip: {
+            callbacks: {
+              label (context) {
+                const NumberFormat = new Intl.NumberFormat('en-US');
+                const idx = context.dataIndex;
+                const tooltip = context.dataset.data[idx].toFixed(1);
+                return NumberFormat.format(tooltip) + '%';
+              },
+            },
+          },
         },
       };
     },
