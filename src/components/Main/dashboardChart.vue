@@ -9,7 +9,7 @@
                 v-for="(item,idx) in vaccineList"
                 :key="idx"
                 class="mr-2 mb-1 btn btn-outline gray btn-sm"
-                :class="[changeBtnColor(item), hoverColor(idx)]"
+                :class="[changeBtnColor(item), hoverColor(item)]"
                 @click="changeChart(item)"
               >
                 {{ item }}
@@ -121,14 +121,14 @@ export default {
         console.log(error);
       }
     },
-    hoverColor (idx) {
-      if (idx === 0 || idx === 1) {
+    hoverColor (item) {
+      if (item.includes('화이자')) {
         return 'hoverPFIZER';
-      } else if (idx === 2 || idx === 3) {
+      } else if (item.includes('모더나')) {
         return 'hoverMODERNA';
-      } else if (idx === 4 || idx === 5) {
+      } else if (item.includes('아스트라제네카')) {
         return 'hoverAZ';
-      } else {
+      } else if (item.includes('얀센')) {
         return 'hoverANSEN';
       }
     },
