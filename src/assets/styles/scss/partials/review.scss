@@ -4,6 +4,13 @@
 .my-review-list{
   height: calc(100vh - #{$layoutHeight} - 5px);
 }
+
+@media screen and (max-height: 550px) {
+  .review-list {
+    height: calc(100vh - #{$layoutHeight} - 100px);
+  }
+}
+
 .tag{
   @apply m-1 btn btn-outline btn-primary btn-sm;
 }

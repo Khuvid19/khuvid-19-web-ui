@@ -1,5 +1,5 @@
-import { resolve } from 'path'
-import * as FontAwesome from './src/plugins/icon/fontawesome'
+import { resolve } from 'path';
+import * as FontAwesome from './src/plugins/icon/fontawesome';
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -148,4 +148,4 @@ export default {
       pathRewrite: { '^/api/v2': '' },
     },
   },
-}
+};
