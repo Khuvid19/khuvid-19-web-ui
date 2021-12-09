@@ -98,7 +98,6 @@ export default {
             yAlign: 'top',
             callbacks: {
               label (context) {
-                console.log(context);
                 const NumberFormat = new Intl.NumberFormat('en-US');
                 const idx = context.dataIndex;
                 const tooltip = context.dataset.data[idx].toFixed(1);
