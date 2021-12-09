@@ -93,6 +93,9 @@ export default {
         plugins: {
           ...defaultPlugins,
           tooltip: {
+            padding: 7,
+            caretPadding: 8,
+            yAlign: 'top',
             callbacks: {
               label (context) {
                 console.log(context);
