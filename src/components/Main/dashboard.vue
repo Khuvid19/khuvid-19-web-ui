@@ -105,45 +105,46 @@ export default {
   },
   created () {
     const PATH_API = '/irgd/cov19stats.do?list=all';
+    const NumberFormat = new Intl.NumberFormat('en-US');
     axios.get(`/api/v1${PATH_API}`).then((res) => {
-      const internationalNumberFormat = new Intl.NumberFormat('en-US');
       const xml = res.data;
       const json = JSON.parse(convert.xml2json(xml, { compact: true }));
-      this.first = json.response.body.items.item[2].firstCnt._text;
-      this.second = json.response.body.items.item[2].secondCnt._text;
-      this.third = json.response.body.items.item[2].thirdCnt._text;
+      const item = json.response.body.items.item;
+      this.first = item[2].firstCnt._text;
+      this.second = item[2].secondCnt._text;
+      this.third = item[2].thirdCnt._text;
+      this.todayFirst = item[0].firstCnt._text;
+      this.todaySecond = item[0].secondCnt._text;
+      this.todayThird = item[0].thirdCnt._text;
       this.firstPercent = (this.first / 51667688 * 100).toFixed(1);
       this.secondPercent = (this.second / 51667688 * 100).toFixed(1);
       this.thirdPercent = (this.third / 51667688 * 100).toFixed(1);
-      this.first = internationalNumberFormat.format(this.first);
-      this.second = internationalNumberFormat.format(this.second);
-      this.third = internationalNumberFormat.format(this.third);
-      this.todayFirst = json.response.body.items.item[0].firstCnt._text;
-      this.todaySecond = json.response.body.items.item[0].secondCnt._text;
-      this.todayThird = json.response.body.items.item[0].thirdCnt._text;
-      this.todayFirst = internationalNumberFormat.format(this.todayFirst);
-      this.todaySecond = internationalNumberFormat.format(this.todaySecond);
-      this.todayThird = internationalNumberFormat.format(this.todayThird);
+      this.first = NumberFormat.format(this.first);
+      this.second = NumberFormat.format(this.second);
+      this.third = NumberFormat.format(this.third);
+      this.todayFirst = NumberFormat.format(this.todayFirst);
+      this.todaySecond = NumberFormat.format(this.todaySecond);
+      this.todayThird = NumberFormat.format(this.todayThird);
     });
     const PATH_API2 = '/covid';
     axios.get(`/api/v2${PATH_API2}`).then((res) => {
-      const internationalNumberFormat = new Intl.NumberFormat('en-US');
       const data = res.data;
-      this.todayAll = data[0].decideCnt;
       this.today = data[0].todayCnt;
+      this.todayAll = data[0].decideCnt;
       this.yesterday = data[1].todayCnt;
       this.yesterdayAll = data[1].decideCnt;
       this.decideDoD = ((this.todayAll - this.yesterdayAll) / this.yesterdayAll * 100).toFixed(1);
-      const figure = ((this.today - this.yesterday) / this.yesterday * 100).toFixed(1);
+      const difference = this.today - this.yesterday;
+      const figure = (difference / this.yesterday * 100).toFixed(1);
       if (figure < 0) {
-        this.todayDoD = `↘︎ ${-(this.today - this.yesterday)} (${-figure})%`;
+        this.todayDoD = `↘︎ ${NumberFormat.format(-(difference))} (${-figure})%`;
       } else if (figure === 0) {
         this.todayDoD = '- 0 (0)%';
       } else {
-        this.todayDoD = `↗︎ ${this.today - this.yesterday} (${figure})%`;
+        this.todayDoD = `↗︎ ${NumberFormat.format(difference)} (${figure})%`;
       }
-      this.todayAll = internationalNumberFormat.format(this.todayAll);
-      this.today = internationalNumberFormat.format(this.today);
+      this.today = NumberFormat.format(this.today);
+      this.todayAll = NumberFormat.format(this.todayAll);
     });
   },
 };

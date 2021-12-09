@@ -3,13 +3,13 @@
     <div class="chart-header">
       <div class="card shadow bg-white">
         <div class="cards-body p-4 ml-2 mr-2 stats">
-          <div class="tabs -ml-3">
+          <div class="tabs -ml-4">
             <div class="flex justify-between align-middle">
               <button
                 v-for="(item,idx) in vaccineList"
                 :key="idx"
                 class="mr-2 mb-1 btn btn-outline gray btn-sm"
-                :class="[changeBtnColor(item), hoverColor(idx)]"
+                :class="[changeBtnColor(item), hoverColor(item)]"
                 @click="changeChart(item)"
               >
                 {{ item }}
@@ -45,7 +45,7 @@ export default {
       current: '화이자 1차',
       borderColor: 'rgb(180, 110, 188)',
       backgroundColor: 'rgb(180, 110, 188)',
-      vaccineList: ['화이자 1차', '화이자 2차', '모더나 1차', '모더나 2차', '아스트라제네카 1차', '아스트라제네카 2차', '얀센', '얀센 부스터샷'],
+      vaccineList: [],
       vaccine: 'PFIZER_FIRST',
       allCount: 0,
       symptomCode: [],
@@ -54,10 +54,17 @@ export default {
     };
   },
   created () {
+    const VACCINELIST = '/review/types/vaccine';
+    axios.get(`/api/v2${VACCINELIST}`).then((res) => {
+      const data = res.data;
+      for (let i = 0; i < data.length; i++) {
+        this.vaccineList.push(data[i].value);
+      }
+    });
     const SYMPTOMLIST = '/review/types/sideEffects';
     axios.get(`/api/v2${SYMPTOMLIST}`).then((res) => {
       const data = res.data;
-      for (let i = 0; i < 14; i++) {
+      for (let i = 0; i < data.length; i++) {
         this.symptomCode.push(data[i].code);
         this.symptomList.push(data[i].value);
       }
@@ -85,6 +92,19 @@ export default {
         },
         plugins: {
           ...defaultPlugins,
+          tooltip: {
+            padding: 7,
+            caretPadding: 8,
+            yAlign: 'top',
+            callbacks: {
+              label (context) {
+                const NumberFormat = new Intl.NumberFormat('en-US');
+                const idx = context.dataIndex;
+                const tooltip = context.dataset.data[idx].toFixed(1);
+                return NumberFormat.format(tooltip) + '%';
+              },
+            },
+          },
         },
       };
     },
@@ -114,14 +134,14 @@ export default {
         console.log(error);
       }
     },
-    hoverColor (idx) {
-      if (idx === 0 || idx === 1) {
+    hoverColor (item) {
+      if (item.includes('화이자')) {
         return 'hoverPFIZER';
-      } else if (idx === 2 || idx === 3) {
+      } else if (item.includes('모더나')) {
         return 'hoverMODERNA';
-      } else if (idx === 4 || idx === 5) {
+      } else if (item.includes('AZ')) {
         return 'hoverAZ';
-      } else {
+      } else if (item.includes('얀센')) {
         return 'hoverANSEN';
       }
     },
@@ -131,7 +151,7 @@ export default {
           return 'PFIZER';
         } else if (item.includes('모더나')) {
           return 'MODERNA';
-        } else if (item.includes('아스트라제네카')) {
+        } else if (item.includes('AZ')) {
           return 'AZ';
         } else if (item.includes('얀센')) {
           return 'ANSEN';
@@ -158,7 +178,7 @@ export default {
         }
         this.borderColor = 'rgb(237, 98, 56)';
         this.backgroundColor = 'rgb(237, 98, 56)';
-      } else if (item.includes('아스트라제네카')) {
+      } else if (item.includes('AZ')) {
         // 기본색
         if (item.includes('1차')) {
           this.vaccine = 'AZ_FIRST';

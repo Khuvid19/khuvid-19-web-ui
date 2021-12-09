@@ -1,4 +1,4 @@
-import {Chart, registerables} from 'chart.js';
+import { Chart, registerables } from 'chart.js';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
@@ -6,11 +6,11 @@ Chart.register(...registerables);
 Chart.register(zoomPlugin);
 Chart.register(ChartDataLabels);
 
-export function generateChart(chartId, chartType) {
+export function generateChart (chartId, chartType) {
   return {
-    render(h) {
+    render (h) {
       return h(
-        'div',{ style: this.styles }, [
+        'div', { style: this.styles }, [
           h(
             'canvas', {
               id: this.chartId,
@@ -70,13 +70,13 @@ export function generateChart(chartId, chartType) {
       // 등록할 추가 플러그인
       plugins: {
         type: Array,
-        default() {
+        default () {
           return [];
         },
       },
     },
 
-    data() {
+    data () {
       return {
         _chart: null,
         _plugins: this.plugins,
@@ -85,15 +85,15 @@ export function generateChart(chartId, chartType) {
     watch: {
       data: {
         deep: true,
-        handler(val) {
+        handler (val) {
           this.updateChart({ data: val });
         },
       },
     },
-    mounted() {
+    mounted () {
       this.renderChart(this.data, this.options);
     },
-    beforeDestroy() {
+    beforeDestroy () {
       if (this.$data._chart) {
         this.$data._chart.destroy();
         this.$refs.canvas.removeEventListener('dblclick', this.resetZoom);
@@ -101,26 +101,26 @@ export function generateChart(chartId, chartType) {
       }
     },
     methods: {
-      updateChart({data = null, options = null}) {
-        if (data) this.$data._chart.data = data;
-        if (options) this.$data._chart.options = options;
-        if (data || options) this.$data._chart.update();
+      updateChart ({ data = null, options = null }) {
+        if (data) { this.$data._chart.data = data; }
+        if (options) { this.$data._chart.options = options; }
+        if (data || options) { this.$data._chart.update(); }
       },
-      addPlugin(plugin) {
+      addPlugin (plugin) {
         this.$data._plugins.push(plugin);
       },
-      generateLegend() {
+      generateLegend () {
         if (this.$data._chart) {
           return this.$data._chart.el.generateLegend();
         }
       },
-      resetZoom() {
+      resetZoom () {
         this.$data._chart.resetZoom();
       },
-      // 차트 생성 부
-      renderChart(data, options) {
-        if (this.$data._chart) this.$data._chart.destroy();
-        if (!this.$refs.canvas) throw new Error('Please remove the <template></template> tags from your chart component. See https://vue-chartjs.org/guide/#vue-single-file-components');
+      // 차트 생성 부분
+      renderChart (data, options) {
+        if (this.$data._chart) { this.$data._chart.destroy(); }
+        if (!this.$refs.canvas) { throw new Error('Please remove the <template></template> tags from your chart component. See https://vue-chartjs.org/guide/#vue-single-file-components'); }
         this.$data._chart = new Chart(
           this.$refs.canvas.getContext('2d'), {
             type: chartType,
@@ -146,7 +146,7 @@ const Doughnut = generateChart('doughnut-chart', 'doughnut');
 const Line = generateChart('line-chart', 'line');
 const Pie = generateChart('pie-chart', 'pie');
 
-export { Bar, Doughnut, Line, Pie }
+export { Bar, Doughnut, Line, Pie };
 
 export default {
   Bar,

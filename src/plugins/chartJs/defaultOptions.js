@@ -3,7 +3,7 @@ const defaultOptions = {
   maintainAspectRatio: false,
   scales: {},
   plugins: {},
-}
+};
 
 const defaultPlugins = {
   legend: {
@@ -33,11 +33,11 @@ const defaultPlugins = {
   //     modifierKey: 'alt',
   //   },
   // },
-}
+};
 
 export default {
   ...defaultOptions,
-  plugins: {...defaultPlugins},
+  plugins: { ...defaultPlugins },
 };
 
-export  {defaultPlugins, defaultOptions}
+export { defaultPlugins, defaultOptions };
