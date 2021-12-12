@@ -102,7 +102,7 @@
     </div>
     <div class="border rounded-box px-3 py-4 mx-4 my-2 bg-white">
       <div class="text-lg mb-1 ml-1">
-        처방날짜
+        접종날짜
       </div>
       <div class="w-full">
         <v-date-picker v-model="range" is-range :masks="masks">
@@ -167,7 +167,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   props: {
@@ -199,21 +199,21 @@ export default {
       sideEffects: [],
       vaccines: [],
       haveDisease: null,
-    }
+    };
   },
   watch: {
     screenFlag: {
       immediate: true,
       handler (v) {
         if (v) {
-          const temp = JSON.parse(JSON.stringify(this.getReviewParams))
-          this.authorAges = temp.authorAges ?? []
-          this.authorGenders = temp.authorGenders ?? []
-          this.sideEffects = temp.sideEffects ?? []
-          this.vaccines = temp.vaccines ?? []
-          this.haveDisease = temp.haveDisease ?? null
-          this.range.start = temp.startInoculated ?? null
-          this.range.end = temp.endInoculated ?? null
+          const temp = JSON.parse(JSON.stringify(this.getReviewParams));
+          this.authorAges = temp.authorAges ?? [];
+          this.authorGenders = temp.authorGenders ?? [];
+          this.sideEffects = temp.sideEffects ?? [];
+          this.vaccines = temp.vaccines ?? [];
+          this.haveDisease = temp.haveDisease ?? null;
+          this.range.start = temp.startInoculated ?? null;
+          this.range.end = temp.endInoculated ?? null;
         }
       },
     },
@@ -234,71 +234,70 @@ export default {
       add: 'Review/add/add',
     }),
     setTag () {
-      console.log('sdf')
       // console.log(this.getReviewParams)
     },
     clearData () {
-      this.authorAges = []
-      this.authorGenders = []
-      this.sideEffects = []
-      this.vaccines = []
-      this.haveDisease = null
+      this.authorAges = [];
+      this.authorGenders = [];
+      this.sideEffects = [];
+      this.vaccines = [];
+      this.haveDisease = null;
       this.range = {
         start: null,
         end: null,
-      }
+      };
     },
     clickSideEffects (key) {
       if (this.sideEffects.includes(key)) {
-        const idx = this.sideEffects.findIndex(r => r === key)
-        this.sideEffects.splice(idx, 1)
+        const idx = this.sideEffects.findIndex(r => r === key);
+        this.sideEffects.splice(idx, 1);
       } else {
-        this.sideEffects.push(key)
+        this.sideEffects.push(key);
       }
     },
     clickAge (key) {
       if (this.authorAges.includes(key)) {
-        const idx = this.authorAges.findIndex(r => r === key)
-        this.authorAges.splice(idx, 1)
+        const idx = this.authorAges.findIndex(r => r === key);
+        this.authorAges.splice(idx, 1);
       } else {
-        this.authorAges.push(key)
+        this.authorAges.push(key);
       }
     },
     clickGender (key) {
       if (this.authorGenders.includes(key)) {
-        const idx = this.authorGenders.findIndex(r => r === key)
-        this.authorGenders.splice(idx, 1)
+        const idx = this.authorGenders.findIndex(r => r === key);
+        this.authorGenders.splice(idx, 1);
       } else {
-        this.authorGenders.push(key)
+        this.authorGenders.push(key);
       }
     },
     clickVaccine (key) {
       if (this.vaccines.includes(key)) {
-        const idx = this.vaccines.findIndex(r => r === key)
-        this.vaccines.splice(idx, 1)
+        const idx = this.vaccines.findIndex(r => r === key);
+        this.vaccines.splice(idx, 1);
       } else {
-        this.vaccines.push(key)
+        this.vaccines.push(key);
       }
     },
     clickHaveDisease (key) {
-      this.haveDisease = key
+      this.haveDisease = key;
     },
     clickSearch () {
-      const params = {}
-      if (this.authorAges.length > 0) { params.authorAges = this.authorAges }
-      if (this.authorGenders.length > 0) { params.authorGenders = this.authorGenders }
-      if (this.getReviewParams.detailDisc) { params.detailDisc = this.getReviewParams.detailDisc }
-      if (this.vaccines.length > 0) { params.vaccines = this.vaccines }
-      if (this.sideEffects.length > 0) { params.sideEffects = this.sideEffects }
-      if (this.haveDisease != null) { params.haveDisease = this.haveDisease }
-      if (typeof this.range.end === 'string') { params.endInoculated = this.range.end } else if (this.range.end != null) { params.endInoculated = this.range.end.toISOString().slice(0, 10) }
-      if (typeof this.range.start === 'string') { params.startInoculated = this.range.start } else if (this.range.start != null) { params.startInoculated = this.range.start.toISOString().slice(0, 10) }
-      this.setReviewParams(params)
-      this.fetchPageContents(params)
-      this.clearData()
+      const params = {};
+      if (this.authorAges.length > 0) { params.authorAges = this.authorAges; }
+      if (this.authorGenders.length > 0) { params.authorGenders = this.authorGenders; }
+      if (this.getReviewParams.detailDisc) { params.detailDisc = this.getReviewParams.detailDisc; }
+      if (this.vaccines.length > 0) { params.vaccines = this.vaccines; }
+      if (this.sideEffects.length > 0) { params.sideEffects = this.sideEffects; }
+      if (this.haveDisease != null) { params.haveDisease = this.haveDisease; }
+      if (typeof this.range.end === 'string') { params.endInoculated = this.range.end; } else if (this.range.end != null) { params.endInoculated = this.range.end.toISOString().slice(0, 10); }
+      if (typeof this.range.start === 'string') { params.startInoculated = this.range.start; } else if (this.range.start != null) { params.startInoculated = this.range.start.toISOString().slice(0, 10); }
+      this.setReviewParams(params);
+      this.fetchPageContents(params);
+      this.clearData();
     },
   },
-}
+};
 </script>
 
 <style>
