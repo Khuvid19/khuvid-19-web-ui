@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from 'vuex';
 
 export default {
   name: 'ReviewSearchFilter',
@@ -60,11 +60,12 @@ export default {
   data () {
     return {
       detailDisc: '',
-    }
+    };
   },
   methods: {
     ...mapActions({
       fetchReview: 'Review/getPage/fetchPageContents',
+      setPageParams: 'Review/getPage/setPageParams',
     }),
     clickSearch () {
       const filters = {
@@ -76,14 +77,18 @@ export default {
         haveDisease: this.haveDisease,
         sideEffects: this.sideEffects,
         vaccine: this.vaccine,
-      }
-      this.fetchReview(filters)
+      };
+      this.setPageParams(filters);
+      // this.fetchReview(filters)
+      //   .then(() => {
+      this.$emit('clickSearch', filters);
+      // });
     },
     openTagFilter () {
-      this.$emit('clickFilter')
+      this.$emit('clickFilter');
     },
   },
-}
+};
 </script>
 
 <style scoped>

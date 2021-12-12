@@ -20,6 +20,16 @@ export const actions = {
         .catch(error => reject(error));
     });
   },
+  fetchPageContents2 (context, params) {
+    return new Promise((resolve, reject) => {
+      this.$axios.post(`/review/search?page=${params.page}`, params.params)
+        .then((r) => {
+          context.commit('SET_PAGE_CONTENTS', r.data);
+          resolve(r);
+        })
+        .catch(error => reject(error));
+    });
+  },
   setPageParams (context, params) {
     context.commit('SET_PAGE_PARAMS', params);
   },

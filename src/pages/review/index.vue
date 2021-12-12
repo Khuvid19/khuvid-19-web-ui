@@ -4,9 +4,19 @@
       ref="searchFilter"
       :filter-tag-list="filterTagList"
       @clickFilter="moveToScreen('filter')"
+      @clickSearch="clickSearch"
     />
     <div class="h-px bg-gray-200 mx-2" />
-    <list-item @clickDetail="clickDetail" />
+    <div class="w-screen overflow-y-scroll" :class="filterTagList.length>0?'review-list-2':'review-list'">
+      <list-item
+        :list-content="listContent"
+        @clickDetail="clickDetail"
+      />
+      <infinite-loading v-if="listContent.length" @infinite="scrolling">
+        <div slot="no-results" />
+        <div slot="no-more" />
+      </infinite-loading>
+    </div>
 
     <full-screen
       v-model="screenFlag"
@@ -82,6 +92,8 @@ export default {
   },
   data () {
     return {
+      currentPage: 0,
+      listContent: [],
       modalText: '',
       modalFlag: false,
       okText: null,
@@ -99,6 +111,7 @@ export default {
   computed: {
     ...mapGetters({
       getPageParams: 'Review/getPage/getPageParams',
+      getPageContents: 'Review/getPage/getPageContents',
       getVaccineName: 'Review/vaccineList/getVaccineName',
       getSideEffectName: 'Review/sideEffectsList/getSideEffectsName',
       getGenderName: 'User/getGenderType/getCodeName',
@@ -107,20 +120,47 @@ export default {
   },
   created () {
     this.clearPageParams();
-    this.fetchPageContents({});
+    this.fetchPageContents({})
+      .then(() => {
+        this.listContent = this.getPageContents;
+      });
   },
   methods: {
     ...mapActions({
       clearPageParams: 'Review/getPage/clearPageParams',
       fetchPageContents: 'Review/getPage/fetchPageContents',
+      fetchPageContents2: 'Review/getPage/fetchPageContents2',
       remove: 'Review/remove/remove',
     }),
+    scrolling ($state) {
+      this.currentPage += 1;
+      this.fetchPageContents2({ page: this.currentPage, params: this.getPageParams })
+        .then((r) => {
+          if (r.data.content.length !== 0) {
+            this.listContent.push(...this.getPageContents);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        });
+    },
+    clickSearch () {
+      this.listContent = [];
+      this.currentPage = 0;
+      this.loadPage();
+    },
+    async loadPage () {
+      await this.fetchPageContents2({ page: this.currentPage, params: this.getPageParams }); // 무한 스크롤 구현하기
+      this.listContent = this.getPageContents;
+    },
     clickOk () {
       if (this.okText === '삭제') {
         this.remove(this.detailContent.id)
           .then(() => {
             this.screenFlag = false;
-            this.fetchPageContents(this.getPageParams);
+            this.listContent = [];
+            this.currentPage = 0;
+            this.loadPage();
           });
       } else if (this.okText === '로그인') {
         this.$auth.loginWith('google', { params: { prompt: 'select_account' } });
@@ -229,17 +269,24 @@ export default {
         if (this.getPageParams.endInoculated) {
           this.filterTagList.push(`${this.getPageParams.startInoculated.slice(0, 10)}~${this.getPageParams.endInoculated.slice(0, 10)}`);
         }
+        this.listContent = [];
+        this.currentPage = 0;
+        this.loadPage();
       }
     },
     afterAdd () {
       this.screenFlag = false;
-      this.fetchPageContents(this.getPageParams);
+      this.listContent = [];
+      this.currentPage = 0;
+      this.loadPage();
     },
     afterModify (detail) {
       this.screenFlag = false;
       this.detailContent = detail;
       this.moveToScreen('detail');
-      this.fetchPageContents(this.getPageParams);
+      this.listContent = [];
+      this.currentPage = 0;
+      this.loadPage();
     },
     clickRemove () {
       this.modalText = '후기를 삭제하시겠습니까?';

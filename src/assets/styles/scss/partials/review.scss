@@ -1,6 +1,9 @@
 .review-list {
   height: calc(100vh - #{$layoutHeight} - 160px);
 }
+.review-list-2 {
+  height: calc(100vh - #{$layoutHeight} - 175px);
+}
 .my-review-list{
   height: calc(100vh - #{$layoutHeight} - 5px);
 }
