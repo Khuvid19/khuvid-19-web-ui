@@ -77,7 +77,7 @@ export default {
     short_name: 'KHUVID-19',
     start_url: '/main',
     display: 'standalone',
-    background_color: '#000',
+    background_color: '#fff',
   },
   workbox: {
     offline: false,
