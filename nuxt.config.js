@@ -3,7 +3,7 @@ import * as FontAwesome from './src/plugins/icon/fontawesome';
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'khuvid-web-nuxt',
+    title: 'KHUHUB',
     htmlAttrs: {
       lang: 'en',
     },
