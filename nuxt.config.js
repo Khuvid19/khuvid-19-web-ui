@@ -14,7 +14,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'google', content: 'notranslate' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }],
     script: [{ hid: 'stripe', src: 'https://js.stripe.com/v3/', defer: true }],
   },
   loading: false,
