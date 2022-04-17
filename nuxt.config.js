@@ -1,21 +1,43 @@
 import { resolve } from 'path';
 import * as FontAwesome from './src/plugins/icon/fontawesome';
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'KHUHUB',
+    title: 'KHUVID',
     htmlAttrs: {
       lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' },
-      { name: 'google', content: 'notranslate' },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1',
+      },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'KHUVID는 코로나 19 백신 접종 후기 플랫폼입니다.',
+      },
+      {
+        name: 'format-detection',
+        content: 'telephone=no',
+      },
+      {
+        name: 'google',
+        content: 'notranslate',
+      },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }],
-    script: [{ hid: 'stripe', src: 'https://js.stripe.com/v3/', defer: true }],
+    link: [{
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.png',
+    }],
+    script: [{
+      hid: 'stripe',
+      src: 'https://js.stripe.com/v3/',
+      defer: true,
+    }],
   },
   loading: false,
   srcDir: 'src/',
@@ -29,10 +51,19 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/axios.js',
-    { src: '@/plugins/chartJs/index', mode: 'client' },
-    { src: '@/plugins/calendar/vCalendar.js', ssr: false },
+    {
+      src: '@/plugins/chartJs/index',
+      mode: 'client',
+    },
+    {
+      src: '@/plugins/calendar/vCalendar.js',
+      ssr: false,
+    },
     { src: '@/plugins/mixins.js' },
-    { src: '@/plugins/infinite-loading.js', ssr: false },
+    {
+      src: '@/plugins/infinite-loading.js',
+      ssr: false,
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
