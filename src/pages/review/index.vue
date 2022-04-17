@@ -6,15 +6,15 @@
       @clickFilter="moveToScreen('filter')"
       @clickSearch="clickSearch"
     />
-    <div class="h-px bg-gray-200 mx-2" />
+    <div class="h-px bg-gray-200 mx-2"/>
     <div class="w-screen overflow-y-scroll" :class="filterTagList.length>0?'review-list-2':'review-list'">
       <list-item
         :list-content="listContent"
         @clickDetail="clickDetail"
       />
       <infinite-loading v-if="listContent.length" @infinite="scrolling">
-        <div slot="no-results" />
-        <div slot="no-more" />
+        <div slot="no-results"/>
+        <div slot="no-more"/>
       </infinite-loading>
     </div>
 
@@ -51,7 +51,7 @@
         @afterModify="afterModify"
       />
     </full-screen>
-    <write-btn content="글쓰기" @clickWriteBtn="moveToScreen('add')" />
+    <write-btn content="글쓰기" @clickWriteBtn="moveToScreen('add')"/>
 
     <confirm-modal
       :check-flag="modalFlag"
@@ -108,6 +108,11 @@ export default {
       myReview: false,
     };
   },
+  head () {
+    return {
+      title: 'KHUVID REVIEW',
+    };
+  },
   computed: {
     ...mapGetters({
       getPageParams: 'Review/getPage/getPageParams',
@@ -134,7 +139,10 @@ export default {
     }),
     scrolling ($state) {
       this.currentPage += 1;
-      this.fetchPageContents2({ page: this.currentPage, params: this.getPageParams })
+      this.fetchPageContents2({
+        page: this.currentPage,
+        params: this.getPageParams,
+      })
         .then((r) => {
           if (r.data.content.length !== 0) {
             this.listContent.push(...this.getPageContents);
@@ -150,7 +158,10 @@ export default {
       this.loadPage();
     },
     async loadPage () {
-      await this.fetchPageContents2({ page: this.currentPage, params: this.getPageParams }); // 무한 스크롤 구현하기
+      await this.fetchPageContents2({
+        page: this.currentPage,
+        params: this.getPageParams,
+      }); // 무한 스크롤 구현하기
       this.listContent = this.getPageContents;
     },
     clickOk () {
