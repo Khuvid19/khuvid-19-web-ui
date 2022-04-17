@@ -34,6 +34,7 @@
           <img
             class="self-center"
             :src="$auth.$state.user ? $auth.$state.user.picture : ''"
+            alt="user"
           >
         </div>
       </label>
