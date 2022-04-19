@@ -2,8 +2,8 @@ build_image:
   only:
     - develop
   script:
-    - ./gradlew clean
-    - ./gradlew build
+    - ./ clean
+    - ./ build
     - docker container stop ui
     - docker container rm ui
     - docker image rm khuvid19/coreui
