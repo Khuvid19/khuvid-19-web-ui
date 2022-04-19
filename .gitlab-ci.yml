@@ -1,0 +1,66 @@
+## gitlab ci/cd 공부
+## 1. 각 변수
+##
+
+
+stages:
+  - others
+  - build
+  - deploy
+
+variables:
+  APP_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+
+.build:
+  cache:
+    paths:
+      - node_modules/
+      - yarn.lock
+
+.deploy:
+  variables:
+    GIT_STRATEGY: none
+
+# DEV (Development)
+
+(DEV) build:
+  stage: build
+  extends: .build
+  script:
+    - node@14 yarn install
+    - node@14 yarn build --mode dev
+    - node@14 yarn after-build
+  only:
+    - develop
+  artifacts:
+    paths:
+      - dist/
+      - Dockerfile
+  tags:
+    - khuvid_front
+
+(DEV) deploy:
+  stage: deploy
+  extends: .deploy
+  services:
+    - docker:dind
+  variables:
+    APP_NAME: $CI_PROJECT_NAME
+    APP_HOST: $CI_PROJECT_NAME.twoz.kr
+    APP_PORT: 80
+  script:
+    - docker build -t $APP_IMAGE
+      --build-arg HTTP_PORT=$APP_PORT
+      .
+    - docker stop $APP_NAME && docker rm $APP_NAME
+    - docker run -d --name $APP_NAME
+      -l traefik.enable=true
+      -l traefik.http.routers.$APP_NAME.service=$APP_NAME
+      -l traefik.http.routers.$APP_NAME.rule="Host(\`$APP_HOST\`)"
+      -l traefik.http.services.$APP_NAME.loadbalancer.server.port=$APP_PORT
+      $APP_IMAGE
+  only:
+    - develop
+  tags:
+    - khuvid_front
+
