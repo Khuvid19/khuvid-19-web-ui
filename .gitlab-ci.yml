@@ -1,47 +1,13 @@
-stages:
-  - test
-  - build
-  - deploy
-
-variables:
-  IMAGE_NAME: <IP>:5000/nodejs-server-test:$IMAGE_VERSION
-
-cache:
-  paths:
-    - node_modules/
-
-test:
-  stage: test
-  image: node:latest
+build_image:
+  only:
+    - develop
   script:
-    - env
-    - yarn install
-  tags:
-    - khuvid_front
-
-build:
-  image: docker:latest
-  services:
-    - docker:dind
-  stage: build
-  script:
-    - ls -al
-    - docker container ls -a
-    - docker build . -t $IMAGE_NAME
-    - docker push $IMAGE_NAME
-    - docker images | grep '<IP>'
-  tags:
-    - khuvid_front
-
-deploy:
-  stage: deploy
-  image: docker:latest
-  services:
-    - docker:dind
-  script:
-    - docker container ls -a
-    - docker container rm -f nodejs-server
-    - docker run -d -p 8090:8090 --name nodejs-server --restart always $IMAGE_NAME
-    - docker container ls -a
+    - ./gradlew clean
+    - ./gradlew build
+    - docker container stop ui
+    - docker container rm ui
+    - docker image rm khuvid19/coreui
+    - docker build -t khuvid19/coreui .
+    - docker run -d -it -p 20501:3000 --name ui khuvid19/coreui
   tags:
     - khuvid_front
