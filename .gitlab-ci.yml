@@ -1,11 +1,14 @@
 build_image:
   only:
     - develop
+  variables:
+    APP_NAME: $CI_PROJECT_NAME
+    APP_HOST: $CI_PROJECT_NAME.twoz.kr
   script:
     - docker container stop ui
     - docker container rm ui
     - docker image rm khuvid19/coreui
     - docker build -t khuvid19/coreui .
-    - docker run -d -it -p 20501:3000 --name ui khuvid19/coreui
+    - docker run -d -it -p 20502:3000 khuvid19/coreui
   tags:
     - khuvid_front
