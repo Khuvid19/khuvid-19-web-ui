@@ -8,7 +8,6 @@ build_image:
     APP_NAME: $CI_PROJECT_NAME
     APP_HOST: $CI_PROJECT_NAME.twoz.kr
     APP_PORT: 20502
-
   script:
     - docker container stop ui
     - docker container rm ui
