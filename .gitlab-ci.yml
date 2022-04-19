@@ -1,27 +1,47 @@
-image: gradle:alpine
+stages:
+  - test
+  - build
+  - deploy
+
 variables:
-  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
-before_script:
-  - chmod +x gradlew
-  - export GRADLE_USER_HOME=`pwd`/.gradle
+  IMAGE_NAME: <IP>:5000/nodejs-server-test:$IMAGE_VERSION
 
 cache:
   paths:
-    - .gradle/wrapper
-    - .gradle/caches
-    - build/
+    - node_modules/
 
-build_image:
-  only:
-    - feature/config_CI_CD
-    - develop
+test:
+  stage: test
+  image: node:latest
   script:
-    - ./gradlew clean
-    - ./gradlew build
-    - docker container stop ui
-    - docker container rm ui
-    - docker image rm khuvid19/front
-    - docker build -t khuvid19/front .
-    - docker run -d -it -p 20501:8080 --name ui khuvid19/front
+    - env
+    - yarn install
+  tags:
+    - khuvid_front
+
+build:
+  image: docker:latest
+  services:
+    - docker:dind
+  stage: build
+  script:
+    - ls -al
+    - docker container ls -a
+    - docker build . -t $IMAGE_NAME
+    - docker push $IMAGE_NAME
+    - docker images | grep '<IP>'
+  tags:
+    - khuvid_front
+
+deploy:
+  stage: deploy
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker container ls -a
+    - docker container rm -f nodejs-server
+    - docker run -d -p 8090:8090 --name nodejs-server --restart always $IMAGE_NAME
+    - docker container ls -a
   tags:
     - khuvid_front
