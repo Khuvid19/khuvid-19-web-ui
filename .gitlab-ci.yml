@@ -1,0 +1,27 @@
+image: gradle:alpine
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+before_script:
+  - chmod +x gradlew
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+    - build/
+
+build_image:
+  only:
+    - feature/config_CI_CD
+    - develop
+  script:
+    - ./gradlew clean
+    - ./gradlew build
+    - docker container stop ui
+    - docker container rm ui
+    - docker image rm khuvid19/front
+    - docker build -t khuvid19/front .
+    - docker run -d -it -p 20501:8080 --name ui khuvid19/front
+  tags:
+    - khuvid_front
