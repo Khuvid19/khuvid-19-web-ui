@@ -1,25 +1,16 @@
-variables:
-  APP_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+cache:
+  paths:
+    - node_modules/
+    - yarn.lock
 
 build_image:
   only:
     - develop
-  variables:
-    APP_NAME: $CI_PROJECT_NAME
-    APP_HOST: $CI_PROJECT_NAME.twoz.kr
-    APP_PORT: 20502
   script:
     - docker container stop ui
     - docker container rm ui
     - docker image rm khuvid19/coreui
     - docker build -t khuvid19/coreui .
-      --build-arg HTTP_PORT=$APP_PORT
     - docker run -d -it -p 20502:3000 --name ui khuvid19/coreui
-      -l traefik.enable=true
-      -l traefik.http.routers.$APP_NAME.service=$APP_NAME
-      -l traefik.http.routers.$APP_NAME.rule="Host(\`$APP_HOST\`)"
-      -l traefik.http.services.$APP_NAME.loadbalancer.server.port=$APP_PORT
-      $APP_IMAGE
-
   tags:
     - khuvid_front

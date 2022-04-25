@@ -1,11 +1,11 @@
-FROM node:12
+FROM node:14
 
 # Create app directory
 WORKDIR /app
 ADD . /app/
 
 # global install & update
-RUN npm install yarn --force
+RUN node@14 yarn install
 
 RUN rm yarn.lock
 RUN rm package-lock.json
@@ -16,4 +16,4 @@ ENV HOST 0.0.0.0
 EXPOSE 3000
 
 # start command
-CMD [ "yarn", "start" ]
+CMD [ "yarn", "dev" ]
