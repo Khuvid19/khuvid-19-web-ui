@@ -66,6 +66,11 @@ export default {
       keyword: '',
     };
   },
+  head () {
+    return {
+      title: 'KHUVID BOARD',
+    };
+  },
   fetch () {
     this.fetchBoardList();
   },

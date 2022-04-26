@@ -9,15 +9,18 @@
     <div class="p-8">
       <div class="avatar flex justify-center">
         <div class="mb-12 rounded-full w-20 h-20">
-          <img :src="profileImgSrl">
+          <img
+            :src="profileImgSrl"
+            alt="user"
+          >
         </div>
       </div>
       <div class="text-xl flex items-center justify-between mb-12">
         이메일<input
-          v-model="email"
-          :disabled="true"
-          class="input input-disabled w-64"
-        >
+        v-model="email"
+        :disabled="true"
+        class="input input-disabled w-64"
+      >
       </div>
       <div class="text-xl flex items-center justify-between mb-12">
         성별
@@ -43,7 +46,7 @@
                 ageListIdx === 0 ? ageList.length - 1 : ageListIdx - 1
             "
           >
-            <fa-icon :icon="['fas', 'caret-left']" />
+            <fa-icon :icon="['fas', 'caret-left']"/>
           </button>
           <div
             style="border-width: 1px"
@@ -71,7 +74,7 @@
             class="btn text-xl btn-primary"
             @click="ageListIdx = (ageListIdx + 1) % ageList.length"
           >
-            <fa-icon :icon="['fas', 'caret-right']" />
+            <fa-icon :icon="['fas', 'caret-right']"/>
           </button>
         </div>
       </div>
@@ -182,7 +185,11 @@ export default {
     nicknameInputChange (event) {
       const nickname = event.target.value.trim();
 
-      if (nickname === '') { this.isEmptyNickname = true; } else { this.isEmptyNickname = false; }
+      if (nickname === '') {
+        this.isEmptyNickname = true;
+      } else {
+        this.isEmptyNickname = false;
+      }
 
       this.passDuplicate = false;
     },
@@ -223,7 +230,9 @@ export default {
         });
     },
     onClickSignupBack () {
-      if (this.mode === 'signUp') { this.$auth.logout(); }
+      if (this.mode === 'signUp') {
+        this.$auth.logout();
+      }
       this.screenFlag = false;
     },
     onClickSignupSubmit () {
