@@ -4,7 +4,7 @@ import * as FontAwesome from './src/plugins/icon/fontawesome';
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'KHUVID',
+    title: 'KHUVID-19',
     htmlAttrs: {
       lang: 'en',
     },
@@ -20,12 +20,29 @@ export default {
         content: 'KHUVID는 코로나 19 백신 접종 후기 플랫폼입니다.',
       },
       {
-        name: 'format-detection',
-        content: 'telephone=no',
+        hid: 'og:type',
+        name: 'og:type',
+        content: 'website',
       },
       {
-        name: 'google',
-        content: 'notranslate',
+        hid: 'og:title',
+        name: 'og:title',
+        content: 'KHUVID-19',
+      },
+      {
+        hid: 'og:description',
+        name: 'og:description',
+        content: 'KHUVID는 코로나 19 백신 접종 후기 플랫폼입니다.',
+      },
+      {
+        hid: 'og:image',
+        name: 'og:image',
+        content: 'article',
+      },
+      {
+        hid: 'og:url',
+        name: 'og:url',
+        content: 'http://125.130.125.108.nip.io:20502/',
       },
     ],
     link: [{
@@ -82,7 +99,7 @@ export default {
     strategies: {
       google: {
         clientId:
-          '442366876413-4a1q3lpghs2rc3pqeeg6fnqfp4cn1frk.apps.googleusercontent.com',
+          '696110534823-vs99c6j41lhailde2dprfp6ae7b442kf.apps.googleusercontent.com',
         codeChallengeMethod: '',
         responseType: ['token', 'id_token'],
       },
