@@ -15,6 +15,11 @@ export default {
         content: 'width=device-width, initial-scale=1',
       },
       {
+        hid: 'naver-site-verification',
+        name: 'naver-site-verification',
+        content: '0df5ecb5c1dc7e221d56b5c98491923133ef78a1',
+      },
+      {
         hid: 'description',
         name: 'description',
         content: 'KHUVID-19는 코로나 19 백신 접종 후기 플랫폼입니다.',
@@ -37,7 +42,7 @@ export default {
       {
         hid: 'og:image',
         name: 'og:image',
-        content: 'https://www.docdocdoc.co.kr/news/userArticlePhoto.html',
+        content: 'https://pds.medicaltimes.com/NewsPhoto/202101/1138336_1.jpg',
       },
       {
         hid: 'og:url',
