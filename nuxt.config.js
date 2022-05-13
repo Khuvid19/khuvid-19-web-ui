@@ -17,7 +17,7 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: 'KHUVID는 코로나 19 백신 접종 후기 플랫폼입니다.',
+        content: 'KHUVID-19는 코로나 19 백신 접종 후기 플랫폼입니다.',
       },
       {
         hid: 'og:type',
@@ -32,17 +32,17 @@ export default {
       {
         hid: 'og:description',
         name: 'og:description',
-        content: 'KHUVID는 코로나 19 백신 접종 후기 플랫폼입니다.',
+        content: 'KHUVID-19는 코로나 19 백신 접종 후기 플랫폼입니다.',
       },
       {
         hid: 'og:image',
         name: 'og:image',
-        content: 'article',
+        content: 'https://www.docdocdoc.co.kr/news/userArticlePhoto.html',
       },
       {
         hid: 'og:url',
         name: 'og:url',
-        content: 'http://125.130.125.108.nip.io:20502/',
+        content: 'http://khuvid-19.twoz.kr/',
       },
     ],
     link: [{
