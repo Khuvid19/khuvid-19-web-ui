@@ -14,6 +14,7 @@
         top-0
         left-0
         w-full
+        page-header
       "
     >
       <div
@@ -21,6 +22,13 @@
         @click="clickLogo"
       >
         KHUVID
+      </div>
+      <div
+        id="toggleBtn"
+        class="btn btn-sm text-xs self-center -mr-24 toggle-btn"
+        @click="changemode"
+      >
+        dark
       </div>
       <div
         v-if="$auth.loggedIn === false"
@@ -55,9 +63,14 @@ export default {
       }
       this.$auth.loginWith('google', { params: { prompt: 'select_account' } });
     },
+    changemode () {
+      document.documentElement.classList.toggle('dark');
+      const toggleBtn = document.getElementById('toggleBtn');
+      toggleBtn.innerHTML =
+        toggleBtn.innerHTML === 'light'
+          ? (toggleBtn.innerHTML = 'dark')
+          : (toggleBtn.innerHTML = 'light');
+    },
   },
 };
 </script>
-
-<style>
-</style>
