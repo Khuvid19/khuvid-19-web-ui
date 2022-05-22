@@ -3,12 +3,13 @@
     v-model="screenFlag"
     title="작성 후기"
     :menu-list="['수정', '삭제']"
+    class="bg-dark"
     @onClickBack="onClickBack"
     @onClickMenu="onClickMenu"
   >
     <div class="mt-3 w-screen overflow-y-scroll">
       <div class="flex mx-4 my-2 gap-2" style="width: calc(100% - 2rem)">
-        <div class="w-1/2 card bordered px-1 py-2 bg-white">
+        <div class="w-1/2 card bordered px-1 py-2 bg-white bg-dark-200">
           <div class="flex justify-between items-center mx-2">
             <div class="text-lg">
               나이
@@ -22,7 +23,7 @@
             </div>
           </div>
         </div>
-        <div class="w-1/2 card bordered px-1 py-2 bg-white">
+        <div class="w-1/2 card bordered px-1 py-2 bg-white bg-dark-200">
           <div class="flex justify-between items-center mx-2">
             <div class="text-lg">
               성별
@@ -37,7 +38,7 @@
           </div>
         </div>
       </div>
-      <div class="card mx-4 my-2 gap-2 bordered px-1 py-2 bg-white">
+      <div class="card mx-4 my-2 gap-2 bordered px-1 py-2 bg-white bg-dark-200">
         <div class="flex justify-between items-center mx-2">
           <div class="text-lg">
             백신 종류
@@ -51,7 +52,7 @@
           </div>
         </div>
       </div>
-      <div class="card mx-4 my-2 gap-2 bordered px-1 py-2 bg-white">
+      <div class="card mx-4 my-2 gap-2 bordered px-1 py-2 bg-white bg-dark-200">
         <div class="flex justify-between items-center mx-2">
           <div class="text-lg">
             접종날짜
@@ -65,7 +66,7 @@
           </div>
         </div>
       </div>
-      <div class="card mx-4 my-2 gap-2 bordered px-1 py-2 bg-white">
+      <div class="card mx-4 my-2 gap-2 bordered px-1 py-2 bg-white bg-dark-200">
         <div class="mx-2">
           <div class="flex justify-between items-center">
             <div class="text-lg">
@@ -85,7 +86,7 @@
           </div>
         </div>
       </div>
-      <div v-if="detailContent.sideEffects.length===0" class="card mx-4 my-2 gap-2 bordered px-1 py-2 bg-white">
+      <div v-if="detailContent.sideEffects.length===0" class="card mx-4 my-2 gap-2 bordered px-1 py-2 bg-white bg-dark-200">
         <div class="mx-2">
           <div class="flex justify-between items-center">
             <div class="text-lg">
@@ -101,7 +102,7 @@
           </div>
         </div>
       </div>
-      <div v-else class="card bordered px-3 py-4 mx-4 my-2 bg-white">
+      <div v-else class="card bordered px-3 py-4 mx-4 my-2 bg-white bg-dark-200">
         <div class="text-lg mb-1 ml-1">
           이상반응
         </div>
@@ -119,7 +120,7 @@
       </div>
       <div
         v-show="detailContent.detailDisc"
-        class="card bordered px-4 py-4 mx-4 my-2 bg-white"
+        class="card bordered px-4 py-4 mx-4 my-2 bg-white bg-dark-200"
       >
         <div>
           {{ detailContent.detailDisc }}
