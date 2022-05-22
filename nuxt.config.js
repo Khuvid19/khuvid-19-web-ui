@@ -26,28 +26,28 @@ export default {
       },
       {
         hid: 'og:type',
-        name: 'og:type',
+        property: 'og:type',
         content: 'website',
       },
       {
         hid: 'og:title',
-        name: 'og:title',
+        property: 'og:title',
         content: 'KHUVID-19',
       },
       {
         hid: 'og:description',
-        name: 'og:description',
+        property: 'og:description',
         content: 'KHUVID-19는 코로나 19 백신 접종 후기 플랫폼입니다.',
       },
       {
         hid: 'og:image',
-        name: 'og:image',
+        property: 'og:image',
         content: 'https://pds.medicaltimes.com/NewsPhoto/202101/1138336_1.jpg',
       },
       {
         hid: 'og:url',
-        name: 'og:url',
-        content: 'http://khuvid-19.twoz.kr/',
+        property: 'og:url',
+        content: 'http://khuvid-19.twoz.kr',
       },
     ],
     link: [{
