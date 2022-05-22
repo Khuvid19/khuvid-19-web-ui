@@ -40,7 +40,6 @@
       <detail-cont
         v-if="screenType === 'detail'"
         :detail-content="detailContent"
-        class="bg-dark-200"
       />
       <add-cont
         v-if="screenType === 'add'"
