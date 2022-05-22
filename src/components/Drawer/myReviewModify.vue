@@ -3,6 +3,7 @@
     v-model="screenFlag"
     title="작성 후기"
     ok-text="완료"
+    class="bg-dark"
     @onClickBack="onClickBack"
     @onClickOk="clickModify"
   >
@@ -17,10 +18,10 @@
               <div
                 v-for="(value, key) in getVaccine"
                 :key="key"
-                class="m-1 btn btn-outline btn-primary btn-sm"
+                class="m-1 btn btn-outline btn-primary btn-sm btn-review"
                 :style="{
-                  backgroundColor:vaccine===value.code?'#65C3C8 !important':'white !important',
-                  color:vaccine===value.code?'white !important':'#65C3C8 !important'
+                  backgroundColor:vaccine===value.code?'#65C3C8 !important':'white',
+                  color:vaccine===value.code?'white !important':'#65C3C8'
                 }"
                 @click="clickVaccine(value.code)"
               >
@@ -34,7 +35,7 @@
               </div>
             </div>
           </div>
-          <div class=" border rounded-box px-3 py-4 mx-4 my-2 bg-white">
+          <div class=" border rounded-box px-3 py-4 mx-4 my-2 bg-white bg-dark">
             <div class="text-lg mb-1 ml-1">
               접종 날짜
             </div>
@@ -48,7 +49,7 @@
                   <div class="flex items-center">
                     <input
                       :value="inputValue"
-                      class="text-center bg-white text-gray-700 w-full py-1 px-2 appearance-none border rounded-xl focus:outline-none focus:border-blue-500"
+                      class="text-center bg-white text-gray-700 w-full py-1 px-2 appearance-none border rounded-xl focus:outline-none focus:border-blue-500 bg-dark-200"
                       readonly
                       @click="togglePopover()"
                     >
@@ -65,7 +66,7 @@
               <div
                 v-for="(value, key) in YNList"
                 :key="key"
-                class="m-1 btn btn-outline btn-primary btn-sm"
+                class="m-1 btn btn-outline btn-primary btn-sm btn-review"
                 :style="{
                   backgroundColor:haveDisease===key?'#65C3C8 !important':'white !important',
                   color:haveDisease===key?'white !important':'#65C3C8 !important'
@@ -106,7 +107,7 @@
               <div
                 v-for="(value, key) in getSideEffects"
                 :key="key"
-                class="m-1 btn btn-outline btn-primary btn-sm"
+                class="m-1 btn btn-outline btn-primary btn-sm btn-review"
                 :style="{
                   backgroundColor:sideEffects.includes(value.code)?'#65C3C8 !important':'white !important',
                   color:sideEffects.includes(value.code)?'white !important':'#65C3C8 !important'
@@ -153,6 +154,7 @@
                   h-auto
                   write-textarea
                   resize-none
+                  bg-dark
                 "
               />
             </div>
