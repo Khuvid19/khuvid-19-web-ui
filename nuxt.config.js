@@ -86,6 +86,7 @@ export default {
       src: '@/plugins/infinite-loading.js',
       ssr: false,
     },
+    { src: '@/plugins/vue-gtag.js', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

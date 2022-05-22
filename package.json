@@ -31,6 +31,7 @@
     "v-calendar": "^2.3.4",
     "vue-axios-cors": "^1.0.1",
     "vue-carousel": "^0.18.0",
+    "vue-gtag": "^2.0.1",
     "vue-infinite-loading": "^2.4.5",
     "vuex": "^3.6.2",
     "xml-js": "^1.6.11"
