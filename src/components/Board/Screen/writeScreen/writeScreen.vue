@@ -7,7 +7,7 @@
     @onClickBack="onClickBack"
     @onClickOk="onClickOk"
   >
-    <div class="pl-4 pr-4 pt-4 h-fll">
+    <div class="pl-4 pr-4 pt-4 h-fll bg-dark-200">
       <input
         v-model="title"
         :maxlength="100"
@@ -46,6 +46,7 @@
       :check-flag="middleModalFlag"
       :text="modalMsg"
       ok-text="확인"
+      class="bg-dark-200"
       @clickOk="clickModalOk"
     />
   </full-screen>
