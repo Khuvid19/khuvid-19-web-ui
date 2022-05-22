@@ -2,7 +2,7 @@
   <div class="drawer-side">
     <label for="my-drawer-4" class="drawer-overlay"/>
     <ul
-      class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content pt-14"
+      class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content pt-14 bg-dark-200"
     >
       <div class="flex align-middle pl-4 mb-12">
         <div class="avatar self-center mr-4">
