@@ -126,7 +126,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   props: {
@@ -144,7 +144,7 @@ export default {
       getGenderName: 'User/getGenderType/getCodeName',
     }),
   },
-}
+};
 </script>
 
 <style>

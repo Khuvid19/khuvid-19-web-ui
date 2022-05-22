@@ -33,10 +33,10 @@ export default {
   },
   methods: {
     clickWriteBtn () {
-      this.$emit('clickWriteBtn')
+      this.$emit('clickWriteBtn');
     },
   },
-}
+};
 </script>
 
 <style>

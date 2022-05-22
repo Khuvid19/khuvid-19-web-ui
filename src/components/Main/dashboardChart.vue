@@ -8,7 +8,7 @@
               <button
                 v-for="(item,idx) in vaccineList"
                 :key="idx"
-                class="mr-2 mb-1 btn btn-outline gray btn-sm"
+                class="mr-2 mb-1 btn btn-outline gray btn-sm btn-chart"
                 :class="[changeBtnColor(item), hoverColor(item)]"
                 @click="changeChart(item)"
               >

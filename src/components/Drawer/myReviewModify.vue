@@ -86,15 +86,15 @@
                 v-model="diseaseDisc"
                 placeholder="기저질환을 입력해주세요."
                 class="
-        rounded-lg
-        border-2
-        focus:border-primary
-        outline-none
-        p-1
-        pl-2
-        w-full
-        my-2
-      "
+                  rounded-lg
+                  border-2
+                  focus:border-primary
+                  outline-none
+                  p-1
+                  pl-2
+                  w-full
+                  my-2
+                "
               >
             </div>
           </div>
@@ -127,15 +127,15 @@
                 v-model="sideEffectsDisc"
                 placeholder="이상반응을 입력해주세요."
                 class="
-        rounded-lg
-        border-2
-        focus:border-primary
-        outline-none
-        p-1
-        pl-2
-        w-full
-        my-2
-      "
+                  rounded-lg
+                  border-2
+                  focus:border-primary
+                  outline-none
+                  p-1
+                  pl-2
+                  w-full
+                  my-2
+                "
               >
             </div>
           </div>
@@ -146,14 +146,14 @@
                 placeholder="내용을 입력해주세요."
                 style="min-height: 200px"
                 class="
-        focus:border-primary
-        outline-none
-        w-full
-        rounded-lg
-        h-auto
-        write-textarea
-        resize-none
-      "
+                  focus:border-primary
+                  outline-none
+                  w-full
+                  rounded-lg
+                  h-auto
+                  write-textarea
+                  resize-none
+                "
               />
             </div>
           </div>

@@ -50,18 +50,18 @@ export default {
   },
   methods: {
     clickOk () {
-      this.$emit('clickOk')
-      this.closeModal()
+      this.$emit('clickOk');
+      this.closeModal();
     },
     clickCancel () {
-      this.$emit('clickCancel')
-      this.closeModal()
+      this.$emit('clickCancel');
+      this.closeModal();
     },
     closeModal () {
-      this.$emit('closeModal')
+      this.$emit('closeModal');
     },
   },
-}
+};
 </script>
 
 <style scoped>

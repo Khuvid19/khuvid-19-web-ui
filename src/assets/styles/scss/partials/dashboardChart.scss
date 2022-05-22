@@ -76,12 +76,16 @@
 // dark
 html.dark {
   .card {
-    background-color: rgb(30, 30, 30);
+    background-color: rgb(30, 30, 30) !important
   }
   .divline {
     border-color: rgb(132, 132, 132) !important;
   }
   .gray {
-    color: rgb(210, 210, 210);
+    color: rgb(210, 210, 210) !important;
   }
+  // .btn-chart {
+  //   background-color: #3e4042; // bg-dark-200
+  //   color: rgb(210, 210, 210);
+  // }
 }
