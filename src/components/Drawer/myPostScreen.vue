@@ -26,9 +26,9 @@
 </template>
 
 <script>
-import ListItem from '../Board/listItem'
-import DetailScreen from '../Board/Screen/detailScreen/detailScreen'
-import FullScreen from '../_Common/fullScreen'
+import ListItem from '../Board/listItem';
+import DetailScreen from '../Board/Screen/detailScreen/detailScreen';
+import FullScreen from '../_Common/fullScreen';
 
 export default {
   components: {
@@ -41,30 +41,30 @@ export default {
       screenFlag: false,
       myBoardList: null,
       boardId: null,
-    }
+    };
   },
   watch: {
     screenFlag: {
       handler (newVal) {
-        if (newVal) { this.fetchBoardList() }
+        if (newVal) { this.fetchBoardList(); }
       },
     },
   },
   methods: {
     fetchBoardList () {
       this.$axios.get('board/user').then((r) => {
-        this.myBoardList = r.data
-      })
+        this.myBoardList = r.data;
+      });
     },
     onClickBack () {
-      this.screenFlag = false
+      this.screenFlag = false;
     },
     clickBoardItem (boardId) {
-      this.boardId = boardId
-      this.$refs.detailScreen.screenFlag = true
+      this.boardId = boardId;
+      this.$refs.detailScreen.screenFlag = true;
     },
   },
-}
+};
 </script>
 
 <style>
