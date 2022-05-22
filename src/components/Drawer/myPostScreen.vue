@@ -2,9 +2,10 @@
   <full-screen
     v-model="screenFlag"
     title="내가 쓴 글"
+    class="bg-dark"
     @onClickBack="onClickBack"
   >
-    <div class="my-post-list pt-2 overflow-y-scroll bg-gray-100">
+    <div class="my-post-list pt-2 overflow-y-scroll bg-gray-100 bg-dark">
       <list-item
         v-for="item in myBoardList"
         :key="item.id"
@@ -13,6 +14,7 @@
         :content="item.content"
         :nickname="item.user.nickName"
         :comment-cnt="item.comments"
+        class="bg-dark-200"
         @click="clickBoardItem(item.id)"
         @fetchBoardList="fetchBoardList"
       />
