@@ -5,12 +5,11 @@
 }
 
 .gray {
-  color: rgb(147, 138, 153);
+  color: #938a99;
 }
 
 .active {
-  background-color: rgb(158, 208, 211);
-  // #9ed0d3
+  background-color:#9ed0d3;
 }
 
 .VueCarousel {
@@ -26,4 +25,44 @@
       margin-top: -1rem!important;
     }
   }
+}
+
+html.dark {
+  .gray {
+    color: #fafafa;
+  }
+  .stat {
+    background-color: #1e1e1e;
+  }
+  .stat-title {
+    color: #e6e6e6 !important;
+    opacity: 1;
+  }
+  .VueCarousel-pagination {
+    margin-top: -2rem;
+    z-index: 10;
+    .VueCarousel-dot-container {
+      margin-top: -1rem!important;
+      .VueCarousel-dot {
+        margin-top: -1rem!important;
+      }
+    }
+  }
+  .VueCarousel-dot {
+      position: relative;
+      background-color: transparent !important;
+      &::after {
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-radius: 100%;
+        background-color: gray;
+        position: absolute;
+        margin-top: -0.4rem;
+        margin-left: -0.2rem;
+      }
+      &--active::after {
+        background-color: #417d87;
+      }
+    }
 }

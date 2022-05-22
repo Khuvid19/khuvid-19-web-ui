@@ -1,12 +1,12 @@
-@import "mixins.scss";
-@import "partials/header.scss";
-@import "partials/body.scss";
-@import "partials/footer.scss";
-@import "partials/board.scss";
-@import "partials/review.scss";
-@import "partials/fullScreen.scss";
-@import "partials/dashboard.scss";
-@import "partials/dashboardChart.scss";
+@import 'mixins.scss';
+@import 'partials/header.scss';
+@import 'partials/body.scss';
+@import 'partials/footer.scss';
+@import 'partials/board.scss';
+@import 'partials/review.scss';
+@import 'partials/fullScreen.scss';
+@import 'partials/dashboard.scss';
+@import 'partials/dashboardChart.scss';
 
 html {
   font-size: 14px;
@@ -22,4 +22,29 @@ html {
 *::-webkit-scrollbar {
   display: none;
   /* Chrome, Safari, Opera*/
+}
+
+html.dark {
+  .text-white {
+    color: #fafafa;
+  }
+  .text-primary {
+    color: #417d87;
+  }
+  .text-success {
+    
+  }
+  .text-error {
+
+  }
+  .btn-primary {
+    background-color: #417d87;
+    border-color: #417d87;
+  }
+  .bg-primary {
+    background-color: #417d87;
+  }
+  .bg-base-200 {
+    background-color: #3e4042;
+  }
 }

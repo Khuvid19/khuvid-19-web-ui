@@ -19,7 +19,7 @@
         </div>
         <div class="divline -mt-2 mb-2" />
         <bar-chart
-          class="-mt-8 mb-4"
+          class="-mt-8 mb-4 chartFontColor"
           style="width: 95%; margin-left: 2%; height:400px;"
           :data="chartData"
           :options="chartOptions"
@@ -51,6 +51,7 @@ export default {
       symptomCode: [],
       symptomList: [],
       symptomCount: {},
+      chartFontColor: 'rgb(100, 100, 100)',
     };
   },
   created () {
@@ -73,6 +74,9 @@ export default {
   },
   methods: {
     async initChart () {
+      // if (document.documentElement.classList.contains('dark')) {
+      //   this.chartFontColor = 'rgb(230, 230, 230)';
+      // }
       this.initOptions();
       await this.getAPI();
       this.initData();
@@ -84,9 +88,15 @@ export default {
         scales: {
           x: {
             ticks: {
+              color: this.chartFontColor,
               callback (value) {
                 return value + '%';
               },
+            },
+          },
+          y: {
+            ticks: {
+              color: this.chartFontColor,
             },
           },
         },
@@ -116,6 +126,9 @@ export default {
         backgroundColor: this.backgroundColor,
         data: Array.from({ length: 14 }, (_, i) => (this.symptomCount[this.symptomCode[i]] / this.allCount) * 100),
       });
+      if (document.documentElement.classList.contains('dark')) {
+        this.chartFontColor = 'rgb(220, 220, 220)';
+      }
     },
     async getAPI () {
       try {
