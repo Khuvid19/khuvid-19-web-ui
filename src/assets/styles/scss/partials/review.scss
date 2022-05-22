@@ -17,3 +17,19 @@
 .tag{
   @apply m-1 btn btn-outline btn-primary btn-sm;
 }
+
+html.dark {
+  .bg-dark {
+    background-color: rgb(30, 30, 30);
+  }
+  .search-dark {
+    background-color: rgb(30, 30, 30);
+    color: rgb(230, 230, 230);
+  }
+  input::placeholder {
+    color: rgb(230, 230, 230);
+  }
+  fa-icon {
+    color: rgb(230, 230, 230);
+  }
+}

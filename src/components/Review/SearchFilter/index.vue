@@ -1,10 +1,10 @@
 <template>
   <div class="w-screen">
-    <div class="bg-white flex justify-between items-center m-2 p-2">
+    <div class="bg-white flex justify-between items-center m-2 p-2 bg-dark">
       <form @submit.prevent="clickSearch">
         <input
           v-model="detailDisc"
-          class="w-full outline-none"
+          class="w-full outline-none search-dark"
           placeholder="검색어를 입력해주세요."
         >
       </form>
@@ -17,7 +17,7 @@
     </div>
     <div class="h-px bg-gray-200 m-2" />
     <div
-      class="bg-white flex justify-start items-center m-2 p-2"
+      class="bg-white flex justify-start items-center m-2 p-2 bg-dark"
       @click="openTagFilter"
     >
       <fa-icon
@@ -25,8 +25,8 @@
         class="bg-white mr-2"
         style="font-size: 20px"
       />
-      <div class="flex w-full overflow-x-scroll">
-        <div v-if="filterTagList.length===0" class="text-gray-400">
+      <div class="flex w-full overflow-x-scroll bg-dark">
+        <div v-if="filterTagList.length===0" class="text-gray-400 search-dark">
           필터로 접종후기를 조회해 보세요.
         </div>
         <div
@@ -39,7 +39,7 @@
           style="background-color: white; color: #65C3C8;
                  border: 1px solid #65C3C8"
         >
-          <div>{{ item }}</div>
+          <div>ffff{{ item }}</div>
         </div>
       </div>
     </div>

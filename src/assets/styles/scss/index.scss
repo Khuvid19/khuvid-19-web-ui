@@ -25,11 +25,12 @@ html {
 }
 
 html.dark {
+  color: #fafafa;
   .text-white {
-    color: #fafafa;
+    color: #fafafa !important;
   }
   .text-primary {
-    color: #417d87;
+    color: #417d87 !important;
   }
   .text-success {
     
@@ -38,13 +39,17 @@ html.dark {
 
   }
   .btn-primary {
-    background-color: #417d87;
-    border-color: #417d87;
+    background-color: #417d87 !important;
+    border-color: #417d87 !important;
+    color: #fafafa !important;
   }
   .bg-primary {
-    background-color: #417d87;
+    background-color: #417d87 !important;
   }
   .bg-base-200 {
-    background-color: #3e4042;
+    background-color: #3e4042 !important;
+  }
+  .bg-gray-200 {
+    background-color: #848484 !important;
   }
 }
