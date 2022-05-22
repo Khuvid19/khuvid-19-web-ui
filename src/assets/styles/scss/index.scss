@@ -41,6 +41,12 @@ html.dark {
   .content-area {
     background-color: #3e4042;
   }
+  input::placeholder {
+    color: rgb(230, 230, 230);
+  }
+  textarea::placeholder {
+    color: rgb(230, 230, 230);
+  }
   .btn-primary {
     background-color: #417d87 !important;
     border-color: #417d87 !important;
@@ -58,9 +64,6 @@ html.dark {
     background-color: #3e4042 !important;
     border-color: #3e4042 !important;
     color: #fafafa !important; 
-  }
-  .bg-red {
-    background-color: red !important;
   }
   .bg-primary {
     background-color: #417d87 !important;
