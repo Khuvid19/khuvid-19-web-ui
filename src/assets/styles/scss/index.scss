@@ -24,6 +24,58 @@ html {
   /* Chrome, Safari, Opera*/
 }
 
+// 보라색, 화이자
+.PFIZER {
+  background-color: rgb(180, 110, 188);
+  border-color: rgb(180, 110, 188);
+  color: white;
+}
+
+.hoverPFIZER:hover {
+  background-color: rgb(180, 110, 188);
+  border-color: rgb(180, 110, 188);
+  color: white;
+}
+
+// 빨간색, 모더나
+.MODERNA {
+  background-color: rgb(237, 98, 56);
+  border-color: rgb(237, 98, 56);
+  color: white;
+}
+
+.hoverMODERNA:hover {
+  background-color: rgb(237, 98, 56);
+  border-color: rgb(237, 98, 56);
+  color: white;
+}
+
+// 기본색, 아스트라제네카
+.AZ {
+  background-color: rgb(98, 176, 182);
+  border-color: rgb(98, 176, 182);
+  color: white;
+}
+
+.hoverAZ:hover {
+  background-color: rgb(98, 176, 182);
+  border-color: rgb(98, 176, 182);
+  color: white;
+}
+
+//파란색, 얀센
+.ANSEN {
+  background-color: rgb(81, 134, 236);
+  border-color: rgb(81, 134, 236);
+  color: white;
+}
+
+.hoverANSEN:hover {
+  background-color: rgb(81, 134, 236);
+  border-color: rgb(81, 134, 236);
+  color: white;
+}
+
 html.dark {
   color: #fafafa;
   .text-white {
@@ -84,5 +136,56 @@ html.dark {
   }
   .bg-gray-200 {
     background-color: #848484 !important;
+  }
+  // 보라색, 화이자
+  .PFIZER {
+    background-color: #a463ab;
+    border-color: #a463ab;
+    color: white;
+  }
+
+  .hoverPFIZER:hover {
+    background-color: #a463ab;
+    border-color: #a463ab;
+    color: white;
+  }
+
+  // 빨간색, 모더나
+  .MODERNA {
+    background-color: #b4551e;
+    border-color: #b4551e;
+    color: white;
+  }
+
+  .hoverMODERNA:hover {
+    background-color: #b4551e;
+    border-color: #b4551e;
+    color: white;
+  }
+
+  // 기본색, 아스트라제네카
+  .AZ {
+    background-color: #417d87;
+    border-color: #417d87;
+    color: white;
+  }
+
+  .hoverAZ:hover {
+    background-color: #417d87;
+    border-color: #417d87;
+    color: white;
+  }
+
+  //파란색, 얀센
+  .ANSEN {
+    background-color: #325faf;
+    border-color: #325faf;
+    color: white;
+  }
+
+  .hoverANSEN:hover {
+    background-color: #325faf;
+    border-color: #325faf;
+    color: white;
   }
 }
