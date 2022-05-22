@@ -38,10 +38,24 @@ html.dark {
   .text-error {
 
   }
+  .content-area {
+    background-color: #3e4042;
+  }
   .btn-primary {
     background-color: #417d87 !important;
     border-color: #417d87 !important;
     color: #fafafa !important;
+  }
+  .bg-dark {
+    background-color: #1e1e1e !important;
+  }
+  .bg-dark-200 {
+    background-color: #3e4042 !important;
+    border-color: #3e4042 !important;
+    color: #fafafa !important; 
+  }
+  .bg-red {
+    background-color: red !important;
   }
   .bg-primary {
     background-color: #417d87 !important;

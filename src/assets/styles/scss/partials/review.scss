@@ -19,14 +19,23 @@
 }
 
 html.dark {
-  .bg-dark {
-    background-color: rgb(30, 30, 30);
+  full-screen {
+    background-color: #1e1e1e;
+    color: #fafafa;
   }
   .search-dark {
     background-color: rgb(30, 30, 30);
     color: rgb(230, 230, 230);
   }
+  .btn-review {
+    background-color: #3e4042 !important;
+    border-color: #3e4042 !important;
+    color: #fafafa !important;
+  }
   input::placeholder {
+    color: rgb(230, 230, 230);
+  }
+  textarea::placeholder {
     color: rgb(230, 230, 230);
   }
   fa-icon {
