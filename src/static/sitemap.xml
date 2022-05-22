@@ -7,10 +7,22 @@
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
 
-<url>
-  <loc>http://khuvid-19.twoz.kr/</loc>
-  <lastmod>2022-05-22T09:12:21+00:00</lastmod>
-</url>
+  <url>
+    <loc>http://khuvid-19.twoz.kr/</loc>
+    <lastmod>2022-05-22T09:12:21+00:00</lastmod>
+  </url>
+  <url>
+    <loc>http://khuvid-19.twoz.kr/main</loc>
+    <lastmod>2022-05-22T09:12:21+00:00</lastmod>
+  </url>
+  <url>
+    <loc>http://khuvid-19.twoz.kr/review</loc>
+    <lastmod>2022-05-22T09:12:21+00:00</lastmod>
+  </url>
+  <url>
+    <loc>http://khuvid-19.twoz.kr/board</loc>
+    <lastmod>2022-05-22T09:12:21+00:00</lastmod>
+  </url>
 
 
 </urlset>
