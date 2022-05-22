@@ -20,6 +20,11 @@ export default {
         content: '0df5ecb5c1dc7e221d56b5c98491923133ef78a1',
       },
       {
+        hid: 'google-site-verification',
+        name: 'google-site-verification',
+        content: '0I_ZUwlvkjuEOgsdcg_UD01bHdxyWlTjcln8cK8F6mQ',
+      },
+      {
         hid: 'description',
         name: 'description',
         content: 'KHUVID-19는 코로나 19 백신 접종 후기 플랫폼입니다.',
