@@ -3,6 +3,7 @@
     v-model="screenFlag"
     title="게시글"
     :menu-list="isOwn ? ['수정', '삭제'] : []"
+    class="bg-dark"
     @onClickBack="onClickBack"
     @onClickMenu="onClickMenu"
   >
@@ -18,9 +19,10 @@
         :content="data.content"
         :date="data.date"
         :nickname="data.userName"
+        class="bg-dark-200"
       />
       <div
-        class="mt-4 mb-2 w-full bg-gray-300 rounded-full"
+        class="mt-4 mb-4 w-full bg-gray-300 rounded-full"
         style="height: 1px"
       />
       <div class="overflow-y-hidden">
@@ -30,11 +32,12 @@
             :nickname="comment.userName"
             :content="comment.content"
             :date="comment.date"
+            class="p-2 bg-dark-200"
           />
           <div
             v-if="idx !== data.commentList.length - 1"
             :key="`line-${comment.commentId}`"
-            class="pl-2 pr-2"
+            class="pl-2 pr-2 bg-dark-200"
           >
             <div
               class="mt-2 mb-2 w-full bg-gray-200 rounded-full"
@@ -46,6 +49,7 @@
       <CommentInput
         v-if="$auth.loggedIn"
         :board-id="data.boardId"
+        class="bg-dark"
         @afterCommentWrite="afterCommentWrite"
       />
     </div>
