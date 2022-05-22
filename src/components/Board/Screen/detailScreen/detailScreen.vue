@@ -69,13 +69,13 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import WriteScreen from '../writeScreen/writeScreen'
-import DetailContent from './detailContent'
-import CommentInput from './commentInput'
-import CommentItem from './commentItem'
-import FullScreen from '@/components/_Common/fullScreen'
-import MiddleModal from '@/components/_Common/middleModal'
+import { mapGetters } from 'vuex';
+import WriteScreen from '../writeScreen/writeScreen';
+import DetailContent from './detailContent';
+import CommentInput from './commentInput';
+import CommentItem from './commentItem';
+import FullScreen from '@/components/_Common/fullScreen';
+import MiddleModal from '@/components/_Common/middleModal';
 export default {
   name: 'BoardDetailScreen',
   components: {
@@ -99,7 +99,7 @@ export default {
       data: {},
       writeScreenFlag: false,
       isOwn: false,
-    }
+    };
   },
   computed: {
     ...mapGetters({
@@ -109,7 +109,7 @@ export default {
   watch: {
     screenFlag: {
       handler (newVal) {
-        if (newVal) { this.fetchData() }
+        if (newVal) { this.fetchData(); }
       },
     },
   },
@@ -117,53 +117,53 @@ export default {
     async fetchData () {
       this.data = (
         await this.$axios.get(`board/detail?boardId=${this.boardId}`)
-      ).data
-      if (this.user && this.data.userName === this.user.nickName) { this.isOwn = true }
+      ).data;
+      if (this.user && this.data.userName === this.user.nickName) { this.isOwn = true; }
     },
     onClickBack () {
-      this.screenFlag = false
+      this.screenFlag = false;
     },
     handleBoardDelete () {
       const params = {
         boardId: this.data.boardId,
-      }
+      };
       this.$axios.delete('board', { data: params }).then((r) => {
-        this.$emit('afterEdit')
-        this.screenFlag = false
-      })
+        this.$emit('afterEdit');
+        this.screenFlag = false;
+      });
     },
     onClickMenu (menu) {
       if (menu === '삭제') {
-        this.middleModalFlag = true
+        this.middleModalFlag = true;
       } else if (menu === '수정') {
-        this.$refs.writeScreen.screenFlag = true
+        this.$refs.writeScreen.screenFlag = true;
       }
     },
     afterCommentWrite () {
-      this.fetchData()
-      this.$emit('afterEdit')
+      this.fetchData();
+      this.$emit('afterEdit');
     },
     afterEdit () {
-      this.fetchData()
-      this.$emit('afterEdit')
+      this.fetchData();
+      this.$emit('afterEdit');
     },
     clickModalCancel () {
-      this.middleModalFlag = false
+      this.middleModalFlag = false;
     },
     clickModalOk () {
-      this.middleModalFlag = false
+      this.middleModalFlag = false;
 
       const params = {
         boardId: this.data.boardId,
-      }
+      };
 
       this.$axios.delete('board', { data: params }).then((r) => {
-        this.$emit('afterEdit')
-        this.screenFlag = false
-      })
+        this.$emit('afterEdit');
+        this.screenFlag = false;
+      });
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
