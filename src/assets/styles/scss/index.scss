@@ -39,7 +39,12 @@ html.dark {
 
   }
   .content-area {
-    background-color: #3e4042;
+    background-color: #3e4042; // bg-dark-200
+  }
+  .bg-SignUp { // 분리 필요
+    .content-area {
+      background-color: #1e1e1e; // bg-dark-200
+    }
   }
   input::placeholder {
     color: rgb(230, 230, 230);

@@ -1,6 +1,6 @@
 <template>
   <div class="drawer-side">
-    <label for="my-drawer-4" class="drawer-overlay"/>
+    <label for="my-drawer-4" class="drawer-overlay" />
     <ul
       class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content pt-14 bg-dark-200"
     >
@@ -25,19 +25,19 @@
       </div>
       <li class="mb-2">
         <a @click="clickMenu('myInfo')">
-          <fa-icon class="text-2xl mr-6" :icon="['fas', 'user']"/>
+          <fa-icon class="text-2xl mr-6" :icon="['fas', 'user']" />
           내 정보
         </a>
       </li>
       <li class="mb-2">
         <a @click="clickMenu('myReview')">
-          <fa-icon class="text-2xl mr-5" :icon="['fas', 'edit']"/>
+          <fa-icon class="text-2xl mr-5" :icon="['fas', 'edit']" />
           내가 쓴 후기
         </a>
       </li>
       <li>
         <a @click="clickMenu('myPost')">
-          <fa-icon class="text-2xl mr-7" :icon="['fas', 'file-alt']"/>
+          <fa-icon class="text-2xl mr-7" :icon="['fas', 'file-alt']" />
           내가 쓴 글
         </a>
       </li>
@@ -52,9 +52,9 @@
           로그아웃</a>
       </li>
     </ul>
-    <sign-up ref="myInfoScreen" mode="myInfo"/>
-    <my-review-screen ref="myReviewScreen"/>
-    <my-post-screen ref="myPostScreen"/>
+    <sign-up ref="myInfoScreen" mode="myInfo" />
+    <my-review-screen ref="myReviewScreen" />
+    <my-post-screen ref="myPostScreen" />
   </div>
 </template>
 

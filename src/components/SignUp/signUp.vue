@@ -3,10 +3,11 @@
     v-model="screenFlag"
     :title="mode === 'signUp' ? '회원가입' : '내 정보'"
     :ok-text="mode === 'signUp' ? '완료' : '수정'"
+    class="bg-dark bg-SignUp"
     @onClickBack="onClickSignupBack"
     @onClickOk="onClickSignupSubmit"
   >
-    <div class="p-8">
+    <div class="p-8 bg-dark">
       <div class="avatar flex justify-center">
         <div class="mb-12 rounded-full w-20 h-20">
           <img
@@ -17,10 +18,10 @@
       </div>
       <div class="text-xl flex items-center justify-between mb-12">
         이메일<input
-        v-model="email"
-        :disabled="true"
-        class="input input-disabled w-64"
-      >
+          v-model="email"
+          :disabled="true"
+          class="input input-disabled w-64 bg-dark-200"
+        >
       </div>
       <div class="text-xl flex items-center justify-between mb-12">
         성별
@@ -46,7 +47,7 @@
                 ageListIdx === 0 ? ageList.length - 1 : ageListIdx - 1
             "
           >
-            <fa-icon :icon="['fas', 'caret-left']"/>
+            <fa-icon :icon="['fas', 'caret-left']" />
           </button>
           <div
             style="border-width: 1px"
@@ -61,9 +62,10 @@
               align-middle
               justify-center
               h-12
+              bg-dark-200
             "
           >
-            <div class="m-auto">
+            <div class="m-auto ">
               {{ ageValue }}
             </div>
           </div>
@@ -74,7 +76,7 @@
             class="btn text-xl btn-primary"
             @click="ageListIdx = (ageListIdx + 1) % ageList.length"
           >
-            <fa-icon :icon="['fas', 'caret-right']"/>
+            <fa-icon :icon="['fas', 'caret-right']" />
           </button>
         </div>
       </div>
@@ -83,7 +85,7 @@
         <div class="w-64 flex justify-between align-middle">
           <input
             v-model="nickname"
-            class="input border-gray-400 bg-white w-40"
+            class="input border-gray-400 bg-white w-40 bg-dark-200"
             @input="nicknameInputChange($event)"
           >
           <label
