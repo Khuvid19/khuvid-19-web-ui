@@ -8,10 +8,10 @@
         <div
           v-for="(value, key) in getVaccine"
           :key="key"
-          class="m-1 btn btn-outline btn-primary btn-sm"
+          class="m-1 btn btn-outline btn-primary btn-sm btn-review"
           :style="{
-            backgroundColor:vaccines.includes(value.code)?'#65C3C8 !important':'white !important',
-            color:vaccines.includes(value.code)?'white !important':'#65C3C8 !important'
+            backgroundColor:vaccines.includes(value.code)?'#65C3C8 !important':'white',
+            color:vaccines.includes(value.code)?'white !important':'#65C3C8'
           }"
           @click="clickVaccine(value.code)"
         >
@@ -33,10 +33,10 @@
         <div
           v-for="(value, idx) in getGender"
           :key="idx"
-          class="m-1 btn btn-outline btn-primary btn-sm"
+          class="m-1 btn btn-outline btn-primary btn-sm btn-review"
           :style="{
-            backgroundColor:authorGenders.includes(value.code)?'#65C3C8 !important':'white !important',
-            color:authorGenders.includes(value.code)?'white !important':'#65C3C8 !important'
+            backgroundColor:authorGenders.includes(value.code)?'#65C3C8 !important':'white',
+            color:authorGenders.includes(value.code)?'white !important':'#65C3C8'
           }"
           @click="clickGender(value.code)"
         >
@@ -58,10 +58,10 @@
         <div
           v-for="(value, idx) in getAge"
           :key="idx"
-          class="m-1 btn btn-outline btn-primary btn-sm"
+          class="m-1 btn btn-outline btn-primary btn-sm btn-review"
           :style="{
-            backgroundColor:authorAges.includes(value.code)?'#65C3C8 !important':'white !important',
-            color:authorAges.includes(value.code)?'white !important':'#65C3C8 !important'
+            backgroundColor:authorAges.includes(value.code)?'#65C3C8 !important':'white',
+            color:authorAges.includes(value.code)?'white !important':'#65C3C8'
           }"
           @click="clickAge(value.code)"
         >
@@ -83,10 +83,10 @@
         <div
           v-for="(value, key) in YNList"
           :key="key"
-          class="m-1 btn btn-outline btn-primary btn-sm"
+          class="m-1 btn btn-outline btn-primary btn-sm btn-review"
           :style="{
-            backgroundColor:haveDisease===key?'#65C3C8 !important':'white !important',
-            color:haveDisease===key?'white !important':'#65C3C8 !important'
+            backgroundColor:haveDisease===key?'#65C3C8 !important':'white',
+            color:haveDisease===key?'white !important':'#65C3C8'
           }"
           @click="clickHaveDisease(key)"
         >
@@ -100,7 +100,7 @@
         </div>
       </div>
     </div>
-    <div class="border rounded-box px-3 py-4 mx-4 my-2 bg-white">
+    <div class="border rounded-box px-3 py-4 mx-4 my-2 bg-white bg-dark">
       <div class="text-lg mb-1 ml-1">
         접종날짜
       </div>
@@ -110,7 +110,7 @@
             <div class="flex justify-between items-center">
               <input
                 :value="inputValue.start"
-                class="border px-2 py-1 rounded focus:outline-none focus:border-indigo-300"
+                class="border px-2 py-1 rounded focus:outline-none focus:border-indigo-300 bg-dark-200"
                 style="width: calc(50% - 20px)"
                 v-on="inputEvents.start"
               >
@@ -129,7 +129,7 @@
               </svg>
               <input
                 :value="inputValue.end"
-                class="border px-2 py-1 rounded focus:outline-none focus:border-indigo-300"
+                class="border px-2 py-1 rounded focus:outline-none focus:border-indigo-300 bg-dark-200"
                 style="width: calc(50% - 20px)"
                 v-on="inputEvents.end"
               >
@@ -146,10 +146,10 @@
         <div
           v-for="(value) in getSideEffects"
           :key="value.code"
-          class="m-1 btn btn-outline btn-primary btn-sm"
+          class="m-1 btn btn-outline btn-primary btn-sm btn-review"
           :style="{
-            backgroundColor:sideEffects.includes(value.code)?'#65C3C8 !important':'white !important',
-            color:sideEffects.includes(value.code)?'white !important':'#65C3C8 !important'
+            backgroundColor:sideEffects.includes(value.code)?'#65C3C8 !important':'white',
+            color:sideEffects.includes(value.code)?'white !important':'#65C3C8'
           }"
           @click="clickSideEffects(value.code)"
         >
