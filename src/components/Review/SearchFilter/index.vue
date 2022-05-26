@@ -39,7 +39,7 @@
           style="background-color: white; color: #65C3C8;
                  border: 1px solid #65C3C8"
         >
-          <div>ffff{{ item }}</div>
+          <div>{{ item }}</div>
         </div>
       </div>
     </div>
