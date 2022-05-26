@@ -10,8 +10,10 @@
           :key="key"
           class="m-1 btn btn-outline btn-primary btn-sm btn-review"
           :style="{
-            backgroundColor:vaccines.includes(value.code)?'#65C3C8 !important':'white',
-            color:vaccines.includes(value.code)?'white !important':'#65C3C8'
+            backgroundColor: vaccines.includes(value.code) ?
+              darkFlag ? '#417d87 !important' : '#65C3C8 !important' : 'white',
+            color: vaccines.includes(value.code) ? 'white !important' :
+              darkFlag ? '#417d87' : '#65C3C8'
           }"
           @click="clickVaccine(value.code)"
         >
@@ -35,8 +37,13 @@
           :key="idx"
           class="m-1 btn btn-outline btn-primary btn-sm btn-review"
           :style="{
-            backgroundColor:authorGenders.includes(value.code)?'#65C3C8 !important':'white',
-            color:authorGenders.includes(value.code)?'white !important':'#65C3C8'
+            backgroundColor: authorGenders.includes(value.code) ?
+              darkFlag ? '#417d87 !important' : '#65C3C8 !important' : 'white',
+            color:authorGenders.includes(value.code) ? 'white !important' :
+              darkFlag ? '#417d87' : '#65C3C8'
+          }"
+          :class="{
+            'AZ': vaccines.includes(value.code),
           }"
           @click="clickGender(value.code)"
         >
@@ -60,8 +67,10 @@
           :key="idx"
           class="m-1 btn btn-outline btn-primary btn-sm btn-review"
           :style="{
-            backgroundColor:authorAges.includes(value.code)?'#65C3C8 !important':'white',
-            color:authorAges.includes(value.code)?'white !important':'#65C3C8'
+            backgroundColor: authorAges.includes(value.code) ?
+              darkFlag ? '#417d87 !important' : '#65C3C8 !important' : 'white',
+            color:authorAges.includes(value.code) ? 'white !important' :
+              darkFlag ? '#417d87' : '#65C3C8'
           }"
           @click="clickAge(value.code)"
         >
@@ -85,8 +94,10 @@
           :key="key"
           class="m-1 btn btn-outline btn-primary btn-sm btn-review"
           :style="{
-            backgroundColor:haveDisease===key?'#65C3C8 !important':'white',
-            color:haveDisease===key?'white !important':'#65C3C8'
+            backgroundColor: haveDisease===key ?
+              darkFlag ? '#417d87 !important' : '#65C3C8 !important' : 'white',
+            color:haveDisease===key ? 'white !important' :
+              darkFlag ? '#417d87' : '#65C3C8'
           }"
           @click="clickHaveDisease(key)"
         >
@@ -148,8 +159,10 @@
           :key="value.code"
           class="m-1 btn btn-outline btn-primary btn-sm btn-review"
           :style="{
-            backgroundColor:sideEffects.includes(value.code)?'#65C3C8 !important':'white',
-            color:sideEffects.includes(value.code)?'white !important':'#65C3C8'
+            backgroundColor: sideEffects.includes(value.code) ?
+              darkFlag ? '#417d87 !important' : '#65C3C8 !important' : 'white',
+            color:sideEffects.includes(value.code) ? 'white !important' :
+              darkFlag ? '#417d87' : '#65C3C8'
           }"
           @click="clickSideEffects(value.code)"
         >
@@ -199,7 +212,17 @@ export default {
       sideEffects: [],
       vaccines: [],
       haveDisease: null,
+      darkFlag: document.documentElement.classList.contains('dark'),
     };
+  },
+  computed: {
+    ...mapGetters({
+      getReviewParams: 'Review/getPage/getPageParams',
+      getSideEffects: 'Review/sideEffectsList/getListContents',
+      getVaccine: 'Review/vaccineList/getListContents',
+      getAge: 'User/getAgeType/getListContents',
+      getGender: 'User/getGenderType/getListContents',
+    }),
   },
   watch: {
     screenFlag: {
@@ -217,15 +240,6 @@ export default {
         }
       },
     },
-  },
-  computed: {
-    ...mapGetters({
-      getReviewParams: 'Review/getPage/getPageParams',
-      getSideEffects: 'Review/sideEffectsList/getListContents',
-      getVaccine: 'Review/vaccineList/getListContents',
-      getAge: 'User/getAgeType/getListContents',
-      getGender: 'User/getGenderType/getListContents',
-    }),
   },
   methods: {
     ...mapActions({
