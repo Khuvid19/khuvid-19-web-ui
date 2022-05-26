@@ -24,168 +24,167 @@ html {
   /* Chrome, Safari, Opera*/
 }
 
+$bg-dark: #1e1e1e;
+$bg-dark-100: #3e4042;
+$bg-dark-200: #848484;
+$text: #e6e6e6;
+$text-100: #fafafa;
+
+$PFIZER: #b46ebc;
+$PFIZER-dark: #a463ab;
+$MODERNA: #ed6238;
+$MODERNA-dark: #b4551e;
+$AZ: #62b0b6;
+$AZ-dark: #417d87;
+$ANSEN: #5186ec;
+$ANSEN-dark: #325faf;
+
 // 보라색, 화이자
 .PFIZER {
-  background-color: rgb(180, 110, 188);
-  border-color: rgb(180, 110, 188);
+  background-color: $PFIZER;
+  border-color: $PFIZER;
   color: white;
 }
-
 .hoverPFIZER:hover {
-  background-color: rgb(180, 110, 188);
-  border-color: rgb(180, 110, 188);
+  background-color: $PFIZER;
+  border-color: $PFIZER;
   color: white;
 }
-
 // 빨간색, 모더나
 .MODERNA {
-  background-color: rgb(237, 98, 56);
-  border-color: rgb(237, 98, 56);
+  background-color: $MODERNA;
+  border-color: $MODERNA;
   color: white;
 }
-
 .hoverMODERNA:hover {
-  background-color: rgb(237, 98, 56);
-  border-color: rgb(237, 98, 56);
+  background-color: $MODERNA;
+  border-color: $MODERNA;
   color: white;
 }
-
 // 기본색, 아스트라제네카
 .AZ {
-  background-color: rgb(98, 176, 182);
-  border-color: rgb(98, 176, 182);
+  background-color: $AZ;
+  border-color: $AZ;
   color: white;
 }
-
 .hoverAZ:hover {
-  background-color: rgb(98, 176, 182);
-  border-color: rgb(98, 176, 182);
+  background-color: $AZ;
+  border-color: $AZ;
   color: white;
 }
-
 //파란색, 얀센
 .ANSEN {
-  background-color: rgb(81, 134, 236);
-  border-color: rgb(81, 134, 236);
+  background-color: $ANSEN;
+  border-color: $ANSEN;
   color: white;
 }
-
 .hoverANSEN:hover {
-  background-color: rgb(81, 134, 236);
-  border-color: rgb(81, 134, 236);
+  background-color: $ANSEN;
+  border-color: $ANSEN;
   color: white;
 }
 
 html.dark {
-  color: #fafafa;
+  color: $text-100;
   .text-white {
-    color: #fafafa !important;
+    color: $text-100 !important;
   }
   .text-primary {
-    color: #417d87 !important;
+    color: $AZ-dark !important;
   }
-  .text-success {
-    
-  }
-  .text-error {
-
-  }
+  // .text-success {
+  // }
+  // .text-error {
+  // }
   .content-area {
-    background-color: #3e4042; // bg-dark-200
+    background-color: $bg-dark-100;
   }
   .bg-SignUp { // 분리 필요
     .content-area {
-      background-color: #1e1e1e; // bg-dark-200
+      background-color: $bg-dark;
     }
   }
   .menu {
-    background-color: #3e4042;
+    background-color: $bg-dark-100;
   }
   .modal-box {
-    background-color: #3e4042;
+    background-color: $bg-dark-100;
   }
   input::placeholder {
-    color: rgb(230, 230, 230);
+    color: $text;
   }
   textarea::placeholder {
-    color: rgb(230, 230, 230);
+    color: $text;
   }
   .btn-primary {
-    background-color: #417d87 !important;
-    border-color: #417d87 !important;
-    color: #fafafa !important;
+    background-color: $AZ-dark !important;
+    border-color: $AZ-dark !important;
+    color: $text-100 !important;
   }
   .btn-review {
-    background-color: #3e4042 !important;
-    border-color: #3e4042 !important;
-    color: #fafafa !important;
+    background-color: $bg-dark-100 !important;
+    border-color: $bg-dark-100 !important;
+    color: $text-100 !important;
   }
   .bg-dark {
-    background-color: #1e1e1e !important;
+    background-color: $bg-dark;
   }
   .bg-dark-200 {
-    background-color: #3e4042 !important;
-    border-color: #3e4042 !important;
-    color: #fafafa !important;
+    background-color: $bg-dark-100;
+    border-color: $bg-dark-100;
+    color: $text-100;
   }
   .bg-primary {
-    background-color: #417d87 !important;
+    background-color: $AZ-dark !important;
   }
   .bg-base-200 {
-    background-color: #3e4042 !important;
+    background-color: $bg-dark-100 !important;
   }
   .bg-gray-200 {
-    background-color: #848484 !important;
+    background-color: $bg-dark-200 !important;
   }
   // 보라색, 화이자
   .PFIZER {
-    background-color: #a463ab;
-    border-color: #a463ab;
+    background-color: $PFIZER-dark;
+    border-color: $PFIZER-dark;
     color: white;
   }
-
   .hoverPFIZER:hover {
-    background-color: #a463ab;
-    border-color: #a463ab;
+    background-color: $PFIZER-dark;
+    border-color: $PFIZER-dark;
     color: white;
   }
-
   // 빨간색, 모더나
   .MODERNA {
-    background-color: #b4551e;
-    border-color: #b4551e;
+    background-color: $MODERNA-dark;
+    border-color: $MODERNA-dark;
     color: white;
   }
-
   .hoverMODERNA:hover {
-    background-color: #b4551e;
-    border-color: #b4551e;
+    background-color: $MODERNA-dark;
+    border-color: $MODERNA-dark;
     color: white;
   }
-
   // 기본색, 아스트라제네카
   .AZ {
-    background-color: #417d87;
-    border-color: #417d87;
+    background-color: $AZ-dark;
+    border-color: $AZ-dark;
     color: white;
   }
-
   .hoverAZ:hover {
-    background-color: #417d87;
-    border-color: #417d87;
+    background-color: $AZ-dark;
+    border-color: $AZ-dark;
     color: white;
   }
-
   //파란색, 얀센
   .ANSEN {
-    background-color: #325faf;
-    border-color: #325faf;
+    background-color: $ANSEN-dark;
+    border-color: $ANSEN-dark;
     color: white;
   }
-
   .hoverANSEN:hover {
-    background-color: #325faf;
-    border-color: #325faf;
+    background-color: $ANSEN-dark;
+    border-color: $ANSEN-dark;
     color: white;
   }
 }
