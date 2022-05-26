@@ -83,6 +83,10 @@ export default {
       ssr: false,
     },
     {
+      src: '@/plugins/vue-carousel',
+      ssr: false,
+    },
+    {
       src: '@/plugins/calendar/vCalendar.js',
       ssr: false,
     },
