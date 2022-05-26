@@ -14,10 +14,12 @@
         @click="clickBoardItem(item.id)"
         @fetchBoardList="fetchBoardList"
       />
+      <client-only>
       <infinite-loading v-if="boardList.length" @infinite="scrolling">
         <div slot="no-results" />
         <div slot="no-more" />
       </infinite-loading>
+      </client-only>
     </div>
     <middle-modal
       :check-flag="middleModalFlag"

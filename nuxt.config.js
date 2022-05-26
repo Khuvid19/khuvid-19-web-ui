@@ -68,7 +68,7 @@ export default {
   },
   loading: false,
   srcDir: 'src/',
-  ssr: false,
+  ssr: true,
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     resolve(__dirname, 'src/assets/styles/css/tailwind.css'),
@@ -80,7 +80,7 @@ export default {
     '@/plugins/axios.js',
     {
       src: '@/plugins/chartJs/index',
-      mode: 'client',
+      ssr: false,
     },
     {
       src: '@/plugins/calendar/vCalendar.js',
@@ -91,7 +91,7 @@ export default {
       src: '@/plugins/infinite-loading.js',
       ssr: false,
     },
-    { src: '@/plugins/vue-gtag.js', mode: 'client' },
+    // { src: '@/plugins/vue-gtag.js', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -154,7 +154,6 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
     '@nuxtjs/proxy',
-    'nuxt-client-init-module',
     '@nuxtjs/dayjs',
     '@nuxtjs/pwa',
   ],

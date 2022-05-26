@@ -12,10 +12,12 @@
         :list-content="listContent"
         @clickDetail="clickDetail"
       />
+      <client-only>
       <infinite-loading v-if="listContent.length" @infinite="scrolling">
         <div slot="no-results"/>
         <div slot="no-more"/>
       </infinite-loading>
+      </client-only>
     </div>
 
     <full-screen
