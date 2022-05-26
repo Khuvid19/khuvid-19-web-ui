@@ -11,8 +11,10 @@
             :key="key"
             class="m-1 btn btn-outline btn-primary btn-sm btn-review"
             :style="{
-              backgroundColor:vaccine===value.code?'#65C3C8 !important':'white',
-              color:vaccine===value.code?'white !important':'#65C3C8'
+              backgroundColor: vaccine===value.code ?
+                darkFlag ? '#417d87 !important' : '#65C3C8 !important' : 'white',
+              color: vaccine===value.code ? 'white !important' :
+                darkFlag ? '#417d87' : '#65C3C8'
             }"
             @click="clickVaccine(value.code)"
           >
@@ -59,8 +61,10 @@
             :key="key"
             class="m-1 btn btn-outline btn-primary btn-sm btn-review"
             :style="{
-              backgroundColor:haveDisease===key?'#65C3C8 !important':'white',
-              color:haveDisease===key?'white !important':'#65C3C8'
+              backgroundColor: haveDisease===key ?
+                darkFlag ? '#417d87 !important' : '#65C3C8 !important' : 'white',
+              color: haveDisease===key ? 'white !important' :
+                darkFlag ? '#417d87' : '#65C3C8'
             }"
             @click="clickHaveDisease(key)"
           >
@@ -100,8 +104,10 @@
             :key="key"
             class="m-1 btn btn-outline btn-primary btn-sm btn-review"
             :style="{
-              backgroundColor:sideEffects.includes(value.code)?'#65C3C8 !important':'white',
-              color:sideEffects.includes(value.code)?'white !important':'#65C3C8'
+              backgroundColor: sideEffects.includes(value.code) ?
+                darkFlag ? '#417d87 !important' : '#65C3C8 !important' : 'white',
+              color: sideEffects.includes(value.code) ? 'white !important' :
+                darkFlag ? '#417d87' : '#65C3C8'
             }"
             @click="clickSideEffects(value.code)"
           >
@@ -189,6 +195,7 @@ export default {
       inoculatedDate: new Date(),
       etcSideEffect: null,
       btnColor: '',
+      darkFlag: document.documentElement.classList.contains('dark'),
     };
   },
   computed: {
