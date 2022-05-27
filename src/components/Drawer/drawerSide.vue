@@ -24,32 +24,33 @@
         </div>
       </div>
       <li class="mb-2">
-        <a @click="clickMenu('myInfo')">
+        <div class=" hoverGray px-4 py-2" @click="clickMenu('myInfo')">
           <fa-icon class="text-2xl mr-6" :icon="['fas', 'user']"/>
           내 정보
-        </a>
+        </div>
       </li>
       <li class="mb-2">
-        <a @click="clickMenu('myReview')">
+        <div class="hoverGray px-4 py-2" @click="clickMenu('myReview')">
           <fa-icon class="text-2xl mr-5" :icon="['fas', 'edit']"/>
           내가 쓴 후기
-        </a>
+        </div>
       </li>
       <li>
-        <a @click="clickMenu('myPost')">
+        <div class="hoverGray px-4 py-2" @click="clickMenu('myPost')">
           <fa-icon class="text-2xl mr-7" :icon="['fas', 'file-alt']"/>
           내가 쓴 글
-        </a>
+        </div>
       </li>
       <li class="bottom-5 absolute w-80 pr-8">
-        <a
+        <div
+          class="hoverGray px-4 py-2"
           @click="clickLogout"
         >
           <fa-icon
             class="text-2xl mr-6"
             :icon="['fas', 'sign-out-alt']"
           />
-          로그아웃</a>
+          로그아웃</div>
       </li>
     </ul>
     <sign-up ref="myInfoScreen" mode="myInfo"/>
@@ -101,6 +102,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>
