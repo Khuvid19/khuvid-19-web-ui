@@ -18,6 +18,11 @@
         @click="clickBoardItem(item.id)"
         @fetchBoardList="fetchBoardList"
       />
+      <div v-show="myBoardList.length===0" class="w-full h-full flex justify-center items-center">
+        <div class="text-gray-500 text-lg">
+          작성된 글이 없습니다.
+        </div>
+      </div>
     </div>
     <detail-screen
       ref="detailScreen"
@@ -41,7 +46,7 @@ export default {
   data () {
     return {
       screenFlag: false,
-      myBoardList: null,
+      myBoardList: [],
       boardId: null,
     };
   },
