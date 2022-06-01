@@ -24,26 +24,26 @@
         </div>
       </div>
       <li class="mb-2">
-        <div class=" hoverGray px-4 py-2" @click="clickMenu('myInfo')">
+        <div class="flex hoverGray px-4 py-2" @click="clickMenu('myInfo')">
           <fa-icon style="font-size: 20px; width: 15px" class="text-2xl mr-6" :icon="['fas', 'user']"/>
           내 정보
         </div>
       </li>
       <li class="mb-2">
-        <div class="hoverGray px-4 py-2" @click="clickMenu('myReview')">
+        <div class="flex hoverGray px-4 py-2" @click="clickMenu('myReview')">
           <fa-icon style="font-size: 20px; width: 15px" class="text-2xl mr-5" :icon="['fas', 'edit']"/>
           내가 쓴 후기
         </div>
       </li>
       <li>
-        <div class="hoverGray px-4 py-2" @click="clickMenu('myPost')">
+        <div class="flex hoverGray px-4 py-2" @click="clickMenu('myPost')">
           <fa-icon style="font-size: 20px; width: 15px" class="text-2xl mr-7" :icon="['fas', 'file-alt']"/>
           내가 쓴 글
         </div>
       </li>
       <li class="bottom-5 absolute w-80 pr-8">
         <div
-          class="hoverGray px-4 py-2"
+          class="flex hoverGray px-4 py-2"
           @click="clickLogout"
         >
           <fa-icon

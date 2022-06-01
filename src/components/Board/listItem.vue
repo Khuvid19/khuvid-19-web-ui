@@ -16,7 +16,7 @@
         <div class="text-2xs ">
           {{ nickname }}
         </div>
-        <div class="text-2xs">
+        <div class="flex text-2xs" style="gap: 5px">
           <fa-icon
             style="width: 10px"
             :icon="['far', 'comments']"
