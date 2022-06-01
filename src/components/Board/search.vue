@@ -3,12 +3,11 @@
     <input
       v-model="keyword"
       class="w-full mr-2 outline-none bg-dark"
-      placeholder="검색어를 입력해주세요."
+      placeholder="검색어를 입력해 주세요."
       @keypress.enter="clickSearch"
     >
     <fa-icon
       icon="search"
-      class="bg-white"
       style="font-size: 20px; width: 20px"
       @click="clickSearch"
     />

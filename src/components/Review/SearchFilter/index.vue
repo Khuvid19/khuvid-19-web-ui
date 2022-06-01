@@ -5,12 +5,11 @@
         <input
           v-model="detailDisc"
           class="w-full outline-none search-dark"
-          placeholder="검색어를 입력해주세요."
+          placeholder="검색어를 입력해 주세요."
         >
       </form>
       <fa-icon
         icon="search"
-        class="bg-white"
         style="font-size: 20px; width: 20px"
         @click="clickSearch"
       />
@@ -22,7 +21,7 @@
     >
       <fa-icon
         icon="filter"
-        class="bg-white mr-2"
+        class="mr-2"
         style="font-size: 20px; width: 20px"
       />
       <div class="flex w-full overflow-x-scroll bg-dark">
