@@ -10,7 +10,8 @@
       </form>
       <fa-icon
         icon="search"
-        style="font-size: 20px"
+        class="bg-white"
+        style="font-size: 20px; width: 20px"
         @click="clickSearch"
       />
     </div>
@@ -21,8 +22,8 @@
     >
       <fa-icon
         icon="filter"
-        class="mr-2"
-        style="font-size: 20px"
+        class="bg-white mr-2"
+        style="font-size: 20px; width: 20px"
       />
       <div class="flex w-full overflow-x-scroll bg-dark">
         <div v-if="filterTagList.length===0" class="text-gray-400 search-dark">

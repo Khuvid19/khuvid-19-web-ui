@@ -4,7 +4,7 @@ import * as FontAwesome from './src/plugins/icon/fontawesome';
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'KHUVID',
+    title: 'KHUVID-19',
     htmlAttrs: {
       lang: 'en',
     },
@@ -15,17 +15,44 @@ export default {
         content: 'width=device-width, initial-scale=1',
       },
       {
+        hid: 'naver-site-verification',
+        name: 'naver-site-verification',
+        content: '0df5ecb5c1dc7e221d56b5c98491923133ef78a1',
+      },
+      {
+        hid: 'google-site-verification',
+        name: 'google-site-verification',
+        content: '0I_ZUwlvkjuEOgsdcg_UD01bHdxyWlTjcln8cK8F6mQ',
+      },
+      {
         hid: 'description',
         name: 'description',
-        content: 'KHUVID는 코로나 19 백신 접종 후기 플랫폼입니다.',
+        content: 'KHUVID-19는 코로나 19 백신 접종 후기 플랫폼입니다.',
       },
       {
-        name: 'format-detection',
-        content: 'telephone=no',
+        hid: 'og:type',
+        property: 'og:type',
+        content: 'website',
       },
       {
-        name: 'google',
-        content: 'notranslate',
+        hid: 'og:title',
+        property: 'og:title',
+        content: 'KHUVID-19',
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content: 'KHUVID-19는 코로나 19 백신 접종 후기 플랫폼입니다.',
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: 'https://pds.medicaltimes.com/NewsPhoto/202101/1138336_1.jpg',
+      },
+      {
+        hid: 'og:url',
+        property: 'og:url',
+        content: 'http://khuvid-19.twoz.kr',
       },
     ],
     link: [{
@@ -41,7 +68,7 @@ export default {
   },
   loading: false,
   srcDir: 'src/',
-  ssr: false,
+  ssr: true,
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     resolve(__dirname, 'src/assets/styles/css/tailwind.css'),
@@ -53,7 +80,11 @@ export default {
     '@/plugins/axios.js',
     {
       src: '@/plugins/chartJs/index',
-      mode: 'client',
+      ssr: false,
+    },
+    {
+      src: '@/plugins/vue-carousel',
+      ssr: false,
     },
     {
       src: '@/plugins/calendar/vCalendar.js',
@@ -64,6 +95,7 @@ export default {
       src: '@/plugins/infinite-loading.js',
       ssr: false,
     },
+    // { src: '@/plugins/vue-gtag.js', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -82,7 +114,7 @@ export default {
     strategies: {
       google: {
         clientId:
-          '442366876413-4a1q3lpghs2rc3pqeeg6fnqfp4cn1frk.apps.googleusercontent.com',
+          '696110534823-vs99c6j41lhailde2dprfp6ae7b442kf.apps.googleusercontent.com',
         codeChallengeMethod: '',
         responseType: ['token', 'id_token'],
       },
@@ -126,7 +158,6 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
     '@nuxtjs/proxy',
-    'nuxt-client-init-module',
     '@nuxtjs/dayjs',
     '@nuxtjs/pwa',
   ],

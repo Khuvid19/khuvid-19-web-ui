@@ -8,7 +8,8 @@
     >
     <fa-icon
       icon="search"
-      style="font-size: 20px"
+      class="bg-white"
+      style="font-size: 20px; width: 20px"
       @click="clickSearch"
     />
   </div>

@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:14
 
 # Create app directory
 WORKDIR /app
@@ -16,4 +16,4 @@ ENV HOST 0.0.0.0
 EXPOSE 3000
 
 # start command
-CMD [ "yarn", "dev" ]
+CMD [ "yarn", "start" ]

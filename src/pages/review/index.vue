@@ -12,10 +12,12 @@
         :list-content="listContent"
         @clickDetail="clickDetail"
       />
+      <client-only>
       <infinite-loading v-if="listContent.length" @infinite="scrolling">
         <div slot="no-results" />
         <div slot="no-more" />
       </infinite-loading>
+      </client-only>
     </div>
 
     <full-screen
@@ -115,6 +117,13 @@ export default {
   head () {
     return {
       title: 'KHUVID REVIEW',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'KHUVID-19는 코로나 19 백신 접종 후기 플랫폼입니다. Review 페이지는 백신 후기를 작성하는 페이지로 다른 사람들의 후기도 볼 수 있습니다.',
+        },
+      ],
     };
   },
   computed: {

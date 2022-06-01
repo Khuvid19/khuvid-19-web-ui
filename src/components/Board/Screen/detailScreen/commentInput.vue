@@ -23,6 +23,7 @@
         :class="`text-xl ${
           isEmptyCommentValue ? 'text-gray-400' : 'text-primary'
         }`"
+        style="width: 20px"
         :icon="['far', 'paper-plane']"
         @click="clickSendBtn"
       />

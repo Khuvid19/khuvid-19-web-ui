@@ -24,64 +24,65 @@
         </div>
       </div>
     </div>
-
-    <carousel
-      :perPage=1
-      :pagination-active-color="'#9ed0d3'"
-      :pagination-padding="7"
-      :autoplay="true"
-      class="mt-3 rounded-2xl shadow w-full place-items-center"
-    >
-      <slide id="item1" class="bg-white rounded-2xl stat">
-        <div class="ml-2 stat-title">
-          전국 1차 접종
-        </div>
-        <div class="ml-2 stat-value text-primary">
-          {{ firstPercent }}%
-        </div>
-        <div class="-mt-1 mr-4 text-sm gray text-neutral flex-grow">
-          누적 {{ first }} <br>
-          신규 {{ todayFirst }} ↗︎
-        </div>
-      </slide>
-      <slide id="item2" class="bg-white rounded-2xl stat">
-        <div class="ml-2 stat-title">
-          전국 2차 접종
-        </div>
-        <div class="ml-2 stat-value text-primary">
-          {{ secondPercent }}%
-        </div>
-        <div class="-mt-1 mr-4 text-sm gray grid flex-grow place-items-center">
-          누적 {{ second }} <br>
-          신규 {{ todaySecond }} ↗︎
-        </div>
-      </slide>
-      <slide id="item3" class="bg-white rounded-2xl stat">
-        <div class="ml-2 stat-title">
-          전국 3차 접종
-        </div>
-        <div class="ml-2 stat-value text-primary">
-          {{ thirdPercent }}%
-        </div>
-        <div class="-mt-1 mr-4 text-sm gray grid flex-grow place-items-center">
-          누적 {{ third }} <br>
-          신규 {{ todayThird }} ↗︎
-        </div>
-      </slide>
-    </carousel>
+    <client-only>
+      <carousel
+        :perPage=1
+        :pagination-active-color="'#9ed0d3'"
+        :pagination-padding="7"
+        :autoplay="true"
+        class="mt-3 rounded-2xl shadow w-full place-items-center"
+      >
+        <slide id="item1" class="bg-white rounded-2xl stat">
+          <div class="ml-2 stat-title">
+            전국 1차 접종
+          </div>
+          <div class="ml-2 stat-value text-primary">
+            {{ firstPercent }}%
+          </div>
+          <div class="hidden"/>
+          <div class="-mt-1 mr-4 text-sm gray text-neutral flex-grow">
+            누적 {{ first }} <br>
+            신규 {{ todayFirst }} ↗︎
+          </div>
+        </slide>
+        <slide id="item2" class="bg-white rounded-2xl stat">
+          <div class="ml-2 stat-title">
+            전국 2차 접종
+          </div>
+          <div class="ml-2 stat-value text-primary">
+            {{ secondPercent }}%
+          </div>
+          <div class="hidden"/>
+          <div class="-mt-1 mr-4 text-sm gray grid flex-grow place-items-center">
+            누적 {{ second }} <br>
+            신규 {{ todaySecond }} ↗︎
+          </div>
+        </slide>
+        <slide id="item3" class="bg-white rounded-2xl stat">
+          <div class="ml-2 stat-title">
+            전국 3차 접종
+          </div>
+          <div class="ml-2 stat-value text-primary">
+            {{ thirdPercent }}%
+          </div>
+          <div class="hidden"/>
+          <div class="-mt-1 mr-4 text-sm gray grid flex-grow place-items-center">
+            누적 {{ third }} <br>
+            신규 {{ todayThird }} ↗︎
+          </div>
+        </slide>
+      </carousel>
+    </client-only>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import { Carousel, Slide } from 'vue-carousel';
+
 const convert = require('xml-js');
 
 export default {
-  components: {
-    Carousel,
-    Slide,
-  },
+  components: {},
   data () {
     return {
       todayAll: '',

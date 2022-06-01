@@ -1,5 +1,4 @@
 <template>
-  <client-only>
     <div class="chart-header">
       <div class="card shadow bg-white">
         <div class="cards-body p-4 ml-2 mr-2 stats">
@@ -18,15 +17,16 @@
           </div>
         </div>
         <div class="divline -mt-2 mb-2" />
+        <client-only>
         <bar-chart
           class="-mt-8 mb-4 chartFontColor"
           style="width: 95%; margin-left: 2%; height:400px;"
           :data="chartData"
           :options="chartOptions"
         />
+        </client-only>
       </div>
     </div>
-  </client-only>
 </template>
 
 <script>

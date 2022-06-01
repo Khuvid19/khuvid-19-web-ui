@@ -14,10 +14,12 @@
         @click="clickBoardItem(item.id)"
         @fetchBoardList="fetchBoardList"
       />
+      <client-only>
       <infinite-loading v-if="boardList.length" @infinite="scrolling">
         <div slot="no-results" />
         <div slot="no-more" />
       </infinite-loading>
+      </client-only>
     </div>
     <middle-modal
       :check-flag="middleModalFlag"
@@ -69,6 +71,13 @@ export default {
   head () {
     return {
       title: 'KHUVID BOARD',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'KHUVID-19는 코로나 19 백신 접종 후기 플랫폼입니다. Board 페이지는 게시판으로 자유로운 주제로 게시물과 댓글을 남길 수 있습니다. ',
+        },
+      ],
     };
   },
   fetch () {
