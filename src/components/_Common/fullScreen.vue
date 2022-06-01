@@ -103,27 +103,27 @@ export default {
   data () {
     return {
       renderMenu: false,
-    }
+    };
   },
   methods: {
     onClickBack () {
-      this.$emit('onClickBack')
+      this.$emit('onClickBack');
     },
     onClickSideBtn () {
-      this.$emit('onClickSideBtn')
+      this.$emit('onClickSideBtn');
     },
     onClickOk () {
-      this.$emit('onClickOk')
+      this.$emit('onClickOk');
     },
     onClickMenu (menu) {
-      this.renderMenu = false
-      this.$emit('onClickMenu', menu)
+      this.renderMenu = false;
+      this.$emit('onClickMenu', menu);
     },
     clickEllipsis () {
-      this.renderMenu = true
+      this.renderMenu = true;
     },
   },
-}
+};
 </script>
 
 <style>

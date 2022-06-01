@@ -3,10 +3,11 @@
     v-model="screenFlag"
     :title="mode === 'signUp' ? '회원가입' : '내 정보'"
     :ok-text="mode === 'signUp' ? '완료' : '수정'"
+    class="bg-dark bg-SignUp"
     @onClickBack="onClickSignupBack"
     @onClickOk="onClickSignupSubmit"
   >
-    <div class="p-8">
+    <div class="p-8 bg-dark">
       <div class="avatar flex justify-center">
         <div class="mb-12 rounded-full w-20 h-20">
           <img
@@ -17,10 +18,10 @@
       </div>
       <div class="text-xl flex items-center justify-between mb-12">
         이메일<input
-        v-model="email"
-        :disabled="true"
-        class="input input-disabled w-64"
-      >
+          v-model="email"
+          :disabled="true"
+          class="input input-disabled w-64 bg-dark-200"
+        >
       </div>
       <div class="text-xl flex items-center justify-between mb-12">
         성별
@@ -32,7 +33,7 @@
             :value="gender.code"
             type="radio"
             :data-title="gender.value"
-            class="btn bg-white w-32 text-gray-400 border-gray-400"
+            class="btn bg-white w-32 text-gray-400 border-gray-400 bg-dark-200"
           >
         </div>
       </div>
@@ -59,14 +60,14 @@
               text-sm
               border-primary
               bg-white
-              text-primary
               rounded-full
               align-middle
               justify-center
               h-12
+              bg-dark-200
             "
           >
-            <div class="m-auto">
+            <div class="m-auto ">
               {{ ageValue }}
             </div>
           </div>
@@ -86,7 +87,7 @@
         <div class="w-64 flex justify-between align-middle">
           <input
             v-model="nickname"
-            class="input border-gray-400 bg-white w-40"
+            class="input border-gray-400 bg-white w-40 bg-dark-200"
             @input="nicknameInputChange($event)"
           >
           <label

@@ -17,3 +17,14 @@
 .tag{
   @apply m-1 btn btn-outline btn-primary btn-sm;
 }
+
+html.dark {
+  full-screen {
+    background-color: #1e1e1e;
+    color: #fafafa;
+  }
+  .search-dark {
+    background-color: #1e1e1e;
+    color: #e6e6e6;
+  }
+}

@@ -13,7 +13,7 @@
 }
 
 .divline {
-  border: 1px solid;
+  border: 1px;
   border-color: rgb(239, 239, 239);
 }
 
@@ -21,54 +21,19 @@
   color: rgb(147, 138, 153);
 }
 
-// 보라색, 화이자
-.PFIZER {
-  background-color: rgb(180, 110, 188)!important;
-  border-color: rgb(180, 110, 188)!important;
-  color: white!important;
-}
-
-.hoverPFIZER:hover {
-  background-color: rgb(180, 110, 188)!important;
-  border-color: rgb(180, 110, 188)!important;
-  color: white!important;
-}
-
-// 빨간색, 모더나
-.MODERNA {
-  background-color: rgb(237, 98, 56)!important;
-  border-color: rgb(237, 98, 56)!important;
-  color: white!important;
-}
-
-.hoverMODERNA:hover {
-  background-color: rgb(237, 98, 56)!important;
-  border-color: rgb(237, 98, 56)!important;
-  color: white!important;
-}
-
-// 기본색, 아스트라제네카
-.AZ {
-  background-color: rgb(98, 176, 182)!important;
-  border-color: rgb(98, 176, 182)!important;
-  color: white!important;
-}
-
-.hoverAZ:hover {
-  background-color: rgb(98, 176, 182)!important;
-  border-color: rgb(98, 176, 182)!important;
-  color: white!important;
-}
-
-//파란색, 얀센
-.ANSEN {
-  background-color: rgb(81, 134, 236)!important;
-  border-color: rgb(81, 134, 236)!important;
-  color: white!important;
-}
-
-.hoverANSEN:hover {
-  background-color: rgb(81, 134, 236)!important;
-  border-color: rgb(81, 134, 236)!important;
-  color: white!important;
+// dark
+html.dark {
+  .card {
+    background-color: rgb(30, 30, 30) !important
+  }
+  .divline {
+    border-color: rgb(132, 132, 132) !important;
+  }
+  .gray {
+    color: rgb(210, 210, 210) !important;
+  }
+  // .btn-chart {
+  //   background-color: #3e4042; // bg-dark-200
+  //   color: rgb(210, 210, 210);
+  // }
 }

@@ -11,3 +11,12 @@
     max-height: calc(100vh - #{$layoutHeight});
   }
 }
+
+html.dark {
+  .bg-gray-100 {
+    background-color: #3e4042;
+  }
+  .page-body {
+    background-color: #3e4042;
+  }
+}

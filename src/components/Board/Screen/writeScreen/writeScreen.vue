@@ -3,10 +3,11 @@
     v-model="screenFlag"
     :title="mode === 'edit' ? '게시글 수정' : '게시글 쓰기'"
     ok-text="완료"
+    class="bg-dark"
     @onClickBack="onClickBack"
     @onClickOk="onClickOk"
   >
-    <div class="pl-4 pr-4 pt-4 h-fll">
+    <div class="pl-4 pr-4 pt-4 h-fll bg-dark-200">
       <input
         v-model="title"
         :maxlength="100"
@@ -20,6 +21,7 @@
           pl-2
           w-full
           mb-2
+          bg-dark
         "
       >
       <textarea
@@ -36,6 +38,7 @@
           h-auto
           write-textarea
           resize-none
+          bg-dark
         "
       />
     </div>
@@ -43,6 +46,7 @@
       :check-flag="middleModalFlag"
       :text="modalMsg"
       ok-text="확인"
+      class="bg-dark-200"
       @clickOk="clickModalOk"
     />
   </full-screen>

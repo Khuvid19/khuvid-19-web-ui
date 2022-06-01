@@ -2,12 +2,12 @@
   <full-screen
     v-model="screenFlag"
     title="내가 쓴 후기"
-    class="bg-gray-100"
+    class="bg-gray-100 bg-dark"
     @onClickBack="onClickBack"
   >
     <div class="w-screen my-review-list overflow-y-scroll">
       <div v-for="(item,idx) in getPageContents" v-show="getPageContents.length>0" :key="idx">
-        <div class="card shadow m-2 bg-white" @click="clickDetail(item)">
+        <div class="card shadow m-2 bg-white bg-dark-200" @click="clickDetail(item)">
           <div class="card-body p-4">
             <div class="flex justify-between align-middle mb-2">
               <div>

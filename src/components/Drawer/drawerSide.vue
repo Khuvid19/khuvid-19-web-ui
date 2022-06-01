@@ -1,8 +1,8 @@
 <template>
   <div class="drawer-side">
-    <label for="my-drawer-4" class="drawer-overlay"/>
+    <label for="my-drawer-4" class="drawer-overlay" />
     <ul
-      class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content pt-14"
+      class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content pt-14 bg-dark-200"
     >
       <div class="flex align-middle pl-4 mb-12">
         <div class="avatar self-center mr-4">
@@ -54,9 +54,9 @@
           로그아웃</div>
       </li>
     </ul>
-    <sign-up ref="myInfoScreen" mode="myInfo"/>
-    <my-review-screen ref="myReviewScreen"/>
-    <my-post-screen ref="myPostScreen"/>
+    <sign-up ref="myInfoScreen" mode="myInfo" />
+    <my-review-screen ref="myReviewScreen" />
+    <my-post-screen ref="myPostScreen" />
   </div>
 </template>
 

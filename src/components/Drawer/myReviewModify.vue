@@ -3,6 +3,7 @@
     v-model="screenFlag"
     title="작성 후기"
     ok-text="완료"
+    class="bg-dark"
     @onClickBack="onClickBack"
     @onClickOk="clickModify"
   >
@@ -17,10 +18,12 @@
               <div
                 v-for="(value, key) in getVaccine"
                 :key="key"
-                class="m-1 btn btn-outline btn-primary btn-sm"
+                class="m-1 btn btn-outline btn-primary btn-sm btn-review"
                 :style="{
-                  backgroundColor:vaccine===value.code?'#65C3C8 !important':'white !important',
-                  color:vaccine===value.code?'white !important':'#65C3C8 !important'
+                  backgroundColor:vaccine===value.code ?
+                    darkFlag ? '#417d87 !important' : '#65C3C8 !important' : 'white',
+                  color:vaccine===value.code ? 'white !important' :
+                    darkFlag ? '#417d87' : '#65C3C8'
                 }"
                 @click="clickVaccine(value.code)"
               >
@@ -34,7 +37,7 @@
               </div>
             </div>
           </div>
-          <div class=" border rounded-box px-3 py-4 mx-4 my-2 bg-white">
+          <div class=" border rounded-box px-3 py-4 mx-4 my-2 bg-white bg-dark">
             <div class="text-lg mb-1 ml-1">
               접종 날짜
             </div>
@@ -48,7 +51,7 @@
                   <div class="flex items-center">
                     <input
                       :value="inputValue"
-                      class="text-center bg-white text-gray-700 w-full py-1 px-2 appearance-none border rounded-xl focus:outline-none focus:border-blue-500"
+                      class="text-center bg-white text-gray-700 w-full py-1 px-2 appearance-none border rounded-xl focus:outline-none focus:border-blue-500 bg-dark-200"
                       readonly
                       @click="togglePopover()"
                     >
@@ -65,10 +68,12 @@
               <div
                 v-for="(value, key) in YNList"
                 :key="key"
-                class="m-1 btn btn-outline btn-primary btn-sm"
+                class="m-1 btn btn-outline btn-primary btn-sm btn-review"
                 :style="{
-                  backgroundColor:haveDisease===key?'#65C3C8 !important':'white !important',
-                  color:haveDisease===key?'white !important':'#65C3C8 !important'
+                  backgroundColor:haveDisease===key ?
+                    darkFlag ? '#417d87 !important' : '#65C3C8 !important' : 'white',
+                  color:haveDisease===key ? 'white !important' :
+                    darkFlag ? '#417d87' : '#65C3C8'
                 }"
                 @click="clickHaveDisease(key)"
               >
@@ -84,17 +89,18 @@
               <input
                 v-if="haveDisease==='true'"
                 v-model="diseaseDisc"
-                placeholder="기저질환을 입력해주세요."
+                placeholder="기저질환을 입력해 주세요."
                 class="
-        rounded-lg
-        border-2
-        focus:border-primary
-        outline-none
-        p-1
-        pl-2
-        w-full
-        my-2
-      "
+                  rounded-lg
+                  border-2
+                  focus:border-primary
+                  outline-none
+                  p-1
+                  pl-2
+                  w-full
+                  my-2
+                  bg-dark-200
+                "
               >
             </div>
           </div>
@@ -106,10 +112,12 @@
               <div
                 v-for="(value, key) in getSideEffects"
                 :key="key"
-                class="m-1 btn btn-outline btn-primary btn-sm"
+                class="m-1 btn btn-outline btn-primary btn-sm btn-review"
                 :style="{
-                  backgroundColor:sideEffects.includes(value.code)?'#65C3C8 !important':'white !important',
-                  color:sideEffects.includes(value.code)?'white !important':'#65C3C8 !important'
+                  backgroundColor:sideEffects.includes(value.code) ?
+                    darkFlag ? '#417d87 !important' : '#65C3C8 !important' : 'white',
+                  color:sideEffects.includes(value.code) ? 'white !important' :
+                    darkFlag ? '#417d87' : '#65C3C8'
                 }"
                 @click="clickSideEffects(value.code)"
               >
@@ -125,17 +133,18 @@
               <input
                 v-if="sideEffects.includes('OTHER')"
                 v-model="sideEffectsDisc"
-                placeholder="이상반응을 입력해주세요."
+                placeholder="이상반응을 입력해 주세요."
                 class="
-        rounded-lg
-        border-2
-        focus:border-primary
-        outline-none
-        p-1
-        pl-2
-        w-full
-        my-2
-      "
+                  rounded-lg
+                  border-2
+                  focus:border-primary
+                  outline-none
+                  p-1
+                  pl-2
+                  w-full
+                  my-2
+                  bg-dark-200
+                "
               >
             </div>
           </div>
@@ -143,17 +152,18 @@
             <div class="form-control">
               <textarea
                 v-model="detailDisc"
-                placeholder="내용을 입력해주세요."
+                placeholder="내용을 입력해 주세요."
                 style="min-height: 200px"
                 class="
-        focus:border-primary
-        outline-none
-        w-full
-        rounded-lg
-        h-auto
-        write-textarea
-        resize-none
-      "
+                  focus:border-primary
+                  outline-none
+                  w-full
+                  rounded-lg
+                  h-auto
+                  write-textarea
+                  resize-none
+                  bg-dark
+                "
               />
             </div>
           </div>
@@ -205,6 +215,7 @@ export default {
       diseaseDisc: '',
       inoculatedDate: new Date(),
       sideEffectsDisc: null,
+      darkFlag: document.documentElement.classList.contains('dark'),
     };
   },
   computed: {
@@ -281,7 +292,7 @@ export default {
       if (this.sideEffectsDisc) { params.sideEffects.push(this.sideEffectsDisc); }
       if (this.haveDisease === 'false') { params.diseaseDisc = ''; }
       if (this.haveDisease === 'true' && this.diseaseDisc === '') {
-        this.modalText = '기저질환을 입력해주세요.';
+        this.modalText = '기저질환을 입력해 주세요.';
         this.modalFlag = true;
       } else {
         this.modify(params)

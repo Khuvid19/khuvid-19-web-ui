@@ -6,7 +6,7 @@
       @clickFilter="moveToScreen('filter')"
       @clickSearch="clickSearch"
     />
-    <div class="h-px bg-gray-200 mx-2"/>
+    <div class="h-px bg-gray-200 mx-2" />
     <div class="w-screen overflow-y-scroll" :class="filterTagList.length>0?'review-list-2':'review-list'">
       <list-item
         :list-content="listContent"
@@ -14,8 +14,8 @@
       />
       <client-only>
       <infinite-loading v-if="listContent.length" @infinite="scrolling">
-        <div slot="no-results"/>
-        <div slot="no-more"/>
+        <div slot="no-results" />
+        <div slot="no-more" />
       </infinite-loading>
       </client-only>
     </div>
@@ -26,6 +26,7 @@
       :ok-text="screenOkText"
       :side-btn-text="screenSideBtnText"
       :menu-list="myReview?['수정','삭제']:[]"
+      class="bg-dark"
       @onClickMenu="onClickMenu"
       @onClickSideBtn="onClickSideBtn"
       @onClickBack="onClickBack"
@@ -36,6 +37,7 @@
         ref="filterCont"
         :screen-flag="screenFlag&&screenType==='filter'"
         :filter-tag-list="filterTagList"
+        class="bg-dark-200"
       />
       <detail-cont
         v-if="screenType === 'detail'"
@@ -44,12 +46,14 @@
       <add-cont
         v-if="screenType === 'add'"
         ref="addCont"
+        class="bg-dark-200"
         @afterAdd="afterAdd"
       />
       <modify-cont
         v-if="screenType === 'modify'"
         ref="modifyCont"
         :detail-content="detailContent"
+        class="bg-dark-200"
         @afterModify="afterModify"
       />
     </full-screen>
