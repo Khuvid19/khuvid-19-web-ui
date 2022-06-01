@@ -6,6 +6,7 @@
     >
       <header class="grid grid-cols-3 items-center h-16 shadow">
         <fa-icon
+          style="width: 20px"
           class="ml-5 text-2xl cursor-pointer self-center"
           icon="arrow-left"
           @click="onClickBack"
@@ -18,6 +19,7 @@
           class="dropdown dropdown-end text-right pr-5"
         >
           <fa-icon
+            style="width: 20px"
             tabindex="0"
             class="text-2xl cursor-pointer padding-5"
             :icon="['fas', 'ellipsis-v']"

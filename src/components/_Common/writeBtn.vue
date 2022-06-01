@@ -18,7 +18,11 @@
     "
     @click="clickWriteBtn"
   >
-    <fa-icon class="mr-2" icon="pen" />
+    <fa-icon
+      class="mr-2"
+      style="width: 20px"
+      icon="pen"
+    />
     <div>{{ content }}</div>
   </button>
 </template>
@@ -33,10 +37,10 @@ export default {
   },
   methods: {
     clickWriteBtn () {
-      this.$emit('clickWriteBtn')
+      this.$emit('clickWriteBtn');
     },
   },
-}
+};
 </script>
 
 <style>

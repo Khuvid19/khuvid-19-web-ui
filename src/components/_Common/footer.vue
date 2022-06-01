@@ -6,7 +6,7 @@
       @click="clickIcon('main')"
     >
       <div :class="footerIconStyle('main')">
-        <fa-icon class="text-2xl self-center" icon="home" />
+        <fa-icon style="width: 20px" class="text-2xl self-center" icon="home" />
         <div class="text-2xs text-center">
           대시보드
         </div>
@@ -18,7 +18,7 @@
       @click="clickIcon('review')"
     >
       <div :class="footerIconStyle('review')">
-        <fa-icon class="text-2xl self-center" icon="band-aid" />
+        <fa-icon style="width: 20px" class="text-2xl self-center" icon="band-aid" />
         <div class="text-2xs text-center">
           접종후기
         </div>
@@ -30,7 +30,7 @@
       @click="clickIcon('board')"
     >
       <div :class="footerIconStyle('board')">
-        <fa-icon class="text-2xl self-center" icon="clipboard" />
+        <fa-icon style="width: 20px" class="text-2xl self-center" icon="clipboard" />
         <div class="text-2xs text-center">
           게시판
         </div>

@@ -3,6 +3,7 @@
     <div class="flex items-center mb-2">
       <fa-icon
         :icon="['far', 'user']"
+        style="width: 20px"
         class="text-4xl bg-white p-1 text-primary rounded"
       />
       <div class="ml-2">

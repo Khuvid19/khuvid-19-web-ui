@@ -46,7 +46,10 @@
                 ageListIdx === 0 ? ageList.length - 1 : ageListIdx - 1
             "
           >
-            <fa-icon :icon="['fas', 'caret-left']"/>
+            <fa-icon
+              :icon="['fas', 'caret-left']"
+              style="width: 20px"
+            />
           </button>
           <div
             style="border-width: 1px"
@@ -74,7 +77,7 @@
             class="btn text-xl btn-primary"
             @click="ageListIdx = (ageListIdx + 1) % ageList.length"
           >
-            <fa-icon :icon="['fas', 'caret-right']"/>
+            <fa-icon style="width: 20px" :icon="['fas', 'caret-right']"/>
           </button>
         </div>
       </div>

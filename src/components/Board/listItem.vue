@@ -17,7 +17,10 @@
           {{ nickname }}
         </div>
         <div class="text-2xs">
-          <fa-icon :icon="['far', 'comments']" />
+          <fa-icon
+            style="width: 20px"
+            :icon="['far', 'comments']"
+          />
           {{ commentCnt }}개
         </div>
       </div>
