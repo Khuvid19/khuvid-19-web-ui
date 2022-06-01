@@ -18,7 +18,7 @@
         </div>
         <div class="text-2xs">
           <fa-icon
-            style="width: 20px"
+            style="width: 10px"
             :icon="['far', 'comments']"
           />
           {{ commentCnt }}개
