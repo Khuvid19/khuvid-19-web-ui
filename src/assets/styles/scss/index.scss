@@ -99,11 +99,6 @@ html.dark {
   .content-area {
     background-color: $bg-dark-100;
   }
-  .bg-SignUp { // 분리 필요
-    .content-area {
-      background-color: $bg-dark;
-    }
-  }
   .menu {
     background-color: $bg-dark-100;
   }
@@ -127,11 +122,11 @@ html.dark {
     color: $text-100 !important;
   }
   .bg-dark {
-    background-color: $bg-dark;
+    background-color: $bg-dark !important;
   }
   .bg-dark-200 {
-    background-color: $bg-dark-100;
-    border-color: $bg-dark-100;
+    background-color: $bg-dark-100 !important;
+    border-color: $bg-dark-100 !important;
     color: $text-100;
   }
   .bg-primary {
@@ -186,5 +181,14 @@ html.dark {
     background-color: $ANSEN-dark;
     border-color: $ANSEN-dark;
     color: white;
+  }
+  .bg-SignUp { // 분리 필요
+    .content-area {
+      background-color: $bg-dark;
+    }
+  }
+  :checked {
+    background-color: $AZ-dark !important;
+    border-color: $AZ-dark !important;
   }
 }

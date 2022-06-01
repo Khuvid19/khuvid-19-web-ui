@@ -33,7 +33,7 @@
             :value="gender.code"
             type="radio"
             :data-title="gender.value"
-            class="btn bg-white w-32 text-gray-400 border-gray-400"
+            class="btn bg-white w-32 text-gray-400 border-gray-400 bg-dark-200"
           >
         </div>
       </div>
@@ -57,7 +57,6 @@
               text-sm
               border-primary
               bg-white
-              text-primary
               rounded-full
               align-middle
               justify-center
