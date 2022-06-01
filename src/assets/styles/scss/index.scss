@@ -120,6 +120,7 @@ html.dark {
   }
   .bg-dark {
     background-color: $bg-dark !important;
+    border-color: $bg-dark-200;
   }
   .bg-dark-200 {
     background-color: $bg-dark-100 !important;
