@@ -23,13 +23,15 @@
       >
         KHUVID
       </div>
-      <div
-        class="text-xs self-center -mr-28"
-        @click="changemode"
-      >
-        <fa-icon v-if="!darkFlag" class="text-3xl self-center toggle-icon" icon="sun" />
-        <fa-icon v-if="darkFlag" class="text-3xl self-center toggle-icon" icon="moon" />
-      </div>
+      <client-only>
+        <div
+          class="text-xs self-center -mr-28"
+          @click="changemode"
+        >
+          <fa-icon v-if="!darkFlag" class="text-3xl self-center toggle-icon" icon="sun" />
+          <fa-icon v-if="darkFlag" class="text-3xl self-center toggle-icon" icon="moon" />
+        </div>
+      </client-only>
       <div
         v-if="$auth.loggedIn === false"
         class="btn btn-sm text-xs btn-primary self-center"
@@ -58,7 +60,23 @@ export default {
       toggleIcon: 'sun',
     };
   },
+  created () {
+    this.storeMode();
+  },
   methods: {
+    storeMode () {
+      if (typeof window !== 'undefined') {
+        if (localStorage.theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+        this.darkFlag = document.documentElement.classList.contains('dark');
+        // 👉️ can use localStorage here
+      } else {
+        // 👉️ can't use localStorage
+      }
+    },
     clickLogo () {
       this.$router.push('/main');
     },
@@ -72,6 +90,8 @@ export default {
     changemode () {
       document.documentElement.classList.toggle('dark');
       this.darkFlag = document.documentElement.classList.contains('dark');
+      const theme = this.darkFlag ? 'dark' : 'light';
+      localStorage.setItem('theme', theme);
     },
   },
 };
