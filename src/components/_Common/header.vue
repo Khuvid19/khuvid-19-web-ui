@@ -24,11 +24,11 @@
         KHUVID
       </div>
       <div
-        id="toggleBtn"
-        class="btn btn-sm text-xs self-center -mr-24 toggle-btn"
+        class="text-xs self-center -mr-28"
         @click="changemode"
       >
-        dark
+        <fa-icon v-if="!darkFlag" class="text-3xl self-center toggle-icon" icon="sun" />
+        <fa-icon v-if="darkFlag" class="text-3xl self-center toggle-icon" icon="moon" />
       </div>
       <div
         v-if="$auth.loggedIn === false"
@@ -52,6 +52,12 @@
 
 <script>
 export default {
+  data () {
+    return {
+      darkFlag: false,
+      toggleIcon: 'sun',
+    };
+  },
   methods: {
     clickLogo () {
       this.$router.push('/main');
@@ -65,12 +71,11 @@ export default {
     },
     changemode () {
       document.documentElement.classList.toggle('dark');
-      const toggleBtn = document.getElementById('toggleBtn');
-      toggleBtn.innerHTML =
-        toggleBtn.innerHTML === 'light'
-          ? (toggleBtn.innerHTML = 'dark')
-          : (toggleBtn.innerHTML = 'light');
+      this.darkFlag = document.documentElement.classList.contains('dark');
     },
   },
 };
 </script>
+
+<style>
+</style>
