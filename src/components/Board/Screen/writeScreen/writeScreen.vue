@@ -11,7 +11,7 @@
       <input
         v-model="title"
         :maxlength="100"
-        placeholder="제목을 입력해주세요."
+        placeholder="제목을 입력해 주세요."
         class="
           rounded-lg
           border-2
@@ -27,7 +27,7 @@
       <textarea
         v-model="content"
         :maxlength="5000"
-        placeholder="내용을 입력해주세요."
+        placeholder="내용을 입력해 주세요."
         class="
           border-2
           p-2

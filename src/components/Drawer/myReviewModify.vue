@@ -10,7 +10,7 @@
     <div class="w-screen overflow-y-scroll">
       <div>
         <div>
-          <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
+          <div class="card bordered px-3 py-4 mx-4 my-2 bg-white bg-dark">
             <div class="text-lg mb-1 ml-1">
               백신 종류
             </div>
@@ -60,7 +60,7 @@
               </v-date-picker>
             </div>
           </div>
-          <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
+          <div class="card bordered px-3 py-4 mx-4 my-2 bg-white bg-dark">
             <div class="text-lg mb-1 ml-1">
               기저질환
             </div>
@@ -104,7 +104,7 @@
               >
             </div>
           </div>
-          <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
+          <div class="card bordered px-3 py-4 mx-4 my-2 bg-white bg-dark">
             <div class="text-lg mb-1 ml-1">
               이상반응
             </div>
@@ -148,7 +148,7 @@
               >
             </div>
           </div>
-          <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
+          <div class="card bordered px-3 py-4 mx-4 my-2 bg-white bg-dark">
             <div class="form-control">
               <textarea
                 v-model="detailDisc"

@@ -17,8 +17,11 @@ const solid = [
   'faFileAlt',
   'faEllipsisV',
   'faInfoCircle',
-]
-const regular = ['faComments', 'faUser', 'faPaperPlane']
-const brands = []
+  'faSun',
+  'faMoon',
+];
 
-export { solid, regular, brands }
+const regular = ['faComments', 'faUser', 'faPaperPlane'];
+const brands = [];
+
+export { solid, regular, brands };

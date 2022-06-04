@@ -7,6 +7,7 @@
 @import 'partials/fullScreen.scss';
 @import 'partials/dashboard.scss';
 @import 'partials/dashboardChart.scss';
+@import 'partials/common.scss';
 
 html {
   font-size: 14px;
@@ -26,6 +27,7 @@ html {
 
 $bg-dark: #1e1e1e;
 $bg-dark-100: #3e4042;
+$boundary-dark: #5a5a5a;
 $bg-dark-200: #848484;
 $text: #e6e6e6;
 $text-100: #fafafa;
@@ -84,6 +86,12 @@ $ANSEN-dark: #325faf;
   color: white;
 }
 
+.hoverGray:hover{
+  background-color: #e9e9e9 !important;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
 html.dark {
   color: $text-100;
   .text-white {
@@ -119,6 +127,7 @@ html.dark {
   }
   .bg-dark {
     background-color: $bg-dark !important;
+    border-color: $bg-dark-200;
   }
   .bg-dark-200 {
     background-color: $bg-dark-100 !important;
@@ -132,7 +141,7 @@ html.dark {
     background-color: $bg-dark-100 !important;
   }
   .bg-gray-200 {
-    background-color: $bg-dark-200 !important;
+    background-color: $boundary-dark !important;
   }
   // 보라색, 화이자
   .PFIZER {
@@ -187,10 +196,7 @@ html.dark {
     background-color: $AZ-dark !important;
     border-color: $AZ-dark !important;
   }
-}
-
-.hoverGray:hover{
-  background-color: #e9e9e9 !important;
-  border-radius: 15px;
-  cursor: pointer;
+  .hoverGray:hover{
+    background-color: $bg-dark !important;
+  }
 }

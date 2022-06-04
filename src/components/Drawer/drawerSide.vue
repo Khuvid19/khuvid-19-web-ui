@@ -31,13 +31,13 @@
       </li>
       <li class="mb-2">
         <div class="flex hoverGray px-4 py-2" @click="clickMenu('myReview')">
-          <fa-icon style="font-size: 20px; width: 15px" class="text-2xl mr-5" :icon="['fas', 'edit']"/>
+          <fa-icon style="font-size: 20px; width: 15px" class="text-2xl mr-6" :icon="['fas', 'edit']"/>
           내가 쓴 후기
         </div>
       </li>
       <li>
         <div class="flex hoverGray px-4 py-2" @click="clickMenu('myPost')">
-          <fa-icon style="font-size: 20px; width: 15px" class="text-2xl mr-7" :icon="['fas', 'file-alt']"/>
+          <fa-icon style="font-size: 20px; width: 15px" class="text-2xl mr-6" :icon="['fas', 'file-alt']"/>
           내가 쓴 글
         </div>
       </li>

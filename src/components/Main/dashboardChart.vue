@@ -1,32 +1,32 @@
 <template>
-    <div class="chart-header">
-      <div class="card shadow bg-white">
-        <div class="cards-body p-4 ml-2 mr-2 stats">
-          <div class="tabs -ml-4">
-            <div class="flex justify-between align-middle">
-              <button
-                v-for="(item,idx) in vaccineList"
-                :key="idx"
-                class="mr-2 mb-1 btn btn-outline gray btn-sm btn-chart"
-                :class="[changeBtnColor(item), hoverColor(item)]"
-                @click="changeChart(item)"
-              >
-                {{ item }}
-              </button>
-            </div>
+  <div class="chart-header">
+    <div class="card shadow bg-white">
+      <div class="cards-body p-4 ml-2 mr-2 stats">
+        <div class="tabs -ml-4">
+          <div class="flex justify-between align-middle">
+            <button
+              v-for="(item,idx) in vaccineList"
+              :key="idx"
+              class="mr-2 mb-1 btn btn-outline gray btn-sm btn-chart"
+              :class="[changeBtnColor(item), hoverColor(item)]"
+              @click="changeChart(item)"
+            >
+              {{ item }}
+            </button>
           </div>
         </div>
-        <div class="divline -mt-2 mb-2" />
-        <client-only>
+      </div>
+      <div class="divline -mt-2 mb-2" />
+      <client-only>
         <bar-chart
-          class="-mt-8 mb-4 chartFontColor"
+          class="-mt-8 mb-4"
           style="width: 95%; margin-left: 2%; height:400px;"
           :data="chartData"
           :options="chartOptions"
         />
-        </client-only>
-      </div>
+      </client-only>
     </div>
+  </div>
 </template>
 
 <script>
@@ -51,7 +51,7 @@ export default {
       symptomCode: [],
       symptomList: [],
       symptomCount: {},
-      chartFontColor: 'rgb(100, 100, 100)',
+      chartFontColor: 'rgb(120, 120, 120)',
     };
   },
   created () {
@@ -74,9 +74,6 @@ export default {
   },
   methods: {
     async initChart () {
-      // if (document.documentElement.classList.contains('dark')) {
-      //   this.chartFontColor = 'rgb(230, 230, 230)';
-      // }
       this.initOptions();
       await this.getAPI();
       this.initData();
@@ -126,9 +123,6 @@ export default {
         backgroundColor: this.backgroundColor,
         data: Array.from({ length: 14 }, (_, i) => (this.symptomCount[this.symptomCode[i]] / this.allCount) * 100),
       });
-      if (document.documentElement.classList.contains('dark')) {
-        this.chartFontColor = 'rgb(220, 220, 220)';
-      }
     },
     async getAPI () {
       try {

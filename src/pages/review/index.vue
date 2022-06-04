@@ -13,10 +13,10 @@
         @clickDetail="clickDetail"
       />
       <client-only>
-      <infinite-loading v-if="listContent.length" @infinite="scrolling">
-        <div slot="no-results" />
-        <div slot="no-more" />
-      </infinite-loading>
+        <infinite-loading v-if="listContent.length" @infinite="scrolling">
+          <div slot="no-results" />
+          <div slot="no-more" />
+        </infinite-loading>
       </client-only>
     </div>
 
@@ -57,7 +57,7 @@
         @afterModify="afterModify"
       />
     </full-screen>
-    <write-btn content="글쓰기" @clickWriteBtn="moveToScreen('add')"/>
+    <write-btn content="글쓰기" @clickWriteBtn="moveToScreen('add')" />
 
     <confirm-modal
       :check-flag="modalFlag"
