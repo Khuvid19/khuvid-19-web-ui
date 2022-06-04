@@ -15,6 +15,7 @@
       transform
       translate-x-1/2
       text-lg
+      write-btn-dark
     "
     @click="clickWriteBtn"
   >

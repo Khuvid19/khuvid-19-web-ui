@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
+      <div class="card bordered px-3 py-4 mx-4 my-2 bg-white bg-dark">
         <div class="text-lg mb-1 ml-1">
           백신 종류
         </div>
@@ -34,6 +34,7 @@
         </div>
         <div>
           <v-date-picker
+            v-if="!darkFlag"
             v-model="inoculatedDate"
             :masks="masks"
             class="inline-block h-full"
@@ -49,9 +50,27 @@
               </div>
             </template>
           </v-date-picker>
+          <v-date-picker
+            v-if="darkFlag"
+            v-model="inoculatedDate"
+            :masks="masks"
+            class="inline-block h-full"
+            is-dark
+          >
+            <template #default="{ inputValue, togglePopover }">
+              <div class="flex items-center">
+                <input
+                  :value="inputValue"
+                  class="text-center bg-white text-gray-700 w-full py-1 px-2 appearance-none border rounded-xl focus:outline-none focus:border-blue-500 bg-dark-200"
+                  readonly
+                  @click="togglePopover()"
+                >
+              </div>
+            </template>
+          </v-date-picker>
         </div>
       </div>
-      <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
+      <div class="card bordered px-3 py-4 mx-4 my-2 bg-white bg-dark">
         <div class="text-lg mb-1 ml-1">
           기저질환
         </div>
@@ -95,7 +114,7 @@
           >
         </div>
       </div>
-      <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
+      <div class="card bordered px-3 py-4 mx-4 my-2 bg-white bg-dark">
         <div class="text-lg mb-1 ml-1">
           이상반응
         </div>
@@ -139,7 +158,7 @@
           >
         </div>
       </div>
-      <div class="card bordered px-3 py-4 mx-4 my-2 bg-white">
+      <div class="card bordered px-3 py-4 mx-4 my-2 bg-white bg-dark">
         <div class="form-control">
           <textarea
             v-model="detailDisc"

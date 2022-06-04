@@ -15,15 +15,15 @@
         @fetchBoardList="fetchBoardList"
       />
       <client-only>
-      <infinite-loading v-if="boardList.length" @infinite="scrolling">
-        <div slot="no-results" />
-        <div slot="no-more" />
-      </infinite-loading>
+        <infinite-loading v-if="boardList.length" @infinite="scrolling">
+          <div slot="no-results" />
+          <div slot="no-more" />
+        </infinite-loading>
       </client-only>
     </div>
     <middle-modal
       :check-flag="middleModalFlag"
-      text="로그인 후 작성해주세요."
+      text="로그인 후 작성해 주세요."
       ok-text="로그인"
       cancel-text="취소"
       @clickOk="clickModalOk"

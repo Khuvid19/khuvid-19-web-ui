@@ -22,7 +22,7 @@
         class="bg-dark-200"
       />
       <div
-        class="mt-4 mb-4 w-full bg-gray-300 rounded-full"
+        class="mt-4 mb-4 w-full bg-gray-200 rounded-full"
         style="height: 1px"
       />
       <div class="overflow-y-hidden">
