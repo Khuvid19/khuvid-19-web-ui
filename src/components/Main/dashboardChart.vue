@@ -150,6 +150,8 @@ export default {
         return 'hoverAZ';
       } else if (item.includes('얀센')) {
         return 'hoverANSEN';
+      } else if (item.includes('소아')) {
+        return 'hoverINFANT';
       }
     },
     changeBtnColor (item) {
@@ -162,6 +164,8 @@ export default {
           return 'AZ';
         } else if (item.includes('얀센')) {
           return 'ANSEN';
+        } else if (item.includes('소아')) {
+          return 'INFANT';
         }
       }
     },
@@ -171,8 +175,10 @@ export default {
         // 보라색
         if (item.includes('1차')) {
           this.vaccine = 'PFIZER_FIRST';
-        } else {
+        } else if (item.includes('2차')) {
           this.vaccine = 'PFIZER_SECOND';
+        } else {
+          this.vaccine = 'PFIZER_THIRD';
         }
         this.borderColor = 'rgb(180, 110, 188)';
         this.backgroundColor = 'rgb(180, 110, 188)';
@@ -180,8 +186,10 @@ export default {
         // 빨간색
         if (item.includes('1차')) {
           this.vaccine = 'MODERNA_FIRST';
-        } else {
+        } else if (item.includes('2차')) {
           this.vaccine = 'MODERNA_SECOND';
+        } else {
+          this.vaccine = 'MODERNA_THIRD';
         }
         this.borderColor = 'rgb(237, 98, 56)';
         this.backgroundColor = 'rgb(237, 98, 56)';
@@ -203,6 +211,15 @@ export default {
         }
         this.borderColor = 'rgb(81, 134, 236)';
         this.backgroundColor = 'rgb(81, 134, 236)';
+      } else if (item.includes('소아')) {
+        // 파란색
+        if (item.includes('1차')) {
+          this.vaccine = 'INFANT_FIRST';
+        } else {
+          this.vaccine = 'INFANT_SECOND';
+        }
+        this.borderColor = 'rgb(144, 209, 169)';
+        this.backgroundColor = 'rgb(144, 209, 169)';
       }
       this.chartData.datasets.pop();
       this.initData();
