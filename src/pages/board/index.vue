@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import DetailScreen from '@/components/Board/Screen/detailScreen/detailScreen';
 import SearchComponent from '@/components/Board/search';
 import ListItem from '@/components/Board/listItem';
@@ -80,7 +81,7 @@ export default {
       ],
     };
   },
-  fetch () {
+  created () {
     this.fetchBoardList();
   },
   methods: {
@@ -97,8 +98,8 @@ export default {
       this.fetchBoardList();
     },
     async fetchBoardList () {
-      const res = (await this.$axios.get(`board/list?page=${this.currentPage}&search=${this.keyword}`)).data; // 무한 스크롤 구현하기
-      this.boardList = res.content;
+      const res = (await axios.get(`/api/v2/board/list?page=${this.currentPage}&search=${this.keyword}`)).data; // 무한 스크롤 구현하기
+      this.boardList = res.content ?? [];
     },
     clickWriteBtn () {
       if (!this.$auth.loggedIn) {
@@ -123,7 +124,7 @@ export default {
     scrolling ($state) {
       this.currentPage += 1;
 
-      this.$axios.get(`board/list?page=${this.currentPage}&search=${this.keyword}`)
+      axios.get(`api/v2/board/list?page=${this.currentPage}&search=${this.keyword}`)
         .then((r) => {
           if (r.data.content.length !== 0) {
             this.boardList.push(...r.data.content);

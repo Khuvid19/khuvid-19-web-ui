@@ -111,10 +111,10 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { mapActions, mapGetters } from 'vuex';
 import FullScreen from '@/components/_Common/fullScreen';
 import MiddleModal from '@/components/_Common/middleModal';
-
 export default {
   name: 'SignUp',
   components: {
@@ -216,8 +216,8 @@ export default {
         return;
       }
 
-      this.$axios
-        .get('auth/user', {
+      axios
+        .get('/api/v2/auth/user', {
           params: {
             nickName: this.nickname,
           },

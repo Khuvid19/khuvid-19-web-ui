@@ -73,6 +73,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { mapGetters } from 'vuex';
 import WriteScreen from '../writeScreen/writeScreen';
 import DetailContent from './detailContent';
@@ -120,7 +121,7 @@ export default {
   methods: {
     async fetchData () {
       this.data = (
-        await this.$axios.get(`board/detail?boardId=${this.boardId}`)
+        await axios.get(`/api/v2/board/detail?boardId=${this.boardId}`)
       ).data;
       if (this.user && this.data.userName === this.user.nickName) { this.isOwn = true; }
     },
