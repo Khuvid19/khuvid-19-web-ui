@@ -12,7 +12,7 @@ export const getters = {
 export const actions = {
   fetchPageContents (context, params) {
     return new Promise((resolve, reject) => {
-      this.$axios.get('/review/search?page=0', params)
+      this.$axios.post('/review/search?page=0', params)
         .then((r) => {
           context.commit('SET_PAGE_CONTENTS', r.data);
           resolve(r);
@@ -22,7 +22,7 @@ export const actions = {
   },
   fetchPageContents2 (context, params) {
     return new Promise((resolve, reject) => {
-      this.$axios.get(`/review/search?page=${params.page}`, params.params)
+      this.$axios.post(`/review/search?page=${params.page}`, params.params)
         .then((r) => {
           context.commit('SET_PAGE_CONTENTS', r.data);
           resolve(r);
