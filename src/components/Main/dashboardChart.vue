@@ -71,6 +71,7 @@ export default {
       }
     });
     this.initChart();
+    this.$root.$refs.dashboardChart = this;
   },
   methods: {
     async initChart () {
@@ -150,6 +151,8 @@ export default {
         return 'hoverAZ';
       } else if (item.includes('얀센')) {
         return 'hoverANSEN';
+      } else if (item.includes('소아')) {
+        return 'hoverINFANT';
       }
     },
     changeBtnColor (item) {
@@ -162,29 +165,44 @@ export default {
           return 'AZ';
         } else if (item.includes('얀센')) {
           return 'ANSEN';
+        } else if (item.includes('소아')) {
+          return 'INFANT';
         }
       }
     },
     changeChart (item) {
       this.current = item;
+      const darkFlag = document.documentElement.classList.contains('dark');
       if (item.includes('화이자')) {
         // 보라색
         if (item.includes('1차')) {
           this.vaccine = 'PFIZER_FIRST';
-        } else {
+        } else if (item.includes('2차')) {
           this.vaccine = 'PFIZER_SECOND';
+        } else {
+          this.vaccine = 'PFIZER_THIRD';
         }
         this.borderColor = 'rgb(180, 110, 188)';
         this.backgroundColor = 'rgb(180, 110, 188)';
+        if (darkFlag === true) {
+          this.borderColor = 'rgb(164, 99, 171)';
+          this.backgroundColor = 'rgb(164, 99, 171)';
+        }
       } else if (item.includes('모더나')) {
         // 빨간색
         if (item.includes('1차')) {
           this.vaccine = 'MODERNA_FIRST';
-        } else {
+        } else if (item.includes('2차')) {
           this.vaccine = 'MODERNA_SECOND';
+        } else {
+          this.vaccine = 'MODERNA_THIRD';
         }
         this.borderColor = 'rgb(237, 98, 56)';
         this.backgroundColor = 'rgb(237, 98, 56)';
+        if (darkFlag === true) {
+          this.borderColor = 'rgb(180, 85, 30)';
+          this.backgroundColor = 'rgb(180, 85, 30)';
+        }
       } else if (item.includes('AZ')) {
         // 기본색
         if (item.includes('1차')) {
@@ -194,6 +212,10 @@ export default {
         }
         this.borderColor = 'rgb(98, 176, 182)';
         this.backgroundColor = 'rgb(98, 176, 182)';
+        if (darkFlag === true) {
+          this.borderColor = 'rgb(65, 125, 135)';
+          this.backgroundColor = 'rgb(65, 125, 135)';
+        }
       } else if (item.includes('얀센')) {
         // 파란색
         if (item.includes('부스터샷')) {
@@ -203,6 +225,23 @@ export default {
         }
         this.borderColor = 'rgb(81, 134, 236)';
         this.backgroundColor = 'rgb(81, 134, 236)';
+        if (darkFlag === true) {
+          this.borderColor = 'rgb(50, 95, 175)';
+          this.backgroundColor = 'rgb(50, 95, 175)';
+        }
+      } else if (item.includes('소아')) {
+        // 파란색
+        if (item.includes('1차')) {
+          this.vaccine = 'INFANT_FIRST';
+        } else {
+          this.vaccine = 'INFANT_SECOND';
+        }
+        this.borderColor = 'rgb(144, 209, 169)';
+        this.backgroundColor = 'rgb(144, 209, 169)';
+        if (darkFlag === true) {
+          this.borderColor = 'rgb(82, 142, 105)';
+          this.backgroundColor = 'rgb(82, 142, 105)';
+        }
       }
       this.chartData.datasets.pop();
       this.initData();

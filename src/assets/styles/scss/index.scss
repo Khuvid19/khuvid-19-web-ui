@@ -40,6 +40,8 @@ $AZ: #62b0b6;
 $AZ-dark: #417d87;
 $ANSEN: #5186ec;
 $ANSEN-dark: #325faf;
+$INFANT: #90d1a9;
+$INFANT-dark: #528e69;
 
 // 보라색, 화이자
 .PFIZER {
@@ -83,6 +85,17 @@ $ANSEN-dark: #325faf;
 .hoverANSEN:hover {
   background-color: $ANSEN;
   border-color: $ANSEN;
+  color: white;
+}
+// 연두색, 소아
+.INFANT {
+  background-color: $INFANT;
+  border-color: $INFANT;
+  color: white;
+}
+.hoverINFANT:hover {
+  background-color: $INFANT;
+  border-color: $INFANT;
   color: white;
 }
 
@@ -185,6 +198,17 @@ html.dark {
   .hoverANSEN:hover {
     background-color: $ANSEN-dark;
     border-color: $ANSEN-dark;
+    color: white;
+  }
+  // 연두색, 소아
+  .INFANT {
+    background-color: $INFANT-dark;
+    border-color: $INFANT-dark;
+    color: white;
+  }
+  .hoverINFANT:hover {
+    background-color: $INFANT-dark;
+    border-color: $INFANT-dark;
     color: white;
   }
   .bg-SignUp { // 분리 필요
