@@ -92,6 +92,8 @@ export default {
       this.darkFlag = document.documentElement.classList.contains('dark');
       const theme = this.darkFlag ? 'dark' : 'light';
       localStorage.setItem('theme', theme);
+      const item = this.$root.$refs.dashboardChart.current;
+      this.$root.$refs.dashboardChart.changeChart(item);
     },
   },
 };
