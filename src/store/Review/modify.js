@@ -4,9 +4,9 @@ export const actions = {
     return new Promise((resolve, reject) => {
       this.$axios.put('/review', params)
         .then((data) => {
-          resolve(data)
+          resolve(data);
         })
-        .catch(error => reject(error))
-    })
+        .catch(error => reject(error));
+    });
   },
-}
+};
