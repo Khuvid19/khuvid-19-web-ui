@@ -53,7 +53,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import fullScreen from '@/components/_Common/fullScreen';
 import MiddleModal from '@/components/_Common/middleModal';
 export default {

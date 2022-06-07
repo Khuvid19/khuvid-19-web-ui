@@ -78,7 +78,7 @@
             class="btn text-xl btn-primary"
             @click="ageListIdx = (ageListIdx + 1) % ageList.length"
           >
-            <fa-icon style="width: 10px" :icon="['fas', 'caret-right']"/>
+            <fa-icon style="width: 10px" :icon="['fas', 'caret-right']" />
           </button>
         </div>
       </div>

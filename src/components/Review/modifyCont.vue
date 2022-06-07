@@ -224,6 +224,12 @@ export default {
       darkFlag: document.documentElement.classList.contains('dark'),
     };
   },
+  computed: {
+    ...mapGetters({
+      getSideEffects: 'Review/sideEffectsList/getListContents',
+      getVaccine: 'Review/vaccineList/getListContents',
+    }),
+  },
   watch: {
     detailContent: {
       immediate: true,
@@ -241,12 +247,6 @@ export default {
         }
       },
     },
-  },
-  computed: {
-    ...mapGetters({
-      getSideEffects: 'Review/sideEffectsList/getListContents',
-      getVaccine: 'Review/vaccineList/getListContents',
-    }),
   },
   methods: {
     ...mapActions({
