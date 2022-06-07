@@ -116,7 +116,38 @@
         접종날짜
       </div>
       <div class="w-full">
-        <v-date-picker v-model="range" is-range :masks="masks">
+        <v-date-picker v-if="!darkFlag" v-model="range" is-range :masks="masks">
+          <template #default="{ inputValue, inputEvents }">
+            <div class="flex justify-between items-center">
+              <input
+                :value="inputValue.start"
+                class="border px-2 py-1 rounded focus:outline-none focus:border-indigo-300 bg-dark-200"
+                style="width: calc(50% - 20px)"
+                v-on="inputEvents.start"
+              >
+              <svg
+                class="w-4 h-4 mx-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                />
+              </svg>
+              <input
+                :value="inputValue.end"
+                class="border px-2 py-1 rounded focus:outline-none focus:border-indigo-300 bg-dark-200"
+                style="width: calc(50% - 20px)"
+                v-on="inputEvents.end"
+              >
+            </div>
+          </template>
+        </v-date-picker>
+        <v-date-picker v-if="darkFlag" v-model="range" is-range :masks="masks" is-dark>
           <template #default="{ inputValue, inputEvents }">
             <div class="flex justify-between items-center">
               <input
