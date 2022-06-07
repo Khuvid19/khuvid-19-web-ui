@@ -1,4 +1,4 @@
-import Vue from 'vue'
-import mixins from '@/utils/Mixins/Global/index'
+import Vue from 'vue';
+import mixins from '@/utils/Mixins/Global/index';
 
-Vue.mixin(mixins)
+Vue.mixin(mixins);

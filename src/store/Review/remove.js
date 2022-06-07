@@ -6,9 +6,9 @@ export const actions = {
         params: { id: params },
       })
         .then((data) => {
-          resolve(data)
+          resolve(data);
         })
-        .catch(error => reject(error))
-    })
+        .catch(error => reject(error));
+    });
   },
-}
+};
