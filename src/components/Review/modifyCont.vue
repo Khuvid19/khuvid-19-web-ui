@@ -34,9 +34,28 @@
         </div>
         <div>
           <v-date-picker
+            v-if="!darkFlag"
             v-model="inoculatedDate"
             :masks="masks"
             class="inline-block h-full"
+          >
+            <template #default="{ inputValue, togglePopover }">
+              <div class="flex items-center">
+                <input
+                  :value="inputValue"
+                  class="text-center bg-white text-gray-700 w-full py-1 px-2 appearance-none border rounded-xl focus:outline-none focus:border-blue-500 bg-dark-200"
+                  readonly
+                  @click="togglePopover()"
+                >
+              </div>
+            </template>
+          </v-date-picker>
+          <v-date-picker
+            v-if="darkFlag"
+            v-model="inoculatedDate"
+            :masks="masks"
+            class="inline-block h-full"
+            is-dark
           >
             <template #default="{ inputValue, togglePopover }">
               <div class="flex items-center">
