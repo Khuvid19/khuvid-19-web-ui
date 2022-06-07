@@ -336,7 +336,11 @@ export default {
       if (this.sideEffects.length > 0) { params.sideEffects = this.sideEffects; }
       if (this.haveDisease != null) { params.haveDisease = this.haveDisease; }
       if (typeof this.range.end === 'string') { params.endInoculated = this.range.end; } else if (this.range.end != null) { params.endInoculated = this.range.end.toISOString().slice(0, 10); }
-      if (typeof this.range.start === 'string') { params.startInoculated = this.range.start; } else if (this.range.start != null) { params.startInoculated = this.range.start.toISOString().slice(0, 10); }
+      if (typeof this.range.start === 'string') {
+        params.startInoculated = this.range.start;
+      } else if (this.range.start != null) {
+        params.startInoculated = this.range.start.toISOString().slice(0, 10);
+      }
       this.setReviewParams(params);
       this.clearData();
     },
