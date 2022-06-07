@@ -28,8 +28,8 @@
           class="text-xs self-center -mr-28"
           @click="changemode"
         >
-          <fa-icon v-if="!darkFlag" class="text-3xl self-center toggle-icon" icon="sun" />
-          <fa-icon v-if="darkFlag" class="text-3xl self-center toggle-icon" icon="moon" />
+          <fa-icon v-if="!darkFlag" class="text-3xl self-center toggle-icon" style="font-size: 25px; width: 25px" icon="sun" />
+          <fa-icon v-if="darkFlag" class="text-3xl self-center toggle-icon" style="font-size: 25px; width: 25px" icon="moon" />
         </div>
       </client-only>
       <div
