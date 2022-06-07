@@ -170,6 +170,7 @@ export default {
         }
       }
     },
+    // 차트 색 변경
     changeChart (item) {
       this.current = item;
       const darkFlag = document.documentElement.classList.contains('dark');
