@@ -125,10 +125,15 @@ export default {
           return 'rgb(81, 134, 236)';
         case 'PFIZER_FIRST':
         case 'PFIZER_SECOND':
+        case 'PFIZER_THIRD':
           return 'rgb(180, 110, 188)';
         case 'MODERNA_FIRST':
         case 'MODERNA_SECOND':
+        case 'MODERNA_THIRD':
           return 'rgb(237, 98, 56)';
+        case 'INFANT_FIRST':
+        case 'INFANT_SECOND':
+          return 'rgb(144, 209, 169)';
         case 'AZ_FIRST':
         case 'AZ_SECOND':
           return 'rgb(98, 176, 182)';

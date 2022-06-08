@@ -186,8 +186,8 @@ export default {
         this.borderColor = 'rgb(180, 110, 188)';
         this.backgroundColor = 'rgb(180, 110, 188)';
         if (darkFlag === true) {
-          this.borderColor = 'rgb(164, 99, 171)';
-          this.backgroundColor = 'rgb(164, 99, 171)';
+          this.borderColor = 'rgb(150, 90, 160)';
+          this.backgroundColor = 'rgb(150, 90, 160)';
         }
       } else if (item.includes('모더나')) {
         // 빨간색
@@ -214,8 +214,8 @@ export default {
         this.borderColor = 'rgb(98, 176, 182)';
         this.backgroundColor = 'rgb(98, 176, 182)';
         if (darkFlag === true) {
-          this.borderColor = 'rgb(65, 125, 135)';
-          this.backgroundColor = 'rgb(65, 125, 135)';
+          this.borderColor = 'rgb(60, 120, 130)';
+          this.backgroundColor = 'rgb(60, 120, 130)';
         }
       } else if (item.includes('얀센')) {
         // 파란색
@@ -240,8 +240,8 @@ export default {
         this.borderColor = 'rgb(144, 209, 169)';
         this.backgroundColor = 'rgb(144, 209, 169)';
         if (darkFlag === true) {
-          this.borderColor = 'rgb(82, 142, 105)';
-          this.backgroundColor = 'rgb(82, 142, 105)';
+          this.borderColor = 'rgb(65, 125, 90)';
+          this.backgroundColor = 'rgb(65, 125, 90)';
         }
       }
       this.chartData.datasets.pop();
